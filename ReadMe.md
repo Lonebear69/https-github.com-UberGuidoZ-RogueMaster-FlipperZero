@@ -69,7 +69,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Sub-GHz Remote (By ESurge)](https://github.com/ESurge/flipperzero-firmware-unirfremix) - Now moves files to correct folder (Thanks to XMasterx)
 - Updated: [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/tree/420/applications/main/clock) - Fix Time at 12PM
 - Added: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP)
-- OFW PR: [Support reseting iCx cards #2451 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2451)
 - OFW PR: [Dumb mode menu freeze fix #2456 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2456)
 - OFW PR: [NFC: Support reading Mifare Classic key B from sector trailer, reading sector with B key where A key can't read block, Nfc Magic app not using NFC folder by default (in file select) #2437 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2437)
 - OFW PR: [Upside down / left handed orientation support #2462 (By hramrach)](https://github.com/flipperdevices/flipperzero-firmware/pull/2462)
@@ -78,6 +77,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Mfkey32 WIP (By noproto)](https://github.com/noproto/FlipperMfkey)
 - Updated build flags to allow Mfkey to function quicker (-O3)
 - Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
+- OFW: [Support reseting iCx cards #2451 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2451) - PR Officialy Merged (Was Alreasdy in RM)
 
 <a name="release">
 
