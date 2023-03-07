@@ -27,8 +27,13 @@
  * SUCH DAMAGE.
  */
 #include "flipbip_string.h"
-// #include <string.h>
 #include <ctype.h>
+#include <stdint.h>
+#include <string.h>
+
+#include "../crypto/memzero.h"
+#include "../crypto/rc4.h"
+
 char* flipbip_strtok(char* s, const char* delim) {
     static char* last;
     return flipbip_strtok_r(s, delim, &last);
@@ -71,67 +76,54 @@ cont:
     }
     /* NOTREACHED */
 }
-/* Copyright (c) 2012, The Linux Foundation. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- * * Redistributions of source code must retain the above copyright
- *  notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above
- * copyright notice, this list of conditions and the following
- * disclaimer in the documentation and/or other materials provided
- *  with the distribution.
- *   * Neither the name of The Linux Foundation nor the names of its
- * contributors may be used to endorse or promote products derived
- * from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
- * ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
- * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
- * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-// void
-// flipbip_strrev(unsigned char *str)
-// {
-// 	int i;
-// 	int j;
-// 	unsigned char a;
-// 	unsigned len = strlen((const char *)str);
-// 	for (i = 0, j = len - 1; i < j; i++, j--)
-// 	{
-// 		a = str[i];
-// 		str[i] = str[j];
-// 		str[j] = a;
-// 	}
-// }
-// int
-// flipbip_itoa(int num, unsigned char* str, int len, int base)
-// {
-// 	int sum = num;
-// 	int i = 0;
-// 	int digit;
-// 	if (len == 0)
-// 		return -1;
-// 	do
-// 	{
-// 		digit = sum % base;
-// 		if (digit < 0xA)
-// 			str[i++] = '0' + digit;
-// 		else
-// 			str[i++] = 'A' + digit - 0xA;
-// 		sum /= base;
-// 	}while (sum && (i < (len - 1)));
-// 	if (i == (len - 1) && sum)
-// 		return -1;
-// 	str[i] = '\0';
-// 	flipbip_strrev(str);
-// 	return 0;
-// }
+
+void flipbip_btox(const unsigned char in, char* str) {
+    unsigned char n;
+    unsigned char i = in;
+
+    str += 2;
+    *str = '\0';
+
+    for(n = 2; n != 0; --n) {
+        *--str = "0123456789abcdef"[i & 0x0F];
+        i >>= 4;
+    }
+}
+void flipbip_xtob(const char* str, unsigned char* out, int out_len) {
+    int len = strlen(str) / 2;
+    if(len > out_len) len = out_len;
+    for(int i = 0; i < len; i++) {
+        char c = 0;
+        if(str[i * 2] >= '0' && str[i * 2] <= '9') c += (str[i * 2] - '0') << 4;
+        if((str[i * 2] & ~0x20) >= 'A' && (str[i * 2] & ~0x20) <= 'F')
+            c += (10 + (str[i * 2] & ~0x20) - 'A') << 4;
+        if(str[i * 2 + 1] >= '0' && str[i * 2 + 1] <= '9') c += (str[i * 2 + 1] - '0');
+        if((str[i * 2 + 1] & ~0x20) >= 'A' && (str[i * 2 + 1] & ~0x20) <= 'F')
+            c += (10 + (str[i * 2 + 1] & ~0x20) - 'A');
+        out[i] = c;
+    }
+}
+
+void flipbip_cipher(
+    const unsigned char* key_in,
+    const unsigned int key_len,
+    const char* in,
+    char* out,
+    const unsigned int io_len) {
+    if(io_len > 512) return;
+
+    RC4_CTX ctx;
+    uint8_t buf[256];
+    memzero(buf, 256);
+
+    flipbip_xtob(in, buf, io_len / 2);
+
+    rc4_init(&ctx, key_in, key_len);
+    rc4_encrypt(&ctx, buf, 256);
+
+    for(size_t i = 0; i < (io_len / 2); i++) {
+        flipbip_btox(buf[i], out + i * 2);
+    }
+
+    memzero(buf, 256);
+}
