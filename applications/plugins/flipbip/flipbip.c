@@ -45,6 +45,7 @@ FlipBip* flipbip_app_alloc() {
     app->led = 1;
     app->bip39_strength = 2; // 256 bits (24 words)
     app->bip44_coin = 0; // 0 (BTC)
+    app->overwrite_saved_seed = 0;
 
     view_dispatcher_add_view(
         app->view_dispatcher, FlipBipViewIdMenu, submenu_get_view(app->submenu));
@@ -56,8 +57,6 @@ FlipBip* flipbip_app_alloc() {
     app->flipbip_scene_1 = flipbip_scene_1_alloc();
     view_dispatcher_add_view(
         app->view_dispatcher, FlipBipViewIdScene1, flipbip_scene_1_get_view(app->flipbip_scene_1));
-    // app->flipbip_scene_2 = flipbip_scene_2_alloc();
-    // view_dispatcher_add_view(app->view_dispatcher, FlipBipViewIdScene2, flipbip_scene_2_get_view(app->flipbip_scene_2));
     app->variable_item_list = variable_item_list_alloc();
     view_dispatcher_add_view(
         app->view_dispatcher,
