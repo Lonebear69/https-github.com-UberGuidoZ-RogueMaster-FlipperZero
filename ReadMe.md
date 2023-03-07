@@ -66,7 +66,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Fix SD card CID parsing #2463 (By hramrach)](https://github.com/flipperdevices/flipperzero-firmware/pull/2463)
 - OFW: [Fixed picopass load save file overrun #2464 (By GuruSteve)](https://github.com/flipperdevices/flipperzero-firmware/pull/2464)
 - UL: Updated: [Sub-GHz Bruteforcer v3.4 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master)
-- Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
 - Updated: [Sub-GHz Remote (By ESurge)](https://github.com/ESurge/flipperzero-firmware-unirfremix) - Now moves files to correct folder (Thanks to XMasterx)
 - Updated: [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/tree/420/applications/main/clock) - Fix Time at 12PM
 - Added: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP)
@@ -77,6 +76,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW PR: [More UI fixes and improvements #2419 (By liamhays)](https://github.com/flipperdevices/flipperzero-firmware/pull/2419)
 - [Sub-GHz PlayList: Added the possibility to skip a file and play the previous one in #541 (By alvarotorijano}](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/541)
 - Updated: [Mfkey32 WIP (By noproto)](https://github.com/noproto/FlipperMfkey)
+- Updated build flags to allow Mfkey to function quicker (-O3)
+- Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
 
 <a name="release">
 
