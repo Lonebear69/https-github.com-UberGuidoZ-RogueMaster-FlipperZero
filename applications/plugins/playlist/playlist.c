@@ -256,6 +256,7 @@ static bool playlist_worker_play_playlist_once(
         FURI_LOG_E(TAG, "Failed to rewind file");
         return false;
     }
+
     while(flipper_format_read_string(fff_head, "sub", data)) {
         if(!playlist_worker_wait_pause(worker)) {
             break;
@@ -267,6 +268,7 @@ static bool playlist_worker_play_playlist_once(
         ++worker->meta->current_count;
         const char* str = furi_string_get_cstr(data);
 
+        // it's not fancy, but it works for now :)
         updatePlayListView(worker, str);
 
         for(int i = 0; i < 1; i++) {
@@ -748,6 +750,10 @@ int32_t playlist_app(void* p) {
                 if(input.type == InputTypeShort && app->meta->playlist_repetitions > 0) {
                     --app->meta->playlist_repetitions;
                 }
+            } else if(app->meta->state == STATE_SENDING) {
+                if(input.type == InputTypeShort) {
+                    app->worker->ctl_request_prev = true;
+                }
             }
             break;
 
@@ -755,6 +761,10 @@ int32_t playlist_app(void* p) {
             if(app->meta->state == STATE_OVERVIEW) {
                 if(input.type == InputTypeShort) {
                     ++app->meta->playlist_repetitions;
+                }
+            } else if(app->meta->state == STATE_SENDING) {
+                if(input.type == InputTypeShort) {
+                    app->worker->ctl_request_skip = true;
                 }
             }
             break;
