@@ -41,9 +41,14 @@ Boilerplate* boilerplate_app_alloc() {
         app->view_dispatcher, boilerplate_custom_event_callback);
     app->submenu = submenu_alloc();
 
+    // Set defaults, in case no config loaded
     app->haptic = 1;
     app->speaker = 1;
     app->led = 1;
+    app->save_settings = 1;
+
+    // Load configs
+    boilerplate_read_settings(app);
 
     view_dispatcher_add_view(
         app->view_dispatcher, BoilerplateViewIdMenu, submenu_get_view(app->submenu));
@@ -99,12 +104,6 @@ void boilerplate_app_free(Boilerplate* app) {
 int32_t boilerplate_app(void* p) {
     UNUSED(p);
     Boilerplate* app = boilerplate_app_alloc();
-    /*
-    if(!furi_hal_region_is_provisioned()) {
-        boilerplate_app_free(app);
-        return 1;
-    }
-    */
 
     view_dispatcher_attach_to_gui(app->view_dispatcher, app->gui, ViewDispatcherTypeFullscreen);
 
@@ -115,6 +114,8 @@ int32_t boilerplate_app(void* p) {
     furi_hal_power_suppress_charge_enter();
 
     view_dispatcher_run(app->view_dispatcher);
+
+    boilerplate_save_settings(app);
 
     furi_hal_power_suppress_charge_exit();
     boilerplate_app_free(app);
