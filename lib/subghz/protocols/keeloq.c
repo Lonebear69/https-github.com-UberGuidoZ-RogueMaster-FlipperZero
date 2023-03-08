@@ -563,8 +563,6 @@ SubGhzProtocolStatus
         }
         if(!flipper_format_read_hex(flipper_format, "Seed", seed_data, sizeof(uint32_t))) {
             FURI_LOG_D(TAG, "ENCODER: Missing Seed");
-            ret = SubGhzProtocolStatusErrorParserOthers;
-            break;
         }
         instance->generic.seed = seed_data[0] << 24 | seed_data[1] << 16 | seed_data[2] << 8 |
                                  seed_data[3];
@@ -576,8 +574,6 @@ SubGhzProtocolStatus
             mfname = furi_string_get_cstr(instance->manufacture_from_file);
         } else {
             FURI_LOG_D(TAG, "ENCODER: Missing Manufacture");
-            ret = SubGhzProtocolStatusErrorParserOthers;
-            break;
         }
 
         if(!flipper_format_rewind(flipper_format)) {

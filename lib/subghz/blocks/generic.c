@@ -93,7 +93,6 @@ SubGhzProtocolStatus subghz_block_generic_serialize(
             uint32_t temp = (instance->data_2 >> 4) & 0xFFFFF;
             if(!flipper_format_write_uint32(flipper_format, "Data", &temp, 1)) {
                 FURI_LOG_E(TAG, "Unable to add Data");
-                res = SubGhzProtocolStatusErrorParserCustomPreset;
                 break;
             }
         }
