@@ -10,6 +10,53 @@
 #include <notification/notification_messages.h>
 #include <dolphin/dolphin.h>
 
+typedef struct {
+    //    +-----x
+    //    |
+    //    |
+    //    y
+    uint8_t x;
+    uint8_t y;
+} Point;
+
+typedef enum {
+    GameStateLife,
+
+    // https://melmagazine.com/en-us/story/snake-nokia-6110-oral-history-taneli-armanto
+    // Armanto: While testing the early versions of the game, I noticed it was hard
+    // to control the snake upon getting close to and edge but not crashing — especially
+    // in the highest speed levels. I wanted the highest level to be as fast as I could
+    // possibly make the device "run," but on the other hand, I wanted to be friendly
+    // and help the player manage that level. Otherwise it might not be fun to play. So
+    // I implemented a little delay. A few milliseconds of extra time right before
+    // the player crashes, during which she can still change the directions. And if
+    // she does, the game continues.
+    GameStateLastChance,
+
+    GameStateGameOver,
+} GameState;
+
+// Note: do not change without purpose. Current values are used in smart
+// orthogonality calculation in `snake_game_get_turn_snake`.
+typedef enum {
+    DirectionUp,
+    DirectionRight,
+    DirectionDown,
+    DirectionLeft,
+} Direction;
+
+#define MAX_SNAKE_LEN 253
+
+typedef struct {
+    Point points[MAX_SNAKE_LEN];
+    uint16_t len;
+    Direction currentMovement;
+    Direction nextMovement; // if backward of currentMovement, ignore
+    Point fruit;
+    GameState state;
+    FuriMutex* mutex;
+} SnakeState;
+
 typedef enum {
     EventTypeTick,
     EventTypeKey,
@@ -50,12 +97,10 @@ const NotificationSequence sequence_eat = {
 };
 
 static void snake_game_render_callback(Canvas* const canvas, void* ctx) {
-    const SnakeState* snake_state = acquire_mutex((ValueMutex*)ctx, 25);
-    if(snake_state == NULL) {
-        return;
-    }
+    furi_assert(ctx);
+    const SnakeState* snake_state = ctx;
 
-    // Before the function is called, the state is set with the canvas_reset(canvas)
+    furi_mutex_acquire(snake_state->mutex, FuriWaitForever);
 
     // Frame
     canvas_draw_frame(canvas, 0, 0, 128, 64);
@@ -105,7 +150,7 @@ static void snake_game_render_callback(Canvas* const canvas, void* ctx) {
         DOLPHIN_DEED(getRandomDeed());
     }
 
-    release_mutex((ValueMutex*)ctx, snake_state);
+    furi_mutex_release(snake_state->mutex);
 }
 
 static void snake_game_input_callback(InputEvent* input_event, FuriMessageQueue* event_queue) {
@@ -304,8 +349,9 @@ int32_t snake_game_app(void* p) {
         snake_game_init_game(snake_state);
     }
 
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, snake_state, sizeof(SnakeState))) {
+    snake_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+
+    if(!snake_state->mutex) {
         FURI_LOG_E("SnakeGame", "cannot create mutex\r\n");
         furi_message_queue_free(event_queue);
         free(snake_state);
@@ -313,7 +359,7 @@ int32_t snake_game_app(void* p) {
     }
 
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, snake_game_render_callback, &state_mutex);
+    view_port_draw_callback_set(view_port, snake_game_render_callback, snake_state);
     view_port_input_callback_set(view_port, snake_game_input_callback, event_queue);
 
     FuriTimer* timer =
@@ -333,7 +379,7 @@ int32_t snake_game_app(void* p) {
     for(bool processing = true; processing;) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 100);
 
-        SnakeState* snake_state = (SnakeState*)acquire_mutex_block(&state_mutex);
+        furi_mutex_acquire(snake_state->mutex, FuriWaitForever);
 
         if(event_status == FuriStatusOk) {
             // press events
@@ -375,7 +421,7 @@ int32_t snake_game_app(void* p) {
         }
 
         view_port_update(view_port);
-        release_mutex(&state_mutex, snake_state);
+        furi_mutex_release(snake_state->mutex);
     }
 
     if(snake_state->isNewHighscore) {
@@ -391,7 +437,7 @@ int32_t snake_game_app(void* p) {
     furi_record_close(RECORD_NOTIFICATION);
     view_port_free(view_port);
     furi_message_queue_free(event_queue);
-    delete_mutex(&state_mutex);
+    furi_mutex_free(snake_state->mutex);
     free(snake_state);
 
     return 0;
