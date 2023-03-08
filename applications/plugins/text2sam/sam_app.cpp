@@ -36,6 +36,7 @@ typedef struct {
 } PluginEvent;
 
 typedef struct {
+    FuriMutex* mutex;
     ViewDispatcher* view_dispatcher;
     TextInput* text_input;
     TextBox* text_box;
@@ -53,8 +54,9 @@ static void say_something(char* something) {
 }
 
 static void text_input_callback(void* ctx) {
-    AppState* app_state = (AppState*)acquire_mutex((ValueMutex*)ctx, 25);
-    FURI_LOG_D(TAG, "Input text: %s", app_state->input);
+    AppState* app_state = (AppState*)ctx;
+    furi_mutex_acquire(app_state->mutex, FuriWaitForever);
+    //FURI_LOG_D(TAG, "Input text: %s", app_state->input);
 
     // underscore_to_space(app_state->input);
     for(int i = 0; app_state->input[i] != '\0'; i++) {
@@ -68,13 +70,13 @@ static void text_input_callback(void* ctx) {
     text_box_set_text(app_state->text_box, app_state->input);
     view_dispatcher_switch_to_view(app_state->view_dispatcher, 1);
 
-    release_mutex((ValueMutex*)ctx, app_state);
+    furi_mutex_release(app_state->mutex);
 }
 
 static bool back_event_callback(void* ctx) {
-    const AppState* app_state = (AppState*)acquire_mutex((ValueMutex*)ctx, 25);
+    const AppState* app_state = (AppState*)ctx;
     view_dispatcher_stop(app_state->view_dispatcher);
-    release_mutex((ValueMutex*)ctx, app_state);
+    furi_mutex_release(app_state->mutex);
     return true;
 }
 
@@ -171,8 +173,8 @@ extern "C" int32_t sam_app(void* p) {
     FURI_LOG_D(TAG, "Running sam_state_init");
     sam_state_init(app_state);
 
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, app_state, sizeof(AppState))) {
+    app_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!app_state->mutex) {
         FURI_LOG_E(TAG, "cannot create mutex\r\n");
         free(app_state);
         return 255;
@@ -199,7 +201,7 @@ extern "C" int32_t sam_app(void* p) {
     text_input_set_result_callback(
         app_state->text_input,
         text_input_callback,
-        &state_mutex,
+        app_state,
         app_state->input,
         TEXT_BUFFER_SIZE,
         //clear default text
@@ -223,7 +225,7 @@ extern "C" int32_t sam_app(void* p) {
     view_dispatcher_attach_to_gui(app_state->view_dispatcher, gui, ViewDispatcherTypeFullscreen);
     FURI_LOG_D(TAG, "starting view dispatcher");
     view_dispatcher_set_navigation_event_callback(app_state->view_dispatcher, back_event_callback);
-    view_dispatcher_set_event_callback_context(app_state->view_dispatcher, &state_mutex);
+    view_dispatcher_set_event_callback_context(app_state->view_dispatcher, app_state);
     view_dispatcher_switch_to_view(app_state->view_dispatcher, 0);
     view_dispatcher_run(app_state->view_dispatcher);
 
@@ -247,7 +249,7 @@ extern "C" int32_t sam_app(void* p) {
     gui_remove_view_port(gui, view_port);
     furi_record_close(RECORD_GUI);
     view_port_free(view_port);
-    delete_mutex(&state_mutex);
+    furi_mutex_free(app_state->mutex);
     // furi_mutex_free(g_state_mutex);
     sam_state_free(app_state);
 

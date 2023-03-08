@@ -146,11 +146,9 @@ void dcf77_deinit() {
 }
 
 static void render_callback(Canvas* const canvas, void* ctx) {
-    // const AppFSM* app_fsm = acquire_mutex((ValueMutex*)ctx, 25);
-    AppFSM* app_fsm = acquire_mutex((ValueMutex*)ctx, 25);
-    if(app_fsm == NULL) {
-        return;
-    }
+    furi_assert(ctx);
+    AppFSM* app_fsm = ctx;
+    furi_mutex_acquire(app_fsm->mutex, FuriWaitForever);
 
     char buffer[64];
     uint8_t yoffset = 9;
@@ -224,7 +222,7 @@ static void render_callback(Canvas* const canvas, void* ctx) {
     underline_x = (bit_number % 8) * 6 + 49;
     canvas_draw_line(canvas, underline_x, 55, underline_x + 4, 55); // current byte
 
-    release_mutex((ValueMutex*)ctx, app_fsm);
+    furi_mutex_release(app_fsm->mutex);
 }
 
 static void input_callback(InputEvent* input_event, FuriMessageQueue* event_queue) {
@@ -333,15 +331,15 @@ int32_t dcf77_app_main(void* p) {
     AppFSM* app_fsm = malloc(sizeof(AppFSM));
     app_init(app_fsm, event_queue);
 
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, app_fsm, sizeof(AppFSM))) {
+    app_fsm->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!app_fsm->mutex) {
         FURI_LOG_E(TAG, "cannot create mutex\r\n");
         free(app_fsm);
         return 255;
     }
 
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, render_callback, &state_mutex);
+    view_port_draw_callback_set(view_port, render_callback, app_fsm);
     view_port_input_callback_set(view_port, input_callback, event_queue);
 
     // Open GUI and register view_port
@@ -360,7 +358,7 @@ int32_t dcf77_app_main(void* p) {
     for(bool processing = true; processing;) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 100);
 
-        AppFSM* app_fsm = (AppFSM*)acquire_mutex_block(&state_mutex);
+        furi_mutex_acquire(app_fsm->mutex, FuriWaitForever);
 
         if(event_status == FuriStatusOk) {
             // kepress events
@@ -396,12 +394,10 @@ int32_t dcf77_app_main(void* p) {
                 on_timer_tick(app_fsm);
                 FURI_CRITICAL_EXIT();
             }
-        } else {
-            // event timeout
         }
 
         view_port_update(view_port);
-        release_mutex(&state_mutex, app_fsm);
+        furi_mutex_release(app_fsm->mutex);
     }
     furi_hal_speaker_release();
     notification_message_block(notification, &seq_c_minor);
@@ -417,7 +413,7 @@ int32_t dcf77_app_main(void* p) {
     furi_record_close(RECORD_NOTIFICATION);
     view_port_free(view_port);
     furi_message_queue_free(event_queue);
-    delete_mutex(&state_mutex);
+    furi_mutex_free(app_fsm->mutex);
     free(app_fsm);
 
     return 0;

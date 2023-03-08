@@ -45,6 +45,7 @@ typedef struct {
 } AppEvent;
 
 typedef struct {
+    FuriMutex* mutex;
     uint16_t len;
     KeyCode last_key;
 
