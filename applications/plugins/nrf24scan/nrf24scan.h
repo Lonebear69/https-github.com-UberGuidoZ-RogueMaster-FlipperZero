@@ -21,6 +21,7 @@ typedef struct {
 typedef struct {
     int x;
     int y;
+    FuriMutex* mutex;
 } PluginState;
 
 struct FOUND {

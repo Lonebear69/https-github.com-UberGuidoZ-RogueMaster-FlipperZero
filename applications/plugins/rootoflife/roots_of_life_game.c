@@ -84,6 +84,7 @@ typedef struct {
 
     int rerolls;
     int score;
+    FuriMutex* mutex;
 } GameState;
 
 typedef struct {
@@ -565,10 +566,9 @@ static void draw_end_ui(Canvas* canvas, GameState* state) {
 }
 
 static void roots_draw_callback(Canvas* const canvas, void* ctx) {
-    GameState* state = acquire_mutex((ValueMutex*)ctx, 25);
-    if(state == NULL) {
-        return;
-    }
+    furi_assert(ctx);
+    GameState* state = ctx;
+    furi_mutex_acquire(state->mutex, FuriWaitForever);
 
     if(!state->initialDraw) {
         state->initialDraw = true;
@@ -600,7 +600,7 @@ static void roots_draw_callback(Canvas* const canvas, void* ctx) {
         break;
     }
 
-    release_mutex((ValueMutex*)ctx, state);
+    furi_mutex_release(state->mutex);
 }
 
 static void roots_input_callback(InputEvent* input_event, FuriMessageQueue* event_queue) {
@@ -678,8 +678,8 @@ int32_t roots_of_life_game_app(void* p) {
     GameState* state = malloc(sizeof(GameState));
     game_state_init(state);
 
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, state, sizeof(GameState))) {
+    state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!state->mutex) {
         FURI_LOG_E(TAG, "Cannot create mutex\r\n");
         return_code = 255;
         goto free_and_exit;
@@ -687,7 +687,7 @@ int32_t roots_of_life_game_app(void* p) {
 
     // Set system callbacks
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, roots_draw_callback, &state_mutex);
+    view_port_draw_callback_set(view_port, roots_draw_callback, state);
     view_port_input_callback_set(view_port, roots_input_callback, event_queue);
 
     FuriTimer* timer =
@@ -702,12 +702,12 @@ int32_t roots_of_life_game_app(void* p) {
     GameEvent event;
     for(bool processing = true; processing;) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 100);
-        GameState* state = (GameState*)acquire_mutex_block(&state_mutex);
+        furi_mutex_acquire(state->mutex, FuriWaitForever);
 
         if(event_status == FuriStatusOk) {
             // Key events
             if(event.type == EventTypeKey) {
-                FURI_LOG_D(TAG, "Got key: %d", event.input.key);
+                //FURI_LOG_D(TAG, "Got key: %d", event.input.key);
                 if(event.input.type == InputTypePress || event.input.type == InputTypeLong ||
                    event.input.type == InputTypeRepeat) {
                     if(event.input.key == InputKeyBack) {
@@ -727,13 +727,10 @@ int32_t roots_of_life_game_app(void* p) {
                     }
                 }
             }
-        } else {
-            // Event timeout
-            FURI_LOG_D(TAG, "furi_message_queue: Event timeout");
         }
 
         view_port_update(view_port);
-        release_mutex(&state_mutex, state);
+        furi_mutex_release(state->mutex);
     }
 
     furi_timer_free(timer);
@@ -742,13 +739,12 @@ int32_t roots_of_life_game_app(void* p) {
     furi_record_close(RECORD_GUI);
     furi_record_close(RECORD_NOTIFICATION);
     view_port_free(view_port);
-    delete_mutex(&state_mutex);
-
+    furi_mutex_free(state->mutex);
 free_and_exit:
-    FURI_LOG_D(TAG, "Quitting game...");
+    furi_message_queue_free(event_queue);
+    //FURI_LOG_D(TAG, "Quitting game...");
     game_state_free(state);
     free(state);
-    furi_message_queue_free(event_queue);
 
     return return_code;
 }

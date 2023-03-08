@@ -95,6 +95,7 @@ typedef struct {
     unsigned char trajectoryAnimationStep;
     PointDetailed bulletPosition;
     PointDetailed bulletVector;
+    FuriMutex* mutex;
 } Game;
 
 typedef enum {
@@ -244,11 +245,9 @@ static void scorched_tanks_draw_tank(
 }
 
 static void scorched_tanks_render_callback(Canvas* const canvas, void* ctx) {
-    const Game* game_state = acquire_mutex((ValueMutex*)ctx, 25);
-
-    if(game_state == NULL) {
-        return;
-    }
+    furi_assert(ctx);
+    const Game* game_state = ctx;
+    furi_mutex_acquire(game_state->mutex, FuriWaitForever);
 
     canvas_draw_frame(canvas, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -342,7 +341,7 @@ static void scorched_tanks_render_callback(Canvas* const canvas, void* ctx) {
         canvas_draw_str(canvas, 27, 10, buffer);
     }
 
-    release_mutex((ValueMutex*)ctx, game_state);
+    furi_mutex_release(game_state->mutex);
 }
 
 static void scorched_tanks_input_callback(InputEvent* input_event, FuriMessageQueue* event_queue) {
@@ -471,15 +470,16 @@ int32_t scorched_tanks_game_app(void* p) {
     Game* game_state = malloc(sizeof(Game));
     scorched_tanks_init_game(game_state);
 
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, game_state, sizeof(ScorchedTanksEvent))) {
+    game_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!game_state->mutex) {
         FURI_LOG_E("ScorchedTanks", "cannot create mutex\r\n");
+        furi_message_queue_free(event_queue);
         free(game_state);
         return 255;
     }
 
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, scorched_tanks_render_callback, &state_mutex);
+    view_port_draw_callback_set(view_port, scorched_tanks_render_callback, game_state);
     view_port_input_callback_set(view_port, scorched_tanks_input_callback, event_queue);
 
     FuriTimer* timer =
@@ -493,6 +493,7 @@ int32_t scorched_tanks_game_app(void* p) {
     ScorchedTanksEvent event;
     for(bool processing = true; processing;) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 50);
+        furi_mutex_acquire(game_state->mutex, FuriWaitForever);
 
         if(event.type == EventTypeKey) { // && game->isPlayerTurn
             if(event.input.type == InputTypeRepeat || event.input.type == InputTypeShort) {
@@ -524,7 +525,7 @@ int32_t scorched_tanks_game_app(void* p) {
         }
 
         view_port_update(view_port);
-        release_mutex(&state_mutex, game_state);
+        furi_mutex_release(game_state->mutex);
     }
 
     furi_timer_free(timer);
@@ -533,7 +534,7 @@ int32_t scorched_tanks_game_app(void* p) {
     furi_record_close(RECORD_GUI);
     view_port_free(view_port);
     furi_message_queue_free(event_queue);
-    delete_mutex(&state_mutex);
+    furi_mutex_free(game_state->mutex);
     free(game_state);
 
     return 0;

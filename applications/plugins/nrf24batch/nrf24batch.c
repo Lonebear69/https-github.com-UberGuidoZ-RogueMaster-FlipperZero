@@ -1032,8 +1032,10 @@ void display_edit_ttf_font(Canvas* const canvas, uint8_t start_x, uint8_t start_
 }
 
 static void render_callback(Canvas* const canvas, void* ctx) {
-    const PluginState* plugin_state = acquire_mutex((ValueMutex*)ctx, 25);
-    if(plugin_state == NULL) return;
+    furi_assert(ctx);
+    const PluginState* plugin_state = ctx;
+    furi_mutex_acquire(plugin_state->mutex, FuriWaitForever);
+
     //canvas_draw_frame(canvas, 0, 0, 128, 64); // border around the edge of the screen
     if(what_doing == 0) {
         canvas_set_font(canvas, FontSecondary); // 8x10 font, 6 lines
@@ -1257,7 +1259,7 @@ static void render_callback(Canvas* const canvas, void* ctx) {
             }
         }
     }
-    release_mutex((ValueMutex*)ctx, plugin_state);
+    furi_mutex_release(plugin_state->mutex);
 }
 
 void work_timer_callback(void* ctx) {
@@ -1327,8 +1329,8 @@ int32_t nrf24batch_app(void* p) {
     APP = malloc(sizeof(nRF24Batch));
     APP->event_queue = furi_message_queue_alloc(8, sizeof(PluginEvent));
     APP->plugin_state = malloc(sizeof(PluginState));
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, APP->plugin_state, sizeof(PluginState))) {
+    APP->plugin_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!APP->plugin_state->mutex) {
         furi_message_queue_free(APP->event_queue);
         FURI_LOG_E(TAG, "cannot create mutex");
         free(APP->plugin_state);
@@ -1337,7 +1339,7 @@ int32_t nrf24batch_app(void* p) {
 
     // Set system callbacks
     APP->view_port = view_port_alloc();
-    view_port_draw_callback_set(APP->view_port, render_callback, &state_mutex);
+    view_port_draw_callback_set(APP->view_port, render_callback, APP->plugin_state);
     view_port_input_callback_set(APP->view_port, input_callback, APP->event_queue);
 
     // Open GUI and register view_port
@@ -1359,7 +1361,7 @@ int32_t nrf24batch_app(void* p) {
     PluginEvent event;
     for(bool processing = true; processing;) {
         FuriStatus event_status = furi_message_queue_get(APP->event_queue, &event, 200);
-        PluginState* plugin_state = (PluginState*)acquire_mutex_block(&state_mutex);
+        furi_mutex_acquire(APP->plugin_state->mutex, FuriWaitForever);
 
         static FuriLogLevel FuriLogLevel = FuriLogLevelDefault;
         if(furi_log_get_level() != FuriLogLevel) {
@@ -1734,7 +1736,7 @@ int32_t nrf24batch_app(void* p) {
         }
 
         view_port_update(APP->view_port);
-        release_mutex(&state_mutex, plugin_state);
+        furi_mutex_release(APP->plugin_state->mutex);
     }
     nrf24_set_idle(nrf24_HANDLE);
     nrf24_deinit();
@@ -1750,6 +1752,7 @@ int32_t nrf24batch_app(void* p) {
         stream_free(file_stream);
     }
     view_port_free(APP->view_port);
+    furi_mutex_free(APP->plugin_state->mutex);
     furi_message_queue_free(APP->event_queue);
     free_store();
     furi_timer_stop(work_timer);

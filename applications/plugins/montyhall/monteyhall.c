@@ -129,6 +129,7 @@ typedef enum {
 } GameState;
 
 typedef struct {
+    FuriMutex* mutex;
     GameState game_state;
     DoorState door_state;
     uint16_t score;
@@ -287,10 +288,9 @@ static void draw_bottom(Canvas* canvas, const MontyState* monty_state) {
 }
 
 static void montyhall_render_callback(Canvas* const canvas, void* ctx) {
-    const MontyState* monty_state = acquire_mutex((ValueMutex*)ctx, 25);
-    if(monty_state == NULL) {
-        return;
-    }
+    furi_assert(ctx);
+    const MontyState* monty_state = ctx;
+    furi_mutex_acquire(monty_state->mutex, FuriWaitForever);
 
     canvas_clear(canvas);
     canvas_set_color(canvas, ColorBlack);
@@ -298,7 +298,7 @@ static void montyhall_render_callback(Canvas* const canvas, void* ctx) {
     draw_doors(canvas, monty_state);
     draw_bottom(canvas, monty_state);
 
-    release_mutex((ValueMutex*)ctx, monty_state);
+    furi_mutex_release(monty_state->mutex);
 }
 
 static void montyhall_input_callback(InputEvent* input_event, FuriMessageQueue* event_queue) {
@@ -315,14 +315,14 @@ int32_t montyhall_game_app(void* p) {
 
     MontyState* monty_state = malloc(sizeof(MontyState));
 
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, monty_state, sizeof(MontyState))) {
+    monty_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!monty_state->mutex) {
         return_code = 255;
         goto free_and_exit;
     }
 
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, montyhall_render_callback, &state_mutex);
+    view_port_draw_callback_set(view_port, montyhall_render_callback, monty_state);
     view_port_input_callback_set(view_port, montyhall_input_callback, event_queue);
 
     Gui* gui = furi_record_open(RECORD_GUI);
@@ -334,7 +334,7 @@ int32_t montyhall_game_app(void* p) {
     InputEvent event;
     for(bool loop = true; loop;) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 100);
-        MontyState* monty_state = (MontyState*)acquire_mutex_block(&state_mutex);
+        furi_mutex_acquire(monty_state->mutex, FuriWaitForever);
 
         if(event_status == FuriStatusOk) {
             if(event.type == InputTypeShort) {
@@ -433,14 +433,14 @@ int32_t montyhall_game_app(void* p) {
         }
 
         view_port_update(view_port);
-        release_mutex(&state_mutex, monty_state);
+        furi_mutex_release(monty_state->mutex);
     }
 
     view_port_enabled_set(view_port, false);
     gui_remove_view_port(gui, view_port);
     furi_record_close(RECORD_GUI);
     view_port_free(view_port);
-    delete_mutex(&state_mutex);
+    furi_mutex_free(monty_state->mutex);
 
 free_and_exit:
     free(monty_state);
