@@ -48,4 +48,5 @@ typedef struct {
     Direction nextMovement; // if backward of currentMovement, ignore
     Point fruit;
     GameState state;
+    FuriMutex* mutex;
 } SnakeState;
