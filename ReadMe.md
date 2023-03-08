@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0307-2115-0.78.2-d6d9a7c](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-08 09:54 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-08 09:54 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-08 15:21 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-08 15:21 EST`
 - Added: [RCWL-516 Motion Sensor (By ahmedafe1)](https://github.com/ahmedafe1/rcwl_0516-Flipperzero)
 - OFW: [PicoPass: auth cleanup #2470 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2470)
 - Fix for Sub-GHz Error Handling to match Unleashed and fix issue with keeloq
@@ -40,6 +40,9 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [iButton Fuzzer (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware)
 - Updated repo link for [Dice (RM) Including SEX/WAR/8BALL/WEED/DRINK DICE (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dice)
 - Updated repo link for [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dabtimer)
+- UL: [Many Plugin Updates for the new ValueMutex removal BS from OFW (Big Thanks to xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/28eb4d1060c2265ac9df5623e17e884bc528511a)
+- UL: [External module 5v power issues fixes (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/ab91dc1882411be703a9348a014d16a2a7dda6e8)
+- UL: [SubGHz playlist - rewind (skip or play previous file) (By alvarotorijano)](https://github.com/DarkFlippers/unleashed-firmware/commit/086be92f691d1ca8ac406efc3f2ade6624f5e223)
 
 <a name="release">
 
