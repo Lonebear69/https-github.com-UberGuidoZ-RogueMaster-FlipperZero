@@ -2,7 +2,7 @@ App(
     appid="DND_Dice_app",
     name="DnD Dice [Ka3u6y6a]",
     apptype=FlipperAppType.EXTERNAL,
-    entry_point="dice_dnd_app",
+    entry_point="dice_tool_app",
     cdefines=["APP_DICE"],
     requires=["gui"],
     stack_size=1 * 1024,
