@@ -36,6 +36,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [RCWL-516 Motion Sensor (By ahmedafe1)](https://github.com/ahmedafe1/rcwl_0516-Flipperzero)
 - OFW: [PicoPass: auth cleanup #2470 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2470)
 - Fix for Sub-GHz Error Handling to match Unleashed and fix issue with keeloq
+- Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
 
 <a name="release">
 
