@@ -78,6 +78,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated build flags to allow Mfkey to function quicker (-O3)
 - Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
 - OFW: [Support reseting iCx cards #2451 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2451) - PR Officialy Merged (Was Alreasdy in RM)
+- Updated: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP)
+- [Infrared: Universal IR Assets Updated (By amec0e)](https://github.com/DarkFlippers/unleashed-firmware/pull/378)
 
 <a name="release">
 
