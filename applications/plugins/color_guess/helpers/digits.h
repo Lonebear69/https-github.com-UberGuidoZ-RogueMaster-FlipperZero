@@ -20,4 +20,6 @@ const Icon* digits[17] = {
     &I_digit_d_10x14,
     &I_digit_e_10x14,
     &I_digit_f_10x14,
-    &I_digit_x_10x14};
+    &I_digit_x_10x14
+};
+
