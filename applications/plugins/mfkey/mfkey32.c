@@ -915,7 +915,8 @@ static void render_callback(Canvas* const canvas, void* ctx) {
             program_state->cracked,
             program_state->total);
         canvas_draw_str_aligned(canvas, 5, 31, AlignLeft, AlignTop, draw_str);
-        snprintf(draw_str, sizeof(draw_str), "Search: %d/256", program_state->search);
+        snprintf(
+            draw_str, sizeof(draw_str), "Search: %d/%d", program_state->search, 256 / MSB_LIMIT);
         canvas_draw_str_aligned(canvas, 26, 41, AlignLeft, AlignTop, draw_str);
     } else if(program_state->is_thread_running && program_state->mfkey_state == DictionaryAttack) {
         elements_progress_bar_with_text(canvas, 5, 18, 118, 0, draw_str);

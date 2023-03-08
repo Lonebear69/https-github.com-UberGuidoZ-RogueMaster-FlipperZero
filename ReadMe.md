@@ -73,7 +73,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW PR: [Upside down / left handed orientation support #2462 (By hramrach)](https://github.com/flipperdevices/flipperzero-firmware/pull/2462)
 - OFW PR: [More UI fixes and improvements #2419 (By liamhays)](https://github.com/flipperdevices/flipperzero-firmware/pull/2419)
 - [Sub-GHz PlayList: Added the possibility to skip a file and play the previous one in #541 (By alvarotorijano}](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/541)
-- Updated: [Mfkey32 WIP (By noproto)](https://github.com/noproto/FlipperMfkey)
 - Updated build flags to allow Mfkey to function quicker (-O3)
 - Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
 - OFW: [Support reseting iCx cards #2451 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2451) - PR Officialy Merged (Was Alreasdy in RM)
@@ -82,6 +81,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: Updated: [Sub-GHz Bruteforcer v3.4 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master)
 - Updated README: [SWD Probe (By g3gg0)](https://github.com/g3gg0/flipper-swd_probe)
 - Updated [NRF24 Scanner v2.2 (By vad7)](https://github.com/vad7/nrf24scan)
+- Updated: [Mfkey32 WIP (By noproto)](https://github.com/noproto/FlipperMfkey)
 
 <a name="release">
 
