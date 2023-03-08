@@ -24,12 +24,7 @@ App(
     requires=["gui", "storage"],
     stack_size=2 * 1024,
     fap_version=(1,0),
-    fap_libs=[],
-    fap_private_libs=[
-        Lib(
-            name="nfc",
-        ),
-    ],
+    fap_libs=["nfc", "misc", "mbedtls", "st25rfal002", "gcc", "toolbox"],
     fap_icon="vb_migrate_10px.png",
     fap_category="NFC",
     fap_description="Makes transferring characters with VB Lab less cumbersome",
