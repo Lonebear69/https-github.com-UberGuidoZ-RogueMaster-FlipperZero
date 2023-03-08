@@ -80,6 +80,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Support reseting iCx cards #2451 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2451) - PR Officialy Merged (Was Alreasdy in RM)
 - Updated: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP)
 - [Infrared: Universal IR Assets Updated (By amec0e)](https://github.com/DarkFlippers/unleashed-firmware/pull/378)
+- UL: Updated: [Sub-GHz Bruteforcer v3.4 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master)
 
 <a name="release">
 
