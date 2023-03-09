@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0308-1741-0.78.2-f270fcd](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-08 20:00 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-08 20:00 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-08 20:09 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-08 20:09 EST`
 - Added: [RCWL-516 Motion Sensor (By ahmedafe1)](https://github.com/ahmedafe1/rcwl_0516-Flipperzero)
 - OFW: [PicoPass: auth cleanup #2470 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2470)
 - Fix for Sub-GHz Error Handling to match Unleashed and fix issue with keeloq
@@ -47,6 +47,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: Plugins: Many small issues was found and fixed due mutex upgrade (By xMasterX)
 - UL: [Plugins: NFC Magic fix - reinit nfc at app start (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/7a413f390deda5088f36d5edba5f3cfb243b6bf4)
 - Updated: [NFC Magic Gen4 app #2238 (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2238) (Changes Adopted By RogueMaster From [NFC Magic fix - reinit nfc at app start (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/7a413f390deda5088f36d5edba5f3cfb243b6bf4))
+- UL: Option to disable auto 5v power for external radio module + Sub-GHz Noise Fixes (By xMasterX)
 
 <a name="release">
 
