@@ -169,7 +169,7 @@ void nfc_magic_blink_stop(NfcMagic* nfc_magic) {
     notification_message(nfc_magic->notifications, &nfc_magic_sequence_blink_stop);
 }
 
-int32_t nfc_magic_app(void* p) {
+int32_t nfc_magic_g4_app(void* p) {
     UNUSED(p);
     NfcMagic* nfc_magic = nfc_magic_alloc();
 

@@ -46,8 +46,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: [Many Additional Plugin Updates for the new ValueMutex removal BS from OFW (Big Thanks to xMasterX)](https://github.com/xMasterX/unleashed-extra-pack)
 - UL: Plugins: Many small issues was found and fixed due mutex upgrade (By xMasterX)
 - UL: [Plugins: NFC Magic fix - reinit nfc at app start (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/7a413f390deda5088f36d5edba5f3cfb243b6bf4)
-- Updated: [NFC Magic Gen4 app #2238 (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2238) (Changes Adopted By RogueMaster From [NFC Magic fix - reinit nfc at app start (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/7a413f390deda5088f36d5edba5f3cfb243b6bf4))
 - UL: Option to disable auto 5v power for external radio module + Sub-GHz Noise Fixes (By xMasterX)
+- Updated: [NFC Magic Gen4 app #2238 (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2238) [(Updates By xMasterX)](https://github.com/xMasterX/unleashed-extra-pack)
 
 <a name="release">
 
@@ -328,7 +328,7 @@ $ ./fbt dolphin_ext
 - [Music Player (By DrZlo13)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1189)
 - [Name Changer (By ESurge)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/488)
 - [NFC Magic (By gornekich)](https://github.com/flipperdevices/flipperzero-firmware/pull/1966)
-- [NFC Magic Gen4 app #2238 (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2238)
+- [NFC Magic Gen4 app #2238 (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2238) [(Updates By xMasterX)](https://github.com/xMasterX/unleashed-extra-pack)
 - [Nightstand Clock (By nymda)](https://github.com/nymda/FlipperNightStand)
 - [NRF Sniff (By mothball187)](https://github.com/mothball187/flipperzero-nrf24/tree/main/nrfsniff) ([Pin Out](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/tree/420/applications/nrfsniff) from nocomp/Frog/UberGuidoZ) `Req: NRF24`
 - [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
