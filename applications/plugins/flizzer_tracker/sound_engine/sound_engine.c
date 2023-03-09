@@ -195,6 +195,6 @@ void sound_engine_fill_buffer(
             }
         }
 
-        audio_buffer[i] = output / (int32_t)(64 * 4);
+        audio_buffer[i] = output >> 8;
     }
 }
