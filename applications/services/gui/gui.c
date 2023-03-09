@@ -56,7 +56,13 @@ static void gui_redraw_status_bar(Gui* gui, bool need_attention) {
     uint8_t right_slim_used = 0;
     uint8_t top_used = 0;
     uint8_t width;
-    canvas_set_orientation(gui->canvas, CanvasOrientationHorizontal);
+
+    if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagHandOrient)) {
+        canvas_set_orientation(gui->canvas, CanvasOrientationHorizontalFlip);
+    } else {
+        canvas_set_orientation(gui->canvas, CanvasOrientationHorizontal);
+    }
+
     canvas_frame_set(
         gui->canvas,
         GUI_STATUS_BAR_X,
