@@ -1,7 +1,7 @@
 
 <a href='https://www.patreon.com/RogueMaster/membership'><img src="https://rogue-master.net/img/rmlogo.png" width="40%"></a>
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0308-1303-0.78.2-ca369f6.tgz&channel=RM0308-1303-0.78.2-ca369f6&version=0.77.2)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0308-2301-0.78.2-f35400e.tgz&channel=RM0308-2301-0.78.2-f35400e&version=0.77.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0308-2301-0.78.2-f35400e-NOANIM.tgz&channel=RM0308-2301-0.78.2-f35400e-NOANIM&version=0.77.2)
 
 ## What Is Not In The Firmware? [SD CARD EXTRA FILES AND OTHER RESEARCH SOURCES](https://github.com/RogueMaster/awesome-flipperzero-withModules)
 
@@ -29,27 +29,10 @@ This software is for experimental purposes only and is not meant for any illegal
 
 <a name="latest">
 
-## Latest Updates - [PATREON: Latest Release RM0308-1741-0.78.2-f270fcd](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
+## Latest Updates - [PATREON: Latest Release RM0308-2301-0.78.2-f35400e](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-08 22:56 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-08 22:56 EST`
-- Added: [RCWL-516 Motion Sensor (By ahmedafe1)](https://github.com/ahmedafe1/rcwl_0516-Flipperzero)
-- OFW: [PicoPass: auth cleanup #2470 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2470)
-- Fix for Sub-GHz Error Handling to match Unleashed and fix issue with keeloq
-- Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
-- Updated: [iButton Fuzzer (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware)
-- Updated repo link for [Dice (RM) Including SEX/WAR/8BALL/WEED/DRINK DICE (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dice)
-- Updated repo link for [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dabtimer)
-- UL: [Many Plugin Updates for the new ValueMutex removal BS from OFW (Big Thanks to xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/28eb4d1060c2265ac9df5623e17e884bc528511a)
-- UL: [External module 5v power issues fixes (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/ab91dc1882411be703a9348a014d16a2a7dda6e8)
-- UL: [SubGHz playlist - rewind (skip or play previous file) (By alvarotorijano)](https://github.com/DarkFlippers/unleashed-firmware/commit/086be92f691d1ca8ac406efc3f2ade6624f5e223)
-- UL: [Many Additional Plugin Updates for the new ValueMutex removal BS from OFW (Big Thanks to xMasterX)](https://github.com/xMasterX/unleashed-extra-pack)
-- UL: Plugins: Many small issues was found and fixed due mutex upgrade (By xMasterX)
-- UL: [Plugins: NFC Magic fix - reinit nfc at app start (By xMasterX)](https://github.com/DarkFlippers/unleashed-firmware/commit/7a413f390deda5088f36d5edba5f3cfb243b6bf4)
-- UL: Option to disable auto 5v power for external radio module + Sub-GHz Noise Fixes (By xMasterX)
-- Updated: [NFC Magic Gen4 app #2238 (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2238) [(Updates By xMasterX)](https://github.com/xMasterX/unleashed-extra-pack)
-- UL: SubGHz: Option to disable automatic 5v power for external modules - (5v is enabled by default, if you are using module without converter you can set this option to OFF) (By xMasterX)
-- UL: Plugins: Update Unitemp - Temperature sensors reader (DHT11/22, DS18B20, BMP280, HTU21x and more) [(by quen0n)](https://github.com/quen0n/unitemp-flipperzero)
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-08 23:01 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-08 23:01 EST`
 
 <a name="release">
 
@@ -378,4 +361,4 @@ $ ./fbt dolphin_ext
 - [Wii EC Analyser (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - [Zero Tracker (By DrZZlo13)](https://github.com/DrZlo13/flipper-zero-music-tracker)
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0308-1303-0.78.2-ca369f6.tgz&channel=RM0308-1303-0.78.2-ca369f6&version=0.77.2)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0308-2301-0.78.2-f35400e.tgz&channel=RM0308-2301-0.78.2-f35400e&version=0.77.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0308-2301-0.78.2-f35400e-NOANIM.tgz&channel=RM0308-2301-0.78.2-f35400e-NOANIM&version=0.77.2)
