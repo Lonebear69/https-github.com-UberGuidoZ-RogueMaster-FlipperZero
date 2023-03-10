@@ -39,7 +39,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [NFC: Fix 0 block write possibility in Mifare Classic emulation #2474 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2474)
 - UL: Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
 - Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
-- Updated: [NRF24 Scanner v2.2 (By vad7)](https://github.com/vad7/nrf24scan)
 - Reverted OFW: [Embed assets in elf file #2466 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2466) - Drop the un-needed poo for now...
 - Updated: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP) [#553](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/553)
 - UL: Updated: [Heap Defence (By xMasterX)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/commit/fc776446de9fdd553b221c02668b925b689378d8) [(original by wquinoa & Vedmein)](https://github.com/Vedmein/flipperzero-firmware/tree/hd/svisto-perdelki)
@@ -48,6 +47,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Removed: [SOS Dolphin Sauce (By atha)](https://github.com/arha/dolphin-sos) (Really it is commented)
 - Re-Add: [Embed assets in elf file #2466 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2466)
 - OFW: [Fbt: fix broken resource deployment (#2477) (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2477)
+- Updated: [NRF24 Scanner v2.2 (By vad7)](https://github.com/vad7/nrf24scan)
 
 <a name="release">
 
