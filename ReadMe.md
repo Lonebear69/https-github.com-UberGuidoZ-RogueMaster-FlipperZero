@@ -42,6 +42,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [NRF24 Scanner v2.2 (By vad7)](https://github.com/vad7/nrf24scan)
 - Reverted OFW: [Embed assets in elf file #2466 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2466) - Drop the un-needed poo for now...
 - Updated: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP) [#553](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/553)
+- UL: Updated: [Heap Defence (By xMasterX)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/commit/fc776446de9fdd553b221c02668b925b689378d8) [(original by wquinoa & Vedmein)](https://github.com/Vedmein/flipperzero-firmware/tree/hd/svisto-perdelki)
+- Added: [SOS Dolphin Sauce (By atha)](https://github.com/arha/dolphin-sos)
 
 <a name="release">
 
@@ -347,6 +349,7 @@ $ ./fbt dolphin_ext
 - [Scope (By anfractuosity)](https://github.com/anfractuosity/flipperscope)
 - [Sentry Safe (By H4ckd4ddy)](https://github.com/H4ckd4ddy/flipperzero-sentry-safe-plugin) ([Pin Out](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/tree/420/applications/sentry_safe) from [UberGuidoZ](https://github.com/UberGuidoZ/))
 - [Signal Generator (By nminaylov)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1793)
+- [SOS Dolphin Sauce (By atha)](https://github.com/arha/dolphin-sos)
 - [Spectrum Analyzer (By jolcese)](https://github.com/jolcese/flipperzero-firmware/tree/spectrum/applications/spectrum_analyzer) [Updates (for testing) Thanks to theY4Kman](https://github.com/theY4Kman/flipperzero-firmware)
 - [Sub-GHz Bruteforcer v3.4 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master)
 - [Sub-GHz Playlist (By darmiel)](https://github.com/darmiel/flipper-playlist)
