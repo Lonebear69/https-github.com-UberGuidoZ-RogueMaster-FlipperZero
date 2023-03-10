@@ -25,6 +25,7 @@ typedef struct {
 } PluginEvent;
 
 typedef struct {
+    FuriMutex* mutex;
     FuriTimer* timer;
     uint32_t last_tick;
     const Icon* dino_icon;
@@ -32,10 +33,9 @@ typedef struct {
 } GameState;
 
 static void timer_callback(void* ctx) {
-    GameState* game_state = acquire_mutex((ValueMutex*)ctx, 25);
-    if(game_state == NULL) {
-        return;
-    }
+    furi_assert(ctx);
+    GameState* game_state = ctx;
+    furi_mutex_acquire(game_state->mutex, FuriWaitForever);
 
     uint32_t ticks_elapsed = furi_get_tick() - game_state->last_tick;
     int delta_time_ms = ticks_elapsed * 1000 / furi_kernel_get_tick_frequency();
@@ -51,8 +51,7 @@ static void timer_callback(void* ctx) {
         }
         game_state->dino_frame_ms = 0;
     }
-
-    release_mutex((ValueMutex*)ctx, game_state);
+    furi_mutex_release(game_state->mutex);
 }
 
 static void input_callback(InputEvent* input_event, FuriMessageQueue* event_queue) {
@@ -63,15 +62,14 @@ static void input_callback(InputEvent* input_event, FuriMessageQueue* event_queu
 }
 
 static void render_callback(Canvas* const canvas, void* ctx) {
-    const GameState* game_state = acquire_mutex((ValueMutex*)ctx, 25);
-    if(game_state == NULL) {
-        return;
-    }
+    furi_assert(ctx);
+    GameState* game_state = ctx;
+    furi_mutex_acquire(game_state->mutex, FuriWaitForever);
 
     //  canvas_draw_xbm(canvas, 0, 0, dino_width, dino_height, dino_bits);
     canvas_draw_icon(canvas, DINO_START_X, DINO_START_Y, game_state->dino_icon);
 
-    release_mutex((ValueMutex*)ctx, game_state);
+    furi_mutex_release(game_state->mutex);
 }
 
 static void game_state_init(GameState* const game_state) {
@@ -88,8 +86,8 @@ int32_t trexrunner_app(void* p) {
     GameState* game_state = malloc(sizeof(GameState));
     game_state_init(game_state);
 
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, game_state, sizeof(game_state))) {
+    game_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!game_state->mutex) {
         FURI_LOG_E("T-rex runner", "cannot create mutex\r\n");
         free(game_state);
         return 255;
@@ -98,20 +96,20 @@ int32_t trexrunner_app(void* p) {
 
     // Set system callbacks
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, render_callback, &state_mutex);
+    view_port_draw_callback_set(view_port, render_callback, game_state);
     view_port_input_callback_set(view_port, input_callback, event_queue);
-    game_state->timer = furi_timer_alloc(timer_callback, FuriTimerTypePeriodic, &state_mutex);
+    game_state->timer = furi_timer_alloc(timer_callback, FuriTimerTypePeriodic, game_state);
 
     furi_timer_start(game_state->timer, (uint32_t)furi_kernel_get_tick_frequency() / FPS);
 
     // Open GUI and register view_port
-    Gui* gui = furi_record_open("gui");
+    Gui* gui = furi_record_open(RECORD_GUI);
     gui_add_view_port(gui, view_port, GuiLayerFullscreen);
 
     PluginEvent event;
     for(bool processing = true; processing;) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 100);
-        //    Minesweeper* minesweeper_state = (Minesweeper*)acquire_mutex_block(&state_mutex);
+        furi_mutex_acquire(game_state->mutex, FuriWaitForever);
         if(event_status == FuriStatusOk) {
             // press events
             if(event.type == EventTypeKey) {
@@ -131,25 +129,22 @@ int32_t trexrunner_app(void* p) {
                         // Exit the app
                         processing = false;
                         break;
+                    case InputKeyMAX:
+                        break;
                     }
                 }
             }
-        } else {
-            // event timeout
-            ;
         }
         view_port_update(view_port);
-        release_mutex(&state_mutex, game_state);
+        furi_mutex_release(game_state->mutex);
     }
-
     view_port_enabled_set(view_port, false);
     gui_remove_view_port(gui, view_port);
-    furi_record_close("gui");
+    furi_record_close(RECORD_GUI);
     view_port_free(view_port);
     furi_message_queue_free(event_queue);
-    delete_mutex(&state_mutex);
+    furi_mutex_free(game_state->mutex);
     furi_timer_free(game_state->timer);
     free(game_state);
-
     return 0;
 }

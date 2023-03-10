@@ -21,7 +21,7 @@ struct EventMessage {
     InputEvent event;
 };
 
-struct State {
+typedef struct {
     FuriTimer* timer = nullptr;
     I2C* i2c = nullptr;
     uint32_t timerFrequency = 1;
@@ -31,4 +31,5 @@ struct State {
 
     bool init(FuriMessageQueue*);
     bool readData();
-};
+    FuriMutex* mutex;
+} State;

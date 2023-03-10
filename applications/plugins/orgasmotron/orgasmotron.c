@@ -7,10 +7,13 @@
 
 typedef struct {
     int mode;
+    FuriMutex* mutex;
 } PluginState;
 
 void vibro_test_draw_callback(Canvas* canvas, void* ctx) {
-    UNUSED(ctx);
+    furi_assert(ctx);
+    const PluginState* plugin_state = ctx;
+    furi_mutex_acquire(plugin_state->mutex, FuriWaitForever);
     canvas_clear(canvas);
     canvas_set_font(canvas, FontPrimary);
     canvas_draw_str(canvas, 2, 10, "Vibro Modes");
@@ -22,6 +25,7 @@ void vibro_test_draw_callback(Canvas* canvas, void* ctx) {
     canvas_draw_str(canvas, 2, 46, "DOWN Pleasure combo");
     canvas_set_font(canvas, FontSecondary);
     canvas_draw_str(canvas, 2, 58, "OK: Pause");
+    furi_mutex_release(plugin_state->mutex);
 }
 
 void vibro_test_input_callback(InputEvent* input_event, void* ctx) {
@@ -39,8 +43,8 @@ int32_t orgasmotron_app(void* p) {
     FuriMessageQueue* event_queue = furi_message_queue_alloc(8, sizeof(InputEvent));
 
     PluginState* plugin_state = malloc(sizeof(PluginState));
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, plugin_state, sizeof(PluginState))) {
+    plugin_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!plugin_state->mutex) {
         FURI_LOG_E("Orgasmatron", "cannot create mutex\r\n");
         free(plugin_state);
         return 255;
@@ -48,7 +52,7 @@ int32_t orgasmotron_app(void* p) {
 
     // Configure view port
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, vibro_test_draw_callback, NULL);
+    view_port_draw_callback_set(view_port, vibro_test_draw_callback, plugin_state);
     view_port_input_callback_set(view_port, vibro_test_input_callback, event_queue);
 
     // Register view port in GUI
@@ -63,7 +67,7 @@ int32_t orgasmotron_app(void* p) {
     //while(furi_message_queue_get(event_queue, &event, FuriWaitForever) == FuriStatusOk) {
     while(processing) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 100);
-        PluginState* plugin_state = (PluginState*)acquire_mutex_block(&state_mutex);
+        furi_mutex_acquire(plugin_state->mutex, FuriWaitForever);
         if(event_status == FuriStatusOk) {
             if(event.key == InputKeyBack && event.type == InputTypeShort) {
                 //Exit Application
@@ -132,15 +136,14 @@ int32_t orgasmotron_app(void* p) {
                 delay(50);
             }
         }
-        release_mutex(&state_mutex, plugin_state);
+        furi_mutex_release(plugin_state->mutex);
     }
     gui_remove_view_port(gui, view_port);
     view_port_free(view_port);
+    furi_mutex_free(plugin_state->mutex);
     furi_message_queue_free(event_queue);
-
     furi_record_close(RECORD_NOTIFICATION);
     furi_record_close(RECORD_GUI);
-    delete_mutex(&state_mutex);
-
+    free(plugin_state);
     return 0;
 }

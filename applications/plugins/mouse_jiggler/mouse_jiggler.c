@@ -18,10 +18,13 @@ typedef struct {
 
 typedef struct {
     bool running;
+    FuriMutex* mutex;
 } MouseJigglerState;
 
 static void mouse_jiggler_render_callback(Canvas* canvas, void* ctx) {
-    const MouseJigglerState* plugin_state = acquire_mutex((ValueMutex*)ctx, 25);
+    furi_assert(ctx);
+    const MouseJigglerState* plugin_state = ctx;
+    furi_mutex_acquire(plugin_state->mutex, FuriWaitForever);
     if(plugin_state == NULL) {
         return;
     }
@@ -39,7 +42,7 @@ static void mouse_jiggler_render_callback(Canvas* canvas, void* ctx) {
         canvas_draw_str(canvas, 2, 51, "Press [back] to stop");
     }
 
-    release_mutex((ValueMutex*)ctx, plugin_state);
+    furi_mutex_release(plugin_state->mutex);
 }
 
 static void mouse_jiggler_input_callback(InputEvent* input_event, void* ctx) {
@@ -66,16 +69,15 @@ int32_t mouse_jiggler_app(void* p) {
     }
     mouse_jiggler_state_init(plugin_state);
 
-    ValueMutex state_mutex;
-    if(!init_mutex(&state_mutex, plugin_state, sizeof(MouseJigglerState))) {
-        FURI_LOG_E("MouseJiggler", "cannot create mutex\r\n");
+    plugin_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!plugin_state->mutex) {
         furi_message_queue_free(event_queue);
         free(plugin_state);
         return 255;
     }
 
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, mouse_jiggler_render_callback, &state_mutex);
+    view_port_draw_callback_set(view_port, mouse_jiggler_render_callback, plugin_state);
     view_port_input_callback_set(view_port, mouse_jiggler_input_callback, event_queue);
 
     FuriHalUsbInterface* usb_mode_prev = furi_hal_usb_get_config();
@@ -90,8 +92,7 @@ int32_t mouse_jiggler_app(void* p) {
 
     for(bool processing = true; processing;) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 100);
-
-        MouseJigglerState* plugin_state = (MouseJigglerState*)acquire_mutex_block(&state_mutex);
+        furi_mutex_acquire(plugin_state->mutex, FuriWaitForever);
 
         if(event_status == FuriStatusOk) {
             if(event.type == EventTypeKey) {
@@ -124,18 +125,16 @@ int32_t mouse_jiggler_app(void* p) {
         }
 
         view_port_update(view_port);
-        release_mutex(&state_mutex, plugin_state);
+        furi_mutex_release(plugin_state->mutex);
     }
-
     furi_hal_usb_set_config(usb_mode_prev, NULL);
-
     // remove & free all stuff created by app
     view_port_enabled_set(view_port, false);
     gui_remove_view_port(gui, view_port);
     furi_record_close(RECORD_GUI);
     view_port_free(view_port);
     furi_message_queue_free(event_queue);
-    delete_mutex(&state_mutex);
-
+    furi_mutex_free(plugin_state->mutex);
+    free(plugin_state);
     return 0;
 }
