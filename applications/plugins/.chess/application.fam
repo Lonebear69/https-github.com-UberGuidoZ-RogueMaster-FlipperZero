@@ -1,5 +1,5 @@
 App(
-    appid="zBroken_Chess",
+    appid="Chess",
     name="Chess",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="chess_app",
@@ -9,4 +9,6 @@ App(
     order=500,
     fap_icon="chessIcon.png",
     fap_category="Games",
+    fap_author="Oleg Kalachev",
+    fap_weburl="https://github.com/GMMan/flipperzero-badapple",
 )

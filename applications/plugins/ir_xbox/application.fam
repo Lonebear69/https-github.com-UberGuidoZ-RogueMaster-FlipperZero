@@ -11,7 +11,7 @@ App(
     ],
     stack_size=1 * 1024,
     order=1,
-	fap_icon="xbox_controller.png",
+    fap_icon="xbox_controller.png",
     fap_category="Infrared",
     fap_icon_assets="assets",
     fap_icon_assets_symbol="xc",
