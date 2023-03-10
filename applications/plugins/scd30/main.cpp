@@ -76,7 +76,7 @@ static void timer_cb(FuriMessageQueue* queue) {
 extern "C" int32_t scd30_main() {
     err_t error = static_cast<err_t>(0);
     Gui* gui = nullptr;
-	State* state = (State*)malloc(sizeof(State));
+    State* state = (State*)malloc(sizeof(State));
     ViewPort* viewport = nullptr;
     state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
     if(!state->mutex) {
@@ -179,7 +179,7 @@ extern "C" int32_t scd30_main() {
 
             view_port_update(viewport);
         }
-		furi_mutex_release(state->mutex);
+        furi_mutex_release(state->mutex);
     }
 
 bail:
