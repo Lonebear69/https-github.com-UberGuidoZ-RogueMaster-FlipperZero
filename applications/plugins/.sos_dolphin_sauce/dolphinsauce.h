@@ -14,7 +14,7 @@
 #define MARKER_HZ 220 * 8 * 2
 
 typedef struct {
-    FuriMutex* model_mutex;
+    FuriMutex* mutex;
     FuriMessageQueue* event_queue;
     ViewPort* view_port;
     Gui* gui;

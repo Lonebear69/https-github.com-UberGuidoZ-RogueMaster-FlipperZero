@@ -2,8 +2,9 @@
 #include <cc1101.h>
 
 void draw_callback(Canvas* canvas, void* ctx) {
+    furi_assert(ctx);
     AppFSM* app = ctx;
-    furi_check(furi_mutex_acquire(app->model_mutex, FuriWaitForever) == FuriStatusOk);
+    furi_mutex_acquire(app->mutex, FuriWaitForever);
     canvas_draw_frame(canvas, 0, 0, 128, 64);
     canvas_set_font(canvas, FontPrimary);
     if(app->active_msg == &sms_msg)
@@ -24,7 +25,7 @@ void draw_callback(Canvas* canvas, void* ctx) {
     canvas_draw_str(canvas, 2, 35, "LRLRLR OK for SOS msg");
     canvas_draw_str(canvas, 2, 50, "Unwarranted maydays may");
     canvas_draw_str(canvas, 2, 60, "cause legal dismay");
-    furi_mutex_release(app->model_mutex);
+    furi_mutex_release(app->mutex);
 }
 
 void input_callback(InputEvent* input, void* ctx) {
@@ -38,7 +39,11 @@ AppFSM* app_init() {
 
     AppFSM* app = malloc(sizeof(AppFSM));
     app->active_msg = &sms_msg;
-    app->model_mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    app->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!app->mutex) {
+        FURI_LOG_E("SOS", "cannot create mutex\r\n");
+        app_exit(app);
+    }
     app->event_queue = furi_message_queue_alloc(8, sizeof(InputEvent));
     app->view_port = view_port_alloc();
     view_port_draw_callback_set(app->view_port, draw_callback, app);
@@ -152,7 +157,7 @@ void app_exit(AppFSM* app) {
     furi_record_close("gui");
     view_port_free(app->view_port);
     furi_message_queue_free(app->event_queue);
-    furi_mutex_free(app->model_mutex);
+    furi_mutex_free(app->mutex);
     furi_hal_speaker_stop();
     free(app);
 }
@@ -163,8 +168,7 @@ int32_t sos_app(void* p) {
     InputEvent event;
     for(bool processing = true; processing;) {
         FuriStatus status = furi_message_queue_get(app->event_queue, &event, 100);
-        furi_check(furi_mutex_acquire(app->model_mutex, FuriWaitForever) == FuriStatusOk);
-
+        furi_mutex_acquire(app->mutex, FuriWaitForever);
         // float volume = 1.0f;
         if(status == FuriStatusOk) {
             if(event.type == InputTypePress) {
@@ -222,9 +226,8 @@ int32_t sos_app(void* p) {
                 furi_hal_speaker_stop();
             }
         }
-
-        furi_mutex_release(app->model_mutex);
         view_port_update(app->view_port);
+        furi_mutex_release(app->mutex);
     }
     app_exit(app);
     return 0;
