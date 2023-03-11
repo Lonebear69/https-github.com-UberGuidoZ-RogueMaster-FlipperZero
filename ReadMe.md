@@ -48,6 +48,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Fbt: fix broken resource deployment (#2477) (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2477)
 - Updated: [NRF24 Scanner v2.2 (By vad7)](https://github.com/vad7/nrf24scan)
 - Updated: [NRF24 Batch v1.6 (By vad7)](https://github.com/vad7/nRF24-Batch)
+- Added: [Cross Remote (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 
 <a name="release">
 
@@ -282,6 +283,7 @@ $ ./fbt dolphin_ext
 - [Clock (By kowalski7cc)](https://github.com/kowalski7cc/flipperzero-firmware/tree/clock-v1)
 - [Count Down Timer (By 0w0mewo)](https://github.com/0w0mewo/fpz_cntdown_timer)
 - [Counter (By Krulknul)](https://github.com/Krulknul/dolphin-counter) [Improved (By plasticuproject)](https://github.com/plasticuproject/dolphin-better-counter)
+- [Cross Remote (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 - [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dabtimer)
 - [DAP Link (By DrZlo13)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1897)
 - [DCF77 Transmitter (By arha)](https://github.com/arha/flipper-dcf77)
