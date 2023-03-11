@@ -7,6 +7,8 @@
 #include <gui/modules/dialog_ex.h>
 #include <toolbox/stream/file_stream.h>
 #include <notification/notification_messages.h>
+#include <power/power_service/power.h>
+#include <power/power_service/power_i.h>
 
 typedef enum {
     EventTypeTick,
@@ -26,4 +28,5 @@ typedef struct {
     Gui* gui;
     Storage* storage;
     NotificationApp* notification;
+    PluginState* plugin_state;
 } nRF24Batch;

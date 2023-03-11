@@ -38,7 +38,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [BadUSB: updated parser and added stringln, hold and release #2448 (By p4p1)](https://github.com/flipperdevices/flipperzero-firmware/pull/2448)
 - OFW: [NFC: Fix 0 block write possibility in Mifare Classic emulation #2474 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2474)
 - UL: Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
-- Updated: [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
 - Reverted OFW: [Embed assets in elf file #2466 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2466) - Drop the un-needed poo for now...
 - Updated: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP) [#553](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/553)
 - UL: Updated: [Heap Defence (By xMasterX)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/commit/fc776446de9fdd553b221c02668b925b689378d8) [(original by wquinoa & Vedmein)](https://github.com/Vedmein/flipperzero-firmware/tree/hd/svisto-perdelki)
@@ -48,6 +47,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Re-Add: [Embed assets in elf file #2466 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2466)
 - OFW: [Fbt: fix broken resource deployment (#2477) (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2477)
 - Updated: [NRF24 Scanner v2.2 (By vad7)](https://github.com/vad7/nrf24scan)
+- Updated: [NRF24 Batch v1.6 (By vad7)](https://github.com/vad7/nRF24-Batch)
 
 <a name="release">
 
@@ -331,7 +331,7 @@ $ ./fbt dolphin_ext
 - [NFC Magic Gen4 app #2238 (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2238) [(Updates By xMasterX)](https://github.com/xMasterX/unleashed-extra-pack)
 - [Nightstand Clock (By nymda)](https://github.com/nymda/FlipperNightStand)
 - [NRF Sniff (By mothball187)](https://github.com/mothball187/flipperzero-nrf24/tree/main/nrfsniff) ([Pin Out](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/tree/420/applications/nrfsniff) from nocomp/Frog/UberGuidoZ) `Req: NRF24`
-- [NRF24 Batch (By vad7)](https://github.com/vad7/nRF24-Batch)
+- [NRF24 Batch v1.6 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - [NRF24 Scanner v2.2 (By vad7)](https://github.com/vad7/nrf24scan)
 - [Ocarina (By invalidna-me)](https://github.com/invalidna-me/flipperzero-ocarina) [Here are the LOTZ Songs](https://www.zeldadungeon.net/wiki/Ocarina_of_Time_Songs)
 - [Orgasmotron (By qqmajikpp)](https://github.com/qqmajikpp/flipperzero-firmware-wPlugins) [Updated by jbohack](https://github.com/jbohack)

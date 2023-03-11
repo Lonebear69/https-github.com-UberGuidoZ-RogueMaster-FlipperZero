@@ -14,7 +14,7 @@
 #include <u8g2.h>
 
 #define TAG "nrf24batch"
-#define VERSION "1.5"
+#define VERSION "1.6"
 
 #define SCAN_APP_PATH_FOLDER "/ext/apps_data/nrf24batch"
 #define LOG_FILEEXT ".txt"
@@ -121,6 +121,10 @@ char* ReadBatch_cmd_curr = NULL; // =0xFFFFFFFF - finish
 FuriString** WriteBatch_cmd = NULL; // Names of write batch cmd
 uint16_t WriteBatch_cmd_Total = 0;
 uint16_t WriteBatch_cmd_curr = 0; // == _Total - finish
+#define POWER_READ_PERIOD 501 // ms
+uint16_t pwr_read_timer = 0;
+int Current = 0;
+int CurrentStart = 0;
 
 enum { ask_write_batch = 1, ask_save_batch, ask_skip_cmd, ask_return, ask_exit };
 uint8_t ask_question = 0; // 1 - Ask now - ask_*
@@ -271,6 +275,24 @@ void free_store(void) {
     free_Log();
 }
 
+void update_power(void) {
+    Current = furi_hal_power_get_battery_current(FuriHalPowerICFuelGauge) * 1000;
+}
+
+void check_en_power_5V(void) {
+    if(!furi_hal_power_is_otg_enabled() && !furi_hal_power_is_charging()) {
+        FURI_LOG_D("PWR", "NO 5V, TURN ON");
+        notification_message(APP->notification, &sequence_blink_yellow_100);
+        furi_delay_ms(10);
+        update_power();
+        CurrentStart = Current;
+        furi_hal_power_enable_otg();
+        NRF_BOARD_POWER_5V = true;
+        furi_delay_ms(100);
+        NRF_INITED = 0;
+    }
+}
+
 static bool select_settings_file() {
     DialogsApp* dialogs = furi_record_open("dialogs");
     bool result = false;
@@ -301,7 +323,9 @@ static bool select_settings_file() {
 }
 
 static void prepare_nrf24(void) {
-    if(!NRF_INITED || !((rw_type == rwt_listen) == (NRF_INITED == rwt_listen))) {
+    check_en_power_5V();
+    if(!NRF_INITED || rw_type == rwt_listen || NRF_INITED == rwt_listen) {
+        FURI_LOG_D("NRF", "Prepare");
         uint8_t adrlen, *adr;
         if(rw_type == rwt_listen) {
             adrlen = listen_addr_len;
@@ -312,6 +336,7 @@ static void prepare_nrf24(void) {
             adr = addr;
             NRF_INITED = 1;
         }
+        furi_hal_gpio_write(nrf24_CE_PIN, false);
         nrf24_set_mac(REG_RX_ADDR_P0, adr, adrlen);
         uint8_t tmp[5] = {0};
         nrf24_read_reg(nrf24_HANDLE, REG_RX_ADDR_P0, tmp, adrlen);
@@ -325,6 +350,11 @@ static void prepare_nrf24(void) {
             NRF_INITED = 0;
             return;
         }
+        // EN_DYN_ACK(0x01) option for W_TX_PAYLOAD_NOACK cmd broke AA on some fake nRF24l01+ modules
+        nrf24_write_reg(
+            nrf24_HANDLE,
+            REG_FEATURE,
+            (NRF_DPL ? 4 : 0)); // Dynamic Payload, Payload with ACK, W_TX_PAYLOAD_NOACK command
         nrf24_write_reg(nrf24_HANDLE, REG_RF_CH, NRF_channel);
         nrf24_write_reg(
             nrf24_HANDLE,
@@ -342,25 +372,16 @@ static void prepare_nrf24(void) {
         nrf24_write_reg(
             nrf24_HANDLE, REG_SETUP_RETR, NRF_RETR); // Automatic Retransmission, ARD<<4 + ARC
         nrf24_write_reg(nrf24_HANDLE, REG_EN_AA, 0x01); // Auto acknowledgement
-        nrf24_write_reg(
-            nrf24_HANDLE,
-            REG_FEATURE,
-            NRF24_EN_DYN_ACK |
-                (NRF_DPL ?
-                     4 :
-                     0)); // Enables the W_TX_PAYLOAD_NOACK command, Disable Payload with ACK, set Dynamic Payload
         nrf24_write_reg(nrf24_HANDLE, REG_DYNPD, NRF_DPL ? 0x3F : 0); // Enable dynamic payload reg
         nrf24_write_reg(nrf24_HANDLE, RX_PW_P0, payload_size);
         nrf24_set_maclen(nrf24_HANDLE, adrlen);
         nrf24_set_mac(REG_TX_ADDR, adr, adrlen);
         nrf24_write_reg(nrf24_HANDLE, REG_EN_RXADDR, 1);
         //nrf24_set_idle(nrf24_HANDLE);
-        NRF_INITED = true;
     }
     nrf24_flush_tx(nrf24_HANDLE);
     nrf24_flush_rx(nrf24_HANDLE);
     nrf24_write_reg(nrf24_HANDLE, REG_STATUS, MAX_RT | RX_DR | TX_DS);
-    furi_hal_gpio_write(nrf24_CE_PIN, false);
 }
 
 // true - ok
@@ -1087,6 +1108,13 @@ static void render_callback(Canvas* const canvas, void* ctx) {
                 add_to_str_hex_bytes(screen_buf, listen_addr, listen_addr_len);
                 canvas_draw_str(canvas, 40, 25, screen_buf);
             }
+            snprintf(
+                screen_buf,
+                sizeof(screen_buf),
+                "I: %d +(%d) mA",
+                Current - CurrentStart,
+                CurrentStart);
+            canvas_draw_str(canvas, 0, 60, screen_buf);
         } else {
             canvas_set_font(canvas, FontBatteryPercent); // 5x7 font, 9 lines, 25 cols
             if(rw_type == rwt_read_batch) {
@@ -1152,6 +1180,7 @@ static void render_callback(Canvas* const canvas, void* ctx) {
                         screen_buf + strlen(screen_buf), 16, " (%lu)", ListenLast - ListenPrev);
             } else
                 strcat(screen_buf, "receiving");
+            snprintf(screen_buf + strlen(screen_buf), 16, " %dmA", Current - CurrentStart);
             canvas_draw_str(canvas, 0, 10, screen_buf);
             if(ListenFields) {
                 char *p2, *p = ListenFields;
@@ -1264,6 +1293,10 @@ static void render_callback(Canvas* const canvas, void* ctx) {
 
 void work_timer_callback(void* ctx) {
     if(ctx == NULL) return;
+    if((pwr_read_timer += WORK_PERIOD) >= POWER_READ_PERIOD) {
+        pwr_read_timer = 0;
+        update_power();
+    }
     if(what_doing == 2) {
         const PluginState* plugin_state = ctx;
         if(furi_mutex_acquire(plugin_state->mutex, 0) != FuriStatusOk) return;
@@ -1331,18 +1364,17 @@ int32_t nrf24batch_app(void* p) {
     UNUSED(p);
     APP = malloc(sizeof(nRF24Batch));
     FuriMessageQueue* event_queue = furi_message_queue_alloc(8, sizeof(PluginEvent));
-    PluginState* plugin_state = malloc(sizeof(PluginState));
-    plugin_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
-    if(!plugin_state->mutex) {
+    APP->plugin_state = malloc(sizeof(PluginState));
+    APP->plugin_state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!APP->plugin_state->mutex) {
         furi_message_queue_free(event_queue);
         FURI_LOG_E(TAG, "cannot create mutex");
-        free(plugin_state);
+        free(APP->plugin_state);
         return 255;
     }
-
     // Set system callbacks
     ViewPort* view_port = view_port_alloc();
-    view_port_draw_callback_set(view_port, render_callback, plugin_state);
+    view_port_draw_callback_set(view_port, render_callback, APP->plugin_state);
     view_port_input_callback_set(view_port, input_callback, event_queue);
 
     // Open GUI and register view_port
@@ -1353,19 +1385,15 @@ int32_t nrf24batch_app(void* p) {
     storage_common_mkdir(APP->storage, SCAN_APP_PATH_FOLDER);
     file_stream = file_stream_alloc(APP->storage);
     FuriTimer* work_timer =
-        furi_timer_alloc(work_timer_callback, FuriTimerTypePeriodic, plugin_state);
+        furi_timer_alloc(work_timer_callback, FuriTimerTypePeriodic, APP->plugin_state);
     furi_timer_start(work_timer, WORK_PERIOD);
-    if(!furi_hal_power_is_otg_enabled()) {
-        furi_hal_power_enable_otg();
-        NRF_BOARD_POWER_5V = true;
-        furi_delay_ms(100);
-    }
     nrf24_init();
+    check_en_power_5V();
 
     PluginEvent event;
     for(bool processing = true; processing;) {
         FuriStatus event_status = furi_message_queue_get(event_queue, &event, 100);
-        furi_mutex_acquire(plugin_state->mutex, FuriWaitForever);
+        furi_mutex_acquire(APP->plugin_state->mutex, FuriWaitForever);
 
         static FuriLogLevel FuriLogLevel = FuriLogLevelDefault;
         if(furi_log_get_level() != FuriLogLevel) {
@@ -1575,7 +1603,7 @@ int32_t nrf24batch_app(void* p) {
                                 Edit_pos = ebuf + strlen(ebuf) - 1;
                                 Edit_start = ebuf;
                                 Edit = 1;
-                                NRF_INITED = false;
+                                NRF_INITED = 0;
                             } else if(setup_cursor == 2) { // change channel
                                 char* ebuf = (char*)payload;
                                 snprintf(ebuf, sizeof(payload), "%d", NRF_channel);
@@ -1583,7 +1611,7 @@ int32_t nrf24batch_app(void* p) {
                                 Edit_pos = ebuf + strlen(ebuf) - 1;
                                 Edit_start = ebuf;
                                 Edit = 1;
-                                NRF_INITED = false;
+                                NRF_INITED = 0;
                             }
                         } else if(what_doing == 1) {
                             if(rw_type == rwt_read_batch) {
@@ -1612,14 +1640,16 @@ int32_t nrf24batch_app(void* p) {
                                     what_doing = 2;
                                 }
                             } else if(rw_type == rwt_listen) {
-                                free_Log();
-                                prepare_nrf24();
-                                if(!NRF_ERROR) {
-                                    nrf24_set_rx_mode(nrf24_HANDLE);
-                                    ListenNew = false;
-                                    send_status = sst_receiving; // receiving
+                                if(listen_addr_len) {
+                                    free_Log();
+                                    prepare_nrf24();
+                                    if(!NRF_ERROR) {
+                                        nrf24_set_rx_mode(nrf24_HANDLE);
+                                        ListenNew = false;
+                                        send_status = sst_receiving; // receiving
+                                    }
+                                    what_doing = 2;
                                 }
-                                what_doing = 2;
                             }
                         } else if(what_doing == 2) {
                             if(rw_type == rwt_read_cmd) {
@@ -1653,14 +1683,16 @@ int32_t nrf24batch_app(void* p) {
                             }
                         } else if(what_doing == 1) {
                             if(rw_type == rwt_listen) {
-                                char* ebuf = (char*)payload;
-                                ebuf[0] = '\0';
-                                add_to_str_hex_bytes(ebuf, listen_addr, listen_addr_len);
-                                Edit_hex = true;
-                                Edit_pos = ebuf + strlen(ebuf) - 1;
-                                Edit_start = ebuf;
-                                Edit = 1;
-                                NRF_INITED = false;
+                                if(listen_addr_len) {
+                                    char* ebuf = (char*)payload;
+                                    ebuf[0] = '\0';
+                                    add_to_str_hex_bytes(ebuf, listen_addr, listen_addr_len);
+                                    Edit_hex = true;
+                                    Edit_pos = ebuf + strlen(ebuf) - 1;
+                                    Edit_start = ebuf;
+                                    Edit = 1;
+                                    NRF_INITED = 0;
+                                }
                             }
                         } else if(what_doing == 2) {
                             if(rw_type == rwt_read_cmd) {
@@ -1740,7 +1772,7 @@ int32_t nrf24batch_app(void* p) {
         }
 
         view_port_update(view_port);
-        furi_mutex_release(plugin_state->mutex);
+        furi_mutex_release(APP->plugin_state->mutex);
     }
     nrf24_set_idle(nrf24_HANDLE);
     nrf24_deinit();
@@ -1760,8 +1792,8 @@ int32_t nrf24batch_app(void* p) {
     free_store();
     furi_timer_stop(work_timer);
     furi_timer_free(work_timer);
-    furi_mutex_free(plugin_state->mutex);
-    free(plugin_state);
+    furi_mutex_free(APP->plugin_state->mutex);
+    free(APP->plugin_state);
     free(APP);
     return 0;
 }
