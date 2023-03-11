@@ -23,7 +23,7 @@ XRemote* xremote_app_alloc() {
     XRemote* app = malloc(sizeof(XRemote));
     app->gui = furi_record_open(RECORD_GUI);
     app->notification = furi_record_open(RECORD_NOTIFICATION);
-    
+
     //Turn backlight on, believe me this makes testing your app easier
     notification_message(app->notification, &sequence_display_backlight_on);
 
@@ -33,8 +33,10 @@ XRemote* xremote_app_alloc() {
 
     app->scene_manager = scene_manager_alloc(&xremote_scene_handlers, app);
     view_dispatcher_set_event_callback_context(app->view_dispatcher, app);
-    view_dispatcher_set_navigation_event_callback(app->view_dispatcher, xremote_navigation_event_callback);
-    view_dispatcher_set_tick_event_callback(app->view_dispatcher, xremote_tick_event_callback, 100);
+    view_dispatcher_set_navigation_event_callback(
+        app->view_dispatcher, xremote_navigation_event_callback);
+    view_dispatcher_set_tick_event_callback(
+        app->view_dispatcher, xremote_tick_event_callback, 100);
     view_dispatcher_set_custom_event_callback(app->view_dispatcher, xremote_custom_event_callback);
     app->submenu = submenu_alloc();
 
@@ -47,17 +49,26 @@ XRemote* xremote_app_alloc() {
     // Load configs
     xremote_read_settings(app);
 
-    view_dispatcher_add_view(app->view_dispatcher, XRemoteViewIdMenu, submenu_get_view(app->submenu));
+    view_dispatcher_add_view(
+        app->view_dispatcher, XRemoteViewIdMenu, submenu_get_view(app->submenu));
     app->xremote_infoscreen = xremote_infoscreen_alloc();
-    view_dispatcher_add_view(app->view_dispatcher, XRemoteViewIdInfoscreen, xremote_infoscreen_get_view(app->xremote_infoscreen));
+    view_dispatcher_add_view(
+        app->view_dispatcher,
+        XRemoteViewIdInfoscreen,
+        xremote_infoscreen_get_view(app->xremote_infoscreen));
     //app->xremote_scene_1 = xremote_scene_1_alloc();
     //view_dispatcher_add_view(app->view_dispatcher, XRemoteViewIdScene1, xremote_scene_1_get_view(app->xremote_scene_1));
     app->button_menu = button_menu_alloc();
-    view_dispatcher_add_view(app->view_dispatcher, XRemoteViewIdScene1, button_menu_get_view(app->button_menu));
+    view_dispatcher_add_view(
+        app->view_dispatcher, XRemoteViewIdScene1, button_menu_get_view(app->button_menu));
     app->xremote_scene_2 = xremote_scene_2_alloc();
-    view_dispatcher_add_view(app->view_dispatcher, XRemoteViewIdScene2, xremote_scene_2_get_view(app->xremote_scene_2));
+    view_dispatcher_add_view(
+        app->view_dispatcher, XRemoteViewIdScene2, xremote_scene_2_get_view(app->xremote_scene_2));
     app->variable_item_list = variable_item_list_alloc();
-    view_dispatcher_add_view(app->view_dispatcher, XRemoteViewIdSettings, variable_item_list_get_view(app->variable_item_list));
+    view_dispatcher_add_view(
+        app->view_dispatcher,
+        XRemoteViewIdSettings,
+        variable_item_list_get_view(app->variable_item_list));
 
     //End Scene Additions
 
@@ -66,7 +77,7 @@ XRemote* xremote_app_alloc() {
 
 void xremote_app_free(XRemote* app) {
     furi_assert(app);
-    
+
     // Scene manager
     scene_manager_free(app->scene_manager);
 
@@ -79,7 +90,7 @@ void xremote_app_free(XRemote* app) {
 
     view_dispatcher_free(app->view_dispatcher);
     furi_record_close(RECORD_GUI);
-    
+
     app->gui = NULL;
     app->notification = NULL;
 
@@ -90,23 +101,21 @@ void xremote_app_free(XRemote* app) {
 int32_t xremote_app(void* p) {
     UNUSED(p);
     XRemote* app = xremote_app_alloc();
-    
+
     view_dispatcher_attach_to_gui(app->view_dispatcher, app->gui, ViewDispatcherTypeFullscreen);
-    
+
     //scene_manager_next_scene(app->scene_manager, XRemoteSceneInfoscreen); //Start with start screen
-    scene_manager_next_scene(app->scene_manager, XRemoteSceneMenu); //if you want to directly start with Menu
+    scene_manager_next_scene(
+        app->scene_manager, XRemoteSceneMenu); //if you want to directly start with Menu
 
     furi_hal_power_suppress_charge_enter();
 
     view_dispatcher_run(app->view_dispatcher);
 
     xremote_save_settings(app);
-    
+
     furi_hal_power_suppress_charge_exit();
     xremote_app_free(app);
 
     return 0;
 }
-
-
-
