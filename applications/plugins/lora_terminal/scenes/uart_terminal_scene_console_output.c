@@ -130,6 +130,7 @@ void uart_terminal_scene_console_output_on_enter(void* context) {
     if(app->is_command && app->selected_tx_string) {
         char buffer[240];
         snprintf(buffer, 240, "%s\r\n", (app->selected_tx_string));
+        FURI_LOG_E("Lora-Terminal", buffer);
         uart_terminal_uart_tx((unsigned char*)buffer, strlen(buffer));
     }
 }
