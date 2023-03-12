@@ -28,6 +28,8 @@
 #define TAG "Mfkey32"
 #define NFC_MF_CLASSIC_KEY_LEN (13)
 
+#define eta_round_time 180
+#define eta_total_time 2880
 #define MSB_LIMIT 16
 #define LF_POLY_ODD (0x29CE5C)
 #define LF_POLY_EVEN (0x870804)
@@ -83,6 +85,9 @@ typedef struct {
     int total;
     int dict_count;
     int search;
+    int eta_timestamp;
+    int eta_total;
+    int eta_round;
     bool is_thread_running;
     bool close_thread_please;
     FuriThread* mfkeythread;
@@ -289,7 +294,12 @@ struct Msb {
     unsigned int states[512];
 };
 
-int calculate_msb_tables(int oks, int eks, int msb_round, struct Crypto1Params* p) {
+int calculate_msb_tables(
+    int oks,
+    int eks,
+    int msb_round,
+    struct Crypto1Params* p,
+    ProgramState* const program_state) {
     unsigned int msb_head =
         (MSB_LIMIT * msb_round); // msb_round ranges from 0 to (256/MSB_LIMIT)-1
     unsigned int msb_tail = (MSB_LIMIT * (msb_round + 1));
@@ -307,9 +317,15 @@ int calculate_msb_tables(int oks, int eks, int msb_round, struct Crypto1Params* 
 
     // Odd
     for(semi_state = 1 << 20; semi_state >= 0; semi_state--) {
-        //if (main_iter % 2048 == 0) {
-        //    FURI_LOG_I(TAG, "On main_iter %i", main_iter); // DEBUG
-        //}
+        if(semi_state % 2048 == 0) {
+            //FURI_LOG_I(TAG, "On semi_state %i", semi_state); // DEBUG
+            program_state->eta_round = program_state->eta_round - (furi_hal_rtc_get_timestamp() -
+                                                                   program_state->eta_timestamp);
+            program_state->eta_total = program_state->eta_total - (furi_hal_rtc_get_timestamp() -
+                                                                   program_state->eta_timestamp);
+            program_state->eta_timestamp = furi_hal_rtc_get_timestamp();
+        }
+
         if(filter(semi_state) == (oks & 1)) {
             states_buffer[0] = semi_state;
             states_tail = state_loop(states_buffer, oks, CONST_M1_1, CONST_M2_1);
@@ -338,6 +354,15 @@ int calculate_msb_tables(int oks, int eks, int msb_round, struct Crypto1Params* 
 
     // Even
     for(semi_state = 1 << 20; semi_state >= 0; semi_state--) {
+        if(semi_state % 2048 == 0) {
+            //FURI_LOG_I(TAG, "On semi_state %i", semi_state); // DEBUG
+            program_state->eta_round = program_state->eta_round - (furi_hal_rtc_get_timestamp() -
+                                                                   program_state->eta_timestamp);
+            program_state->eta_total = program_state->eta_total - (furi_hal_rtc_get_timestamp() -
+                                                                   program_state->eta_timestamp);
+            program_state->eta_timestamp = furi_hal_rtc_get_timestamp();
+        }
+
         if(filter(semi_state) == (eks & 1)) {
             states_buffer[0] = semi_state;
             states_tail = state_loop(states_buffer, eks, CONST_M1_2, CONST_M2_2);
@@ -392,10 +417,13 @@ int recover(struct Crypto1Params* p, int ks2, ProgramState* const program_state)
     for(i = 30; i >= 0; i -= 2) {
         eks = eks << 1 | BEBIT(ks2, i);
     }
+    program_state->eta_total = eta_total_time;
+    program_state->eta_timestamp = furi_hal_rtc_get_timestamp();
     int bench_start = furi_hal_rtc_get_timestamp();
     for(msb = 0; msb <= ((256 / MSB_LIMIT) - 1); msb++) {
         program_state->search = msb;
-        if(calculate_msb_tables(oks, eks, msb, p)) {
+        program_state->eta_round = eta_round_time;
+        if(calculate_msb_tables(oks, eks, msb, p, program_state)) {
             int bench_stop = furi_hal_rtc_get_timestamp();
             FURI_LOG_I(TAG, "Cracked in %i seconds", bench_stop - bench_start);
             return 1;
@@ -905,27 +933,34 @@ static void render_callback(Canvas* const canvas, void* ctx) {
     canvas_draw_str_aligned(canvas, 5, 4, AlignLeft, AlignTop, "Mfkey32");
     canvas_draw_icon(canvas, 114, 4, &I_mfkey);
     if(program_state->is_thread_running && program_state->mfkey_state == MfkeyAttack) {
+        float eta_round = (float)1 - ((float)program_state->eta_round / (float)eta_round_time);
+        float eta_total = (float)1 - ((float)program_state->eta_total / (float)eta_total_time);
         float progress = (float)program_state->cracked / (float)program_state->total;
-        elements_progress_bar_with_text(canvas, 5, 18, 118, progress, draw_str);
         canvas_set_font(canvas, FontSecondary);
         snprintf(
             draw_str,
             sizeof(draw_str),
-            "Keys found: %d/%d (in prog.)",
+            "Keys found: %d/%d - in prog.",
             program_state->cracked,
             program_state->total);
-        canvas_draw_str_aligned(canvas, 5, 31, AlignLeft, AlignTop, draw_str);
+        elements_progress_bar_with_text(canvas, 5, 18, 118, progress, draw_str);
         snprintf(
-            draw_str, sizeof(draw_str), "Search: %d/%d", program_state->search, 256 / MSB_LIMIT);
-        canvas_draw_str_aligned(canvas, 26, 41, AlignLeft, AlignTop, draw_str);
+            draw_str,
+            sizeof(draw_str),
+            "Round: %d/%d - ETA %02d Sec",
+            program_state->search,
+            256 / MSB_LIMIT,
+            program_state->eta_round);
+        elements_progress_bar_with_text(canvas, 5, 31, 118, eta_round, draw_str);
+        snprintf(draw_str, sizeof(draw_str), "Total ETA %03d Sec", program_state->eta_total);
+        elements_progress_bar_with_text(canvas, 5, 44, 118, eta_total, draw_str);
     } else if(program_state->is_thread_running && program_state->mfkey_state == DictionaryAttack) {
-        elements_progress_bar_with_text(canvas, 5, 18, 118, 0, draw_str);
         canvas_set_font(canvas, FontSecondary);
         snprintf(
             draw_str, sizeof(draw_str), "Dict solves: %d (in progress)", program_state->cracked);
-        canvas_draw_str_aligned(canvas, 10, 31, AlignLeft, AlignTop, draw_str);
+        canvas_draw_str_aligned(canvas, 10, 18, AlignLeft, AlignTop, draw_str);
         snprintf(draw_str, sizeof(draw_str), "Keys in dict: %d", program_state->dict_count);
-        canvas_draw_str_aligned(canvas, 26, 41, AlignLeft, AlignTop, draw_str);
+        canvas_draw_str_aligned(canvas, 26, 28, AlignLeft, AlignTop, draw_str);
     } else if(program_state->mfkey_state == Complete) {
         // TODO: Scrollable list view to see cracked keys if user presses down
         elements_progress_bar_with_text(canvas, 5, 18, 118, 1, draw_str);
@@ -1081,6 +1116,9 @@ int32_t mfkey32_main() {
                     }
                 }
             }
+        } else {
+            FURI_LOG_D(TAG, "FuriMessageQueue: event timeout");
+            // event timeout
         }
 
         view_port_update(view_port);
