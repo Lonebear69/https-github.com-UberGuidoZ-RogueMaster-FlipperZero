@@ -29,7 +29,7 @@ This software is for experimental purposes only and is not meant for any illegal
 
 <a name="latest">
 
-## Latest Updates - [PATREON: Latest Release RM0312-0407-0.78.2-1b94edc](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
+## Latest Updates - [PATREON: Latest Release RM0312-1305-0.78.2-80982d8](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
 - Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-12 13:04 EST`
 - Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-12 13:04 EST`
@@ -57,6 +57,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player) <- Follow link to donwload examples and learn how to convert vids
 - Updated: [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term)
 - Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
+- Fix SubGHz Naming Issue
 
 <a name="release">
 
