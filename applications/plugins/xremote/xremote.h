@@ -13,6 +13,7 @@
 #include <gui/modules/variable_item_list.h>
 #include "scenes/xremote_scene.h"
 #include "views/xremote_infoscreen.h"
+#include "views/xremote_scene_1.h"
 #include "views/xremote_scene_2.h"
 #include "helpers/xremote_storage.h"
 
@@ -27,6 +28,7 @@ typedef struct {
     SceneManager* scene_manager;
     VariableItemList* variable_item_list;
     XRemoteInfoscreen* xremote_infoscreen;
+    XRemoteScene1* xremote_scene_1;
     XRemoteScene2* xremote_scene_2;
     uint32_t haptic;
     uint32_t speaker;
@@ -37,8 +39,7 @@ typedef struct {
 typedef enum {
     XRemoteViewIdInfoscreen,
     XRemoteViewIdMenu,
-    XRemoteViewIdCreate,
-    XRemoteViewIdCreateAdd,
+    XRemoteViewIdScene1,
     XRemoteViewIdScene2,
     XRemoteViewIdSettings,
 } XRemoteViewId;

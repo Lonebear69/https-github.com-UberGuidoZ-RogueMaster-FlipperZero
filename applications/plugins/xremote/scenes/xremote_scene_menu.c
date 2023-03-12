@@ -1,7 +1,7 @@
 #include "../xremote.h"
 
 enum SubmenuIndex {
-    SubmenuIndexCreate = 10,
+    SubmenuIndexScene1 = 10,
     SubmenuIndexScene2,
     SubmenuIndexSettings,
     SubmenuIndexInfoscreen,
@@ -18,7 +18,7 @@ void xremote_scene_menu_on_enter(void* context) {
     submenu_add_item(
         app->submenu,
         "New Command Chain",
-        SubmenuIndexCreate,
+        SubmenuIndexScene1,
         xremote_scene_menu_submenu_callback,
         app);
     submenu_add_item(
@@ -46,10 +46,10 @@ bool xremote_scene_menu_on_event(void* context, SceneManagerEvent event) {
         view_dispatcher_stop(app->view_dispatcher);
         return true;
     } else if(event.type == SceneManagerEventTypeCustom) {
-        if(event.event == SubmenuIndexCreate) {
+        if(event.event == SubmenuIndexScene1) {
             scene_manager_set_scene_state(
-                app->scene_manager, XRemoteSceneMenu, SubmenuIndexCreate);
-            scene_manager_next_scene(app->scene_manager, XRemoteSceneCreate);
+                app->scene_manager, XRemoteSceneMenu, SubmenuIndexScene1);
+            scene_manager_next_scene(app->scene_manager, XRemoteSceneScene_1);
             return true;
         } else if(event.event == SubmenuIndexScene2) {
             scene_manager_set_scene_state(
