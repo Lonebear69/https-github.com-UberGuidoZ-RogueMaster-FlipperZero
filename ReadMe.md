@@ -50,6 +50,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [Cross Remote (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 - UL: Updated: [Sub-GHz Bruteforcer v3.5 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master) added - Holtek HT12X 12bit AM 433.920MHz/315MHz/868MHz/915MHz (TE: 433us) (By xMasterX)
 - Updated: [NRF24 Batch v1.6 (By vad7)](https://github.com/vad7/nRF24-Batch)
+- Updated: [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term)
 
 <a name="release">
 
