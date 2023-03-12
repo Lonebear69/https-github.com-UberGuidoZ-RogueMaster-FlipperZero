@@ -15,11 +15,18 @@ Connect the GPS module to power and the USART using GPIO pins 9 (3.3V), 11
 
 ![wiring](wiring.png)
 
+See the [tutorial video](https://www.youtube.com/watch?v=5vSGFzEBp-k) from
+Lab401 by [RocketGod](https://github.com/RocketGod-git) for a visual guide to
+the hardware setup.
+
 ### Confirmed Compatible Modules
 
 * [Adafruit Ultimate GPS Breakout]
 * Beitian BN-180
 * [u-blox NEO-6M]
+
+If you have verified this application working with a module not listed here,
+please submit a PR adding it to the list.
 
 ## Building the FAP
 

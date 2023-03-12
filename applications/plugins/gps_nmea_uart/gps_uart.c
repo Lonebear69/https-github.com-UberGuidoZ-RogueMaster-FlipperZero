@@ -136,6 +136,13 @@ static int32_t gps_uart_worker(void* context) {
 GpsUart* gps_uart_enable() {
     GpsUart* gps_uart = malloc(sizeof(GpsUart));
 
+    gps_uart->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!gps_uart->mutex) {
+        FURI_LOG_E("GPS", "cannot create mutex\r\n");
+        free(gps_uart);
+        return NULL;
+    }
+
     gps_uart->status.valid = false;
     gps_uart->status.latitude = 0.0;
     gps_uart->status.longitude = 0.0;

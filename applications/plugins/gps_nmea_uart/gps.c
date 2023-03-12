@@ -15,8 +15,7 @@ typedef struct {
 } PluginEvent;
 
 static void render_callback(Canvas* const canvas, void* context) {
-    furi_assert(context);
-    const GpsUart* gps_uart = context;
+    const GpsUart* gps_uart = (GpsUart*)context;
     furi_mutex_acquire(gps_uart->mutex, FuriWaitForever);
 
     canvas_set_font(canvas, FontPrimary);
@@ -72,11 +71,7 @@ int32_t gps_app(void* p) {
     FuriMessageQueue* event_queue = furi_message_queue_alloc(8, sizeof(PluginEvent));
 
     GpsUart* gps_uart = gps_uart_enable();
-
-    gps_uart->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
-    if(!gps_uart->mutex) {
-        FURI_LOG_E("GPS", "cannot create mutex\r\n");
-        free(gps_uart);
+    if(gps_uart == NULL) {
         return 255;
     }
 
@@ -100,12 +95,6 @@ int32_t gps_app(void* p) {
             if(event.type == EventTypeKey) {
                 if(event.input.type == InputTypePress) {
                     switch(event.input.key) {
-                    case InputKeyUp:
-                    case InputKeyDown:
-                    case InputKeyRight:
-                    case InputKeyLeft:
-                    case InputKeyOk:
-                        break;
                     case InputKeyBack:
                         processing = false;
                         break;
