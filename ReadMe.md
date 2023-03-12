@@ -47,9 +47,9 @@ This software is for experimental purposes only and is not meant for any illegal
 - Re-Add: [Embed assets in elf file #2466 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2466)
 - OFW: [Fbt: fix broken resource deployment (#2477) (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2477)
 - Updated: [NRF24 Scanner v2.2 (By vad7)](https://github.com/vad7/nrf24scan)
-- Updated: [NRF24 Batch v1.6 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - Added: [Cross Remote (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 - UL: Updated: [Sub-GHz Bruteforcer v3.5 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master) added - Holtek HT12X 12bit AM 433.920MHz/315MHz/868MHz/915MHz (TE: 433us) (By xMasterX)
+- Updated: [NRF24 Batch v1.6 (By vad7)](https://github.com/vad7/nRF24-Batch)
 
 <a name="release">
 

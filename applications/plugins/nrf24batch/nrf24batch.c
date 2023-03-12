@@ -22,6 +22,7 @@
 #define WORK_PERIOD 2 // ms, Timer period
 #define MAX_CHANNEL 125
 #define FONT_5x7_SCREEN_WIDTH 25
+#define NRF_EN_DYN_ACK 0 // does not work on some nrf24l01+ chips, (0/1)
 
 const char SettingsFld_Info[] = "Info:";
 const char SettingsFld_Ch[] = "Ch:";
@@ -160,7 +161,8 @@ static bool is_digit(char* ptr, bool hex) {
     if(hex) {
         c &= ~0x20;
         if(c >= 'A' && c <= 'F') return true;
-    }
+    } else if(c == '-')
+        return true;
     return false;
 }
 
@@ -202,6 +204,28 @@ static void add_to_str_hex_bytes(char* out, uint8_t* arr, int bytes) {
         snprintf(out, 3, "%02X", *arr++);
         out += 2;
     } while(--bytes);
+}
+
+void Edit_insert_digit(char new) {
+    if(*Edit_pos == '-') return;
+    if(what_doing <= 1) {
+        if(strlen(Edit_start) < (what_doing == 0 && setup_cursor == 2 ? 3 : 5 * 2)) {
+            memmove(Edit_pos + 1, Edit_pos, strlen(Edit_pos) + 1);
+            *Edit_pos = new;
+        }
+    } else {
+        FuriString* fs = Log[view_Batch];
+        FuriString* ns = furi_string_alloc();
+        if(ns) {
+            uint16_t len = Edit_pos - (char*)furi_string_get_cstr(fs);
+            furi_string_set_n(ns, fs, 0, len);
+            furi_string_cat_printf(ns, "%c", new);
+            furi_string_cat_str(ns, Edit_pos);
+            furi_string_free(fs);
+            Log[view_Batch] = ns;
+            Edit_pos = (char*)furi_string_get_cstr(ns) + len;
+        }
+    }
 }
 
 int32_t get_payload_receive_field(uint8_t* var, uint8_t size) {
@@ -350,11 +374,13 @@ static void prepare_nrf24(void) {
             NRF_INITED = 0;
             return;
         }
-        // EN_DYN_ACK(0x01) option for W_TX_PAYLOAD_NOACK cmd broke AA on some fake nRF24l01+ modules
+        // EN_DYN_ACK(0x01) option for W_TX_PAYLOAD_NOACK cmd broke AA on some fake nRF24l01+, i.e. set it to 0
         nrf24_write_reg(
             nrf24_HANDLE,
             REG_FEATURE,
-            (NRF_DPL ? 4 : 0)); // Dynamic Payload, Payload with ACK, W_TX_PAYLOAD_NOACK command
+            NRF_EN_DYN_ACK +
+                (NRF_DPL ? 4 :
+                           0)); // Dynamic Payload, Payload with ACK, W_TX_PAYLOAD_NOACK command
         nrf24_write_reg(nrf24_HANDLE, REG_RF_CH, NRF_channel);
         nrf24_write_reg(
             nrf24_HANDLE,
@@ -1417,16 +1443,20 @@ int32_t nrf24batch_app(void* p) {
                     if(event.input.type == InputTypeShort || event.input.type == InputTypeRepeat) {
                         if(!ask_question) {
                             if(Edit) {
-                                if(*Edit_pos < '9')
-                                    (*Edit_pos)++;
-                                else if(Edit_hex) {
-                                    if(*Edit_pos == '9')
-                                        *Edit_pos = 'A';
-                                    else if((*Edit_pos & ~0x20) < 'F')
+                                if(*Edit_pos != '-') {
+                                    if(*Edit_pos < '9')
                                         (*Edit_pos)++;
-                                } else if(Edit_pos > Edit_start && *(Edit_pos - 1) < '9') {
-                                    *Edit_pos = '0';
-                                    (*(Edit_pos - 1))++;
+                                    else if(Edit_hex) {
+                                        if(*Edit_pos == '9')
+                                            *Edit_pos = 'A';
+                                        else if((*Edit_pos & ~0x20) < 'F')
+                                            (*Edit_pos)++;
+                                    } else if(
+                                        Edit_pos > Edit_start && *(Edit_pos - 1) < '9' &&
+                                        *(Edit_pos - 1) >= '0') {
+                                        *Edit_pos = '0';
+                                        (*(Edit_pos - 1))++;
+                                    }
                                 }
                             } else if(what_doing == 0) {
                                 if(addr_len) {
@@ -1447,13 +1477,21 @@ int32_t nrf24batch_app(void* p) {
                     if(event.input.type == InputTypeShort || event.input.type == InputTypeRepeat) {
                         if(!ask_question) {
                             if(Edit) {
-                                if(Edit_hex && (*Edit_pos & ~0x20) == 'A')
-                                    (*Edit_pos) = '9';
-                                else if(*Edit_pos > '0')
-                                    (*Edit_pos)--;
-                                else if(!Edit_hex && Edit_pos > Edit_start && *(Edit_pos - 1) > '0') {
-                                    *Edit_pos = '9';
-                                    (*(Edit_pos - 1))--;
+                                if(*Edit_pos != '-') {
+                                    if(Edit_hex && (*Edit_pos & ~0x20) == 'A')
+                                        (*Edit_pos) = '9';
+                                    else if(*Edit_pos > '0')
+                                        (*Edit_pos)--;
+                                    else if(!Edit_hex) {
+                                        if(Edit_pos > Edit_start) {
+                                            if(*(Edit_pos - 1) > '0') {
+                                                *Edit_pos = '9';
+                                                (*(Edit_pos - 1))--;
+                                            }
+                                        } else if(strlen(Edit_start) == 1) { // negative
+                                            Edit_insert_digit('-');
+                                        }
+                                    }
                                 }
                             } else if(what_doing == 0) {
                                 if(addr_len) {
@@ -1567,25 +1605,7 @@ int32_t nrf24batch_app(void* p) {
                             }
                             ask_question = 0;
                         } else if(Edit) { // insert digit
-                            if(what_doing <= 1) {
-                                if(strlen(Edit_start) <
-                                   (what_doing == 0 && setup_cursor == 2 ? 3 : 5 * 2)) {
-                                    memmove(Edit_pos + 1, Edit_pos, strlen(Edit_pos) + 1);
-                                    *Edit_pos = '0';
-                                }
-                            } else {
-                                FuriString* fs = Log[view_Batch];
-                                FuriString* ns = furi_string_alloc();
-                                if(ns) {
-                                    uint16_t len = Edit_pos - (char*)furi_string_get_cstr(fs);
-                                    furi_string_set_n(ns, fs, 0, len);
-                                    furi_string_cat_str(ns, "0");
-                                    furi_string_cat_str(ns, Edit_pos);
-                                    furi_string_free(fs);
-                                    Log[view_Batch] = ns;
-                                    Edit_pos = (char*)furi_string_get_cstr(ns) + len;
-                                }
-                            }
+                            Edit_insert_digit('0');
                         } else if(what_doing == 0) {
                             if(setup_cursor == 0) { // open file
                                 file_stream_close(file_stream);
@@ -1670,7 +1690,7 @@ int32_t nrf24batch_app(void* p) {
                         if(Edit) { // delete
                             if(what_doing <= 1) {
                                 if(strlen(Edit_start) > 1) {
-                                    memmove(Edit_pos, Edit_pos + 1, strlen(Edit_pos) + 1);
+                                    memmove(Edit_pos, Edit_pos + 1, strlen(Edit_pos));
                                     if(*Edit_pos == '\0') Edit_pos--;
                                 }
                             } else {
@@ -1678,6 +1698,7 @@ int32_t nrf24batch_app(void* p) {
                                 if(is_digit(Edit_pos + 1, Edit_hex) ||
                                    (Edit_pos > Edit_start && is_digit(Edit_pos - 1, Edit_hex))) {
                                     memmove(Edit_pos, Edit_pos + 1, strlen(Edit_pos));
+                                    if(*Edit_pos == '\0') Edit_pos--;
                                     furi_string_left(fs, furi_string_size(fs) - 1);
                                 }
                             }
