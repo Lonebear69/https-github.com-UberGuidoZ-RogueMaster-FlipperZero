@@ -262,8 +262,9 @@ uint16_t mrtd_bac_decrypt_verify_sm(
             size_t enclength = do87.length - 1;
 
             mrtd_bac_decrypt(encdata, enclength, key_enc, output);
-            printf("Decrypted: "); 
-            for(uint16_t i = 0; i < enclength; ++i) printf("%02X ", output[i]); printf("\r\n");
+            printf("Decrypted: ");
+            for(uint16_t i = 0; i < enclength; ++i) printf("%02X ", output[i]);
+            printf("\r\n");
             printf("\r\n");
 
             //TODO: function mrtd_bac_unpad?

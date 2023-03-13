@@ -326,8 +326,7 @@ static void
             uint16_t oldNumLines = tetris_state->numLines;
             tetris_state->numLines += numLines;
             if((oldNumLines / 10) % 10 != (tetris_state->numLines / 10) % 10) {
-                nextFallSpeed =
-                    tetris_state->fallSpeed - (100 / (tetris_state->numLines / 10));
+                nextFallSpeed = tetris_state->fallSpeed - (100 / (tetris_state->numLines / 10));
                 if(nextFallSpeed >= MIN_FALL_SPEED) {
                     tetris_state->fallSpeed = nextFallSpeed;
                 }
@@ -342,7 +341,7 @@ static void
             memcpy(&tetris_state->currPiece, spawnedPiece, sizeof(tetris_state->currPiece));
             furi_timer_start(tetris_state->timer, tetris_state->fallSpeed);
         }
-    }else{
+    } else {
         tetris_game_remove_curr_piece(tetris_state);
         if(tetris_game_is_valid_pos(tetris_state, newPiece->p)) {
             memcpy(&tetris_state->currPiece, newPiece, sizeof(tetris_state->currPiece));
