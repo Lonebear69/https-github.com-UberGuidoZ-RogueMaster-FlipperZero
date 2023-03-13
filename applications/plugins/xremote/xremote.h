@@ -30,7 +30,7 @@ typedef struct {
     VariableItemList* variable_item_list;
     XRemoteInfoscreen* xremote_infoscreen;
     XRemoteScene2* xremote_scene_2;
-    uint32_t haptic; 
+    uint32_t haptic;
     uint32_t speaker;
     uint32_t led;
     uint32_t save_settings;
