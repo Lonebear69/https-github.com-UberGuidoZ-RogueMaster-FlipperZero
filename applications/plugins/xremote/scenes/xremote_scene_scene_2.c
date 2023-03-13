@@ -23,23 +23,23 @@ bool xremote_scene_scene_2_on_event(void* context, SceneManagerEvent event) {
 
     if(event.type == SceneManagerEventTypeCustom) {
         switch(event.event) {
-        case XRemoteCustomEventScene2Left:
-        case XRemoteCustomEventScene2Right:
-            break;
-        case XRemoteCustomEventScene2Up:
-        case XRemoteCustomEventScene2Down:
-            break;
-        case XRemoteCustomEventScene2Back:
-            notification_message(app->notification, &sequence_reset_red);
-            notification_message(app->notification, &sequence_reset_green);
-            notification_message(app->notification, &sequence_reset_blue);
-            if(!scene_manager_search_and_switch_to_previous_scene(
-                   app->scene_manager, XRemoteSceneMenu)) {
-                scene_manager_stop(app->scene_manager);
-                view_dispatcher_stop(app->view_dispatcher);
-            }
-            consumed = true;
-            break;
+            case XRemoteCustomEventScene2Left:
+            case XRemoteCustomEventScene2Right:
+                break;
+            case XRemoteCustomEventScene2Up:
+            case XRemoteCustomEventScene2Down:
+                break;
+            case XRemoteCustomEventScene2Back:
+                notification_message(app->notification, &sequence_reset_red);
+                notification_message(app->notification, &sequence_reset_green);
+                notification_message(app->notification, &sequence_reset_blue);
+                if(!scene_manager_search_and_switch_to_previous_scene(
+                    app->scene_manager, XRemoteSceneMenu)) {
+                        scene_manager_stop(app->scene_manager);
+                        view_dispatcher_stop(app->view_dispatcher);
+                    }
+                consumed = true;
+                break;
         }
     }
 
@@ -50,3 +50,4 @@ void xremote_scene_scene_2_on_exit(void* context) {
     XRemote* app = context;
     UNUSED(app);
 }
+

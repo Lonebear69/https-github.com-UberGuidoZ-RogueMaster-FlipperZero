@@ -10,7 +10,7 @@ typedef void (*XRemoteScene2Callback)(XRemoteCustomEvent event, void* context);
 void xremote_scene_2_set_callback(
     XRemoteScene2* instance,
     XRemoteScene2Callback callback,
-    void* context);
+    void * context);
 
 XRemoteScene2* xremote_scene_2_alloc();
 
