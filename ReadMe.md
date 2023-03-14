@@ -53,7 +53,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [RC2014 ColecoVision (By ezod)](https://github.com/ezod/flipperzero-rc2014-coleco)
 - UL PR: [Fixed bug in Tetris #381 (By unDeadHerbs)](https://github.com/DarkFlippers/unleashed-firmware/pull/381)
 - [MRTD overflow fixes (By mranostay)](https://github.com/qistoph/flipperzero-firmware/pull/1)
-- Added: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player) <- Follow link to donwload examples and learn how to convert vids
+- Added: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player) <- Follow link to download examples and learn how to convert vids
 - Updated: [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term)
 - Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
 - Fix SubGHz Naming Issue
@@ -65,7 +65,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - [New Patreon Animation Build](https://www.patreon.com/RogueMaster/membership): SJUMP Build (with only DBZ, Narut0 and 0nePiece related animations) - 19 animations
 - [New Patreon Animation Build](https://www.patreon.com/RogueMaster/membership): CHERUI 18+ Build (with only 18+, 420, Dem0n Slayer, Mari0, P0kem0n & Sail0r M00n related animations) - 75 animations
 - Updated: [Reversi (By dimat)](https://github.com/dimat/flipperzero-reversi)
-- Updated: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player) <- Follow link to donwload examples and learn how to convert vids
+- Updated: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player) <- Follow link to download examples and learn how to convert vids
 
 <a name="release">
 
