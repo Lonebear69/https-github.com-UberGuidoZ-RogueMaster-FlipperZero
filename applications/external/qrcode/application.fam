@@ -8,7 +8,6 @@ App(
     apptype=FlipperAppType.EXTERNAL,
     entry_point="qrcode_app",
     stack_size=2 * 1024,
-    cdefines=["APP_QRCODE"],
     requires=[
         "gui",
         "dialogs",

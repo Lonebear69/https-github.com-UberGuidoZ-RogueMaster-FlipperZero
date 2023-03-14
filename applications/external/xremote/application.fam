@@ -3,7 +3,6 @@ App(
     name="Cross Remote",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="xremote_app",
-    cdefines=["APP_XREMOTE"],
     requires=[
         "gui",
         "storage",

@@ -3,7 +3,6 @@ App(
     name="BarCode ScannerE",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="bc_scanner_app",
-    cdefines=["APP_BC_SCANNER"],
     requires=[
         "gui",
         "dialogs",

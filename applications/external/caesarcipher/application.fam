@@ -3,7 +3,6 @@ App(
     name="Caesar Cipher",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="caesar_cipher_app",
-    cdefines=["APP_CAESAR_CIPHER"],
     requires=[
         "gui",
     ],

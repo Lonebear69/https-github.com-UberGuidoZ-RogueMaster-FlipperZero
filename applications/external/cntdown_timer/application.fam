@@ -3,7 +3,6 @@ App(
     name="Count Down Timer",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="app_main",
-    cdefines=["APP_COUNT_DOWN_TIMER"],
     requires=[
         "gui",
     ],

@@ -3,7 +3,6 @@ App(
     name="[GPIO] Intervalometer",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="zeitraffer_app",
-    cdefines=["APP_ZEITRAFFER"],
     requires=[
         "gui",
 		"input", 

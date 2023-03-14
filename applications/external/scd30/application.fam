@@ -3,7 +3,6 @@ App(
     name="SCD30 Reader",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="scd30_main",
-    cdefines=["APP_SCD30"],
     requires=[
         "gui",
     ],

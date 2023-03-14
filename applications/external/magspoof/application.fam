@@ -3,7 +3,6 @@ App(
     name="MagSpoof WIP",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="mag_app",
-    cdefines=["APP_MAG"],
     requires=[
         "gui", 
         "storage",

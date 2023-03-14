@@ -3,7 +3,6 @@ App(
     name="Calculator",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="calculator_app",
-    cdefines=["APP_CALCULATOR"],
     requires=["gui"],
     stack_size=1 * 1024,
     order=45,

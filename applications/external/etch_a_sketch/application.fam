@@ -3,7 +3,6 @@ App(
     name="Etch A Sketch",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="etch_a_sketch_app",
-    cdefines=["APP_ETCH_A_SKETCH"],
     requires=["gui"],
     stack_size=2 * 1024,
     order=175,
