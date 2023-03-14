@@ -64,6 +64,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [NRF24 Batch v1.6 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - [New Patreon Animation Build](https://www.patreon.com/RogueMaster/membership): SJUMP Build (with only DBZ, Narut0 and 0nePiece related animations) - 19 animations
 - [New Patreon Animation Build](https://www.patreon.com/RogueMaster/membership): CHERUI 18+ Build (with only 18+, 420, Dem0n Slayer, Mari0, P0kem0n & Sail0r M00n related animations) - 75 animations
+- Updated: [Reversi (By dimat)](https://github.com/dimat/flipperzero-reversi)
 
 <a name="release">
 

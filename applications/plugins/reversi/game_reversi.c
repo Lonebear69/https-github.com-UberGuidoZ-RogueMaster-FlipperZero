@@ -38,9 +38,10 @@ static void input_callback(InputEvent* input_event, void* ctx) {
 
 static void draw_callback(Canvas* const canvas, void* ctx) {
     furi_assert(ctx);
+
     const AppState* app_state = ctx;
     furi_mutex_acquire(app_state->mutex, FuriWaitForever);
-
+    if(app_state == NULL) return;
     const GameState* game_state = &app_state->game;
 
     canvas_clear(canvas);
