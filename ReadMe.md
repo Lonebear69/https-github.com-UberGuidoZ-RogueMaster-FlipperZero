@@ -29,10 +29,10 @@ This software is for experimental purposes only and is not meant for any illegal
 
 <a name="latest">
 
-## Latest Updates - [PATREON: Latest Release RM0313-1813-0.78.2-44f23a3](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
+## Latest Updates - [PATREON: Latest Release RM0314-0207-0.78.2-c28f765](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-12 13:04 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-12 13:04 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-14 02:12 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-14 02:12 EST`
 - OFW: [Embed assets in elf file #2466 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2466)
 - OFW: [BadUSB: updated parser and added stringln, hold and release #2448 (By p4p1)](https://github.com/flipperdevices/flipperzero-firmware/pull/2448)
 - OFW: [NFC: Fix 0 block write possibility in Mifare Classic emulation #2474 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2474)
