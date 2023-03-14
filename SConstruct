@@ -139,7 +139,6 @@ if GetOption("fullenv") or any(
 basic_dist = distenv.DistCommand("fw_dist", distenv["DIST_DEPENDS"])
 distenv.Default(basic_dist)
 
-dist_dir = distenv.GetProjectDirName()
 dist_dir_name = distenv.GetProjetDirName()
 dist_dir = distenv.Dir(f"#/dist/{dist_dir_name}")
 external_apps_artifacts = firmware_env["FW_EXTAPPS"]
