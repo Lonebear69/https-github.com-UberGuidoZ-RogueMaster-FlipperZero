@@ -1,7 +1,7 @@
 
 <a href='https://www.patreon.com/RogueMaster/membership'><img src="https://rogue-master.net/img/rmlogo.png" width="40%"></a>
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6.tgz&channel=RM0314-1541-0.79.2-1311ef6&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6-NOANIM.tgz&channel=RM0314-1541-0.79.2-1311ef6-NOANIM&version=0.79.2)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6.tgz&channel=RM0314-1541-0.79.2-1311ef6&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6-NoAnim.tgz&channel=RM0314-1541-0.79.2-1311ef6-NoAnim&version=0.79.2)
 
 ## What Is Not In The Firmware? [SD CARD EXTRA FILES AND OTHER RESEARCH SOURCES](https://github.com/RogueMaster/awesome-flipperzero-withModules)
 
@@ -21,7 +21,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Keep Your Flipper Up To Date With [PATREON membership](https://www.patreon.com/RogueMaster/membership)
 - [PATREON for compiled releases](https://www.patreon.com/RogueMaster) for nearly ALL updates. Patreon Releases sometimes multiple times a day. GitHub releases will occur weekly or with OFW version updates.
 - [Contact me on Patreon to RENAME your Flipper](https://www.patreon.com/RogueMaster/membership) I can do custom names and custom animation sets with your custom build provided for every Patreon release.
-- [:fire: PATREON ANIMATION BUILDS AVAILABLE](https://www.patreon.com/RogueMaster/membership): [ALL](https://www.patreon.com/posts/animation-all-v4-77935728), 420, 420+18, Anime Only, Anime+420, Anime+420+18, CHERUI 18+, DBZ, Dolphin, HACKZ, MARIO, ONE PIECE, P0KEMON, RM 18PLUS, RM SELECT, RM SELECT + 18PLUS, RM MINIMAL (default on GitHub), SAO, SCIENCE, SJUMP AND STOCK with all assets updated to look like stock.
+- [:fire: PATREON ANIMATION BUILDS AVAILABLE](https://www.patreon.com/RogueMaster/membership): [ALL](https://www.patreon.com/posts/animation-all-v4-77935728), 420, 420+18, Anime Only, Anime+420, Anime+420+18, CHERUI 18+, DBZ, Dolphin, HACKZ, MARIO, No Anim, ONE PIECE, P0KEMON, RM 18PLUS, RM SELECT, RM SELECT + 18PLUS, RM MINIMAL (default on GitHub), SAO, SCIENCE, SJUMP AND STOCK with all assets updated to look like stock.
 - [NEW VIDEO PREVIEW FOR ALL ANIMATIONS](https://www.patreon.com/posts/animation-all-v4-77935728)
 - [Supporters get SD Card Assets with extra NFC Assets such as 48 RM Pro Trained Level 50 Sm@sh Amiib0 (By RogueMaster)](https://www.patreon.com/RogueMaster/membership)
 - Donations: BTC: `3MPQbKmGRCstg4FjnadfHa3woCT94JkR2a`
@@ -368,4 +368,4 @@ $ ./fbt dolphin_ext
 - [Wii EC Analyser (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - [Zero Tracker (By DrZZlo13)](https://github.com/DrZlo13/flipper-zero-music-tracker)
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6.tgz&channel=RM0314-1541-0.79.2-1311ef6&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6-NOANIM.tgz&channel=RM0314-1541-0.79.2-1311ef6-NOANIM&version=0.79.2)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6.tgz&channel=RM0314-1541-0.79.2-1311ef6&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6-NoAnim.tgz&channel=RM0314-1541-0.79.2-1311ef6-NoAnim&version=0.79.2)
