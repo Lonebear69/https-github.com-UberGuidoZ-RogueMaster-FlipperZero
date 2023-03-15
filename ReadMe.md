@@ -41,6 +41,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [Mifare Fuzzer (By spheeere98)](https://github.com/spheeere98/mifare_fuzzer)
 - OFW PR: [Picopass standard KDF dictionary #2478 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2478)
 - OFW PR: [SubGhz: bugfix unable to send, new generated secplus_v2 protocol #2488 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2488)
+- OFW PR: [Mark keys as not found when they couldn't auth successfully #2476 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2476)
 
 <a name="release">
 
