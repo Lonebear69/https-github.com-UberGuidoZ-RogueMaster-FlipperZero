@@ -31,20 +31,22 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0315-0040-0.79.2-644dd5b](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-14 18:20 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-14 18:20 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-15 15:29 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-15 15:29 EST`
 - Updated: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player)
 - Updated: [NRF24 Batch v1.6 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - OFW: [Dolphin: new spring animation, weight adjust, drop winter animation. #2489 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2489)
 - OFW: [fbt, faploader: minimal app module implementation #2420 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2420)
 - Fixed error for plugins folder missing
 - Added: [Mifare Fuzzer (By spheeere98)](https://github.com/spheeere98/mifare_fuzzer)
-- OFW PR: [Picopass standard KDF dictionary #2478 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2478)
-- OFW PR: [SubGhz: bugfix unable to send, new generated secplus_v2 protocol #2488 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2488)
 - OFW PR: [Mark keys as not found when they couldn't auth successfully #2476 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2476)
-- OFW PR: [Fix auto-capitalization in the keyboard #2483 (By liamhays)](https://github.com/flipperdevices/flipperzero-firmware/pull/2483)
 - OFW PR: [BadUSB: Advertise HID device as "boot protocol" #2480 (By CFSworks)](https://github.com/flipperdevices/flipperzero-firmware/pull/2480)
-- OFW PR: [add new nfc apdu cli command #2482 (By leommxj)](https://github.com/flipperdevices/flipperzero-firmware/pull/2482)
+- OFW: [SubGhz: bugfix unable to send, new generated secplus_v2 protocol #2488 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2488)
+- OFW: [Picopass standard KDF dictionary #2478 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2478)
+- OFW: [add new nfc apdu cli command #2482 (By leommxj)](https://github.com/flipperdevices/flipperzero-firmware/pull/2482)
+- OFW: [Fix auto-capitalization in the keyboard #2483 (By liamhays)](https://github.com/flipperdevices/flipperzero-firmware/pull/2483)
+- OFW: [nfc: fixes for latest PVS-studio 7.23 #2490 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2490)
+- OFW: [gh: use shallow clones whenever possible #2491 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2491)
 
 <a name="release">
 
