@@ -44,6 +44,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW PR: [Mark keys as not found when they couldn't auth successfully #2476 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2476)
 - OFW PR: [Fix auto-capitalization in the keyboard #2483 (By liamhays)](https://github.com/flipperdevices/flipperzero-firmware/pull/2483)
 - OFW PR: [BadUSB: Advertise HID device as "boot protocol" #2480 (By CFSworks)](https://github.com/flipperdevices/flipperzero-firmware/pull/2480)
+- OFW PR: [add new nfc apdu cli command #2482 (By leommxj)](https://github.com/flipperdevices/flipperzero-firmware/pull/2482)
 
 <a name="release">
 
