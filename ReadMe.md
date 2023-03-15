@@ -39,6 +39,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [fbt, faploader: minimal app module implementation #2420 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2420)
 - Fixed error for plugins folder missing
 - Added: [Mifare Fuzzer (By spheeere98)](https://github.com/spheeere98/mifare_fuzzer)
+- OFW PR: [Picopass standard KDF dictionary #2478 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2478)
 
 <a name="release">
 
