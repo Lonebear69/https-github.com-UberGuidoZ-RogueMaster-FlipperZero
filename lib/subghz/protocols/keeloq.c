@@ -312,8 +312,9 @@ bool subghz_protocol_keeloq_create_data(
     instance->generic.data_count_bit = 64;
     bool res = subghz_protocol_keeloq_gen_data(instance, btn, false);
     if(res) {
-        return SubGhzProtocolStatusOk ==
-               subghz_block_generic_serialize(&instance->generic, flipper_format, preset);
+        if(subghz_block_generic_serialize(&instance->generic, flipper_format, preset) !=
+           SubGhzProtocolStatusOk)
+            res = false;
     }
     return res;
 }
@@ -335,11 +336,11 @@ bool subghz_protocol_keeloq_bft_create_data(
     instance->generic.seed = seed;
     instance->manufacture_name = manufacture_name;
     instance->generic.data_count_bit = 64;
-    // roguuemaster don't steal.!!!!
     bool res = subghz_protocol_keeloq_gen_data(instance, btn, false);
     if(res) {
-        return SubGhzProtocolStatusOk ==
-               subghz_block_generic_serialize(&instance->generic, flipper_format, preset);
+        if(subghz_block_generic_serialize(&instance->generic, flipper_format, preset) !=
+           SubGhzProtocolStatusOk)
+            res = false;
     }
     return res;
 }
