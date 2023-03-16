@@ -57,6 +57,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: Fix issues when external module is not found but plugins tries to use it, now they will fallback to internal in that case (By xMasterX)
 - UL: Updates on Sub-GHz Bruteforcer, Sub-GHz Playlist, POCSAG Pager, Protocol Viewer, Spectrum Analyzer and Weather Station
 - OFW: [iButton: Add support for Dallas DS1971 v2 #2492 (By baconlive)](https://github.com/flipperdevices/flipperzero-firmware/pull/2492)
+- Added: [Logic Analyzer (By g3gg0)](https://github.com/g3gg0/flipper-logic_analyzer) - [How to use](https://github.com/g3gg0/flipper-logic_analyzer#readme)
 
 <a name="release">
 
@@ -326,6 +327,7 @@ $ ./fbt dolphin_ext
 - [IR Xbox Controller (By gebeto)](https://github.com/gebeto/flipper-xbox-controller)
 - [LED Pulsator (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications)
 - [Lightmeter (By oleksiikutuzov)](https://github.com/oleksiikutuzov/flipperzero-lightmeter) `Req: BH1750`
+- [Logic Analyzer (By g3gg0)](https://github.com/g3gg0/flipper-logic_analyzer)
 - [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term)
 - [MagSpoof WIP (By zacharyweiss)](https://github.com/zacharyweiss/magspoof_flipper)
 - [Metronome (By panki27)](https://github.com/panki27/Metronome)
