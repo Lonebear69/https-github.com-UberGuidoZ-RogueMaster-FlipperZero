@@ -59,6 +59,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [iButton: Add support for Dallas DS1971 v2 #2492 (By baconlive)](https://github.com/flipperdevices/flipperzero-firmware/pull/2492)
 - Added: [Logic Analyzer (By g3gg0)](https://github.com/g3gg0/flipper-logic_analyzer) - [How to use](https://github.com/g3gg0/flipper-logic_analyzer#readme)
 - Updated: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP)
+- Added: [Servotester (By spin7ion)](https://github.com/spin7ion/flipper-servotester)
 
 <a name="release">
 
@@ -366,6 +367,7 @@ $ ./fbt dolphin_ext
 - [SCD30 Carbon Dioxide Sensor (By heimskr)](https://github.com/heimskr/flipperzero-scd30)
 - [Scope (By anfractuosity)](https://github.com/anfractuosity/flipperscope)
 - [Sentry Safe (By H4ckd4ddy)](https://github.com/H4ckd4ddy/flipperzero-sentry-safe-plugin) ([Pin Out](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/tree/420/applications/sentry_safe) from [UberGuidoZ](https://github.com/UberGuidoZ/))
+- [Servotester (By spin7ion)](https://github.com/spin7ion/flipper-servotester)
 - [Signal Generator (By nminaylov)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1793)
 - [Spectrum Analyzer (By jolcese)](https://github.com/jolcese/flipperzero-firmware/tree/spectrum/applications/spectrum_analyzer) [Updates (for testing) Thanks to theY4Kman](https://github.com/theY4Kman/flipperzero-firmware)
 - [Sub-GHz Bruteforcer v3.5 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master)
