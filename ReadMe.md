@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0316-1057-0.79.2-5b7c901](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-16 10:27 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-16 10:27 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-16 17:30 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-16 17:30 EST`
 - Updated: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player)
 - OFW: [Dolphin: new spring animation, weight adjust, drop winter animation. #2489 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2489)
 - OFW: [fbt, faploader: minimal app module implementation #2420 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2420)
@@ -60,6 +60,9 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [Logic Analyzer (By g3gg0)](https://github.com/g3gg0/flipper-logic_analyzer) - [How to use](https://github.com/g3gg0/flipper-logic_analyzer#readme)
 - Updated: [FlipBIP Crypto Tool (By xtruan)](https://github.com/xtruan/FlipBIP)
 - Added: [Servotester (By spin7ion)](https://github.com/spin7ion/flipper-servotester)
+- UL: SubGHz: Security+ 2.0 - Ability to send custom buttons codes (0x80, 0x81, 0xE2) (By xMasterX)
+- UL: SubGHz: Small UI text fixes (By xMasterX)
+- UL: GUI: Fix submenu elements text size, now we can fit more symbols (By xMasterX)
 
 <a name="release">
 
