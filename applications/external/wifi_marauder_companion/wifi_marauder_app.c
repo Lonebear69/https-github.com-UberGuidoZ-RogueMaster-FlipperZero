@@ -107,6 +107,14 @@ void wifi_marauder_app_free(WifiMarauderApp* app) {
 
 int32_t wifi_marauder_app(void* p) {
     UNUSED(p);
+
+    uint8_t attempts = 0;
+    while(!furi_hal_power_is_otg_enabled() && attempts++ < 5) {
+        furi_hal_power_enable_otg();
+        furi_delay_ms(10);
+    }
+    furi_delay_ms(200);
+
     WifiMarauderApp* wifi_marauder_app = wifi_marauder_app_alloc();
 
     wifi_marauder_make_app_folder(wifi_marauder_app);
@@ -117,6 +125,10 @@ int32_t wifi_marauder_app(void* p) {
     view_dispatcher_run(wifi_marauder_app->view_dispatcher);
 
     wifi_marauder_app_free(wifi_marauder_app);
+
+    if(furi_hal_power_is_otg_enabled()) {
+        furi_hal_power_disable_otg();
+    }
 
     return 0;
 }

@@ -198,10 +198,12 @@ static bool subghz_protocol_keeloq_gen_data(
                            (instance->generic.serial & 0x3FF)
                                << 16 | //ToDo in some protocols the discriminator is 0
                            instance->generic.cnt;
-        // DTM Neo uses 12bit -> simple learning -- FAAC_RC,XT , Mutanco_Mutancode -> 12bit normal learning
+        // DTM Neo, Came_Space uses 12bit -> simple learning -- FAAC_RC,XT , Mutanco_Mutancode, Stilmatic(Schellenberg) -> 12bit normal learning
         if((strcmp(instance->manufacture_name, "DTM_Neo") == 0) ||
            (strcmp(instance->manufacture_name, "FAAC_RC,XT") == 0) ||
-           (strcmp(instance->manufacture_name, "Mutanco_Mutancode") == 0)) {
+           (strcmp(instance->manufacture_name, "Mutanco_Mutancode") == 0) ||
+           (strcmp(instance->manufacture_name, "Stilmatic") == 0) ||
+           (strcmp(instance->manufacture_name, "Came_Space") == 0)) {
             decrypt = btn << 28 | (instance->generic.serial & 0xFFF) << 16 | instance->generic.cnt;
         }
 
@@ -312,9 +314,8 @@ bool subghz_protocol_keeloq_create_data(
     instance->generic.data_count_bit = 64;
     bool res = subghz_protocol_keeloq_gen_data(instance, btn, false);
     if(res) {
-        if(subghz_block_generic_serialize(&instance->generic, flipper_format, preset) !=
-           SubGhzProtocolStatusOk)
-            res = false;
+        return SubGhzProtocolStatusOk ==
+               subghz_block_generic_serialize(&instance->generic, flipper_format, preset);
     }
     return res;
 }
@@ -338,9 +339,8 @@ bool subghz_protocol_keeloq_bft_create_data(
     instance->generic.data_count_bit = 64;
     bool res = subghz_protocol_keeloq_gen_data(instance, btn, false);
     if(res) {
-        if(subghz_block_generic_serialize(&instance->generic, flipper_format, preset) !=
-           SubGhzProtocolStatusOk)
-            res = false;
+        return SubGhzProtocolStatusOk ==
+               subghz_block_generic_serialize(&instance->generic, flipper_format, preset);
     }
     return res;
 }
@@ -568,6 +568,10 @@ SubGhzProtocolStatus
         instance->generic.seed = seed_data[0] << 24 | seed_data[1] << 16 | seed_data[2] << 8 |
                                  seed_data[3];
 
+        if(!flipper_format_rewind(flipper_format)) {
+            FURI_LOG_E(TAG, "Rewind error");
+            break;
+        }
         // Read manufacturer from file
         if(flipper_format_read_string(
                flipper_format, "Manufacture", instance->manufacture_from_file)) {
@@ -1248,6 +1252,10 @@ SubGhzProtocolStatus
         instance->generic.seed = seed_data[0] << 24 | seed_data[1] << 16 | seed_data[2] << 8 |
                                  seed_data[3];
 
+        if(!flipper_format_rewind(flipper_format)) {
+            FURI_LOG_E(TAG, "Rewind error");
+            break;
+        }
         // Read manufacturer from file
         if(flipper_format_read_string(
                flipper_format, "Manufacture", instance->manufacture_from_file)) {

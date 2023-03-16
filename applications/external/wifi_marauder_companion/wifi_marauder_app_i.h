@@ -23,7 +23,7 @@
 #define WIFI_MARAUDER_TEXT_BOX_STORE_SIZE (4096)
 #define WIFI_MARAUDER_TEXT_INPUT_STORE_SIZE (512)
 
-#define MARAUDER_APP_FOLDER ANY_PATH("apps_data/marauder")
+#define MARAUDER_APP_FOLDER EXT_PATH("apps_data/marauder")
 
 struct WifiMarauderApp {
     Gui* gui;

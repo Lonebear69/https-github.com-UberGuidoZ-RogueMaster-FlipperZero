@@ -73,6 +73,9 @@ SubGhz* subghz_alloc(bool alloc_for_tx_only) {
     subghz->in_decoder_scene = false;
     subghz->in_decoder_scene_skip = false;
 
+    // Call enable power for external module
+    furi_hal_subghz_enable_ext_power();
+
     // View Dispatcher
     subghz->view_dispatcher = view_dispatcher_alloc();
     view_dispatcher_enable_queue(subghz->view_dispatcher);
@@ -450,6 +453,11 @@ int32_t subghz_app(void* p) {
     // Check argument and run corresponding scene
     if(p && strlen(p)) {
         uint32_t rpc_ctx = 0;
+
+        if(!furi_hal_subghz_check_radio()) {
+            furi_hal_subghz_set_radio_type(SubGhzRadioInternal);
+        }
+
         if(sscanf(p, "RPC %lX", &rpc_ctx) == 1) {
             subghz->rpc_ctx = (void*)rpc_ctx;
             rpc_system_app_set_callback(subghz->rpc_ctx, subghz_rpc_command_callback, subghz);
