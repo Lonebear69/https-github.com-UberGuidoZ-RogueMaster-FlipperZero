@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0316-0058-0.79.2-e3aac41](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-16 10:11 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-16 10:11 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-16 10:27 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-16 10:27 EST`
 - Updated: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player)
 - OFW: [Dolphin: new spring animation, weight adjust, drop winter animation. #2489 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2489)
 - OFW: [fbt, faploader: minimal app module implementation #2420 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2420)
@@ -56,6 +56,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: Remember last external module setting and power setting, so if you turn off flipper it will remember last external module settings (only for subghz app) (By xMasterX)
 - UL: SubGHz: Fix issues when external module is not found but plugins tries to use it, now they will fallback to internal in that case (By xMasterX)
 - UL: Updates on Sub-GHz Bruteforcer, Sub-GHz Playlist, POCSAG Pager, Protocol Viewer, Spectrum Analyzer and Weather Station
+- OFW: [iButton: Add support for Dallas DS1971 v2 #2492 (By baconlive)](https://github.com/flipperdevices/flipperzero-firmware/pull/2492)
 
 <a name="release">
 
