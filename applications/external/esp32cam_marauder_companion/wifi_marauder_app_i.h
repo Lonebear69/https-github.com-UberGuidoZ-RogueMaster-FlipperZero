@@ -15,14 +15,10 @@
 #include <gui/modules/text_input.h>
 #include <gui/modules/variable_item_list.h>
 
-<<<<<<<< HEAD:applications/external/esp32cam_marauder_companion/wifi_marauder_app_i.h
-#define NUM_MENU_ITEMS (17)
-========
 #include <storage/storage.h>
 #include <dialogs/dialogs.h>
 
 #define NUM_MENU_ITEMS (16)
->>>>>>>> 353adf4fb78e9b19a61a363d8616e7b7bd272977:applications/external/wifi_marauder_companion/wifi_marauder_app_i.h
 
 #define WIFI_MARAUDER_TEXT_BOX_STORE_SIZE (4096)
 #define WIFI_MARAUDER_TEXT_INPUT_STORE_SIZE (512)

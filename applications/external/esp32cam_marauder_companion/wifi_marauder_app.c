@@ -107,18 +107,6 @@ void wifi_marauder_app_free(WifiMarauderApp* app) {
 
 int32_t wifi_marauder_app(void* p) {
     UNUSED(p);
-<<<<<<<< HEAD:applications/external/esp32cam_marauder_companion/wifi_marauder_app.c
-    furi_hal_power_disable_external_3_3v();
-    furi_hal_power_disable_otg();
-    furi_delay_ms(200);
-    furi_hal_power_enable_external_3_3v();
-    furi_hal_power_enable_otg();
-    for(int i = 0; i < 2; i++) {
-        furi_delay_ms(500);
-        furi_hal_uart_tx(FuriHalUartIdUSART1, (uint8_t[1]){'w'}, 1);
-    }
-    furi_delay_ms(1);
-========
 
     uint8_t attempts = 0;
     while(!furi_hal_power_is_otg_enabled() && attempts++ < 5) {
@@ -126,7 +114,6 @@ int32_t wifi_marauder_app(void* p) {
         furi_delay_ms(10);
     }
     furi_delay_ms(200);
->>>>>>>> 353adf4fb78e9b19a61a363d8616e7b7bd272977:applications/external/wifi_marauder_companion/wifi_marauder_app.c
 
     WifiMarauderApp* wifi_marauder_app = wifi_marauder_app_alloc();
 

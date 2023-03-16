@@ -2,12 +2,8 @@
 #include "wifi_marauder_uart.h"
 
 #define UART_CH (FuriHalUartIdUSART1)
-<<<<<<<< HEAD:applications/external/esp32cam_marauder_companion/wifi_marauder_uart.c
-#define BAUDRATE (230400)
-========
 #define LP_UART_CH (FuriHalUartIdLPUART1)
 #define BAUDRATE (115200)
->>>>>>>> 353adf4fb78e9b19a61a363d8616e7b7bd272977:applications/external/wifi_marauder_companion/wifi_marauder_uart.c
 
 struct WifiMarauderUart {
     WifiMarauderApp* app;
