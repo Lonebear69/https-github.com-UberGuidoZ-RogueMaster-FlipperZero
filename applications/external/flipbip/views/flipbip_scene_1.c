@@ -283,7 +283,8 @@ void flipbip_scene_1_draw(Canvas* canvas, FlipBipScene1Model* model) {
         if(model->coin == FlipBipCoinETH60) {
             line_len = 14;
         }
-        flipbip_scene_1_draw_generic(model->recv_addresses[model->page - PAGE_ADDR_BEGIN], line_len);
+        flipbip_scene_1_draw_generic(
+            model->recv_addresses[model->page - PAGE_ADDR_BEGIN], line_len);
     }
 
     if(model->page == PAGE_LOADING) {
