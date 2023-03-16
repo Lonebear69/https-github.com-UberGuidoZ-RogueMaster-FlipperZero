@@ -55,7 +55,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [fbt: explicitly set dist suffix length #2497 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2497)
 - UL: SubGHz: Remember last external module setting and power setting, so if you turn off flipper it will remember last external module settings (only for subghz app) (By xMasterX)
 - UL: SubGHz: Fix issues when external module is not found but plugins tries to use it, now they will fallback to internal in that case (By xMasterX)
-- UL: Updates on Sub-GHz Playlist, POCSAG Pager, Protocol Viewer, Spectrum Analyzer and Weather Station
+- UL: Updates on Sub-GHz Bruteforcer, Sub-GHz Playlist, POCSAG Pager, Protocol Viewer, Spectrum Analyzer and Weather Station
 
 <a name="release">
 
