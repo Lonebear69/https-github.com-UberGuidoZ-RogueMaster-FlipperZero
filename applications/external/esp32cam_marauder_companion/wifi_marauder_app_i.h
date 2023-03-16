@@ -18,7 +18,7 @@
 #include <storage/storage.h>
 #include <dialogs/dialogs.h>
 
-#define NUM_MENU_ITEMS (16)
+#define NUM_MENU_ITEMS (17)
 
 #define WIFI_MARAUDER_TEXT_BOX_STORE_SIZE (4096)
 #define WIFI_MARAUDER_TEXT_INPUT_STORE_SIZE (512)
