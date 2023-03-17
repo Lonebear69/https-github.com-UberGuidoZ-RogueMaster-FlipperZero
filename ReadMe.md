@@ -63,6 +63,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: Security+ 2.0 - Ability to send custom buttons codes (0x80, 0x81, 0xE2) (By xMasterX)
 - UL: SubGHz: Small UI text fixes (By xMasterX)
 - UL: GUI: Fix submenu elements text size, now we can fit more symbols (By xMasterX)
+- OFW: [Optimize trailing slash check #2503 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2503)
 
 <a name="release">
 
