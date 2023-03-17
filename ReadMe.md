@@ -45,7 +45,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Fix auto-capitalization in the keyboard #2483 (By liamhays)](https://github.com/flipperdevices/flipperzero-firmware/pull/2483)
 - OFW: [nfc: fixes for latest PVS-studio 7.23 #2490 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2490)
 - OFW: [gh: use shallow clones whenever possible #2491 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2491)
-- Updated: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - UL: SubGHz: Fixed external CC1101 module power issues, added more checks, fixed issues when launching subghz favourites (By xMasterX)
 - UL: Plugins: Added delay and retries to avoid power issues in plugins -> WiFi Scanner, ESP8266 Deauther (By xMasterX)
 - UL: Plugins: Update for WiFi Marauder companion -> `sniff` saves pcaps in `YourFlippersMicroSD/apps_data/marauder/` -> Only with custom marauder build (It is necessary to uncomment "#define WRITE_PACKETS_SERIAL" in configs.h (in marauder fw) and compile the firmware for the wifi board.) Or download precompiled build -> [Download esp32_marauder_ver_flipper_sd_serial.bin](https://github.com/justcallmekoko/ESP32Marauder/releases/latest) - [(by tcpassos)](https://github.com/0xchocolate/flipperzero-firmware-with-wifi-marauder-companion/pull/7)
@@ -64,6 +63,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: Small UI text fixes (By xMasterX)
 - UL: GUI: Fix submenu elements text size, now we can fit more symbols (By xMasterX)
 - OFW: [Optimize trailing slash check #2503 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2503)
+- Updated: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
 
 <a name="release">
 
