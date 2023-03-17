@@ -15,21 +15,23 @@ All cracked nonces are automatically added to your user dictionary, allowing you
 ## Builds
 Published: https://github.com/noproto/FlipperMfkey/releases
 
-Manual: :information_source: Refer to the build flags necessary in mfkey32.c
+Manual: Copy the fap/ directory to applications_user/mfkey32/ and build it with fbt
 
 ## Why
 This was the only function of the Flipper Zero that was [thought to be impossible on the hardware](https://old.reddit.com/r/flipperzero/comments/is31re/comment/g72077x/). You can still use other methods if you prefer them.
 
 ## Misc Stats
-1. RAM used: **90 KB**, RAM free: 50 KB (original was ~53,000 KB, 99.9% RAM usage eliminated)
+1. RAM used: **135 KB**, RAM free: 5 KB (original was ~53,000 KB, 99.75% RAM usage eliminated)
 2. Disk used: (None)
 3. Time per unsolved key:
 
 | Category | Time |
 | -------- | ---- |
-| Best (real world) | 62 seconds (43 nonces solved in ~1 minute) |
-| Average (expected) | 25 minutes |
-| Worst possible (expected) | 50 minutes |
+| Best (real world) | 31 seconds |
+| Average | 5.1-8.85 min |
+| Worst possible (expected) | 10.2-14.14 min |
+
+NB: Keys that are already in the system/user dictionary or nonces with already found keys are cracked instantly. This means on average cracking an arbitrary number of nonces from the same reader will take 5.1 to 8.85 minutes (1 unknown key).
 
 Writeup: Coming soon
 
