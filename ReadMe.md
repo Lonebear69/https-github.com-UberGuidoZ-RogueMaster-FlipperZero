@@ -72,6 +72,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: [OFW PR: SD Driver: reinit sd card on error (by DrZlo13 | OFW PR 2493)](https://github.com/flipperdevices/flipperzero-firmware/pull/2493)
 - UL: [OFW PR: iButton -> Fix a typo: use right shift instead of greater than (by gsurkov | OFW PR 2506)](https://github.com/flipperdevices/flipperzero-firmware/pull/2506)
 - Added a Quaternary Favorite App (By RogueMaster) (Thanks To xMasterX)
+- Added: [Antidepressants (By nymda)](https://github.com/nymda/FlipperAntidepressants) - Use this app to change flipper experience and butthurt level.
 
 <a name="release">
 
@@ -289,6 +290,7 @@ $ ./fbt dolphin_ext
 
 - [Air Mouse (By ginkage)](https://github.com/ginkage/FlippAirMouse/)
 - [Analog Clock (By scrolltex)](https://github.com/scrolltex/flipper_analog_clock)
+- [Antidepressants (By nymda)](https://github.com/nymda/FlipperAntidepressants) (Change Flipper experience and butthurt level)
 - [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
 - [Barcode App (By Kingal1337)](https://github.com/Kingal1337/flipper-barcode-generator)
 - [Barcode Generator (By McAzzaMan)](https://github.com/McAzzaMan/flipperzero-firmware/tree/UPC-A_Barcode_Generator/applications/barcode_generator)
@@ -353,7 +355,7 @@ $ ./fbt dolphin_ext
 - [Multi Converter (By theisolinearchip)](https://github.com/theisolinearchip)
 - [Music Beeper (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/1189) [With Changes By qqMajiKpp/Haseo](https://github.com/qqmajikpp/)
 - [Music Player (By DrZlo13)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1189)
-- [Name Changer (By ESurge)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/488)
+- [Name Changer (By ESurge)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/488) (Change Flipper name)
 - [NFC Magic (By gornekich)](https://github.com/flipperdevices/flipperzero-firmware/pull/1966)
 - [NFC Magic Gen4 app #2238 (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2238) [(Updates By xMasterX)](https://github.com/xMasterX/unleashed-extra-pack)
 - [Nightstand Clock (By nymda)](https://github.com/nymda/FlipperNightStand)
