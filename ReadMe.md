@@ -64,7 +64,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: GUI: Fix submenu elements text size, now we can fit more symbols (By xMasterX)
 - OFW: [Optimize trailing slash check #2503 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2503)
 - Updated: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
-- Updated: [Mfkey32 WIP (By noproto)](https://github.com/noproto/FlipperMfkey)
+- Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 
 <a name="release">
 
@@ -338,7 +338,7 @@ $ ./fbt dolphin_ext
 - [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term)
 - [MagSpoof WIP (By zacharyweiss)](https://github.com/zacharyweiss/magspoof_flipper)
 - [Metronome (By panki27)](https://github.com/panki27/Metronome)
-- [Mfkey32 WIP (By noproto)](https://github.com/noproto/FlipperMfkey)
+- [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - [Mifare Fuzzer (By spheeere98)](https://github.com/spheeere98/mifare_fuzzer)
 - [Morse Code (By wh00hw)](https://github.com/DarkFlippers/unleashed-firmware/pull/144)
 - [Mouse Jacker (By mothball187)](https://github.com/mothball187/flipperzero-nrf24/tree/main/mousejacker) ([Pin Out](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/tree/420/applications/mousejacker) from nocomp/Frog/UberGuidoZ) `Req: NRF24`
