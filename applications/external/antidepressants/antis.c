@@ -145,7 +145,7 @@ int32_t bigsad_app(void* p) {
                 } else if(btnIndex == 2) {
                     curLevel = dolphin_get_mylevel(stateLocal->data.icounter) - 1;
                     if(curLevel <= 28) {
-                        stateLocal->data.icounter = level_array[curLevel];
+                        stateLocal->data.icounter = level_array[curLevel]+1;
                     }
                 }
             }
@@ -161,7 +161,7 @@ int32_t bigsad_app(void* p) {
                 } else if(btnIndex == 2) {
                     curLevel = dolphin_get_mylevel(stateLocal->data.icounter) - 3;
                     if(curLevel >= 1) {
-                        stateLocal->data.icounter = level_array[curLevel];
+                        stateLocal->data.icounter = level_array[curLevel]+1;
                     } else if(curLevel == 0) {
                         stateLocal->data.icounter = 0;
 					}
