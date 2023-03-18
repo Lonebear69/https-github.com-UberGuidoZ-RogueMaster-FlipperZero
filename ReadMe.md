@@ -74,6 +74,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added a Quaternary Favorite App (By RogueMaster) (Thanks To xMasterX)
 - Added: [Antidepressants (By nymda)](https://github.com/nymda/FlipperAntidepressants) - Use this app to change flipper experience and butthurt level.
 - Added: [HEX Editor (By dunaevai135)](https://github.com/dunaevai135/flipper-zero-hex_editor)
+- Added: [Radiation Sensor (By sionyx)](https://github.com/sionyx/flipper_radsens) `Req: RadSens`
 
 <a name="release">
 
