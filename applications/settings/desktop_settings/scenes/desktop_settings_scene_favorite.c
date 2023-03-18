@@ -119,6 +119,9 @@ bool desktop_settings_scene_favorite_on_event(void* context, SceneManagerEvent e
             } else if(primary_favorite == 2) {
                 app->settings.favorite_tertiary.is_external = false;
                 strncpy(app->settings.favorite_tertiary.name_or_path, "", MAX_APP_LENGTH);
+            } else if(primary_favorite == 3) {
+                app->settings.favorite_quaternary.is_external = false;
+                strncpy(app->settings.favorite_quaternary.name_or_path, "", MAX_APP_LENGTH);
             }
 
             scene_manager_previous_scene(app->scene_manager);
@@ -143,6 +146,12 @@ bool desktop_settings_scene_favorite_on_event(void* context, SceneManagerEvent e
                 app->settings.favorite_tertiary.is_external = false;
                 strncpy(
                     app->settings.favorite_tertiary.name_or_path,
+                    FLIPPER_APPS[event.event].name,
+                    MAX_APP_LENGTH);
+            } else if(primary_favorite == 3) {
+                app->settings.favorite_quaternary.is_external = false;
+                strncpy(
+                    app->settings.favorite_quaternary.name_or_path,
                     FLIPPER_APPS[event.event].name,
                     MAX_APP_LENGTH);
             }
@@ -172,6 +181,11 @@ bool desktop_settings_scene_favorite_on_event(void* context, SceneManagerEvent e
                        app->settings.favorite_tertiary.name_or_path)) {
                     furi_string_set_str(temp_path, app->settings.favorite_tertiary.name_or_path);
                 }
+            } else if(primary_favorite == 3) {
+                if(favorite_fap_selector_file_exists(
+                       app->settings.favorite_quaternary.name_or_path)) {
+                    furi_string_set_str(temp_path, app->settings.favorite_quaternary.name_or_path);
+                }
             }
 
             submenu_reset(app->submenu);
@@ -192,6 +206,12 @@ bool desktop_settings_scene_favorite_on_event(void* context, SceneManagerEvent e
                     app->settings.favorite_tertiary.is_external = true;
                     strncpy(
                         app->settings.favorite_tertiary.name_or_path,
+                        furi_string_get_cstr(temp_path),
+                        MAX_APP_LENGTH);
+                } else if(primary_favorite == 3) {
+                    app->settings.favorite_quaternary.is_external = true;
+                    strncpy(
+                        app->settings.favorite_quaternary.name_or_path,
                         furi_string_get_cstr(temp_path),
                         MAX_APP_LENGTH);
                 }
