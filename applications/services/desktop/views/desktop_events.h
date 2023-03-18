@@ -21,7 +21,6 @@ typedef enum {
     DesktopMainEventOpenDice,
     DesktopMainEventOpenArkanoid,
     DesktopMainEventOpenHeap,
-    DesktopMainEventOpenSubRemote,
     DesktopMainEventOpenClock,
 
     DesktopLockedEventUnlocked,

@@ -65,6 +65,12 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Optimize trailing slash check #2503 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2503)
 - Updated: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
+- UL: iButton: Add support for DS1420 (not fully tested)
+- UL: Desktop: Option to set Tertiary favourite app (Hold right arrow on desktop) - Desktop settings (pin code, favourite app, autolock time) will be resetted!!! Only one time after installing - due to changes in settings structure, after installing of this release desktop settings will not be reset with next release
+- UL: Desktop: Ability to disable favourite app (use last element in a main list `None (disable)`)
+- UL: Desktop: Fix issue #387 (Ok button was showing invalid file error in dummy mode)
+- UL: [OFW PR: SD Driver: reinit sd card on error (by DrZlo13 | OFW PR 2493)](https://github.com/flipperdevices/flipperzero-firmware/pull/2493)
+- UL: [OFW PR: iButton -> Fix a typo: use right shift instead of greater than (by gsurkov | OFW PR 2506)](https://github.com/flipperdevices/flipperzero-firmware/pull/2506)
 
 <a name="release">
 

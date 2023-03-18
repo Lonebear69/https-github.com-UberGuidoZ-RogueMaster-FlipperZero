@@ -192,9 +192,6 @@ steps:
         Version: {{build.tag}}
 
 
-        [-> Sponsor our project](https://boosty.to/mmxdev)
-
-
         [-Github - Changelog-](https://github.com/DarkFlippers/unleashed-firmware/releases/tag/${DRONE_TAG})
 
 

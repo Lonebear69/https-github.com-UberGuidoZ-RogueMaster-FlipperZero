@@ -307,11 +307,6 @@ bool desktop_scene_main_on_event(void* context, SceneManagerEvent event) {
             desktop_scene_main_open_app_or_profile(desktop, HEAP_DEFENCE_APP);
             break;
         }
-        case DesktopMainEventOpenSubRemote: {
-            loader_start(desktop->loader, FLIPPER_APPS[3].name, NULL);
-            consumed = true;
-            break;
-        }
         case DesktopMainEventOpenClock: {
             desktop_scene_main_open_app_or_profile(desktop, CLOCK_APP);
             break;
