@@ -15,13 +15,27 @@ const char* funnyText[] = {
     "This really isnt ok",
     "Just feed me RFID cards!",
     "Forget to charge me too?"};
-
 int funnyTextIndex = 0;
-
 DolphinState* stateLocal = 0;
 char strButthurt[16];
 char strXp[16];
+char strLevel[10];
 int btnIndex = 0;
+uint32_t curLevel = 0;
+uint32_t level_array[29] = {500,    1250,   2250,   3500,   5000,  6750,  8750,  11000,
+                            13500,  16250,  19250,  22500,  26000, 29750, 33750, 38000,
+                            42500,  47250,  52250,  58250,  65250, 73250, 82250, 92250,
+                            103250, 115250, 128250, 142250, 157250};
+#define NUM(a) (sizeof(a) / sizeof(*a))
+
+uint8_t dolphin_get_mylevel(uint32_t icounter) {
+    for(int i = 0; i < NUM(level_array); i++) {
+        if(icounter <= level_array[i]) {
+            return i + 1;
+        }
+    }
+    return NUM(level_array) + 1;
+}
 
 static void draw_callback(Canvas* canvas, void* ctx) {
     UNUSED(ctx);
@@ -34,19 +48,24 @@ static void draw_callback(Canvas* canvas, void* ctx) {
         canvas_draw_icon(canvas, 110, 15, &I_ButtonLeftSmall_3x5);
     } else if(btnIndex == 1) {
         canvas_draw_icon(canvas, 110, 25, &I_ButtonLeftSmall_3x5);
+    } else if(btnIndex == 2) {
+        canvas_draw_icon(canvas, 110, 35, &I_ButtonLeftSmall_3x5);
     }
 
     //strings
+    curLevel = dolphin_get_mylevel(stateLocal->data.icounter);
     canvas_set_font(canvas, FontBatteryPercent);
     canvas_draw_str(canvas, 3, 9, funnyText[funnyTextIndex]);
     canvas_set_font(canvas, FontSecondary);
     snprintf(strButthurt, 16, "Butthurt: %lu", stateLocal->data.butthurt);
     snprintf(strXp, 16, "XP: %lu", stateLocal->data.icounter);
+    snprintf(strLevel, 10, "Level: %lu", curLevel);
     canvas_draw_str(canvas, 51, 21, strButthurt);
     canvas_draw_str(canvas, 51, 31, strXp);
+    canvas_draw_str(canvas, 51, 41, strLevel);
 
     //save button
-    if(btnIndex == 2) {
+    if(btnIndex == 3) {
         canvas_draw_rbox(canvas, 51, 46, 74, 15, 3);
         canvas_invert_color(canvas);
         canvas_draw_str_aligned(canvas, 88, 53, AlignCenter, AlignCenter, "Save & Reboot");
@@ -94,7 +113,7 @@ int32_t bigsad_app(void* p) {
     while(running) {
         furi_check(furi_message_queue_get(event_queue, &event, FuriWaitForever) == FuriStatusOk);
         if(event.type == InputTypePress) {
-            if(event.key == InputKeyOk && btnIndex == 2) {
+            if(event.key == InputKeyOk && btnIndex == 3) {
                 bool result = saved_struct_save(
                     "/int/.dolphin.state", &stateLocal->data, sizeof(DolphinStoreData), 0xD0, 0x01);
                 if(result) {
@@ -106,13 +125,13 @@ int32_t bigsad_app(void* p) {
             }
             if(event.key == InputKeyUp) {
                 if(btnIndex == 0) {
-                    btnIndex = 2;
+                    btnIndex = 3;
                 } else {
                     btnIndex--;
                 }
             }
             if(event.key == InputKeyDown) {
-                if(btnIndex == 2) {
+                if(btnIndex == 3) {
                     btnIndex = 0;
                 } else {
                     btnIndex++;
@@ -123,6 +142,11 @@ int32_t bigsad_app(void* p) {
                     stateLocal->data.butthurt++;
                 } else if(btnIndex == 1) {
                     stateLocal->data.icounter += 10;
+                } else if(btnIndex == 2) {
+                    curLevel = dolphin_get_mylevel(stateLocal->data.icounter) - 1;
+                    if(curLevel <= 28) {
+                        stateLocal->data.icounter = level_array[curLevel];
+                    }
                 }
             }
             if(event.key == InputKeyLeft) {
@@ -134,6 +158,13 @@ int32_t bigsad_app(void* p) {
                     } else {
                         stateLocal->data.icounter -= 10;
                     }
+                } else if(btnIndex == 2) {
+                    curLevel = dolphin_get_mylevel(stateLocal->data.icounter) - 3;
+                    if(curLevel >= 1) {
+                        stateLocal->data.icounter = level_array[curLevel];
+                    } else if(curLevel == 0) {
+                        stateLocal->data.icounter = 0;
+					}
                 }
             }
             if(event.key == InputKeyBack) {
