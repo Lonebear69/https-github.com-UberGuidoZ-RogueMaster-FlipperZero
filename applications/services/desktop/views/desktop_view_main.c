@@ -82,13 +82,16 @@ bool desktop_main_input_callback(InputEvent* event, void* context) {
                 main_view->callback(DesktopAnimationEventNewIdleAnimation, main_view->context);
             } else if(event->key == InputKeyUp) {
                 main_view->callback(
-                    DesktopMainEventOpenFavoriteTertiary, main_view->context); // HOLD UP FOR Tertiary
+                    DesktopMainEventOpenFavoriteTertiary,
+                    main_view->context); // HOLD UP FOR Tertiary
             } else if(event->key == InputKeyDown) {
                 main_view->callback(
-                    DesktopMainEventOpenFavoriteQuaternary, main_view->context); // HOLD DOWN FOR Quaternary
+                    DesktopMainEventOpenFavoriteQuaternary,
+                    main_view->context); // HOLD DOWN FOR Quaternary
             } else if(event->key == InputKeyLeft) {
                 main_view->callback(
-                    DesktopMainEventOpenFavoritePrimary, main_view->context); // HOLD LEFT FOR SECONDARY
+                    DesktopMainEventOpenFavoritePrimary,
+                    main_view->context); // HOLD LEFT FOR SECONDARY
             }
         }
     } else if(main_view->is_gamemode == true) {
