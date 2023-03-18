@@ -7,15 +7,16 @@
 #define SCENE_EVENT_SELECT_FAVORITE_PRIMARY 0
 #define SCENE_EVENT_SELECT_FAVORITE_SECONDARY 1
 #define SCENE_EVENT_SELECT_FAVORITE_TERTIARY 2
-#define SCENE_EVENT_SELECT_PIN_SETUP 3
-#define SCENE_EVENT_SELECT_AUTO_LOCK_DELAY 4
-#define SCENE_EVENT_SELECT_AUTO_LOCK_PIN 5
-#define SCENE_EVENT_SELECT_ICON_STYLE 6
-#define SCENE_EVENT_SELECT_BATTERY_DISPLAY 7
-#define SCENE_EVENT_SELECT_BT_ICON 8
-#define SCENE_EVENT_SELECT_SDCARD_ICON 9
-#define SCENE_EVENT_SELECT_TOP_BAR 10
-#define SCENE_EVENT_SELECT_DUMBMODE 11
+#define SCENE_EVENT_SELECT_FAVORITE_QUATERNARY 3
+#define SCENE_EVENT_SELECT_PIN_SETUP 4
+#define SCENE_EVENT_SELECT_AUTO_LOCK_DELAY 5
+#define SCENE_EVENT_SELECT_AUTO_LOCK_PIN 6
+#define SCENE_EVENT_SELECT_ICON_STYLE 7
+#define SCENE_EVENT_SELECT_BATTERY_DISPLAY 8
+#define SCENE_EVENT_SELECT_BT_ICON 9
+#define SCENE_EVENT_SELECT_SDCARD_ICON 10
+#define SCENE_EVENT_SELECT_TOP_BAR 11
+#define SCENE_EVENT_SELECT_DUMBMODE 12
 
 #define AUTO_LOCK_DELAY_COUNT 9
 const char* const auto_lock_delay_text[AUTO_LOCK_DELAY_COUNT] = {
@@ -160,6 +161,8 @@ void desktop_settings_scene_start_on_enter(void* context) {
 
     variable_item_list_add(variable_item_list, "Tertiary Favorite App", 1, NULL, NULL);
 
+    variable_item_list_add(variable_item_list, "Quaternary Favorite App", 1, NULL, NULL);
+
     variable_item_list_add(variable_item_list, "PIN Setup", 1, NULL, NULL);
 
     item = variable_item_list_add(
@@ -277,6 +280,11 @@ bool desktop_settings_scene_start_on_event(void* context, SceneManagerEvent sme)
             break;
         case SCENE_EVENT_SELECT_FAVORITE_TERTIARY:
             scene_manager_set_scene_state(app->scene_manager, DesktopSettingsAppSceneFavorite, 2);
+            scene_manager_next_scene(app->scene_manager, DesktopSettingsAppSceneFavorite);
+            consumed = true;
+            break;
+        case SCENE_EVENT_SELECT_FAVORITE_QUATERNARY:
+            scene_manager_set_scene_state(app->scene_manager, DesktopSettingsAppSceneFavorite, 3);
             scene_manager_next_scene(app->scene_manager, DesktopSettingsAppSceneFavorite);
             consumed = true;
             break;

@@ -71,6 +71,12 @@ void desktop_settings_scene_favorite_on_enter(void* context) {
                (!strcmp(FLIPPER_APPS[i].name, app->settings.favorite_tertiary.name_or_path))) {
                 pre_select_item = i;
             }
+        } else if(primary_favorite == 3) {
+            if((app->settings.favorite_quaternary.is_external &&
+                !strcmp(FLIPPER_APPS[i].name, FAP_LOADER_APP_NAME)) ||
+               (!strcmp(FLIPPER_APPS[i].name, app->settings.favorite_quaternary.name_or_path))) {
+                pre_select_item = i;
+            }
         }
     }
     submenu_add_item(
@@ -86,6 +92,8 @@ void desktop_settings_scene_favorite_on_enter(void* context) {
         submenu_set_header(submenu, "Secondary favorite app:");
     } else if(primary_favorite == 2) {
         submenu_set_header(submenu, "Tertiary favorite app:");
+    } else if(primary_favorite == 3) {
+        submenu_set_header(submenu, "Quaternary favorite app:");
     }
     submenu_set_selected_item(submenu, pre_select_item); // If set during loop, visual glitch.
 

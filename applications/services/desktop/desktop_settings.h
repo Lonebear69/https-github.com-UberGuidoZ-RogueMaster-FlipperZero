@@ -63,6 +63,7 @@ typedef struct {
     FavoriteApp favorite_primary;
     FavoriteApp favorite_secondary;
     FavoriteApp favorite_tertiary;
+    FavoriteApp favorite_quaternary;
     PinCode pin_code;
     uint8_t is_locked;
     uint32_t auto_lock_delay_ms;
