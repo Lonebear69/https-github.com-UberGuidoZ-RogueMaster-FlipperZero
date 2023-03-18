@@ -6,14 +6,16 @@
 
 #define SCENE_EVENT_SELECT_FAVORITE_PRIMARY 0
 #define SCENE_EVENT_SELECT_FAVORITE_SECONDARY 1
-#define SCENE_EVENT_SELECT_PIN_SETUP 2
-#define SCENE_EVENT_SELECT_AUTO_LOCK_DELAY 3
-#define SCENE_EVENT_SELECT_ICON_STYLE 4
-#define SCENE_EVENT_SELECT_BATTERY_DISPLAY 5
-#define SCENE_EVENT_SELECT_BT_ICON 6
-#define SCENE_EVENT_SELECT_SDCARD_ICON 7
-#define SCENE_EVENT_SELECT_TOP_BAR 8
-#define SCENE_EVENT_SELECT_DUMBMODE 9
+#define SCENE_EVENT_SELECT_FAVORITE_TERTIARY 2
+#define SCENE_EVENT_SELECT_PIN_SETUP 3
+#define SCENE_EVENT_SELECT_AUTO_LOCK_DELAY 4
+#define SCENE_EVENT_SELECT_AUTO_LOCK_PIN 5
+#define SCENE_EVENT_SELECT_ICON_STYLE 6
+#define SCENE_EVENT_SELECT_BATTERY_DISPLAY 7
+#define SCENE_EVENT_SELECT_BT_ICON 8
+#define SCENE_EVENT_SELECT_SDCARD_ICON 9
+#define SCENE_EVENT_SELECT_TOP_BAR 10
+#define SCENE_EVENT_SELECT_DUMBMODE 11
 
 #define AUTO_LOCK_DELAY_COUNT 9
 const char* const auto_lock_delay_text[AUTO_LOCK_DELAY_COUNT] = {
@@ -156,7 +158,7 @@ void desktop_settings_scene_start_on_enter(void* context) {
 
     variable_item_list_add(variable_item_list, "Secondary Favorite App", 1, NULL, NULL);
 
-    // variable_item_list_add(variable_item_list, "Favorite Game", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Tertiary Favorite App", 1, NULL, NULL);
 
     variable_item_list_add(variable_item_list, "PIN Setup", 1, NULL, NULL);
 
@@ -174,6 +176,16 @@ void desktop_settings_scene_start_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
+        "Auto Lock Pin",
+        2,
+        desktop_settings_scene_start_auto_lock_pin_changed,
+        app);
+
+    variable_item_set_current_value_index(item, app->settings.auto_lock_with_pin);
+    variable_item_set_current_value_text(item, app->settings.auto_lock_with_pin ? "ON" : "OFF");
+
+    item = variable_item_list_add(
+        variable_item_list,
         "Icon Style",
         ICON_STYLE_COUNT,
         desktop_settings_scene_start_icon_style_changed,
@@ -182,16 +194,6 @@ void desktop_settings_scene_start_on_enter(void* context) {
     value_index = value_index_uint32(app->settings.icon_style, icon_style_value, ICON_STYLE_COUNT);
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, icon_style_count_text[value_index]);
-
-    item = variable_item_list_add(
-        variable_item_list,
-        "Auto Lock Pin",
-        2,
-        desktop_settings_scene_start_auto_lock_pin_changed,
-        app);
-
-    variable_item_set_current_value_index(item, app->settings.auto_lock_with_pin);
-    variable_item_set_current_value_text(item, app->settings.auto_lock_with_pin ? "ON" : "OFF");
 
     item = variable_item_list_add(
         variable_item_list,
@@ -273,16 +275,19 @@ bool desktop_settings_scene_start_on_event(void* context, SceneManagerEvent sme)
             scene_manager_next_scene(app->scene_manager, DesktopSettingsAppSceneFavorite);
             consumed = true;
             break;
-        // case SCENE_EVENT_SELECT_FAVORITE_GAME:
-        // scene_manager_set_scene_state(app->scene_manager, DesktopSettingsAppSceneFavorite, 2);
-        // scene_manager_next_scene(app->scene_manager, DesktopSettingsAppSceneFavorite);
-        // consumed = true;
-        // break;
+        case SCENE_EVENT_SELECT_FAVORITE_TERTIARY:
+            scene_manager_set_scene_state(app->scene_manager, DesktopSettingsAppSceneFavorite, 2);
+            scene_manager_next_scene(app->scene_manager, DesktopSettingsAppSceneFavorite);
+            consumed = true;
+            break;
         case SCENE_EVENT_SELECT_PIN_SETUP:
             scene_manager_next_scene(app->scene_manager, DesktopSettingsAppScenePinMenu);
             consumed = true;
             break;
         case SCENE_EVENT_SELECT_AUTO_LOCK_DELAY:
+            consumed = true;
+            break;
+        case SCENE_EVENT_SELECT_AUTO_LOCK_PIN:
             consumed = true;
             break;
         case SCENE_EVENT_SELECT_ICON_STYLE:

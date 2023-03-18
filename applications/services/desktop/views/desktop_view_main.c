@@ -87,7 +87,7 @@ bool desktop_main_input_callback(InputEvent* event, void* context) {
                     DesktopMainEventOpenFavoritePrimary, main_view->context); // DOWN FOR SECONDARY
             } else if(event->key == InputKeyLeft) {
                 main_view->callback(
-                    DesktopMainEventOpenSubRemote, main_view->context); // OPENS SUBGHZ REMOTE
+                    DesktopMainEventOpenFavoriteTertiary, main_view->context); // DOWN FOR Tertiary
             }
         }
     } else if(main_view->is_gamemode == true) {
