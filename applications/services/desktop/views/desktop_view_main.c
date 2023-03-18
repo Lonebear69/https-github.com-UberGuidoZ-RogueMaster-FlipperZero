@@ -70,7 +70,7 @@ bool desktop_main_input_callback(InputEvent* event, void* context) {
                 main_view->callback(DesktopMainEventOpenArchive, main_view->context);
             } else if(event->key == InputKeyLeft) {
                 main_view->callback(
-                    DesktopMainEventOpenFavoriteSecondary, main_view->context); // LEFT FOR PRIMARY
+                    DesktopMainEventOpenFavoritePrimary, main_view->context); // LEFT FOR PRIMARY
             } else if(event->key == InputKeyRight) {
                 // Right key is handled by animation manager
                 // GOES TO PASSPORT NO MATTER WHAT
@@ -90,7 +90,7 @@ bool desktop_main_input_callback(InputEvent* event, void* context) {
                     main_view->context); // HOLD DOWN FOR Quaternary
             } else if(event->key == InputKeyLeft) {
                 main_view->callback(
-                    DesktopMainEventOpenFavoritePrimary,
+                    DesktopMainEventOpenFavoriteSecondary,
                     main_view->context); // HOLD LEFT FOR SECONDARY
             }
         }
