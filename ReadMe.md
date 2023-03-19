@@ -64,7 +64,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: GUI: Fix submenu elements text size, now we can fit more symbols (By xMasterX)
 - OFW: [Optimize trailing slash check #2503 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2503)
 - Updated: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
-- Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - UL: iButton: Add support for DS1420 (not fully tested) (By xMasterX)
 - UL: Desktop: Option to set Tertiary favourite app (Hold right arrow on desktop) - Desktop settings (pin code, favourite app, autolock time) will be resetted!!! Only one time after installing - due to changes in settings structure, after installing of this release desktop settings will not be reset with next release (By xMasterX)
 - UL: Desktop: Ability to disable favourite app (use last element in a main list `None (disable)`) (By xMasterX)
@@ -77,6 +76,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [Radiation Sensor (By sionyx)](https://github.com/sionyx/flipper_radsens) `Req: RadSens`
 - Added: [AZERTY Mouse Jacker (By mothball187)](https://github.com/mothball187/flipperzero-nrf24/tree/main/mousejacker) `Req: NRF24` (Uses AZERTY keyboard - Source Unknown)
 - Updated: [Antidepressants (By nymda)](https://github.com/nymda/FlipperAntidepressants) [Added Level Changer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/commit/96b67d9d53b5a70e85f8bdd81dcbc602f90d46cd)
+- Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 
 <a name="release">
 
