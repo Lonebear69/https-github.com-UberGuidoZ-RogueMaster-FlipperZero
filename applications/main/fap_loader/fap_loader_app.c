@@ -10,7 +10,7 @@
 #include <loader/firmware_api/firmware_api.h>
 #include "fap_loader_app.h"
 
-#define TAG "fap_loader_app"
+#define TAG "fap_loader"
 
 struct FapLoader {
     FlipperApplication* app;
@@ -22,6 +22,8 @@ struct FapLoader {
     ViewDispatcher* view_dispatcher;
     Loading* loading;
 };
+
+volatile bool fap_loader_debug_active = false;
 
 bool fap_loader_load_name_and_icon(
     FuriString* path,
@@ -109,6 +111,14 @@ static bool fap_loader_run_selected_app(FapLoader* loader) {
         if(strcmp(furi_string_get_cstr(loader->fap_args), "false") == 0) {
             FuriThread* thread = flipper_application_spawn(loader->app, NULL);
 
+            /* This flag is set by the debugger - to break on app start */
+            if(fap_loader_debug_active) {
+                FURI_LOG_W(TAG, "Triggering BP for debugger");
+                /* After hitting this, you can set breakpoints in your .fap's code
+                 * Note that you have to toggle breakpoints that were set before */
+                __asm volatile("bkpt 0");
+            }
+
             FuriString* app_name = furi_string_alloc();
             path_extract_filename_no_ext(furi_string_get_cstr(loader->fap_path), app_name);
             furi_thread_set_appid(thread, furi_string_get_cstr(app_name));
@@ -124,6 +134,14 @@ static bool fap_loader_run_selected_app(FapLoader* loader) {
         } else {
             FuriThread* thread = flipper_application_spawn(
                 loader->app, (void*)furi_string_get_cstr(loader->fap_args));
+
+            /* This flag is set by the debugger - to break on app start */
+            if(fap_loader_debug_active) {
+                FURI_LOG_W(TAG, "Triggering BP for debugger");
+                /* After hitting this, you can set breakpoints in your .fap's code
+                 * Note that you have to toggle breakpoints that were set before */
+                __asm volatile("bkpt 0");
+            }
 
             FuriString* app_name = furi_string_alloc();
             path_extract_filename_no_ext(furi_string_get_cstr(loader->fap_path), app_name);
