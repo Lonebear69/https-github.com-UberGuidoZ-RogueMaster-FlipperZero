@@ -81,6 +81,9 @@ This software is for experimental purposes only and is not meant for any illegal
 - Renamed: [Antidepressants (By nymda)](https://github.com/nymda/FlipperAntidepressants) to [Dolphin Trainer (By nymda)](https://github.com/nymda/FlipperAntidepressants)
 - Added Settings folder to Applications with these options: Dolphin Backup, Dolphin Restorer, Dolphin Trainer, Extend Range, Name Changer, Passport & Passport Settings (By RogueMaster)
 - Did some other backend renames; please delete your apps folder before installing.
+- Fixed Clock Link on Main Menu
+- OFW PR: [NFC: Fixed writing gen1a magic tags with invalid BCC #2511 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2511)
+- OFW PR: [Improved debugging experience for external apps #2507 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2507)
 
 <a name="release">
 
