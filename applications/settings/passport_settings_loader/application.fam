@@ -6,5 +6,5 @@ App(
     requires=["gui"],
     stack_size=int(1.5 * 1024),
     order=50,
-	link="/ext/apps/Main/Passport_Settings.fap",
+	link="/ext/apps/Settings/Passport_Settings.fap",
 )

@@ -10,5 +10,5 @@ App(
     stack_size=1 * 1024,
     order=50,
     fap_icon="passport_10px.png",
-    fap_category="Main",
+    fap_category="Settings",
 )

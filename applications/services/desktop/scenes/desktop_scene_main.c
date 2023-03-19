@@ -14,8 +14,8 @@
 
 #define TAG "DesktopSrv"
 
-#define CLOCK_APP EXT_PATH("apps/Main/Clock.fap")
-#define PASSPORT_APP EXT_PATH("apps/Main/Passport.fap")
+#define CLOCK_APP EXT_PATH("apps/Main/Dab_Timer.fap")
+#define PASSPORT_APP EXT_PATH("apps/Settings/Passport.fap")
 #define SNAKE_APP EXT_PATH("apps/Games/Snake.fap")
 #define IMPROVED_2048_APP EXT_PATH("apps/Games/2048_improved.fap")
 #define ZOMBIEZ_APP EXT_PATH("apps/Games/Zombiez.fap")

@@ -3,7 +3,7 @@
 #include <gui/gui.h>
 #include <input/input.h>
 #include <stdlib.h>
-#include "Antidepressants_icons.h"
+#include "Dolphin_Trainer_icons.h"
 #include "dolphin/helpers/dolphin_state.h"
 #include "saved_struct.h"
 #include <power/power_service/power.h>
@@ -86,7 +86,7 @@ static void input_callback(InputEvent* input_event, void* ctx) {
     furi_message_queue_put(event_queue, input_event, FuriWaitForever);
 }
 
-int32_t bigsad_app(void* p) {
+int32_t dolphin_trainer_app(void* p) {
     UNUSED(p);
 
     InputEvent event;
@@ -145,7 +145,7 @@ int32_t bigsad_app(void* p) {
                 } else if(btnIndex == 2) {
                     curLevel = dolphin_get_mylevel(stateLocal->data.icounter) - 1;
                     if(curLevel <= 28) {
-                        stateLocal->data.icounter = level_array[curLevel]+1;
+                        stateLocal->data.icounter = level_array[curLevel] + 1;
                     }
                 }
             }
@@ -161,10 +161,10 @@ int32_t bigsad_app(void* p) {
                 } else if(btnIndex == 2) {
                     curLevel = dolphin_get_mylevel(stateLocal->data.icounter) - 3;
                     if(curLevel >= 1) {
-                        stateLocal->data.icounter = level_array[curLevel]+1;
+                        stateLocal->data.icounter = level_array[curLevel] + 1;
                     } else if(curLevel == 0) {
                         stateLocal->data.icounter = 0;
-					}
+                    }
                 }
             }
             if(event.key == InputKeyBack) {

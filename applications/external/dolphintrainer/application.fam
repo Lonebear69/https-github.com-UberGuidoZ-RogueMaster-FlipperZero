@@ -1,12 +1,13 @@
 App(
-    appid="Antidepressants",
-    name="Antidepressants",
+    appid="Dolphin_Trainer",
+    # OLD name="Antidepressants",
+    name="Dolphin Trainer",
     apptype=FlipperAppType.EXTERNAL,
-    entry_point="bigsad_app",
+    entry_point="dolphin_trainer_app",
     requires=["gui"],
     stack_size=2 * 1024,
     order = 0,
     fap_icon="ico.png",
-    fap_category="Misc",
+    fap_category="Settings",
     fap_icon_assets="icons",
 )
