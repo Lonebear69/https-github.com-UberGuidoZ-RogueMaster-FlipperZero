@@ -84,6 +84,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - Fixed Clock Link on Main Menu
 - OFW PR: [NFC: Fixed writing gen1a magic tags with invalid BCC #2511 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2511)
 - OFW PR: [Improved debugging experience for external apps #2507 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2507)
+- OFW PR: [OTP programmer: return exit code based on error type #2504 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2504)
+- OFW PR: [Fix typos in iButton #2506 (By gsurkov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2506)
 
 <a name="release">
 
