@@ -19,20 +19,20 @@ This software is for experimental purposes only and is not meant for any illegal
 
 - [Rogue Master Merch! `Shop Here For All Your Flipper Zero Accessories and Boards`](https://shop.rogue-master.net)
 - Keep Your Flipper Up To Date With [PATREON membership](https://www.patreon.com/RogueMaster/membership)
-- [PATREON for compiled releases](https://www.patreon.com/RogueMaster) for nearly ALL updates. Patreon Releases sometimes multiple times a day. GitHub releases will occur weekly or with OFW version updates.
-- [Contact me on Patreon to RENAME your Flipper](https://www.patreon.com/RogueMaster/membership) I can do custom names and custom animation sets with your custom build provided for every Patreon release.
-- [:fire: PATREON ANIMATION BUILDS AVAILABLE](https://www.patreon.com/RogueMaster/membership): [ALL](https://www.patreon.com/posts/animation-all-v4-77935728), 420, 420+18, Anime Only, Anime+420, Anime+420+18, CHERUI 18+, DBZ, Dolphin, HACKZ, MARIO, No Anim, ONE PIECE, P0KEMON, RM 18PLUS, RM SELECT, RM SELECT + 18PLUS, RM MINIMAL (default on GitHub), SAO, SCIENCE, SJUMP AND STOCK with all assets updated to look like stock.
+- [PATREON for daily compiled releases](https://www.patreon.com/RogueMaster) for nearly ALL updates. GitHub releases will occur weekly or with OFW version updates.
+- [Contact me on Discord/Patreon to RENAME your Flipper or for GIF conversion for Flipper Zero](https://www.patreon.com/RogueMaster/membership)
+- [:fire: PATREON ANIMATION BUILDS AVAILABLE](https://www.patreon.com/RogueMaster/membership): [ALL](https://www.patreon.com/posts/animation-all-v4-77935728), 420, 420+18, Anime Only, Anime+420, Anime+420+18, CHERUI 18+, DBZ, Dolphin, HACKZ, MARIO, No Anim, ONE PIECE, P0KEMON, RM 18PLUS, RM SELECT, RM SELECT + 18PLUS, RM MINIMAL (default on GitHub), SAO, SCIENCE, SJUMP AND STOCK with all assets updated to look like stock. ALL, Anime and RM Select are very large and can slow down F0.
 - [VIDEO PREVIEW FOR ALL ANIMATIONS](https://www.patreon.com/posts/animation-all-v4-77935728)
-- [Supporters get SD Card Assets with extra NFC Assets such as 48 RM Pro Trained Level 50 Sm@sh Amiib0 (By RogueMaster)](https://www.patreon.com/RogueMaster/membership)
-- Donations: BTC: `3MPQbKmGRCstg4FjnadfHa3woCT94JkR2a`
-- Donations: ETH: `roguemaster.eth` or `0xC32Ea488DBeCF95992A5C81BD411e56Bd418BC5f`
+- [Supporters also get SD Card Assets zip file with extra NFC Assets such as Infrared remotes, NFC files, SubGHz files and 48 RM Pro Trained Level 50 Sm@sh Amiib0 (By RogueMaster)](https://www.patreon.com/RogueMaster/membership)
+- Donations: BTC: `3MPQbKmGRCstg4FjnadfHa3woCT94JkR2a` - Let me know on Discord when you send
+- Donations: ETH: `roguemaster.eth` or `0xC32Ea488DBeCF95992A5C81BD411e56Bd418BC5f` - Let me know on Discord when you send
 
 <a name="latest">
 
 ## Latest Updates - [PATREON: Latest Release RM0320-0155-0.79.2-4ac2fc3](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-20 10:40 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-20 10:40 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-20 15:10 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-20 15:10 EST`
 - Updated: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player)
 - OFW: [Dolphin: new spring animation, weight adjust, drop winter animation. #2489 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2489)
 - OFW: [fbt, faploader: minimal app module implementation #2420 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2420)
@@ -96,6 +96,9 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: Fix for iButton Fuzzer includes (By xMasterX)
 - Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
+- [New Patreon Build Update](https://www.patreon.com/RogueMaster/membership): SailorChibi animation added to Anime and ALL builds.
+- [New Patreon Build Update](https://www.patreon.com/RogueMaster/membership): Simps0ns and another Battle Royale animation added to ALL build.
+- For those that use ALL, Anime or RM Select builds, be warned, if you have more than 50 animations in your dolphin folder it causes issues with loading on boot and sometimes between apps. It is recommeneded you use a build with less animations to improve Flipper speed. I'm open to suggestions on Discord for build combinations.
 
 <a name="release">
 
