@@ -83,7 +83,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - Did some other backend renames; please delete your apps folder before installing.
 - Fixed Clock Link on Main Menu
 - OFW PR: [NFC: Fixed writing gen1a magic tags with invalid BCC #2511 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2511)
-- OFW PR: [Improved debugging experience for external apps #2507 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2507)
 - OFW PR: [OTP programmer: return exit code based on error type #2504 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2504)
 - OFW PR: [Elite progress #2481 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2481)
 - Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
@@ -91,6 +90,10 @@ This software is for experimental purposes only and is not meant for any illegal
 - Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 - OFW: [OTP programmer: return exit code based on error type #2504 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2504)
 - OFW: [SD Driver: reinit sd card on error #2493 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2493)
+- OFW: [Improved debugging experience for external apps #2507 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2507)
+- OFW: [Fix typos in iButton #2506 (By gsurkov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2506)
+- OFW: [Add one_wire lib to f18, separate ibutton #2509 (By gsurkov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2509)
+- OFW: [SubGhz: fix Incorrect comparison in subghz_setting_get_hopper_frequency #2518 (By skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2518)
 
 <a name="release">
 
