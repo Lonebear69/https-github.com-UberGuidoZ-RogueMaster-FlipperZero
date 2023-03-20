@@ -88,6 +88,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW PR: [Elite progress #2481 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2481)
 - Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - We now have [Rogue Master Merch! `Shop Here For All Your Flipper Zero Accessories and Boards`](https://shop.rogue-master.net)
+- Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 
 <a name="release">
 

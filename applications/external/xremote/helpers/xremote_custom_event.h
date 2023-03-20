@@ -5,7 +5,10 @@
 
 enum XRemoteCustomEventType {
     // Reserve first 100 events for button types and indexes, starting from 0
+    XRemoteCustomEventMenuVoid,
     XRemoteCustomEventMenuSelected,
+    XRemoteCustomEventMenuAddSelected,
+    XRemoteCustomEventMenuAddIrSelected,
 };
 
 #pragma pack(push, 1)
@@ -41,6 +44,7 @@ typedef enum {
     XRemoteCustomEventScene2Back,
 
     XRemoteCustomEventTypePopupClosed,
+    XRemoteCustomEventTextInput,
 } XRemoteCustomEvent;
 
 static inline uint32_t xremote_custom_menu_event_pack(uint16_t type, int16_t value) {
