@@ -21,7 +21,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Keep Your Flipper Up To Date With [PATREON membership](https://www.patreon.com/RogueMaster/membership)
 - [PATREON for daily compiled releases](https://www.patreon.com/RogueMaster) for nearly ALL updates. GitHub releases will occur weekly or with OFW version updates.
 - [Contact me on Discord/Patreon to RENAME your Flipper or for GIF conversion for Flipper Zero](https://www.patreon.com/RogueMaster/membership)
-- [:fire: PATREON ANIMATION BUILDS AVAILABLE](https://www.patreon.com/RogueMaster/membership): [ALL](https://www.patreon.com/posts/animation-all-v4-77935728), 420, 420+18, Anime Only, Anime+420, Anime+420+18, CHERUI 18+, DBZ, Dolphin, HACKZ, MARIO, No Anim, ONE PIECE, P0KEMON, RM 18PLUS, RM SELECT, RM SELECT + 18PLUS, RM MINIMAL (default on GitHub), SAO, SCIENCE, SJUMP AND STOCK with all assets updated to look like stock. ALL, Anime and RM Select are very large and can slow down F0.
+- [:fire: PATREON ANIMATION BUILDS AVAILABLE](https://www.patreon.com/RogueMaster/membership): [ALL](https://www.patreon.com/posts/animation-all-v4-77935728), 420, 420+18, Anime Only, Anime+420, Anime+420+18, CHERUI 18+, DBZ, Dolphin, HACKZ, MARIO, No Anim, ONE PIECE, P0KEMON, RM 18PLUS, RM SELECT, RM SELECT + 18PLUS, RM MINIMAL (default on GitHub), SAO, SCIENCE, SJUMP AND STOCK with all assets updated to look like stock. ALL, Anime and RM Select builds are very large and can slow down F0.
 - [VIDEO PREVIEW FOR ALL ANIMATIONS](https://www.patreon.com/posts/animation-all-v4-77935728)
 - [Supporters also get SD Card Assets zip file with extra NFC Assets such as Infrared remotes, NFC files, SubGHz files and 48 RM Pro Trained Level 50 Sm@sh Amiib0 (By RogueMaster)](https://www.patreon.com/RogueMaster/membership)
 - Donations: BTC: `3MPQbKmGRCstg4FjnadfHa3woCT94JkR2a` - Let me know on Discord when you send
@@ -99,6 +99,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - [New Patreon Build Update](https://www.patreon.com/RogueMaster/membership): SailorChibi animation added to Anime and ALL builds.
 - [New Patreon Build Update](https://www.patreon.com/RogueMaster/membership): Simps0ns and another Battle Royale animation added to ALL build.
 - For those that use ALL, Anime or RM Select builds, be warned, if you have more than 50 animations in your dolphin folder it causes issues with loading on boot and sometimes between apps. It is recommeneded you use a build with less animations to improve Flipper speed. I'm open to suggestions on Discord for build combinations.
+- [New Patreon Build Update](https://www.patreon.com/RogueMaster/membership): Several [IoriKesso](https://github.com/IoriKesso/Flipper-Zero-Anime-Wallpapers) animations added to Anime, RM Select and ALL builds. Iorikesso NSFW pack added to ALL and 18+ Builds (11 animations).
 
 <a name="release">
 
