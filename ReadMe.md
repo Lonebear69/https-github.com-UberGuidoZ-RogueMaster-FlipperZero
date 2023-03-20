@@ -100,7 +100,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - [New Patreon Build Update](https://www.patreon.com/RogueMaster/membership): Simps0ns and another Battle Royale animation added to ALL build.
 - For those that use ALL, Anime or RM Select builds, be warned, if you have more than 50 animations in your dolphin folder it causes issues with loading on boot and sometimes between apps. It is recommeneded you use a build with less animations to improve Flipper speed. I'm open to suggestions on Discord for build combinations.
 - [New Patreon Build Update](https://www.patreon.com/RogueMaster/membership): Several [IoriKesso](https://github.com/IoriKesso/Flipper-Zero-Anime-Wallpapers) animations added to Anime, RM Select and ALL builds. Iorikesso NSFW pack added to ALL and 18+ Builds (11 animations).
-- For the New Patreon Builds: Added Animal Crossing, Controller, Deku and Kirby animations to Cherui18+ build. Added Kirby animations to Mario build.
+- For the Next Patreon Builds: Added Animal Crossing, Controller, Deku and Kirby animations to Cherui18+ build. Added Kirby animations to Mario build.
 
 <a name="release">
 
