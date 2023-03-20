@@ -151,6 +151,7 @@ class FlipperAppStateHelper:
             return False
 
     def _sync_apps(self) -> None:
+        self.set_debug_mode(True)
         if not (app_list := self.app_list_ptr.value()):
             print("Reset app loader state")
             for app in self._current_apps:
@@ -165,7 +166,7 @@ class FlipperAppStateHelper:
 
         for app in self._current_apps.copy():
             if app.entry_address not in loaded_apps:
-                print(f"Application {app} is no longer loaded")
+                print(f"Application {app.name} is no longer loaded")
                 if not self._exec_gdb_command(app.get_gdb_unload_command()):
                     print(f"Failed to unload debug info for {app.name}")
                 self._current_apps.remove(app)
@@ -173,20 +174,19 @@ class FlipperAppStateHelper:
         for entry_point, app in loaded_apps.items():
             if entry_point not in set(app.entry_address for app in self._current_apps):
                 new_app_state = AppState.from_gdb(app)
-                print(f"New application loaded: {app}")
+                print(f"New application loaded. Adding debug info")
                 if self._exec_gdb_command(new_app_state.get_gdb_load_command()):
                     self._current_apps.append(new_app_state)
                 else:
                     print(f"Failed to load debug info for {new_app_state}")
 
-        # print("Loaded apps:", self._current_apps)
-
     def attach_to_fw(self) -> None:
         print("Attaching to Flipper firmware")
-        self.app_list_ptr = gdb.lookup_global_symbol("loaded_flipper_apps")
+        self.app_list_ptr = gdb.lookup_global_symbol(
+            "flipper_application_loaded_app_list"
+        )
         self.app_type_ptr = gdb.lookup_type("FlipperApplication").pointer()
         self.app_list_entry_type = gdb.lookup_type("struct FlipperApplicationList_s")
-        self.set_debug_mode(True)
 
     def handle_stop(self, event) -> None:
         self._sync_apps()
