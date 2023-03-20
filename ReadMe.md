@@ -93,7 +93,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Add one_wire lib to f18, separate ibutton #2509 (By gsurkov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2509)
 - OFW: [SubGhz: fix Incorrect comparison in subghz_setting_get_hopper_frequency #2518 (By skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2518)
 - OFW: [BadUSB: Script interpreter refactoring #2485 (By nminaylov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2485)
-- UL: Fix for iButton Fuzzer includes (By xMastterX)
+- UL: Fix for iButton Fuzzer includes (By xMasterX)
 - Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 
