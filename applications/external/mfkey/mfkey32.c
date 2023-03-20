@@ -3,6 +3,7 @@
 
 // TODO: Add keys to top of the user dictionary, not the bottom
 // TODO: More efficient dictionary bruteforce by scanning through hardcoded very common keys and previously found dictionary keys first?
+//       (a cache for napi_key_already_found_for_nonce)
 
 #include <furi.h>
 #include <furi_hal.h>
@@ -21,6 +22,7 @@
 #include <lib/nfc/helpers/mf_classic_dict.h>
 #include <lib/toolbox/args.h>
 #include <lib/flipper_format/flipper_format.h>
+#include <dolphin/dolphin.h>
 
 #define MF_CLASSIC_DICT_FLIPPER_PATH EXT_PATH("nfc/assets/mf_classic_dict.nfc")
 #define MF_CLASSIC_DICT_USER_PATH EXT_PATH("nfc/assets/mf_classic_dict_user.nfc")
@@ -28,10 +30,6 @@
 #define TAG "Mfkey32"
 #define NFC_MF_CLASSIC_KEY_LEN (13)
 
-#define eta_round_time 56
-#define eta_total_time 900
-// MSB_LIMIT: Chunk size (out of 256)
-#define MSB_LIMIT 16
 #define MIN_RAM 114500
 #define LF_POLY_ODD (0x29CE5C)
 #define LF_POLY_EVEN (0x870804)
@@ -43,6 +41,11 @@
 #define BEBIT(x, n) BIT(x, (n) ^ 24)
 #define SWAPENDIAN(x) (x = (x >> 8 & 0xff00ff) | (x & 0xff00ff) << 8, x = x >> 16 | x << 16)
 //#define SIZEOF(arr) sizeof(arr) / sizeof(*arr)
+
+static int eta_round_time = 56;
+static int eta_total_time = 900;
+// MSB_LIMIT: Chunk size (out of 256)
+static int MSB_LIMIT = 16;
 
 struct Crypto1State {
     uint32_t odd, even;
@@ -69,7 +72,6 @@ typedef struct {
 typedef enum {
     MissingNonces,
     ZeroNonces,
-    OutOfMemory,
 } MfkeyError;
 
 typedef enum {
@@ -82,12 +84,14 @@ typedef enum {
     Help,
 } MfkeyState;
 
+// TODO: Can we eliminate any of the members of this struct?
 typedef struct {
     FuriMutex* mutex;
     MfkeyError err;
     MfkeyState mfkey_state;
     int cracked;
     int unique_cracked;
+    int num_completed;
     int total;
     int dict_count;
     int search;
@@ -575,6 +579,7 @@ bool recover(struct Crypto1Params* p, int ks2, ProgramState* const program_state
     for(msb = 0; msb <= ((256 / MSB_LIMIT) - 1); msb++) {
         program_state->search = msb;
         program_state->eta_round = eta_round_time;
+        program_state->eta_total = eta_total_time - (eta_round_time * msb);
         if(calculate_msb_tables(
                oks,
                eks,
@@ -941,6 +946,7 @@ MfClassicNonceArray* napi_mf_classic_nonce_array_alloc(
                 napi_key_already_found_for_nonce(
                     user_dict, res.uid ^ res.nt1, res.nr1_enc, p64b, res.ar1_enc))) {
                 (program_state->cracked)++;
+                (program_state->num_completed)++;
                 continue;
             }
             FURI_LOG_I(TAG, "No key found for %lx %lx", res.uid, res.ar1_enc);
@@ -953,14 +959,13 @@ MfClassicNonceArray* napi_mf_classic_nonce_array_alloc(
             nonce_array->total_nonces++;
         }
         furi_string_free(next_line);
-        stream_rewind(nonce_array->stream);
+        buffered_file_stream_close(nonce_array->stream);
 
         array_loaded = true;
         FURI_LOG_I(TAG, "Loaded %lu nonces", nonce_array->total_nonces);
     } while(false);
 
     if(!array_loaded) {
-        buffered_file_stream_close(nonce_array->stream);
         free(nonce_array);
         nonce_array = NULL;
     }
@@ -993,7 +998,7 @@ void mfkey32(ProgramState* const program_state) {
     uint64_t found_key; // recovered key
     size_t keyarray_size = 0;
     uint64_t* keyarray = malloc(sizeof(uint64_t) * 1);
-    uint32_t i = 0;
+    uint32_t i = 0, j = 0;
     // Check for nonces
     if(!napi_mf_classic_nonces_check_presence()) {
         program_state->err = MissingNonces;
@@ -1034,13 +1039,10 @@ void mfkey32(ProgramState* const program_state) {
         return;
     }
     if(memmgr_get_free_heap() < MIN_RAM) {
-        // Insufficient RAM
-        program_state->err = OutOfMemory;
-        program_state->mfkey_state = Error;
-        napi_mf_classic_nonce_array_free(nonce_arr);
-        napi_mf_classic_dict_free(user_dict);
-        free(keyarray);
-        return;
+        // System has less than the guaranteed amount of RAM (140 KB) - adjust some parameters to run anyway at half speed
+        eta_round_time *= 2;
+        eta_total_time *= 2;
+        MSB_LIMIT /= 2;
     }
     program_state->mfkey_state = MfkeyAttack;
     // TODO: Work backwards on this array and free memory
@@ -1057,6 +1059,7 @@ void mfkey32(ProgramState* const program_state) {
                next_nonce.ar1_enc)) {
             nonce_arr->remaining_nonces--;
             (program_state->cracked)++;
+            (program_state->num_completed)++;
             continue;
         }
         FURI_LOG_I(TAG, "Cracking %lx %lx", next_nonce.uid, next_nonce.ar1_enc);
@@ -1073,12 +1076,15 @@ void mfkey32(ProgramState* const program_state) {
                 break;
             }
             // No key found in recover()
+            (program_state->num_completed)++;
             continue;
         }
+        (program_state->cracked)++;
+        (program_state->num_completed)++;
         found_key = p.key;
         bool already_found = false;
-        for(i = 0; i < keyarray_size; i++) {
-            if(keyarray[i] == found_key) {
+        for(j = 0; j < keyarray_size; j++) {
+            if(keyarray[j] == found_key) {
                 already_found = true;
                 break;
             }
@@ -1088,7 +1094,6 @@ void mfkey32(ProgramState* const program_state) {
             keyarray = realloc(keyarray, sizeof(uint64_t) * (keyarray_size + 1));
             keyarray_size += 1;
             keyarray[keyarray_size - 1] = found_key;
-            (program_state->cracked)++;
             (program_state->unique_cracked)++;
         }
     }
@@ -1101,6 +1106,10 @@ void mfkey32(ProgramState* const program_state) {
         furi_string_cat_printf(temp_key, "%012" PRIX64, keyarray[i]);
         napi_mf_classic_dict_add_key_str(user_dict, temp_key);
         furi_string_free(temp_key);
+    }
+    if(keyarray_size > 0) {
+        // TODO: Should we use DolphinDeedNfcMfcAdd?
+        DOLPHIN_DEED(DolphinDeedNfcMfcAdd);
     }
     napi_mf_classic_nonce_array_free(nonce_arr);
     if(user_dict_exists) {
@@ -1121,7 +1130,7 @@ static void render_callback(Canvas* const canvas, void* ctx) {
     furi_assert(ctx);
     const ProgramState* program_state = ctx;
     furi_mutex_acquire(program_state->mutex, FuriWaitForever);
-    char draw_str[32] = {};
+    char draw_str[44] = {};
     canvas_clear(canvas);
     canvas_draw_frame(canvas, 0, 0, 128, 64);
     canvas_draw_frame(canvas, 0, 15, 128, 64);
@@ -1131,20 +1140,28 @@ static void render_callback(Canvas* const canvas, void* ctx) {
     if(program_state->is_thread_running && program_state->mfkey_state == MfkeyAttack) {
         float eta_round = (float)1 - ((float)program_state->eta_round / (float)eta_round_time);
         float eta_total = (float)1 - ((float)program_state->eta_total / (float)eta_total_time);
-        float progress = (float)program_state->cracked / (float)program_state->total;
+        float progress = (float)program_state->num_completed / (float)program_state->total;
+        if(eta_round < 0) {
+            // Round ETA miscalculated
+            eta_round = 0;
+        }
+        if(eta_total < 0) {
+            // Total ETA miscalculated
+            eta_total = 0;
+        }
         canvas_set_font(canvas, FontSecondary);
         snprintf(
             draw_str,
             sizeof(draw_str),
-            "Keys found: %d/%d - in prog.",
-            program_state->cracked,
+            "Cracking: %d/%d - in prog.",
+            program_state->num_completed,
             program_state->total);
         elements_progress_bar_with_text(canvas, 5, 18, 118, progress, draw_str);
         snprintf(
             draw_str,
             sizeof(draw_str),
             "Round: %d/%d - ETA %02d Sec",
-            program_state->search,
+            (program_state->search) + 1, // Zero indexed
             256 / MSB_LIMIT,
             program_state->eta_round);
         elements_progress_bar_with_text(canvas, 5, 31, 118, eta_round, draw_str);
@@ -1187,8 +1204,6 @@ static void render_callback(Canvas* const canvas, void* ctx) {
             canvas_draw_str_aligned(canvas, 25, 36, AlignLeft, AlignTop, "No nonces found");
         } else if(program_state->err == ZeroNonces) {
             canvas_draw_str_aligned(canvas, 25, 36, AlignLeft, AlignTop, "No nonces to crack");
-        } else if(program_state->err == OutOfMemory) {
-            canvas_draw_str_aligned(canvas, 25, 36, AlignLeft, AlignTop, "Insufficient memory");
         } else {
             // Unhandled error
         }
@@ -1210,6 +1225,7 @@ static void mfkey32_state_init(ProgramState* const program_state) {
     program_state->mfkey_state = Ready;
     program_state->cracked = 0;
     program_state->unique_cracked = 0;
+    program_state->num_completed = 0;
     program_state->total = 0;
     program_state->dict_count = 0;
 }
