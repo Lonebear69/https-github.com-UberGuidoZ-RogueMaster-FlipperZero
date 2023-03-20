@@ -1,4 +1,4 @@
-<h1 align="center"><a href='https://rogue-master.net'><img src="https://rogue-master.net/img/rmlogo.png" width="40%"></a></h1>
+<h1 align="center"><a href='https://rogue-master.net'><img src="https://rogue-master.net/img/rmlogo.png" width="40%"></a><br><a href="https://shop.rogue-master.net/" target="_blank"><img src="https://rogue-master.net/img/Merch.png" alt="RM Merch"  title="RM Merch"></a></h1>
 
 # Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6.tgz&channel=RM0314-1541-0.79.2-1311ef6&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6-NoAnim.tgz&channel=RM0314-1541-0.79.2-1311ef6-NoAnim&version=0.79.2)
 
