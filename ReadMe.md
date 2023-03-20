@@ -1,11 +1,11 @@
-<h1 align="center"><a href='https://rogue-master.net'><img src="https://rogue-master.net/img/rmlogo.png" width="40%"></a><br><a href="https://shop.rogue-master.net/" target="_blank"><img src="https://rogue-master.net/img/Merch.png" alt="RM Merch"  title="RM Merch"></a></h1>
+<h1 align="center"><a href='https://rogue-master.net'><img src="https://rogue-master.net/img/rmlogo.png" width="40%"></a>
+<br><a href='https://discord.gg/gF2bBUzAFe' target='_blank'><img src='https://rogue-master.net/img/Discord.png' alt='Discord' title='Discord'></a>
+&nbsp;<a href='https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release' target='_blank'><img src='https://rogue-master.net/img/Patreon.png' alt='Latest PATREON Release' title='Latest PATREON Release'></a>
+&nbsp;<a href='https://shop.rogue-master.net/' target='_blank'><img src='https://rogue-master.net/img/Merch.png' alt='RM Merch'' title='RM Merch'></a>
+&nbsp;<a href='https://github.com/RogueMaster/awesome-flipperzero-withModules' target='_blank'><img src='https://rogue-master.net/img/Resources.png' alt='More Research / Assets' title='More Research / Assets'></a></h1>
 
 # Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6.tgz&channel=RM0314-1541-0.79.2-1311ef6&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0314-1541-0.79.2-1311ef6-NoAnim.tgz&channel=RM0314-1541-0.79.2-1311ef6-NoAnim&version=0.79.2)
 
-## What Is Not In The Firmware? [SD CARD EXTRA FILES AND OTHER RESEARCH SOURCES](https://github.com/RogueMaster/awesome-flipperzero-withModules)
-
-
-# RogueMaster Flipper Zero FW [Support Us!](https://www.patreon.com/RogueMaster/membership)
 ## Thank you so much to our RM Pro/Extreme Patreon supporters! Because of people like you, we are able to offer the best and most up-to-date Flipper Zero Firmware!
 
 <table><tr><th><div align="left">
