@@ -85,9 +85,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW PR: [NFC: Fixed writing gen1a magic tags with invalid BCC #2511 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2511)
 - OFW PR: [OTP programmer: return exit code based on error type #2504 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2504)
 - OFW PR: [Elite progress #2481 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2481)
-- Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - We now have [Rogue Master Merch! `Shop Here For All Your Flipper Zero Accessories and Boards`](https://shop.rogue-master.net)
-- Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 - OFW: [OTP programmer: return exit code based on error type #2504 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2504)
 - OFW: [SD Driver: reinit sd card on error #2493 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2493)
 - OFW: [Improved debugging experience for external apps #2507 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2507)
@@ -96,6 +94,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [SubGhz: fix Incorrect comparison in subghz_setting_get_hopper_frequency #2518 (By skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2518)
 - OFW: [BadUSB: Script interpreter refactoring #2485 (By nminaylov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2485)
 - UL: Fix for iButton Fuzzer includes (By xMastterX)
+- Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
+- Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 
 <a name="release">
 

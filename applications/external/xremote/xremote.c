@@ -79,9 +79,6 @@ XRemote* xremote_app_alloc() {
     app->button_menu_ir = button_menu_alloc();
     view_dispatcher_add_view(
         app->view_dispatcher, XRemoteViewIdIrRemote, button_menu_get_view(app->button_menu_ir));
-    app->xremote_scene_2 = xremote_scene_2_alloc();
-    view_dispatcher_add_view(
-        app->view_dispatcher, XRemoteViewIdScene2, xremote_scene_2_get_view(app->xremote_scene_2));
     app->variable_item_list = variable_item_list_alloc();
     view_dispatcher_add_view(
         app->view_dispatcher,
@@ -125,7 +122,6 @@ void xremote_app_free(XRemote* app) {
     view_dispatcher_remove_view(app->view_dispatcher, XRemoteViewIdMenu);
     view_dispatcher_remove_view(app->view_dispatcher, XRemoteViewIdCreate);
     view_dispatcher_remove_view(app->view_dispatcher, XRemoteViewIdCreateAdd);
-    view_dispatcher_remove_view(app->view_dispatcher, XRemoteViewIdScene2);
     view_dispatcher_remove_view(app->view_dispatcher, XRemoteViewIdSettings);
     view_dispatcher_remove_view(app->view_dispatcher, XRemoteViewIdWip);
     view_dispatcher_remove_view(app->view_dispatcher, XRemoteViewIdStack);

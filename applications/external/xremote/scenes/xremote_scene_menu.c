@@ -2,7 +2,7 @@
 
 enum SubmenuIndex {
     SubmenuIndexCreate = 10,
-    SubmenuIndexScene2,
+    SubmenuIndexLoad,
     SubmenuIndexSettings,
     SubmenuIndexInfoscreen,
 };
@@ -24,7 +24,7 @@ void xremote_scene_menu_on_enter(void* context) {
     submenu_add_item(
         app->submenu,
         "Run Saved Command",
-        SubmenuIndexScene2,
+        SubmenuIndexLoad,
         xremote_scene_menu_submenu_callback,
         app);
     submenu_add_item(
@@ -51,10 +51,9 @@ bool xremote_scene_menu_on_event(void* context, SceneManagerEvent event) {
                 app->scene_manager, XRemoteSceneMenu, SubmenuIndexCreate);
             scene_manager_next_scene(app->scene_manager, XRemoteSceneCreate);
             return true;
-        } else if(event.event == SubmenuIndexScene2) {
-            scene_manager_set_scene_state(
-                app->scene_manager, XRemoteSceneMenu, SubmenuIndexScene2);
-            scene_manager_next_scene(app->scene_manager, XRemoteSceneScene_2);
+        } else if(event.event == SubmenuIndexLoad) {
+            scene_manager_set_scene_state(app->scene_manager, XRemoteSceneMenu, SubmenuIndexLoad);
+            scene_manager_next_scene(app->scene_manager, XRemoteSceneXrList);
             return true;
         } else if(event.event == SubmenuIndexSettings) {
             scene_manager_set_scene_state(
