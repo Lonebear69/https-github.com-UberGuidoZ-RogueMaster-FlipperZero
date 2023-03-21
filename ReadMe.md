@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0320-1559-0.79.2-5292ec3](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-20 15:10 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-20 15:10 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-21 00:24 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-21 00:24 EST`
 - Updated: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player)
 - OFW: [Dolphin: new spring animation, weight adjust, drop winter animation. #2489 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2489)
 - OFW: [fbt, faploader: minimal app module implementation #2420 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2420)
@@ -101,6 +101,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - For those that use ALL, Anime or RM Select builds, be warned, if you have more than 50 animations in your dolphin folder it causes issues with loading on boot and sometimes between apps. It is recommeneded you use a build with less animations to improve Flipper speed. I'm open to suggestions on Discord for build combinations.
 - [New Patreon Build Update](https://www.patreon.com/RogueMaster/membership): Several [IoriKesso](https://github.com/IoriKesso/Flipper-Zero-Anime-Wallpapers) animations added to Anime, RM Select and ALL builds. Iorikesso NSFW pack added to ALL and 18+ Builds (11 animations).
 - For the Next Patreon Builds: Added Animal Crossing, Controller, Deku and Kirby animations to Cherui18+ build. Added Kirby animations to Mario build.
+- UL: Plugins: Update WAV Player, 16 bit support by LTVA1
+- UL: [Infrared: Update universal remote assets (by amec0e | PR #394)](https://github.com/DarkFlippers/unleashed-firmware/pull/394)
 
 <a name="release">
 
