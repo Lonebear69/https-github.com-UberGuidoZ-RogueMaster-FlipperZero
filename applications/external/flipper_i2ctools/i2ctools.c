@@ -1,9 +1,10 @@
 #include "i2ctools_i.h"
 
 void i2ctools_draw_callback(Canvas* canvas, void* ctx) {
-    furi_assert(ctx);
     i2cTools* i2ctools = ctx;
-    furi_mutex_acquire(i2ctools->mutex, FuriWaitForever);
+    if(furi_mutex_acquire(i2ctools->mutex, 200) != FuriStatusOk) {
+        return;
+    }
 
     switch(i2ctools->main_view->current_view) {
     case MAIN_VIEW:
