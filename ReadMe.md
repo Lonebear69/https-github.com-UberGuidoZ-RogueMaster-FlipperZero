@@ -112,6 +112,10 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: Fix hopper stuck at 433.42 due to wide range signals - When we using 433.92 remote flipper in hopping mode will stuck at 433.42 and may loose signal because of that, need to avoid using close freqs in hopping, only freqs with bigger difference like 310 -> 315
 - UL: Plugins: Update TOTP (Authenticator) [(by akopachov)]
 - Added: [SUPER-CHIP Emulator (By Milk-Cool)](https://github.com/Milk-Cool/fz-schip)
+- Updated: [ESP32CAM Camera (By Z4urce & eried)](https://github.com/eried/flipperzero-mayhem)
+- Updated: [ESP32CAM QR Code (By eried)](https://github.com/eried/flipperzero-mayhem)
+- Added: [ESP32CAM Morse Flasher (By eried)](https://github.com/eried/flipperzero-mayhem)
+- Added: [ESP32CAM Nanny Cam (By eried)](https://github.com/eried/flipperzero-mayhem)
 
 <a name="release">
 
@@ -362,7 +366,9 @@ $ ./fbt dolphin_ext
 - [EM4100 Key Generator (By Milk-Cool)](https://github.com/Milk-Cool/fz-em4100-generator)
 - [ESP32CAM Camera (By Z4urce & eried)](https://github.com/eried/flipperzero-mayhem)
 - [ESP32CAM Marauder (By 0xchocolate & eried)](https://github.com/eried/flipperzero-mayhem)
+- [ESP32CAM Morse Flasher (By eried)](https://github.com/eried/flipperzero-mayhem)
 - [ESP32CAM Motion Detection (By eried)](https://github.com/eried/flipperzero-mayhem)
+- [ESP32CAM Nanny Cam (By eried)](https://github.com/eried/flipperzero-mayhem)
 - [ESP32CAM QR Code (By eried)](https://github.com/eried/flipperzero-mayhem)
 - [Extend Range (By maede97)](https://github.com/maede97/flipperzero-extend-range) (Allows SubGHz Unlock!)
 - [EXTRA Demo (By Milk-Cool)](https://github.com/Milk-Cool/EXTRA-demo) (This app has VERY useful functions!)

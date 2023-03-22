@@ -182,7 +182,7 @@ static UartEchoApp* uart_echo_app_alloc() {
     for(int i=0;i<2;i++)
     {
         furi_delay_ms(500); 
-        furi_hal_uart_tx(FuriHalUartIdUSART1, (uint8_t[1]){'q'}, 1);
+        furi_hal_uart_tx(FuriHalUartIdUSART1, (uint8_t[1]){'n'}, 1);
     }
     furi_delay_ms(1);
     app->initialized = true;
