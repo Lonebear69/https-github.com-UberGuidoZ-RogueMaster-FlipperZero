@@ -111,6 +111,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: Add 318 MHz back to hopping list
 - UL: SubGHz: Fix hopper stuck at 433.42 due to wide range signals - When we using 433.92 remote flipper in hopping mode will stuck at 433.42 and may loose signal because of that, need to avoid using close freqs in hopping, only freqs with bigger difference like 310 -> 315
 - UL: Plugins: Update TOTP (Authenticator) [(by akopachov)]
+- Added: [Bluetooth Teleop (By amperka)](https://github.com/amperka/flipperzero-examples/tree/main/bluetooth_applications) - "Example App" - `Req: HM-10`
 
 <a name="release">
 
@@ -293,6 +294,7 @@ $ ./fbt dolphin_ext
 - [Arkanoid (By gotnull)](https://github.com/gotnull/flipperzero-firmware-wPlugins) [(Score By DevMilanIan)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/188)
 - [Asteroids (By antirez)](https://github.com/antirez/flipper-asteroids) [(Modified By SimplyMinimal)](https://github.com/SimplyMinimal/FlipperZero-Asteroids)
 - [BlackJack (By teeebor)](https://github.com/teeebor/flipper_games)
+- [Bluetooth Teleop (By amperka)](https://github.com/amperka/flipperzero-examples/tree/main/bluetooth_applications) - "Example App" - `Req: HM-10`
 - [Color Guess (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications)
 - [Dice (RM) Including SEX/WAR/8BALL/WEED/DRINK DICE (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dice)
 - [Dice (By Ka3u6y6a)](https://github.com/Ka3u6y6a/flipper-zero-dice)
