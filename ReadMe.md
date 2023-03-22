@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0320-1559-0.79.2-5292ec3](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-21 00:24 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-21 00:24 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-22 12:44 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-22 12:44 EST`
 - Updated: [Video Player (By LTVA1)](https://github.com/LTVA1/flipper-zero-video-player)
 - OFW: [Dolphin: new spring animation, weight adjust, drop winter animation. #2489 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2489)
 - OFW: [fbt, faploader: minimal app module implementation #2420 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2420)
@@ -82,7 +82,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added Settings folder to Applications with these options: Dolphin Backup, Dolphin Restorer, Dolphin Trainer, Extend Range, Name Changer, Passport & Passport Settings (By RogueMaster)
 - Did some other backend renames; please delete your apps folder before installing.
 - Fixed Clock Link on Main Menu
-- OFW PR: [NFC: Fixed writing gen1a magic tags with invalid BCC #2511 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2511)
 - OFW PR: [OTP programmer: return exit code based on error type #2504 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2504)
 - OFW PR: [Elite progress #2481 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2481)
 - We now have [Rogue Master Merch! `Shop Here For All Your Flipper Zero Accessories and Boards`](https://shop.rogue-master.net)
@@ -103,6 +102,15 @@ This software is for experimental purposes only and is not meant for any illegal
 - For the Next Patreon Builds: Added Animal Crossing, Controller, Deku and Kirby animations to Cherui18+ build. Added Kirby animations to Mario build.
 - UL: Plugins: Update WAV Player, 16 bit support by LTVA1
 - UL: [Infrared: Update universal remote assets (by amec0e | PR #394)](https://github.com/DarkFlippers/unleashed-firmware/pull/394)
+- OFW: [Github: unshallow on decontamination #2521 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2521)
+- OFW: [NFC: Fixed writing gen1a magic tags with invalid BCC #2511 (By AloneLiberty)](https://github.com/flipperdevices/flipperzero-firmware/pull/2511)
+- OFW: [Remove hmac_sha256 from public API #2519 (By nminaylov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2519)
+- OFW: [BadUSB: implement boot protocol #2496 (By CFSworks)](https://github.com/flipperdevices/flipperzero-firmware/pull/2496)
+- UL: If you have copied apps into `apps` folder - remove `apps` folder on your microSD before installing this release to avoid issues!
+- UL: SubGHz: Add manually -> GSN protocol support
+- UL: SubGHz: Add 318 MHz back to hopping list
+- UL: SubGHz: Fix hopper stuck at 433.42 due to wide range signals - When we using 433.92 remote flipper in hopping mode will stuck at 433.42 and may loose signal because of that, need to avoid using close freqs in hopping, only freqs with bigger difference like 310 -> 315
+- UL: Plugins: Update TOTP (Authenticator) [(by akopachov)]
 
 <a name="release">
 
