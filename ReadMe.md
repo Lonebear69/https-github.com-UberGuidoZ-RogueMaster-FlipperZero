@@ -36,6 +36,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Wii EC Analyser (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - UL: [Fap loader add option to ignore api mismatch #395 (By Willy-JL)](https://github.com/DarkFlippers/unleashed-firmware/pull/395)
 - UL: iButton Fixes for DS1420
+- Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 
 <a name="release">
 
