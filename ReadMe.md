@@ -116,6 +116,9 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [ESP32CAM QR Code (By eried)](https://github.com/eried/flipperzero-mayhem)
 - Added: [ESP32CAM Morse Flasher (By eried)](https://github.com/eried/flipperzero-mayhem)
 - Added: [ESP32CAM Nanny Cam (By eried)](https://github.com/eried/flipperzero-mayhem)
+- OFW: [Disable UART IRQs by default #2523 (By nminaylov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2523)
+- OFW: [1-Wire Overdrive Mode #2522 (By gsurkov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2522)
+- OFW: [Screen streaming improvements #2498 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2498)
 
 <a name="release">
 
