@@ -44,7 +44,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Refactored [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term) to not reference UART Terminal
 - Fixed many apps and code bugs causing compile errors
 - Added: [GPIO w I2C (By OFW)] which [I²C-Scanner #1431 (By GitChris3004)](https://github.com/flipperdevices/flipperzero-firmware/pull/1431) and [read EEPROM of SFP Modules using I2C (By marcusju)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/198)
-- Switched GPIO to be internal without I2C (For LoRa Terminal troubleshooting
+- Switched GPIO to be internal without I2C (For LoRa Terminal troubleshooting)
 
 <a name="release">
 
