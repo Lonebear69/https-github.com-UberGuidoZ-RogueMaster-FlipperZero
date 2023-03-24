@@ -47,6 +47,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Barcode App (By Kingal1337)](https://github.com/Kingal1337/flipper-barcode-generator)
 - Update: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - Update: [SCD30 Carbon Dioxide Sensor (By heimskr)](https://github.com/heimskr/flipperzero-scd30)
+- Added: [Distance Sensor (By privet971)](https://github.com/privet971/FlipperZeroApps/tree/main/usping) `Req: Parallax (3 wires) SKU 28015`
 
 <a name="release">
 
@@ -286,7 +287,8 @@ $ ./fbt dolphin_ext
 - [DAP Link (By DrZlo13)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1897)
 - [DCF77 Transmitter (By arha)](https://github.com/arha/flipper-dcf77)
 - [Deauther PWNDTOOLS V2.6.0 (By HEX0DAYS)](https://github.com/HEX0DAYS/FlipperZero-PWNDTOOLS) `Req: ESP8266` [Original](https://github.com/SpacehuhnTech/esp8266_deauther)
-- [Distance Sensor (By Sanqui)](https://github.com/Sanqui/flipperzero-firmware/tree/hc_sr04)) `Req: HC-SR04` Ported/Modified by xMasterX
+- [Distance Sensor (By privet971)](https://github.com/privet971/FlipperZeroApps/tree/main/usping) `Req: Parallax (3 wires) SKU 28015`
+- [Distance Sensor (By Sanqui)](https://github.com/Sanqui/flipperzero-firmware/tree/hc_sr04) `Req: HC-SR04` Ported/Modified by xMasterX
 - [Dolphin Backup (By nminaylov)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1384) Modified by RogueMaster
 - [Dolphin Restorer (By nminaylov)](https://github.com/flipperdevices/flipperzero-firmware/pull/1384) Cloned by RogueMaster
 - [Dolphin Trainer (By nymda)](https://github.com/nymda/FlipperAntidepressants) (Change Flipper level, experience and butthurt) [Level Changer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/commit/96b67d9d53b5a70e85f8bdd81dcbc602f90d46cd)
