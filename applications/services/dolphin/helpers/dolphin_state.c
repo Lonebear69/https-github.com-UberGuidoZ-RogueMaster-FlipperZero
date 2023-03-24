@@ -37,11 +37,11 @@ Desired Level XP: 750
 Value in level_array: 1250
 */
 
-uint32_t level_array[29] = {500,    1250,   2250,   3500,   5000,  6750,  8750,  11000,
-                            13500,  16250,  19250,  22500,  26000, 29750, 33750, 38000,
-                            42500,  47250,  52250,  58250,  65250, 73250, 82250, 92250,
-                            103250, 115250, 128250, 142250, 157250};
-
+const int DOLPHIN_LEVELS[DOLPHIN_LEVEL_COUNT] = {500,    1250,   2250,   3500,   5000,  6750,  8750,  11000,
+                                                13500,  16250,  19250,  22500,  26000, 29750, 33750, 38000,
+                                                42500,  47250,  52250,  58250,  65250, 73250, 82250, 92250,
+                                                103250, 115250, 128250, 142250, 157250};
+												
 /*
 This calculates the size of an array. This is good as it's used for dynamic for loops below. Therefore, you can just add more values to level_array for more levels.
 */
@@ -55,7 +55,7 @@ DolphinState* dolphin_state_alloc() {
 }
 
 int dolphin_state_max_level() {
-    return NUM(level_array) + 1;
+    return NUM(DOLPHIN_LEVELS) + 1;
 }
 
 void dolphin_state_free(DolphinState* dolphin_state) {
@@ -114,51 +114,44 @@ uint64_t dolphin_state_timestamp() {
     return furi_hal_rtc_datetime_to_timestamp(&datetime);
 }
 
-bool dolphin_state_is_levelup(uint32_t icounter) {
-    for(int i = 0; i < NUM(level_array); i++) {
-        if((icounter == level_array[i])) {
-            return (icounter == level_array[i]);
+bool dolphin_state_is_levelup(int icounter) {
+    for(int i = 0; i < DOLPHIN_LEVEL_COUNT; ++i) {
+        if((icounter == DOLPHIN_LEVELS[i])) {
+            return true;
         }
-    }
-    return NUM(level_array) + 1;
+    };
+    return false;
 }
 
-uint8_t dolphin_get_level(uint32_t icounter) {
-    for(int i = 0; i < NUM(level_array); i++) {
-        if(icounter <= level_array[i]) {
+const int* dolphin_get_levels() {
+    return DOLPHIN_LEVELS;
+}
+
+uint8_t dolphin_get_level(int icounter) {
+    for(int i = 0; i < DOLPHIN_LEVEL_COUNT; ++i) {
+        if(icounter <= DOLPHIN_LEVELS[i]) {
             return i + 1;
         }
     }
-    return NUM(level_array) + 1;
+    return DOLPHIN_LEVEL_COUNT + 1;
 }
 
-uint32_t dolphin_state_xp_above_last_levelup(uint32_t icounter) {
-    uint32_t threshold = 0;
-    for(int i = 0; i < NUM(level_array); i++) {
-        if(icounter <= level_array[0]) {
-            threshold = 0;
-            break;
-        } else if(icounter <= level_array[i]) {
-            threshold = level_array[i - 1];
-            break;
-        } else {
-            threshold = level_array[NUM(level_array) - 1];
+uint32_t dolphin_state_xp_above_last_levelup(int icounter) {
+    for(int i = DOLPHIN_LEVEL_COUNT; i >= 0; --i) {
+        if(icounter >= DOLPHIN_LEVELS[i]) {
+            return icounter - DOLPHIN_LEVELS[i];
         }
     }
-    return icounter - threshold;
+    return icounter;
 }
 
-uint32_t dolphin_state_xp_to_levelup(uint32_t icounter) {
-    uint32_t threshold = 0;
-    for(int i = 0; i < NUM(level_array); i++) {
-        if(icounter <= level_array[i]) {
-            threshold = level_array[i];
-            break;
-        } else {
-            threshold = (uint32_t)-1;
+uint32_t dolphin_state_xp_to_levelup(int icounter) {
+    for(int i = 0; i < DOLPHIN_LEVEL_COUNT; ++i) {
+        if(icounter <= DOLPHIN_LEVELS[i]) {
+            return DOLPHIN_LEVELS[i] - icounter;
         }
     }
-    return threshold - icounter;
+    return (uint32_t)-1;
 }
 
 void dolphin_state_on_deed(DolphinState* dolphin_state, DolphinDeed deed) {
@@ -209,13 +202,14 @@ void dolphin_state_on_deed(DolphinState* dolphin_state, DolphinDeed deed) {
                            (butthurt_icounter_level_old != butthurt_icounter_level_new);
     new_butthurt = CLAMP(new_butthurt, BUTTHURT_MAX, BUTTHURT_MIN);
     if(new_butthurt >= 7) new_butthurt = BUTTHURT_MIN; // FLIPPER STAYS HAPPY
+
     dolphin_state->data.butthurt = new_butthurt;
     dolphin_state->data.timestamp = dolphin_state_timestamp();
     dolphin_state->dirty = true;
 
     FURI_LOG_D(
         TAG,
-        "icounter %lu, butthurt %ld",
+        "icounter %ld, butthurt %ld",
         dolphin_state->data.icounter,
         dolphin_state->data.butthurt);
 }

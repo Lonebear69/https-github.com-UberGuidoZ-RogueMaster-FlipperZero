@@ -233,7 +233,7 @@ void passport_settings_scene_start_on_enter(void* context) {
 }
 
 bool passport_settings_scene_start_on_event(void* context, SceneManagerEvent sme) {
-    PassportSettingsApp* app = context;
+    UNUSED(context);
     bool consumed = false;
 
     if(sme.type == SceneManagerEventTypeCustom) {

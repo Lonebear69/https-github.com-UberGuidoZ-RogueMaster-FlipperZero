@@ -131,8 +131,6 @@ void nfc_scene_mf_ultralight_emulate_on_enter(void* context) {
 
 bool nfc_scene_mf_ultralight_emulate_on_event(void* context, SceneManagerEvent event) {
     Nfc* nfc = context;
-    uint32_t state =
-        scene_manager_get_scene_state(nfc->scene_manager, NfcSceneMfUltralightEmulate);
     bool consumed = false;
 
     if(event.type == SceneManagerEventTypeBack) {

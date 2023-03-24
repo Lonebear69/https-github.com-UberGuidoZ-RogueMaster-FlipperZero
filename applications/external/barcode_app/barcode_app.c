@@ -65,7 +65,7 @@ bool get_file_name_from_path(FuriString* file_path, FuriString* file_name, bool 
     if(file_path == NULL || file_name == NULL) {
         return false;
     }
-    int slash_index = furi_string_search_rchar(file_path, '/', 0);
+    uint32_t slash_index = furi_string_search_rchar(file_path, '/', 0);
     if(slash_index == FURI_STRING_FAILURE || slash_index >= (furi_string_size(file_path) - 1)) {
         return false;
     }
@@ -73,7 +73,7 @@ bool get_file_name_from_path(FuriString* file_path, FuriString* file_name, bool 
     furi_string_set(file_name, file_path);
     furi_string_right(file_name, slash_index + 1);
     if(remove_extension) {
-        int ext_index = furi_string_search_rchar(file_name, '.', 0);
+        uint32_t ext_index = furi_string_search_rchar(file_name, '.', 0);
         if(ext_index != FURI_STRING_FAILURE && ext_index < (furi_string_size(file_path))) {
             furi_string_left(file_name, ext_index);
         }

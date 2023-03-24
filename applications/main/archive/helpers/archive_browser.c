@@ -501,7 +501,7 @@ void archive_switch_tab(ArchiveBrowserView* browser, InputKey key) {
             // Hide dot files everywhere except Browser
             bool hide_dot_files = (strcmp(archive_get_tab_ext(tab), "*") == 0) ? false : true;
             archive_file_browser_set_path(
-                browser, browser->path, archive_get_tab_ext(tab), skip_assets, false);
+                browser, browser->path, archive_get_tab_ext(tab), skip_assets, hide_dot_files);
             tab_empty = false; // Empty check will be performed later
         }
     }
