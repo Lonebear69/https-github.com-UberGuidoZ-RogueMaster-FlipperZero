@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0324-1306-0.80.1-9ccf66f](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-23 23:55 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-23 23:55 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-24 19:04 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-24 19:04 EST`
 - Updated: [Wii EC Analyzer (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - UL: [Fap loader add option to ignore api mismatch #395 (By Willy-JL)](https://github.com/DarkFlippers/unleashed-firmware/pull/395)
 - UL: iButton Fixes for DS1420
@@ -48,6 +48,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Update: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - Update: [SCD30 Carbon Dioxide Sensor (By heimskr)](https://github.com/heimskr/flipperzero-scd30)
 - Added: [Distance Sensor (By privet971)](https://github.com/privet971/FlipperZeroApps/tree/main/usping) `Req: Parallax (3 wires) SKU 28015`
+- UL: [Additional checks before invalidating the key (By Astrrra)](https://github.com/DarkFlippers/unleashed-firmware/commit/5391b694d134a4a4efcf8d45dafd241b8ff08bbd)
 
 <a name="release">
 
