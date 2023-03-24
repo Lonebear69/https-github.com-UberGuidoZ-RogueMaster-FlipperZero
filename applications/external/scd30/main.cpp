@@ -17,6 +17,8 @@
 
 constexpr static int FPS = 2;
 
+std::unique_ptr<State> state;
+
 static void input_cb(InputEvent* event, FuriMessageQueue* queue) {
     furi_assert(event);
     furi_assert(queue);
@@ -26,8 +28,12 @@ static void input_cb(InputEvent* event, FuriMessageQueue* queue) {
 }
 
 static void draw_cb(Canvas* canvas, void* ctx) {
-    State* state = (State*)ctx;
-    furi_mutex_acquire(state->mutex, FuriWaitForever);
+    auto* mutex = reinterpret_cast<FuriMutex*>(ctx);
+
+    if(furi_mutex_acquire(mutex, 0) != FuriStatusOk) {
+        ERROR(errs[(ERR_MUTEX_BLOCK)]);
+        goto bail;
+    }
 
     canvas_clear(canvas);
     canvas_set_color(canvas, ColorBlack);
@@ -63,7 +69,10 @@ bail:
     canvas_draw_str_aligned(canvas, 0, 0, AlignLeft, AlignTop, "Couldn't acquire state.");
 
 release:
-    furi_mutex_release(state->mutex);
+    if(furi_mutex_release(mutex) != FuriStatusOk) {
+        canvas_clear(canvas);
+        canvas_draw_str_aligned(canvas, 0, 0, AlignLeft, AlignTop, "Couldn't release mutex.");
+    }
 }
 
 static void timer_cb(FuriMessageQueue* queue) {
@@ -76,14 +85,8 @@ static void timer_cb(FuriMessageQueue* queue) {
 extern "C" int32_t scd30_main() {
     err_t error = static_cast<err_t>(0);
     Gui* gui = nullptr;
-    State* state = (State*)malloc(sizeof(State));
     ViewPort* viewport = nullptr;
-    state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
-    if(!state->mutex) {
-        FURI_LOG_E("SCD30", "cannot create mutex\r\n");
-        free(state);
-        return 255;
-    }
+    FuriMutex* mutex = furi_mutex_alloc(FuriMutexTypeNormal);
     FuriMessageQueue* queue = nullptr;
     constexpr uint32_t queue_size = 8;
     EventMessage message;
@@ -99,11 +102,14 @@ extern "C" int32_t scd30_main() {
         goto bail;
     }
 
-    state->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
-    if(!state->mutex) {
-        FURI_LOG_E("SCD30", "cannot create mutex\r\n");
-        free(state);
-        return 255;
+    if(!(state = std::make_unique<State>())) {
+        ERROR(errs[(error = ERR_MALLOC_STATE)]);
+        goto bail;
+    }
+
+    if(mutex == nullptr) {
+        ERROR(errs[(error = ERR_NO_MUTEX)]);
+        goto bail;
     }
 
     if(!(viewport = view_port_alloc())) {
@@ -120,7 +126,7 @@ extern "C" int32_t scd30_main() {
     }
 
     view_port_input_callback_set(viewport, input_cb, queue);
-    view_port_draw_callback_set(viewport, draw_cb, state);
+    view_port_draw_callback_set(viewport, draw_cb, &mutex);
     gui_add_view_port(gui, viewport, GuiLayerFullscreen);
 
     if(!(state->timer = furi_timer_alloc(timer_cb, FuriTimerTypePeriodic, queue))) {
@@ -141,7 +147,7 @@ extern "C" int32_t scd30_main() {
         FuriStatus status = FuriStatusErrorTimeout;
         while((status = furi_message_queue_get(queue, &message, 60000)) == FuriStatusErrorTimeout)
             ;
-        furi_mutex_acquire(state->mutex, FuriWaitForever);
+
         if(status != FuriStatusOk) {
             switch(status) {
             case FuriStatusErrorTimeout:
@@ -167,7 +173,10 @@ extern "C" int32_t scd30_main() {
                 goto bail;
             }
         } else {
-            furi_mutex_acquire(state->mutex, FuriWaitForever);
+            if(!furi_mutex_acquire(mutex, 0)) {
+                ERROR(errs[(error = ERR_MUTEX_BLOCK)]);
+                goto bail;
+            }
 
             if(message.id == EventID::Tick) {
                 state->readData();
@@ -178,8 +187,12 @@ extern "C" int32_t scd30_main() {
                 WARN("Unknown message ID [%d]", static_cast<int>(message.id));
 
             view_port_update(viewport);
+
+            if(!furi_mutex_release(mutex)) {
+                ERROR(errs[(error = ERR_MUTEX_RELEASE)]);
+                goto bail;
+            }
         }
-        furi_mutex_release(state->mutex);
     }
 
 bail:
@@ -197,15 +210,16 @@ bail:
         viewport = nullptr;
     }
 
+    state.reset();
+
     furi_record_close(RECORD_GUI);
+    furi_mutex_free(mutex);
 
     if(queue) {
         furi_message_queue_free(queue);
         queue = nullptr;
     }
 
-    furi_mutex_free(state->mutex);
-    free(state);
     return 0;
 }
 
