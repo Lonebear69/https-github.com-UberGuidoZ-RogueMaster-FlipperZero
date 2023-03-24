@@ -39,6 +39,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - OFW: [Fix crash when emulating a DSGeneric key #2530 (By gsurkov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2530)
 - Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
+- Update: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
 
 <a name="release">
 
