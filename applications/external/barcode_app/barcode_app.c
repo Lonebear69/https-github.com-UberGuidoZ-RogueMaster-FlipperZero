@@ -13,7 +13,7 @@
 static bool select_file(const char* folder, FuriString* file_path) {
     DialogsApp* dialogs = furi_record_open(RECORD_DIALOGS);
     DialogsFileBrowserOptions browser_options;
-    dialog_file_browser_set_basic_options(&browser_options, BARCODE_EXTENSION, &I_barcode_10);
+    dialog_file_browser_set_basic_options(&browser_options, "", &I_barcode_10);
     browser_options.base_path = DEFAULT_USER_BARCODES;
     furi_string_set(file_path, folder);
 
@@ -239,6 +239,11 @@ void submenu_callback(void* context, uint32_t index) {
     }
 }
 
+uint32_t create_view_callback(void* context) {
+    UNUSED(context);
+    return CreateBarcodeView;
+}
+
 uint32_t main_menu_callback(void* context) {
     UNUSED(context);
     return MainMenuView;
@@ -305,6 +310,7 @@ int32_t barcode_main(void* p) {
      * Creating Text Input View
      ******************************/
     app->text_input = text_input_alloc();
+    view_set_previous_callback(text_input_get_view(app->text_input), create_view_callback);
     view_dispatcher_add_view(
         app->view_dispatcher, TextInputView, text_input_get_view(app->text_input));
 

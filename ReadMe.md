@@ -45,6 +45,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Fixed many apps and code bugs causing compile errors
 - Added: [GPIO w I2C (By OFW)] which [I²C-Scanner #1431 (By GitChris3004)](https://github.com/flipperdevices/flipperzero-firmware/pull/1431) and [read EEPROM of SFP Modules using I2C (By marcusju)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/198)
 - Switched GPIO to be internal without I2C (For LoRa Terminal troubleshooting)
+- Updated: [Barcode App (By Kingal1337)](https://github.com/Kingal1337/flipper-barcode-generator)
 
 <a name="release">
 
