@@ -39,13 +39,13 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - OFW: [Fix crash when emulating a DSGeneric key #2530 (By gsurkov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2530)
 - Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
-- Update: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - Update: [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term)
 - Refactored [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term) to not reference UART Terminal
 - Fixed many apps and code bugs causing compile errors
 - Added: [GPIO w I2C (By OFW)] which [I²C-Scanner #1431 (By GitChris3004)](https://github.com/flipperdevices/flipperzero-firmware/pull/1431) and [read EEPROM of SFP Modules using I2C (By marcusju)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/198)
 - Switched GPIO to be internal without I2C (For LoRa Terminal troubleshooting)
 - Updated: [Barcode App (By Kingal1337)](https://github.com/Kingal1337/flipper-barcode-generator)
+- Update: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
 
 <a name="release">
 
