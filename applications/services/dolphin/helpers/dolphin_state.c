@@ -37,11 +37,12 @@ Desired Level XP: 750
 Value in level_array: 1250
 */
 
-const int DOLPHIN_LEVELS[DOLPHIN_LEVEL_COUNT] = {500,    1250,   2250,   3500,   5000,  6750,  8750,  11000,
-                                                13500,  16250,  19250,  22500,  26000, 29750, 33750, 38000,
-                                                42500,  47250,  52250,  58250,  65250, 73250, 82250, 92250,
-                                                103250, 115250, 128250, 142250, 157250};
-												
+const int DOLPHIN_LEVELS[DOLPHIN_LEVEL_COUNT] = {500,    1250,   2250,   3500,   5000,  6750,
+                                                 8750,   11000,  13500,  16250,  19250, 22500,
+                                                 26000,  29750,  33750,  38000,  42500, 47250,
+                                                 52250,  58250,  65250,  73250,  82250, 92250,
+                                                 103250, 115250, 128250, 142250, 157250};
+
 /*
 This calculates the size of an array. This is good as it's used for dynamic for loops below. Therefore, you can just add more values to level_array for more levels.
 */
