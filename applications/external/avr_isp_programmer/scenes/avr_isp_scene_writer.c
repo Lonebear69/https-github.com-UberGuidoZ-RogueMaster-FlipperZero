@@ -19,7 +19,7 @@ void avr_isp_scene_writer_on_enter(void* context) {
 
 bool avr_isp_scene_writer_on_event(void* context, SceneManagerEvent event) {
     furi_assert(context);
-    
+
     AvrIspApp* app = context;
     bool consumed = false;
     if(event.type == SceneManagerEventTypeBack) {

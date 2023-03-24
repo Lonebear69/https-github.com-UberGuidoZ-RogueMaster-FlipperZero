@@ -347,7 +347,7 @@ static void avr_isp_worker_rw_get_dump_eeprom(AvrIspWorkerRW* instance, const ch
         flipper_i32hex_file_bin_to_i32hex_set_data(flipper_hex_eeprom, data, size_data);
         FURI_LOG_D(TAG, "%s", flipper_i32hex_file_get_string(flipper_hex_eeprom));
         instance->progress_eeprom =
-            (float)(i) /((float)avr_isp_chip_arr[instance->chip_arr_ind].eepromsize);
+            (float)(i) / ((float)avr_isp_chip_arr[instance->chip_arr_ind].eepromsize);
     }
     flipper_i32hex_file_bin_to_i32hex_set_end_line(flipper_hex_eeprom);
     FURI_LOG_D(TAG, "%s", flipper_i32hex_file_get_string(flipper_hex_eeprom));
