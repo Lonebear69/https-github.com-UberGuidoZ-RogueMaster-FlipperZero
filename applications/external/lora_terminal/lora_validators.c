@@ -1,5 +1,5 @@
 #include <furi.h>
-#include "uart_validators.h"
+#include "lora_validators.h"
 #include <storage/storage.h>
 
 struct ValidatorIsFile {

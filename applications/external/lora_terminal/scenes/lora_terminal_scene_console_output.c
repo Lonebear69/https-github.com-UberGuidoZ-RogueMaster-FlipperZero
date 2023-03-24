@@ -1,15 +1,15 @@
-#include "applications/external/lora_terminal/uart_terminal_app_i.h"
+#include "applications/external/lora_terminal/lora_terminal_app_i.h"
 #include <string.h>
 #include <furi.h>
 #define appName "lora_terminal"
 
-void uart_terminal_console_output_handle_rx_data_cb(uint8_t* buf, size_t len, void* context) {
+void lora_terminal_console_output_handle_rx_data_cb(uint8_t* buf, size_t len, void* context) {
     furi_assert(context);
-    UART_TerminalApp* app = context;
+    lora_terminalApp* app = context;
 
     // If text box store gets too big, then truncate it
     app->text_box_store_strlen += len;
-    if(app->text_box_store_strlen >= UART_TERMINAL_TEXT_BOX_STORE_SIZE - 1) {
+    if(app->text_box_store_strlen >= lora_terminal_TEXT_BOX_STORE_SIZE - 1) {
         furi_string_right(app->text_box_store, app->text_box_store_strlen / 2);
         app->text_box_store_strlen = furi_string_size(app->text_box_store) + len;
     }
@@ -19,11 +19,11 @@ void uart_terminal_console_output_handle_rx_data_cb(uint8_t* buf, size_t len, vo
     furi_string_cat_printf(app->text_box_store, "%s", buf);
 
     view_dispatcher_send_custom_event(
-        app->view_dispatcher, UART_TerminalEventRefreshConsoleOutput);
+        app->view_dispatcher, lora_terminalEventRefreshConsoleOutput);
 }
 
-void uart_terminal_scene_console_output_on_enter(void* context) {
-    UART_TerminalApp* app = context;
+void lora_terminal_scene_console_output_on_enter(void* context) {
+    lora_terminalApp* app = context;
 
     TextBox* text_box = app->text_box;
     text_box_reset(app->text_box);
@@ -36,53 +36,53 @@ void uart_terminal_scene_console_output_on_enter(void* context) {
 
     //Change baudrate ///////////////////////////////////////////////////////////////////////////
     if(0 == strncmp("2400", app->selected_tx_string, strlen("2400")) && app->BAUDRATE != 2400) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 2400;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     if(0 == strncmp("9600", app->selected_tx_string, strlen("9600")) && app->BAUDRATE != 9600) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 9600;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     if(0 == strncmp("19200", app->selected_tx_string, strlen("19200")) && app->BAUDRATE != 19200) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 19200;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     if(0 == strncmp("38400", app->selected_tx_string, strlen("38400")) && app->BAUDRATE != 38400) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 38400;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     if(0 == strncmp("57600", app->selected_tx_string, strlen("57600")) && app->BAUDRATE != 57600) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 57600;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     if(0 == strncmp("115200", app->selected_tx_string, strlen("115200")) &&
        app->BAUDRATE != 115200) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 115200;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     if(0 == strncmp("230400", app->selected_tx_string, strlen("230400")) &&
        app->BAUDRATE != 230400) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 230400;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     if(0 == strncmp("460800", app->selected_tx_string, strlen("460800")) &&
        app->BAUDRATE != 460800) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 460800;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     if(0 == strncmp("921600", app->selected_tx_string, strlen("921600")) &&
        app->BAUDRATE != 921600) {
-        uart_terminal_uart_free(app->uart);
+        lora_terminal_uart_free(app->uart);
         app->BAUDRATE = 921600;
-        app->uart = uart_terminal_uart_init(app);
+        app->uart = lora_terminal_uart_init(app);
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -107,12 +107,12 @@ void uart_terminal_scene_console_output_on_enter(void* context) {
     // Set starting text - for "View Log", this will just be what was already in the text box store
     text_box_set_text(app->text_box, furi_string_get_cstr(app->text_box_store));
 
-    scene_manager_set_scene_state(app->scene_manager, UART_TerminalSceneConsoleOutput, 0);
-    view_dispatcher_switch_to_view(app->view_dispatcher, UART_TerminalAppViewConsoleOutput);
+    scene_manager_set_scene_state(app->scene_manager, lora_terminalSceneConsoleOutput, 0);
+    view_dispatcher_switch_to_view(app->view_dispatcher, lora_terminalAppViewConsoleOutput);
 
     // Register callback to receive data
-    uart_terminal_uart_set_handle_rx_data_cb(
-        app->uart, uart_terminal_console_output_handle_rx_data_cb); // setup callback for rx thread
+    lora_terminal_uart_set_handle_rx_data_cb(
+        app->uart, lora_terminal_console_output_handle_rx_data_cb); // setup callback for rx thread
 
     // Send command with CR+LF
     if(app->is_command && app->selected_tx_string) {
@@ -120,12 +120,12 @@ void uart_terminal_scene_console_output_on_enter(void* context) {
         snprintf(buffer, 240, "%s\r\n", (app->selected_tx_string));
         FURI_LOG_E(appName, "Command: %s", buffer);
         FURI_LOG_I(appName, "Command: %s", buffer);
-        uart_terminal_uart_tx((unsigned char*)buffer, strlen(buffer));
+        lora_terminal_uart_tx((unsigned char*)buffer, strlen(buffer));
     }
 }
 
-bool uart_terminal_scene_console_output_on_event(void* context, SceneManagerEvent event) {
-    UART_TerminalApp* app = context;
+bool lora_terminal_scene_console_output_on_event(void* context, SceneManagerEvent event) {
+    lora_terminalApp* app = context;
 
     bool consumed = false;
 
@@ -139,14 +139,14 @@ bool uart_terminal_scene_console_output_on_event(void* context, SceneManagerEven
     return consumed;
 }
 
-void uart_terminal_scene_console_output_on_exit(void* context) {
-    UART_TerminalApp* app = context;
+void lora_terminal_scene_console_output_on_exit(void* context) {
+    lora_terminalApp* app = context;
 
     // Unregister rx callback
-    uart_terminal_uart_set_handle_rx_data_cb(app->uart, NULL);
+    lora_terminal_uart_set_handle_rx_data_cb(app->uart, NULL);
 
     // Automatically logut when exiting view
     //if(app->is_command) {
-    //    uart_terminal_uart_tx((uint8_t*)("exit\n"), strlen("exit\n"));
+    //    lora_terminal_uart_tx((uint8_t*)("exit\n"), strlen("exit\n"));
     //}
 }

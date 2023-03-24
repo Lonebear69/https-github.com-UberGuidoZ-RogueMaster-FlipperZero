@@ -1,4 +1,4 @@
-#include "applications/external/lora_terminal/uart_terminal_app_i.h"
+#include "applications/external/lora_terminal/lora_terminal_app_i.h"
 #include <furi.h>
 
 // For each command, define whether additional arguments are needed
@@ -20,10 +20,10 @@ typedef struct {
     InputArgs needs_keyboard;
     FocusConsole focus_console;
     bool show_stopscan_tip;
-} UART_TerminalItem;
+} lora_terminalItem;
 
-// NUM_MENU_ITEMS defined in uart_terminal_app_i.h - if you add an entry here, increment it!
-const UART_TerminalItem items[NUM_MENU_ITEMS] = {
+// NUM_MENU_ITEMS defined in lora_terminal_app_i.h - if you add an entry here, increment it!
+const lora_terminalItem items[NUM_MENU_ITEMS] = {
     {"Console",
      {"115200", "2400", "9600", "19200", "38400", "57600", "230400", "460800", "921600"},
      9,
@@ -50,12 +50,12 @@ const UART_TerminalItem items[NUM_MENU_ITEMS] = {
     {"Help", {""}, 1, {"help"}, NO_ARGS, FOCUS_CONSOLE_START, SHOW_STOPSCAN_TIP},
 };
 
-static void uart_terminal_scene_start_var_list_enter_callback(void* context, uint32_t index) {
+static void lora_terminal_scene_start_var_list_enter_callback(void* context, uint32_t index) {
     furi_assert(context);
-    UART_TerminalApp* app = context;
+    lora_terminalApp* app = context;
 
     furi_assert(index < NUM_MENU_ITEMS);
-    const UART_TerminalItem* item = &items[index];
+    const lora_terminalItem* item = &items[index];
 
     const int selected_option_index = app->selected_option_index[index];
     furi_assert(selected_option_index < item->num_options_menu);
@@ -71,31 +71,31 @@ static void uart_terminal_scene_start_var_list_enter_callback(void* context, uin
     bool needs_keyboard = (item->needs_keyboard == TOGGLE_ARGS) ? (selected_option_index != 0) :
                                                                   item->needs_keyboard;
     if(needs_keyboard) {
-        view_dispatcher_send_custom_event(app->view_dispatcher, UART_TerminalEventStartKeyboard);
+        view_dispatcher_send_custom_event(app->view_dispatcher, lora_terminalEventStartKeyboard);
     } else {
-        view_dispatcher_send_custom_event(app->view_dispatcher, UART_TerminalEventStartConsole);
+        view_dispatcher_send_custom_event(app->view_dispatcher, lora_terminalEventStartConsole);
     }
 }
 
-static void uart_terminal_scene_start_var_list_change_callback(VariableItem* item) {
+static void lora_terminal_scene_start_var_list_change_callback(VariableItem* item) {
     furi_assert(item);
 
-    UART_TerminalApp* app = variable_item_get_context(item);
+    lora_terminalApp* app = variable_item_get_context(item);
     furi_assert(app);
 
-    const UART_TerminalItem* menu_item = &items[app->selected_menu_index];
+    const lora_terminalItem* menu_item = &items[app->selected_menu_index];
     uint8_t item_index = variable_item_get_current_value_index(item);
     furi_assert(item_index < menu_item->num_options_menu);
     variable_item_set_current_value_text(item, menu_item->options_menu[item_index]);
     app->selected_option_index[app->selected_menu_index] = item_index;
 }
 
-void uart_terminal_scene_start_on_enter(void* context) {
-    UART_TerminalApp* app = context;
+void lora_terminal_scene_start_on_enter(void* context) {
+    lora_terminalApp* app = context;
     VariableItemList* var_item_list = app->var_item_list;
 
     variable_item_list_set_enter_callback(
-        var_item_list, uart_terminal_scene_start_var_list_enter_callback, app);
+        var_item_list, lora_terminal_scene_start_var_list_enter_callback, app);
 
     VariableItem* item;
     for(int i = 0; i < NUM_MENU_ITEMS; ++i) {
@@ -103,7 +103,7 @@ void uart_terminal_scene_start_on_enter(void* context) {
             var_item_list,
             items[i].item_string,
             items[i].num_options_menu,
-            uart_terminal_scene_start_var_list_change_callback,
+            lora_terminal_scene_start_var_list_change_callback,
             app);
         variable_item_set_current_value_index(item, app->selected_option_index[i]);
         variable_item_set_current_value_text(
@@ -111,25 +111,25 @@ void uart_terminal_scene_start_on_enter(void* context) {
     }
 
     variable_item_list_set_selected_item(
-        var_item_list, scene_manager_get_scene_state(app->scene_manager, UART_TerminalSceneStart));
+        var_item_list, scene_manager_get_scene_state(app->scene_manager, lora_terminalSceneStart));
 
-    view_dispatcher_switch_to_view(app->view_dispatcher, UART_TerminalAppViewVarItemList);
+    view_dispatcher_switch_to_view(app->view_dispatcher, lora_terminalAppViewVarItemList);
 }
 
-bool uart_terminal_scene_start_on_event(void* context, SceneManagerEvent event) {
+bool lora_terminal_scene_start_on_event(void* context, SceneManagerEvent event) {
     UNUSED(context);
-    UART_TerminalApp* app = context;
+    lora_terminalApp* app = context;
     bool consumed = false;
 
     if(event.type == SceneManagerEventTypeCustom) {
-        if(event.event == UART_TerminalEventStartKeyboard) {
+        if(event.event == lora_terminalEventStartKeyboard) {
             scene_manager_set_scene_state(
-                app->scene_manager, UART_TerminalSceneStart, app->selected_menu_index);
-            scene_manager_next_scene(app->scene_manager, UART_TerminalAppViewTextInput);
-        } else if(event.event == UART_TerminalEventStartConsole) {
+                app->scene_manager, lora_terminalSceneStart, app->selected_menu_index);
+            scene_manager_next_scene(app->scene_manager, lora_terminalAppViewTextInput);
+        } else if(event.event == lora_terminalEventStartConsole) {
             scene_manager_set_scene_state(
-                app->scene_manager, UART_TerminalSceneStart, app->selected_menu_index);
-            scene_manager_next_scene(app->scene_manager, UART_TerminalAppViewConsoleOutput);
+                app->scene_manager, lora_terminalSceneStart, app->selected_menu_index);
+            scene_manager_next_scene(app->scene_manager, lora_terminalAppViewConsoleOutput);
         }
         consumed = true;
     } else if(event.type == SceneManagerEventTypeTick) {
@@ -140,7 +140,7 @@ bool uart_terminal_scene_start_on_event(void* context, SceneManagerEvent event) 
     return consumed;
 }
 
-void uart_terminal_scene_start_on_exit(void* context) {
-    UART_TerminalApp* app = context;
+void lora_terminal_scene_start_on_exit(void* context) {
+    lora_terminalApp* app = context;
     variable_item_list_reset(app->var_item_list);
 }

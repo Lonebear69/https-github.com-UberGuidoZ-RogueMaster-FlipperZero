@@ -1,9 +1,9 @@
-#include "uart_text_input.h"
+#include "lora_text_input.h"
 #include <gui/elements.h>
 #include "lora_terminal_icons.h"
 #include <furi.h>
 
-struct UART_TextInput {
+struct lora_textInput {
     View* view;
     FuriTimer* timer;
 };
@@ -12,7 +12,7 @@ typedef struct {
     const char text;
     const uint8_t x;
     const uint8_t y;
-} UART_TextInputKey;
+} lora_textInputKey;
 
 typedef struct {
     const char* header;
@@ -20,17 +20,17 @@ typedef struct {
     size_t text_buffer_size;
     bool clear_default_text;
 
-    UART_TextInputCallback callback;
+    lora_textInputCallback callback;
     void* callback_context;
 
     uint8_t selected_row;
     uint8_t selected_column;
 
-    UART_TextInputValidatorCallback validator_callback;
+    lora_textInputValidatorCallback validator_callback;
     void* validator_callback_context;
     FuriString* validator_text;
     bool valadator_message_visible;
-} UART_TextInputModel;
+} lora_textInputModel;
 
 static const uint8_t keyboard_origin_x = 1;
 static const uint8_t keyboard_origin_y = 29;
@@ -39,7 +39,7 @@ static const uint8_t keyboard_row_count = 4;
 #define ENTER_KEY '\n'
 #define BACKSPACE_KEY '\b'
 
-static const UART_TextInputKey keyboard_keys_row_1[] = {
+static const lora_textInputKey keyboard_keys_row_1[] = {
     {'{', 1, 0},
     {'(', 9, 0},
     {'[', 17, 0},
@@ -58,7 +58,7 @@ static const UART_TextInputKey keyboard_keys_row_1[] = {
     {'/', 120, 0},
 };
 
-static const UART_TextInputKey keyboard_keys_row_2[] = {
+static const lora_textInputKey keyboard_keys_row_2[] = {
     {'Q', 1, 10},
     {'W', 9, 10},
     {'E', 17, 10},
@@ -77,7 +77,7 @@ static const UART_TextInputKey keyboard_keys_row_2[] = {
     {'-', 120, 10},
 };
 
-static const UART_TextInputKey keyboard_keys_row_3[] = {
+static const lora_textInputKey keyboard_keys_row_3[] = {
     {'A', 1, 21},
     {'S', 9, 21},
     {'D', 18, 21},
@@ -96,7 +96,7 @@ static const UART_TextInputKey keyboard_keys_row_3[] = {
 
 };
 
-static const UART_TextInputKey keyboard_keys_row_4[] = {
+static const lora_textInputKey keyboard_keys_row_4[] = {
     {'Z', 1, 33},
     {'X', 9, 33},
     {'C', 18, 33},
@@ -118,24 +118,24 @@ static uint8_t get_row_size(uint8_t row_index) {
 
     switch(row_index + 1) {
     case 1:
-        row_size = sizeof(keyboard_keys_row_1) / sizeof(UART_TextInputKey);
+        row_size = sizeof(keyboard_keys_row_1) / sizeof(lora_textInputKey);
         break;
     case 2:
-        row_size = sizeof(keyboard_keys_row_2) / sizeof(UART_TextInputKey);
+        row_size = sizeof(keyboard_keys_row_2) / sizeof(lora_textInputKey);
         break;
     case 3:
-        row_size = sizeof(keyboard_keys_row_3) / sizeof(UART_TextInputKey);
+        row_size = sizeof(keyboard_keys_row_3) / sizeof(lora_textInputKey);
         break;
     case 4:
-        row_size = sizeof(keyboard_keys_row_4) / sizeof(UART_TextInputKey);
+        row_size = sizeof(keyboard_keys_row_4) / sizeof(lora_textInputKey);
         break;
     }
 
     return row_size;
 }
 
-static const UART_TextInputKey* get_row(uint8_t row_index) {
-    const UART_TextInputKey* row = NULL;
+static const lora_textInputKey* get_row(uint8_t row_index) {
+    const lora_textInputKey* row = NULL;
 
     switch(row_index + 1) {
     case 1:
@@ -155,7 +155,7 @@ static const UART_TextInputKey* get_row(uint8_t row_index) {
     return row;
 }
 
-static char get_selected_char(UART_TextInputModel* model) {
+static char get_selected_char(lora_textInputModel* model) {
     return get_row(model->selected_row)[model->selected_column].text;
 }
 
@@ -200,15 +200,15 @@ static char char_to_uppercase(const char letter) {
     }
 }
 
-static void uart_text_input_backspace_cb(UART_TextInputModel* model) {
+static void lora_text_input_backspace_cb(lora_textInputModel* model) {
     uint8_t text_length = model->clear_default_text ? 1 : strlen(model->text_buffer);
     if(text_length > 0) {
         model->text_buffer[text_length - 1] = 0;
     }
 }
 
-static void uart_text_input_view_draw_callback(Canvas* canvas, void* _model) {
-    UART_TextInputModel* model = _model;
+static void lora_text_input_view_draw_callback(Canvas* canvas, void* _model) {
+    lora_textInputModel* model = _model;
     uint8_t text_length = model->text_buffer ? strlen(model->text_buffer) : 0;
     uint8_t needed_string_width = canvas_width(canvas) - 8;
     uint8_t start_pos = 4;
@@ -245,7 +245,7 @@ static void uart_text_input_view_draw_callback(Canvas* canvas, void* _model) {
 
     for(uint8_t row = 0; row <= keyboard_row_count; row++) {
         const uint8_t column_count = get_row_size(row);
-        const UART_TextInputKey* keys = get_row(row);
+        const lora_textInputKey* keys = get_row(row);
 
         for(size_t column = 0; column < column_count; column++) {
             if(keys[column].text == ENTER_KEY) {
@@ -324,8 +324,8 @@ static void uart_text_input_view_draw_callback(Canvas* canvas, void* _model) {
 }
 
 static void
-    uart_text_input_handle_up(UART_TextInput* uart_text_input, UART_TextInputModel* model) {
-    UNUSED(uart_text_input);
+    lora_text_input_handle_up(lora_textInput* lora_text_input, lora_textInputModel* model) {
+    UNUSED(lora_text_input);
     if(model->selected_row > 0) {
         model->selected_row--;
         if(model->selected_column > get_row_size(model->selected_row) - 6) {
@@ -335,8 +335,8 @@ static void
 }
 
 static void
-    uart_text_input_handle_down(UART_TextInput* uart_text_input, UART_TextInputModel* model) {
-    UNUSED(uart_text_input);
+    lora_text_input_handle_down(lora_textInput* lora_text_input, lora_textInputModel* model) {
+    UNUSED(lora_text_input);
     if(model->selected_row < keyboard_row_count - 1) {
         model->selected_row++;
         if(model->selected_column > get_row_size(model->selected_row) - 4) {
@@ -346,8 +346,8 @@ static void
 }
 
 static void
-    uart_text_input_handle_left(UART_TextInput* uart_text_input, UART_TextInputModel* model) {
-    UNUSED(uart_text_input);
+    lora_text_input_handle_left(lora_textInput* lora_text_input, lora_textInputModel* model) {
+    UNUSED(lora_text_input);
     if(model->selected_column > 0) {
         model->selected_column--;
     } else {
@@ -356,8 +356,8 @@ static void
 }
 
 static void
-    uart_text_input_handle_right(UART_TextInput* uart_text_input, UART_TextInputModel* model) {
-    UNUSED(uart_text_input);
+    lora_text_input_handle_right(lora_textInput* lora_text_input, lora_textInputModel* model) {
+    UNUSED(lora_text_input);
     if(model->selected_column < get_row_size(model->selected_row) - 1) {
         model->selected_column++;
     } else {
@@ -365,9 +365,9 @@ static void
     }
 }
 
-static void uart_text_input_handle_ok(
-    UART_TextInput* uart_text_input,
-    UART_TextInputModel* model,
+static void lora_text_input_handle_ok(
+    lora_textInput* lora_text_input,
+    lora_textInputModel* model,
     bool shift) {
     char selected = get_selected_char(model);
     uint8_t text_length = strlen(model->text_buffer);
@@ -381,12 +381,12 @@ static void uart_text_input_handle_ok(
            (!model->validator_callback(
                model->text_buffer, model->validator_text, model->validator_callback_context))) {
             model->valadator_message_visible = true;
-            furi_timer_start(uart_text_input->timer, furi_kernel_get_tick_frequency() * 4);
+            furi_timer_start(lora_text_input->timer, furi_kernel_get_tick_frequency() * 4);
         } else if(model->callback != 0 && text_length > 0) {
             model->callback(model->callback_context);
         }
     } else if(selected == BACKSPACE_KEY) {
-        uart_text_input_backspace_cb(model);
+        lora_text_input_backspace_cb(model);
     } else {
         if(model->clear_default_text) {
             text_length = 0;
@@ -402,14 +402,14 @@ static void uart_text_input_handle_ok(
     model->clear_default_text = false;
 }
 
-static bool uart_text_input_view_input_callback(InputEvent* event, void* context) {
-    UART_TextInput* uart_text_input = context;
-    furi_assert(uart_text_input);
+static bool lora_text_input_view_input_callback(InputEvent* event, void* context) {
+    lora_textInput* lora_text_input = context;
+    furi_assert(lora_text_input);
 
     bool consumed = false;
 
     // Acquire model
-    UART_TextInputModel* model = view_get_model(uart_text_input->view);
+    lora_textInputModel* model = view_get_model(lora_text_input->view);
 
     if((!(event->type == InputTypePress) && !(event->type == InputTypeRelease)) &&
        model->valadator_message_visible) {
@@ -419,19 +419,19 @@ static bool uart_text_input_view_input_callback(InputEvent* event, void* context
         consumed = true;
         switch(event->key) {
         case InputKeyUp:
-            uart_text_input_handle_up(uart_text_input, model);
+            lora_text_input_handle_up(lora_text_input, model);
             break;
         case InputKeyDown:
-            uart_text_input_handle_down(uart_text_input, model);
+            lora_text_input_handle_down(lora_text_input, model);
             break;
         case InputKeyLeft:
-            uart_text_input_handle_left(uart_text_input, model);
+            lora_text_input_handle_left(lora_text_input, model);
             break;
         case InputKeyRight:
-            uart_text_input_handle_right(uart_text_input, model);
+            lora_text_input_handle_right(lora_text_input, model);
             break;
         case InputKeyOk:
-            uart_text_input_handle_ok(uart_text_input, model, false);
+            lora_text_input_handle_ok(lora_text_input, model, false);
             break;
         default:
             consumed = false;
@@ -441,22 +441,22 @@ static bool uart_text_input_view_input_callback(InputEvent* event, void* context
         consumed = true;
         switch(event->key) {
         case InputKeyUp:
-            uart_text_input_handle_up(uart_text_input, model);
+            lora_text_input_handle_up(lora_text_input, model);
             break;
         case InputKeyDown:
-            uart_text_input_handle_down(uart_text_input, model);
+            lora_text_input_handle_down(lora_text_input, model);
             break;
         case InputKeyLeft:
-            uart_text_input_handle_left(uart_text_input, model);
+            lora_text_input_handle_left(lora_text_input, model);
             break;
         case InputKeyRight:
-            uart_text_input_handle_right(uart_text_input, model);
+            lora_text_input_handle_right(lora_text_input, model);
             break;
         case InputKeyOk:
-            uart_text_input_handle_ok(uart_text_input, model, true);
+            lora_text_input_handle_ok(lora_text_input, model, true);
             break;
         case InputKeyBack:
-            uart_text_input_backspace_cb(model);
+            lora_text_input_backspace_cb(model);
             break;
         default:
             consumed = false;
@@ -466,19 +466,19 @@ static bool uart_text_input_view_input_callback(InputEvent* event, void* context
         consumed = true;
         switch(event->key) {
         case InputKeyUp:
-            uart_text_input_handle_up(uart_text_input, model);
+            lora_text_input_handle_up(lora_text_input, model);
             break;
         case InputKeyDown:
-            uart_text_input_handle_down(uart_text_input, model);
+            lora_text_input_handle_down(lora_text_input, model);
             break;
         case InputKeyLeft:
-            uart_text_input_handle_left(uart_text_input, model);
+            lora_text_input_handle_left(lora_text_input, model);
             break;
         case InputKeyRight:
-            uart_text_input_handle_right(uart_text_input, model);
+            lora_text_input_handle_right(lora_text_input, model);
             break;
         case InputKeyBack:
-            uart_text_input_backspace_cb(model);
+            lora_text_input_backspace_cb(model);
             break;
         default:
             consumed = false;
@@ -487,67 +487,67 @@ static bool uart_text_input_view_input_callback(InputEvent* event, void* context
     }
 
     // Commit model
-    view_commit_model(uart_text_input->view, consumed);
+    view_commit_model(lora_text_input->view, consumed);
 
     return consumed;
 }
 
-void uart_text_input_timer_callback(void* context) {
+void lora_text_input_timer_callback(void* context) {
     furi_assert(context);
-    UART_TextInput* uart_text_input = context;
+    lora_textInput* lora_text_input = context;
 
     with_view_model(
-        uart_text_input->view,
-        UART_TextInputModel * model,
+        lora_text_input->view,
+        lora_textInputModel * model,
         { model->valadator_message_visible = false; },
         true);
 }
 
-UART_TextInput* uart_text_input_alloc() {
-    UART_TextInput* uart_text_input = malloc(sizeof(UART_TextInput));
-    uart_text_input->view = view_alloc();
-    view_set_context(uart_text_input->view, uart_text_input);
-    view_allocate_model(uart_text_input->view, ViewModelTypeLocking, sizeof(UART_TextInputModel));
-    view_set_draw_callback(uart_text_input->view, uart_text_input_view_draw_callback);
-    view_set_input_callback(uart_text_input->view, uart_text_input_view_input_callback);
+lora_textInput* lora_text_input_alloc() {
+    lora_textInput* lora_text_input = malloc(sizeof(lora_textInput));
+    lora_text_input->view = view_alloc();
+    view_set_context(lora_text_input->view, lora_text_input);
+    view_allocate_model(lora_text_input->view, ViewModelTypeLocking, sizeof(lora_textInputModel));
+    view_set_draw_callback(lora_text_input->view, lora_text_input_view_draw_callback);
+    view_set_input_callback(lora_text_input->view, lora_text_input_view_input_callback);
 
-    uart_text_input->timer =
-        furi_timer_alloc(uart_text_input_timer_callback, FuriTimerTypeOnce, uart_text_input);
+    lora_text_input->timer =
+        furi_timer_alloc(lora_text_input_timer_callback, FuriTimerTypeOnce, lora_text_input);
 
     with_view_model(
-        uart_text_input->view,
-        UART_TextInputModel * model,
+        lora_text_input->view,
+        lora_textInputModel * model,
         { model->validator_text = furi_string_alloc(); },
         false);
 
-    uart_text_input_reset(uart_text_input);
+    lora_text_input_reset(lora_text_input);
 
-    return uart_text_input;
+    return lora_text_input;
 }
 
-void uart_text_input_free(UART_TextInput* uart_text_input) {
-    furi_assert(uart_text_input);
+void lora_text_input_free(lora_textInput* lora_text_input) {
+    furi_assert(lora_text_input);
     with_view_model(
-        uart_text_input->view,
-        UART_TextInputModel * model,
+        lora_text_input->view,
+        lora_textInputModel * model,
         { furi_string_free(model->validator_text); },
         false);
 
     // Send stop command
-    furi_timer_stop(uart_text_input->timer);
+    furi_timer_stop(lora_text_input->timer);
     // Release allocated memory
-    furi_timer_free(uart_text_input->timer);
+    furi_timer_free(lora_text_input->timer);
 
-    view_free(uart_text_input->view);
+    view_free(lora_text_input->view);
 
-    free(uart_text_input);
+    free(lora_text_input);
 }
 
-void uart_text_input_reset(UART_TextInput* uart_text_input) {
-    furi_assert(uart_text_input);
+void lora_text_input_reset(lora_textInput* lora_text_input) {
+    furi_assert(lora_text_input);
     with_view_model(
-        uart_text_input->view,
-        UART_TextInputModel * model,
+        lora_text_input->view,
+        lora_textInputModel * model,
         {
             model->text_buffer_size = 0;
             model->header = "";
@@ -566,21 +566,21 @@ void uart_text_input_reset(UART_TextInput* uart_text_input) {
         true);
 }
 
-View* uart_text_input_get_view(UART_TextInput* uart_text_input) {
-    furi_assert(uart_text_input);
-    return uart_text_input->view;
+View* lora_text_input_get_view(lora_textInput* lora_text_input) {
+    furi_assert(lora_text_input);
+    return lora_text_input->view;
 }
 
-void uart_text_input_set_result_callback(
-    UART_TextInput* uart_text_input,
-    UART_TextInputCallback callback,
+void lora_text_input_set_result_callback(
+    lora_textInput* lora_text_input,
+    lora_textInputCallback callback,
     void* callback_context,
     char* text_buffer,
     size_t text_buffer_size,
     bool clear_default_text) {
     with_view_model(
-        uart_text_input->view,
-        UART_TextInputModel * model,
+        lora_text_input->view,
+        lora_textInputModel * model,
         {
             model->callback = callback;
             model->callback_context = callback_context;
@@ -596,13 +596,13 @@ void uart_text_input_set_result_callback(
         true);
 }
 
-void uart_text_input_set_validator(
-    UART_TextInput* uart_text_input,
-    UART_TextInputValidatorCallback callback,
+void lora_text_input_set_validator(
+    lora_textInput* lora_text_input,
+    lora_textInputValidatorCallback callback,
     void* callback_context) {
     with_view_model(
-        uart_text_input->view,
-        UART_TextInputModel * model,
+        lora_text_input->view,
+        lora_textInputModel * model,
         {
             model->validator_callback = callback;
             model->validator_callback_context = callback_context;
@@ -610,28 +610,28 @@ void uart_text_input_set_validator(
         true);
 }
 
-UART_TextInputValidatorCallback
-    uart_text_input_get_validator_callback(UART_TextInput* uart_text_input) {
-    UART_TextInputValidatorCallback validator_callback = NULL;
+lora_textInputValidatorCallback
+    lora_text_input_get_validator_callback(lora_textInput* lora_text_input) {
+    lora_textInputValidatorCallback validator_callback = NULL;
     with_view_model(
-        uart_text_input->view,
-        UART_TextInputModel * model,
+        lora_text_input->view,
+        lora_textInputModel * model,
         { validator_callback = model->validator_callback; },
         false);
     return validator_callback;
 }
 
-void* uart_text_input_get_validator_callback_context(UART_TextInput* uart_text_input) {
+void* lora_text_input_get_validator_callback_context(lora_textInput* lora_text_input) {
     void* validator_callback_context = NULL;
     with_view_model(
-        uart_text_input->view,
-        UART_TextInputModel * model,
+        lora_text_input->view,
+        lora_textInputModel * model,
         { validator_callback_context = model->validator_callback_context; },
         false);
     return validator_callback_context;
 }
 
-void uart_text_input_set_header_text(UART_TextInput* uart_text_input, const char* text) {
+void lora_text_input_set_header_text(lora_textInput* lora_text_input, const char* text) {
     with_view_model(
-        uart_text_input->view, UART_TextInputModel * model, { model->header = text; }, true);
+        lora_text_input->view, lora_textInputModel * model, { model->header = text; }, true);
 }
