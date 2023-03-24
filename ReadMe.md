@@ -42,7 +42,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Update: [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term)
 - Refactored [LORA Terminal (By aafksab)](https://github.com/aafksab/LORA-Term) to not reference UART Terminal
 - Fixed many apps and code bugs causing compile errors
-- Added: [GPIO w I2C (By OFW)] which [I²C-Scanner #1431 (By GitChris3004)](https://github.com/flipperdevices/flipperzero-firmware/pull/1431) and [read EEPROM of SFP Modules using I2C (By marcusju)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/198)
+- Added: [GPIO w I2C (By gornekich)-OFW] with [I²C-Scanner #1431 (By GitChris3004)](https://github.com/flipperdevices/flipperzero-firmware/pull/1431) and [read EEPROM of SFP Modules using I2C (By marcusju)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/198)
 - Switched GPIO to be internal without I2C (For LoRa Terminal troubleshooting)
 - Updated: [Barcode App (By Kingal1337)](https://github.com/Kingal1337/flipper-barcode-generator)
 - Update: [NRF24 Batch v1.7 (By vad7)](https://github.com/vad7/nRF24-Batch)
@@ -311,7 +311,7 @@ $ ./fbt dolphin_ext
 - [Geiger Counter (By nmrr)](https://github.com/nmrr/flipperzero-geigercounter)
 - [GPIO Reader (biotinker) (By biotinker)](https://github.com/biotinker/flipperzero-gpioreader)
 - [GPIO Reader (Aurelilc) (By aureli1c)](https://github.com/aureli1c/flipperzero_GPIO_read)
-- [GPIO w I2C (By OFW)] which [I²C-Scanner #1431 (By GitChris3004)](https://github.com/flipperdevices/flipperzero-firmware/pull/1431) and [read EEPROM of SFP Modules using I2C (By marcusju)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/198)
+- [GPIO w I2C (By gornekich)-OFW] with [I²C-Scanner #1431 (By GitChris3004)](https://github.com/flipperdevices/flipperzero-firmware/pull/1431) and [read EEPROM of SFP Modules using I2C (By marcusju)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/198)
 - [GPS (By ezod)](https://github.com/ezod/flipperzero-gps) `Req: NMEA 0183`
 - [HEX Editor (By dunaevai135)](https://github.com/dunaevai135/flipper-zero-hex_editor)
 - [HEX Viewer (By QtRoS)](https://github.com/QtRoS/flipperzero-firmware)
