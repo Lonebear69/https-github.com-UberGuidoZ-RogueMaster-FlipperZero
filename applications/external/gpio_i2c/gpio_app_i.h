@@ -15,7 +15,9 @@
 #include <gui/modules/widget.h>
 #include "views/gpio_test.h"
 #include "views/gpio_usb_uart.h"
-#include <assets_icons.h>
+#include "views/gpio_i2c_scanner.h"
+#include "views/gpio_i2c_sfp.h"
+#include <gpio_icons.h>
 
 struct GpioApp {
     Gui* gui;
@@ -30,6 +32,8 @@ struct GpioApp {
     GpioUsbUart* gpio_usb_uart;
     GPIOItems* gpio_items;
     UsbUartBridge* usb_uart_bridge;
+    GpioI2CScanner* gpio_i2c_scanner;
+    GpioI2CSfp* gpio_i2c_sfp;
     UsbUartConfig* usb_uart_cfg;
 };
 
@@ -39,4 +43,6 @@ typedef enum {
     GpioAppViewUsbUart,
     GpioAppViewUsbUartCfg,
     GpioAppViewUsbUartCloseRpc,
+    GpioAppViewI2CScanner,
+    GpioAppViewI2CSfp
 } GpioAppView;
