@@ -38,6 +38,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: iButton Fixes for DS1420
 - Updated: [Mfkey32 (By noproto)](https://github.com/noproto/FlipperMfkey)
 - OFW: [Fix crash when emulating a DSGeneric key #2530 (By gsurkov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2530)
+- Update: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 
 <a name="release">
 

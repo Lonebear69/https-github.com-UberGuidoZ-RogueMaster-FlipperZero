@@ -13,6 +13,11 @@
 
 typedef struct CrossRemoteItem CrossRemoteItem;
 
+bool xremote_remote_item_read(CrossRemoteItem* item, FlipperFormat* ff);
+bool xremote_remote_item_read_ir(CrossRemoteItem* item, FlipperFormat* ff);
+bool xremote_remote_item_read_ir_signal_raw(CrossRemoteItem* item, FlipperFormat* ff);
+bool xremote_remote_item_read_message(CrossRemoteItem* item, FlipperFormat* ff);
+
 CrossRemoteItem* xremote_remote_item_alloc();
 void xremote_remote_item_free(CrossRemoteItem* item);
 
