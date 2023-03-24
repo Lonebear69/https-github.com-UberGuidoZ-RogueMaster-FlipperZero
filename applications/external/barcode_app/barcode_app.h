@@ -35,10 +35,10 @@
 #define CODE128_DICT_FILE_PATH BARCODE_DATA_FILE_DIR_PATH "/code128_encodings.txt"
 
 //the folder where the user stores their barcodes
-#define DEFAULT_USER_BARCODES EXT_PATH("barcodes")
+#define DEFAULT_USER_BARCODES EXT_PATH("apps_data/barcodes")
 
 //The extension barcode files use
-#define BARCODE_EXTENSION ".barcode"
+#define BARCODE_EXTENSION ".txt"
 #define BARCODE_EXTENSION_LENGTH 8
 
 #include "views/barcode_view.h"
