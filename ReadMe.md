@@ -53,6 +53,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [Pokemon Trading (By EstebanFuentealba)](https://github.com/EstebanFuentealba/Flipper-Zero-Game-Boy-Trading-Pokemons)
 - UL: MF Classic dict - Fix key delete, now works properly
 - Updated: [WiFi (Marauder) v3.1.3 (By 0xchocolate)](https://github.com/0xchocolate/flipperzero-firmware-with-wifi-marauder-companion) `Req: ESP32 WITH MARAUDER FLASHED` [ESP32 MARAUDER Firmware](https://github.com/tcpassos/ESP32Marauder)
+- UL: [Fix POCSAG pager RIC: text repetition and overlap #398 (By Willy-JL)](https://github.com/DarkFlippers/unleashed-firmware/pull/398)
 
 <a name="release">
 
