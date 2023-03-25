@@ -50,6 +50,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [Distance Sensor (By privet971)](https://github.com/privet971/FlipperZeroApps/tree/main/usping) `Req: Parallax (3 wires) SKU 28015`
 - UL: [Additional checks before invalidating the key OFW PR #2533 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2533)
 - Added: [AVR Flasher WIP (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2475)
+- Added: [Pokemon Trading (By EstebanFuentealba)](https://github.com/EstebanFuentealba/Flipper-Zero-Game-Boy-Trading-Pokemons)
 
 <a name="release">
 
@@ -351,6 +352,7 @@ $ ./fbt dolphin_ext
 - [Password Generator (By anakod)](https://github.com/anakod/flipper_passgen)
 - [PicoPass Reader (By Bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/1366)
 - [POCSAG Pager (By XMasterx & Shmuma)](https://github.com/xMasterX/flipper-pager)
+- [Pokemon Trading (By EstebanFuentealba)](https://github.com/EstebanFuentealba/Flipper-Zero-Game-Boy-Trading-Pokemons)
 - [Pomodoro Timer (By sbrin)](https://github.com/sbrin/flipperzero_pomodoro)
 - [Pomodoro 2 (By Th3Un1q3)](https://github.com/Th3Un1q3/flipp_pomodoro)
 - [Protocol Visualizer (By antirez)](https://github.com/antirez/protoview)
