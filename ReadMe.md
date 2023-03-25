@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0324-1922-0.80.1-6593594](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-24 19:15 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-24 19:15 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-25 00:15 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-25 00:15 EST`
 - Updated: [Wii EC Analyzer (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - UL: [Fap loader add option to ignore api mismatch #395 (By Willy-JL)](https://github.com/DarkFlippers/unleashed-firmware/pull/395)
 - UL: iButton Fixes for DS1420
@@ -51,6 +51,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: [Additional checks before invalidating the key OFW PR #2533 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2533)
 - Added: [AVR Flasher WIP (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2475)
 - Added: [Pokemon Trading (By EstebanFuentealba)](https://github.com/EstebanFuentealba/Flipper-Zero-Game-Boy-Trading-Pokemons)
+- UL: MF Classic dict - Fix key delete, now works properly
 
 <a name="release">
 
