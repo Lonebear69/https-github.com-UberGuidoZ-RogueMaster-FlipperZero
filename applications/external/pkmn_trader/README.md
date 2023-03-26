@@ -2,13 +2,16 @@
 # PARTS: [PortData EXT Link](https://shop.rogue-master.net/products/gpio-ext-link-portdata-line-interface-connecting-line-interface-for-game-boy-color-game-boy-pocket-gbc-gbp-gbl) & [Proto Board](https://shop.rogue-master.net/products/gpio-10pcs-pcb-prototype-pcb-board-circuit-board-protoboard-pcb-price-universal-stripboard-prototyping-veroboard-2-x-8-double-side) 
 
 <p align="center">
-<a target="_blank" href="https://youtube.com/shorts/44rBn0jeGRk&feature=github.com">
+<a target="_blank" href="https://www.reddit.com/r/flipperzero/comments/121ncot/flipper_zero_game_boy_pokemon_trading/">
   <img align="center" alt="Flipper Zero - Pokemon Trading Game Boy" src="./docs/images/youtube.png" />
   </a>
   <br />
 </p>
 
-[![FlipC.org](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading/badge?branch=main)](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading?branch=main)
+| **FW Official** | **FW Unleashed** | **FW RogueMaster** |
+| :- | :- | :- |
+|[![FlipC.org](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading/badge?branch=main)](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading?branch=main)|[![FlipC.org](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading/badge?branch=main&firmware=unleashed)](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading?branch=main&firmware=unleashed)|[![FlipC.org](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading/badge?branch=main&firmware=roguemaster)](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading?branch=main&firmware=roguemaster)
+
 ## Introduction
 
 This is a Pokemon exchange application from Flipper Zero to Game Boy [(Generación I)](https://bulbapedia.bulbagarden.net/wiki/Generation_I). Flipper Zero emulates a "Slave" Game Boy connected to a Game Link Cable to be able to exchange any Pokemon from the First Generation (Red, Blue, Yellow) to a real Game Boy.
@@ -149,7 +152,7 @@ _An example GB SPI transfer. Here, the master sends 0xD9 (217) and the slave sen
 
 You can learn more about it in the following video. [**Analyzing the Different Versions of the Link Cable**](https://youtu.be/h1KKkCfzOws?t=151).
 
-## Board for Flipper Zero.
+## Board for Flipper Zero with PortData EXT Link.
 
 <p align='center'>
 <br />
@@ -166,6 +169,8 @@ _PortData EXT Link for Game Boy Color, Game Boy Pocket, GBC, GBP, GBL._
 <br />
 <img src="./docs/images/flipper-zero-pcb.png" width="400" /><br />
 </p>
+I used 33kΩ resistor on CLK, but it's optional, it can be connected directly.
+
 
 ## Connection: Flipper Zero GPIO - Game Boy
 
@@ -190,6 +195,21 @@ The pins should be connected as follows:
 | 5 (CLK)                  | 7 (C3)            |
 | 3 (SI)                   | 6 (B2)            |
 | 2 (SO)                   | 5 (B3)            |
+
+## Connect to Flipper Zero without Socket PortData EXT Link
+
+It's possible to cut a cable directly without using a socket, but it's important to note that the cable is a crossover cable SI-SO.
+
+<p align='center'>
+<br />
+<img src="./docs/images/cut-cable.png" width="400" /><br />
+</p>
+
+*"Cable Game Link" cut and directly connected to the Flipper Zero pins.*
+
+**NOTE**: Don't rely on the cable colors as they may vary depending on the manufacturer. Use a multimeter to measure continuity and identify which cable corresponds to each pin.
+
+
 
 ## GUI
 

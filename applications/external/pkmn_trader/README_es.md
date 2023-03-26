@@ -1,13 +1,15 @@
 # 🐬 Flipper Zero - Pokemon Trading in Game Boy
-# PARTS: [PortData EXT Link](https://shop.rogue-master.net/products/gpio-ext-link-portdata-line-interface-connecting-line-interface-for-game-boy-color-game-boy-pocket-gbc-gbp-gbl) & [Proto Board](https://shop.rogue-master.net/products/gpio-10pcs-pcb-prototype-pcb-board-circuit-board-protoboard-pcb-price-universal-stripboard-prototyping-veroboard-2-x-8-double-side) 
+# PARTES: [PortData EXT Link](https://shop.rogue-master.net/products/gpio-ext-link-portdata-line-interface-connecting-line-interface-for-game-boy-color-game-boy-pocket-gbc-gbp-gbl) Y [place de prototipo](https://shop.rogue-master.net/products/gpio-10pcs-pcb-prototype-pcb-board-circuit-board-protoboard-pcb-price-universal-stripboard-prototyping-veroboard-2-x-8-double-side) 
 
 <p align="center">
-<a target="_blank" href="https://youtube.com/shorts/44rBn0jeGRk&feature=github.com">
+<a target="_blank" href="https://www.reddit.com/r/flipperzero/comments/121ncot/flipper_zero_game_boy_pokemon_trading/">
   <img align="center" alt="Flipper Zero - Pokemon Trading Game Boy" src="./docs/images/youtube.png" />
   <br />
 </p>
 
-[![FlipC.org](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading/badge?branch=main)](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading?branch=main)
+| **FW Official** | **FW Unleashed** | **FW RogueMaster** |
+| :- | :- | :- |
+|[![FlipC.org](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading/badge?branch=main)](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading?branch=main)|[![FlipC.org](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading/badge?branch=main&firmware=unleashed)](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading?branch=main&firmware=unleashed)|[![FlipC.org](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading/badge?branch=main&firmware=roguemaster)](https://flipc.org/EstebanFuentealba/Flipper-Zero-Game-Boy-Pokemon-Trading?branch=main&firmware=roguemaster)
 
 ## Introducción
 
@@ -146,7 +148,7 @@ _Una transferencia de ejemplo de GB SPI. Aquí, el maestro envía 0xD9 (217) y e
 
 Se puede conocer mas al respecto en el siguiente Video [**Analyzing the Different Versions of the Link Cable**](https://youtu.be/h1KKkCfzOws?t=151).
 
-## Placa para Flipper Zero
+## Placa para Flipper Zero con Socket PortData EXT Link
 
 <p align='center'>
 <br />
@@ -163,6 +165,7 @@ _PortData EXT Link para Game Boy Color, Game Boy Pocket, GBC, GBP, GBL._
 <br />
 <img src="./docs/images/flipper-zero-pcb.png" width="400" /><br />
 </p>
+Usé una resistencia de 33kΩ en CLK, pero es opcional, se puede conectar directamente.
 
 ## Conexión: Flipper Zero GPIO - Game Boy
 
@@ -187,6 +190,22 @@ Se deben conectar los Pines de la siguiente manera
 | 5 (CLK)                  | 7 (C3)            |
 | 3 (SI)                   | 6 (B2)            |
 | 2 (SO)                   | 5 (B3)            |
+
+
+## Conectar a Flipper Zero sin Socket PortData EXT Link
+
+Pudes cortar un cable directamente sin usar el socket pero debes tener en cuenta que el es un cable cruzado SI-SO.
+
+<p align='center'>
+<br />
+<img src="./docs/images/cut-cable.png" width="400" /><br />
+</p>
+
+*"Cable Game Link" cortado y conectado directamente a los pines de Flipper Zero.*
+
+
+**NOTA**: No guiarse por los colores porque dependiendo del fabricante estos pueden cambiar, con un multímetro medir continuidad e identificar que cable es de que pin
+
 
 ## GUI
 
