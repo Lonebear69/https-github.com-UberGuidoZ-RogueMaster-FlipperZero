@@ -12,8 +12,6 @@
 - `Write URL to NFC` APP to allow creating URL NFC tags from only the flipper
 - - Also can possibly support larger URLs than the ones in samples (due to length limits on NFC types)
 - - Also can possibly create other types of tags, like WIFI configurations
-- `Dolphin SubGHz Chat` APP to allow listening for and viewing SubGHz messages and sending SubGHz messages
-- - Could also be set to transmit a message every X seconds/minutes until another Flipper responds
 - `Bluetooth Audio` APP to allow flipper to pair to external speaker or headphones for mp3 playback
 - - Also can possible pair to speaker via NFC tap, here are some possible resources:
 - - - https://github.com/urish/circuitpython-mp3-ble
@@ -26,7 +24,6 @@
 - `Bluetooth OpenHayStack` for Flipper, changes current bluetooth configuration to transmit Bluetooth Open Haystack packet as needed for the device to be findable when settings for Bluetooth is set to ON in settings and OpenHayStack is set to ON in settings.
 - - Not sure if could possiblt also serve to find devices
 - - Example resource of OpenHayStack as an alternative to Bluetooth On/Off: https://github.com/AlexStrNik/flipperzero-firmware/tree/dev
-- `Tamagochi` Save State
 - Skip to next or previous SubGHz scan file from emulation screen using UP/DOWN
 
 # 
