@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0328-0158-0.80.1-d6d37df](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-28 01:42 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-28 01:42 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-28 02:42 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-28 02:42 EST`
 - Updated: [Wii EC Analyzer (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - UL: [Fap loader add option to ignore api mismatch #395 (By Willy-JL)](https://github.com/DarkFlippers/unleashed-firmware/pull/395)
 - UL: iButton Fixes for DS1420
@@ -58,6 +58,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: AN-Motors AT4 + Alutech AT4N - Add Manually support 
 - UL: Updated: [WiFi (Marauder) v3.1.3 (By 0xchocolate)](https://github.com/0xchocolate/flipperzero-firmware-with-wifi-marauder-companion) `Req: ESP32 WITH MARAUDER FLASHED` [ESP32 MARAUDER Firmware](https://github.com/tcpassos/ESP32Marauder)
 - Updated: [Pokemon Trading (By EstebanFuentealba)](https://github.com/EstebanFuentealba/Flipper-Zero-Game-Boy-Trading-Pokemons) [OK Button Fix (By ESurge)](https://github.com/ESurge/Flipper-Zero-Game-Boy-Pokemon-Trading)
+- OFW: [View Model: recursive mutex #2532 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2532)
 
 <a name="release">
 
@@ -398,6 +399,6 @@ $ ./fbt dolphin_ext
 - [WiFi (Marauder) v3.1.3 (By 0xchocolate)](https://github.com/0xchocolate/flipperzero-firmware-with-wifi-marauder-companion) `Req: ESP32 WITH MARAUDER FLASHED` [ESP32 MARAUDER Firmware](https://github.com/tcpassos/ESP32Marauder)
 - [WiFi Scanner v.0.4 (By SequoiaSan)](https://github.com/SequoiaSan/FlipperZero-WiFi-Scanner_Module-ESP8266) `Req: ESP8266 or ESP32`
 - [Wii EC Analyzer (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
-- [Zero Tracker (By DrZZlo13)](https://github.com/DrZlo13/flipper-zero-music-tracker)
+- [Zero Tracker (By DrZlo13)](https://github.com/DrZlo13/flipper-zero-music-tracker)
 
 # Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0322-1504-0.79.2-22158b0.tgz&channel=RM0322-1504-0.79.2-22158b0&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0322-1504-0.79.2-22158b0-NoAnim.tgz&channel=RM0322-1504-0.79.2-22158b0-NoAnim&version=0.79.2)
