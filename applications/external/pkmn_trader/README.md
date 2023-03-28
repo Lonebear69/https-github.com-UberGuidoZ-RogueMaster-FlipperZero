@@ -185,18 +185,18 @@ The pins should be connected as follows:
 </p>
 
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./docs/images/GPIO-GBPIN_light.png">
-    <source media="(prefers-color-scheme: light)" srcset="./docs/images/GPIO-GBPIN.png">
+    <source media="(prefers-color-scheme: dark)" srcset="./docs/images/GPIO-GBPIN_light-v2.png">
+    <source media="(prefers-color-scheme: light)" srcset="./docs/images/GPIO-GBPIN-v2.png">
     <img
         alt="Connect Flipper Zero GPIO to Game Boy Pins"
-        src="./docs/images/GPIO-GBPIN.png">
+        src="./docs/images/GPIO-GBPIN-v2.png">
 </picture>
 
 | Cable Game Link (Socket) | Flipper Zero GPIO |
 | ------------------------ | ----------------- |
 | 6 (GND)                  | 8 (GND)           |
-| 5 (CLK)                  | 7 (C3)            |
-| 3 (SI)                   | 6 (B2)            |
+| 5 (CLK)                  | 6 (B2)            |
+| 3 (SI)                   | 7 (C3)            |
 | 2 (SO)                   | 5 (B3)            |
 
 ## Connect to Flipper Zero without Socket PortData EXT Link
@@ -205,7 +205,7 @@ It's possible to cut a cable directly without using a socket, but it's important
 
 <p align='center'>
 <br />
-<img src="./docs/images/cut-cable.png" width="400" /><br />
+<img src="./docs/images/cut-cable-v3.png" width="400" /><br />
 </p>
 
 *"Cable Game Link" cut and directly connected to the Flipper Zero pins.*
@@ -229,7 +229,7 @@ For each image, the color `#aaa` was transformed to `#fff` so that Flipper Zero 
 
 ## TODO
 - [ ] Refactor the code
-- [ ] The OK button stops working when exiting the app, so it needs to be restarted 🤔
+- [x] The OK button stops working when exiting the app, so it needs to be restarted 🤔
 - [ ] Set each Pokemon's characteristics, attacks, and default levels
 - [ ] Improve animations
 

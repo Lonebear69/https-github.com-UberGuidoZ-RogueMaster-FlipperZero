@@ -179,18 +179,18 @@ Se deben conectar los Pines de la siguiente manera
 </p>
 
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./docs/images/GPIO-GBPIN_light.png">
-    <source media="(prefers-color-scheme: light)" srcset="./docs/images/GPIO-GBPIN.png">
+    <source media="(prefers-color-scheme: dark)" srcset="./docs/images/GPIO-GBPIN_light-v2.png">
+    <source media="(prefers-color-scheme: light)" srcset="./docs/images/GPIO-GBPIN-v2.png">
     <img
         alt="Connect Flipper Zero GPIO to Game Boy Pins"
-        src="./docs/images/GPIO-GBPIN.png">
+        src="./docs/images/GPIO-GBPIN-v2.png">
 </picture>
 
 | Cable Game Link (Socket) | Flipper Zero GPIO |
 | ------------------------ | ----------------- |
 | 6 (GND)                  | 8 (GND)           |
-| 5 (CLK)                  | 7 (C3)            |
-| 3 (SI)                   | 6 (B2)            |
+| 5 (CLK)                  | 6 (B2)            |
+| 3 (SI)                   | 7 (C3)            |
 | 2 (SO)                   | 5 (B3)            |
 
 
@@ -200,7 +200,7 @@ Pudes cortar un cable directamente sin usar el socket pero debes tener en cuenta
 
 <p align='center'>
 <br />
-<img src="./docs/images/cut-cable.png" width="400" /><br />
+<img src="./docs/images/cut-cable-v3.png" width="400" /><br />
 </p>
 
 *"Cable Game Link" cortado y conectado directamente a los pines de Flipper Zero.*
