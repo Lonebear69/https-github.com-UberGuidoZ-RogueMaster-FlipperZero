@@ -9,4 +9,6 @@ App(
     fap_icon="pokemon_10px.png",
     fap_icon_assets="assets",
     fap_icon_assets_symbol="pokemon",
+    fap_author="Esteban Fuentealba",
+    fap_weburl="https://github.com/EstebanFuentealba"
 )
