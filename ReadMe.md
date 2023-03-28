@@ -60,6 +60,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Pokemon Trading (By EstebanFuentealba)](https://github.com/EstebanFuentealba/Flipper-Zero-Game-Boy-Trading-Pokemons) [OK Button Fix (By ESurge)](https://github.com/ESurge/Flipper-Zero-Game-Boy-Pokemon-Trading)
 - OFW: [View Model: recursive mutex #2532 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2532)
 - OFW: [Improved thread lifecycle #2534 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2534)
+- OFW: [Elite Progress #2481 (By bettse)](https://github.com/flipperdevices/flipperzero-firmware/pull/2481)
 
 <a name="release">
 
