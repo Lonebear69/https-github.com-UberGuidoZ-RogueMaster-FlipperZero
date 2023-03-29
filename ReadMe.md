@@ -35,6 +35,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-29 12:01 EST`
 - Added: [Race (By zyuhel)](https://github.com/zyuhel/flipperzero-racegame)
 - UL: [Updated IR Assets #404 (By amec0e)](https://github.com/DarkFlippers/unleashed-firmware/pull/404)
+- Added: 24 SUPER-CHIP ROMs (Tested by qqMajiKpp)
 
 <a name="release">
 
