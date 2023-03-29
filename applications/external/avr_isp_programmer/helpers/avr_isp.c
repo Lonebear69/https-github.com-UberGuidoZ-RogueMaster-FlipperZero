@@ -121,12 +121,35 @@ bool avr_isp_auto_set_spi_speed_start_pmode(AvrIsp* instance) {
         AvrIspSpiSwSpeed400Khz,
         AvrIspSpiSwSpeed250Khz,
         AvrIspSpiSwSpeed125Khz,
+        AvrIspSpiSwSpeed60Khz,
         AvrIspSpiSwSpeed40Khz,
         AvrIspSpiSwSpeed20Khz,
+        AvrIspSpiSwSpeed10Khz,
+        AvrIspSpiSwSpeed5Khz,
+        AvrIspSpiSwSpeed1Khz,
     };
     for(uint8_t i = 0; i < COUNT_OF(spi_speed); i++) {
         if(avr_isp_start_pmode(instance, spi_speed[i])) {
-            return true;
+            AvrIspSignature sig = avr_isp_read_signature(instance);
+            AvrIspSignature sig_examination = avr_isp_read_signature(instance); //-V656
+            uint8_t y = 0;
+            while(y < 8) {
+                if(memcmp((uint8_t*)&sig, (uint8_t*)&sig_examination, sizeof(AvrIspSignature)) !=
+                   0)
+                    break;
+                sig_examination = avr_isp_read_signature(instance);
+                y++;
+            }
+            if(y == 8) {
+                if(spi_speed[i] > AvrIspSpiSwSpeed1Mhz) {
+                    if(i < (COUNT_OF(spi_speed) - 1)) {
+                        avr_isp_end_pmode(instance);
+                        i++;
+                        return avr_isp_start_pmode(instance, spi_speed[i]);
+                    }
+                }
+                return true;
+            }
         }
     }
     return false;
@@ -457,4 +480,11 @@ bool avr_isp_write_fuse_extended(AvrIsp* instance, uint8_t efuse) {
         }
     }
     return ret;
+}
+
+void avr_isp_write_extended_addr(AvrIsp* instance, uint8_t extended_addr) {
+    furi_assert(instance);
+
+    avr_isp_spi_transaction(instance, AVR_ISP_EXTENDED_ADDR(extended_addr));
+    furi_delay_ms(10);
 }
