@@ -63,6 +63,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Pokemon Trading (By EstebanFuentealba)](https://github.com/EstebanFuentealba/Flipper-Zero-Game-Boy-Trading-Pokemons) (Pinout Changed)
 - UL: [Clear code in 'add manual' scene #403 (By gid9798)](https://github.com/DarkFlippers/unleashed-firmware/pull/403)
 - Updated: [AVR Flasher WIP (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2475)
+- OFW PR: [added WAIT_FOR_BUTTON_PRESS functionality to badusb #2544 (By p4p1)](https://github.com/flipperdevices/flipperzero-firmware/pull/2544)
 
 <a name="release">
 
