@@ -21,5 +21,6 @@ zip -rq "RM$DATE_VAR-$TIME_VAR-$VER_VAR-$HASH_VAR-NoAnim.zip" "RM$DATE_VAR-$TIME
 tar -czf "RM$DATE_VAR-$TIME_VAR-$VER_VAR-$HASH_VAR-NoAnim.tgz" "RM$DATE_VAR-$TIME_VAR-NoAnim"
 rm -rf "RM$DATE_VAR-$TIME_VAR"
 rm -rf "RM$DATE_VAR-$TIME_VAR-NoAnim"
+rm -rf assets/dolphin/internal/*
 git stash
 echo "BUILD COMPLETED, ZIP AND TGZ GENERATED FOR RM$DATE_VAR-$TIME_VAR-$VER_VAR-$HASH_VAR"
