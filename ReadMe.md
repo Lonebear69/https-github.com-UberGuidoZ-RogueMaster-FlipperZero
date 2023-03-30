@@ -38,6 +38,15 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: 24 SUPER-CHIP ROMs (Tested by qqMajiKpp)
 - No Animations Build will now have blank internal animations (Thanks to qqMajiKpp)
 - Updated: [ESP32CAM Marauder (By 0xchocolate & eried)](https://github.com/eried/flipperzero-mayhem) (Changes Applied By RogueMaster)
+- UL: Plugins: Show External CC1101 module status in Weather Station and in POCSAG Pager plugins
+- UL: SubGHz: Fix false detections of StarLine 72bit, flipper can decode only 64bit
+- UL: SubGHz: ScherKhan, more informative messages instead of 'Unknown', may be not correct, because we guessing type by bits
+- UL: SubGHz: Clear code in 'Add Manually' scene (by gid9798 | PR #403)
+- UL: Plugins: GPS NMEA (UART) modifications:
+- - Ability to change baudrate using Up button, hold button to switch between baudrates (9600, 57600, 115200) (i set 57600 as default)
+- - Ok button will set backlight to always on mode, to disable press ok button again (it will restore default settings after app exit too)
+- - Long press Right button to change speed from knots to kilometers per hour
+- - Exit from app using long press on back button instead of short press, may be useful in case you want to turn backlight on and accidentally click back
 
 <a name="release">
 
