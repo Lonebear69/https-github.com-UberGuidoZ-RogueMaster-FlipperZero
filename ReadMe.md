@@ -37,6 +37,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: [Updated IR Assets #404 (By amec0e)](https://github.com/DarkFlippers/unleashed-firmware/pull/404)
 - Added: 24 SUPER-CHIP ROMs (Tested by qqMajiKpp)
 - No Animations Build will now have blank internal animations (Thanks to qqMajiKpp)
+- Updated: [ESP32CAM Marauder (By 0xchocolate & eried)](https://github.com/eried/flipperzero-mayhem) (Changes Applied By RogueMaster)
 
 <a name="release">
 
