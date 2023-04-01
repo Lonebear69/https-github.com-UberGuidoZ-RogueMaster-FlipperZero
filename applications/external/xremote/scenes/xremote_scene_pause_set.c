@@ -1,21 +1,20 @@
 #include "../xremote.h"
-#include "../helpers/xremote_custom_event.h"
-#include "../views/xremote_infoscreen.h"
+#include "../views/xremote_pause_set.h"
 
-void xremote_scene_infoscreen_callback(XRemoteCustomEvent event, void* context) {
+void xremote_scene_pause_set_callback(XRemoteCustomEvent event, void* context) {
     furi_assert(context);
     XRemote* app = context;
     view_dispatcher_send_custom_event(app->view_dispatcher, event);
 }
 
-void xremote_scene_infoscreen_on_enter(void* context) {
+void xremote_scene_pause_set_on_enter(void* context) {
     furi_assert(context);
     XRemote* app = context;
-    xremote_infoscreen_set_callback(app->xremote_infoscreen, xremote_scene_infoscreen_callback, app);
-    view_dispatcher_switch_to_view(app->view_dispatcher, XRemoteViewIdInfoscreen);
+    xremote_pause_set_set_callback(app->xremote_pause_set, xremote_scene_pause_set_callback, app);
+    view_dispatcher_switch_to_view(app->view_dispatcher, XRemoteViewIdPauseSet);
 }
 
-bool xremote_scene_infoscreen_on_event(void* context, SceneManagerEvent event) {
+bool xremote_scene_pause_set_on_event(void* context, SceneManagerEvent event) {
     XRemote* app = context;
     bool consumed = false;
     
@@ -31,24 +30,25 @@ bool xremote_scene_infoscreen_on_event(void* context, SceneManagerEvent event) {
                 scene_manager_next_scene(app->scene_manager, XRemoteSceneMenu);
                 consumed = true;
                 break;
-            case XRemoteCustomEventInfoscreenBack:
-                notification_message(app->notification, &sequence_reset_red);
-                notification_message(app->notification, &sequence_reset_green);
-                notification_message(app->notification, &sequence_reset_blue);
+            case XRemoteCustomEventPauseSetBack:
                 if(!scene_manager_search_and_switch_to_previous_scene(
-                    app->scene_manager, XRemoteSceneInfoscreen)) {
+                    app->scene_manager, XRemoteSceneCreateAdd)) {
                         scene_manager_stop(app->scene_manager);
                         view_dispatcher_stop(app->view_dispatcher);
                     }
                 consumed = true;
                 break;
+            case XRemoteCustomEventPauseSetOk:
+                //cross_remote_add_pause(app->cross_remote, time);
+                scene_manager_search_and_switch_to_previous_scene(app->scene_manager, XRemoteSceneCreate);
+                consumed = true;
+                break;
         }
     }
-    
     return consumed;
 }
 
-void xremote_scene_infoscreen_on_exit(void* context) {
-    XRemote* app = context;
-    UNUSED(app);
+
+void xremote_scene_pause_set_on_exit(void* context) {
+    UNUSED(context);
 }

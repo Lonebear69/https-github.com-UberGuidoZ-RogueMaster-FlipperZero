@@ -11,6 +11,8 @@
 #include <assets_icons.h>
 
 #include <gui/gui.h>
+#include <gui/elements.h>
+#include <gui/view.h>
 #include <gui/view_stack.h>
 #include <gui/view_dispatcher.h>
 #include <gui/scene_manager.h>
@@ -26,10 +28,12 @@
 #include <input/input.h>
 #include <notification/notification_messages.h>
 
+#include <string.h>
 #include <m-array.h>
 #include <toolbox/path.h>
 #include <storage/storage.h>
 #include <dialogs/dialogs.h>
+#include <core/check.h>
 #include <core/common_defines.h>
 #include <dolphin/dolphin.h>
 #include <infrared.h>
@@ -51,6 +55,9 @@
 #define INFRARED_APP_EXTENSION ".ir"
 #define INFRARED_APP_FOLDER ANY_PATH("infrared")
 
+#define SUBGHZ_APP_EXTENSION ".sub"
+#define SUBGHZ_APP_FOLDER ANY_PATH("subghz")
+
 #define TAG "XRemote"
 
 typedef enum {
@@ -68,6 +75,10 @@ typedef enum {
     InfraredNotificationMessageBlinkStartRead,
     InfraredNotificationMessageBlinkStartSend,
     InfraredNotificationMessageBlinkStop,
+    PauseNotificationMessageBlinkStartSend,
+    PauseNotificationMessageBlinkStop,
+    SubGhzNotificationMessageBlinkStartSend,
+    SubGhzNotificationMessageBlinkStop,
 } XRemoteNotificationMessage;
 
 typedef enum {
@@ -90,3 +101,15 @@ struct CrossRemoteItem {
     int16_t type;
     int32_t time;
 };
+
+typedef struct CrossRemote CrossRemote;
+typedef struct CrossRemoteItem CrossRemoteItem;
+
+typedef struct XRemoteTransmit XRemoteTransmit;
+typedef struct XRemotePauseSet XRemotePauseSet;
+//typedef struct XRemoteInfoscreen XRemoteInfoscreen;
+
+//typedef struct InfraredRemote InfraredRemote;
+//typedef struct InfraredRemoteButton InfraredRemoteButton;
+//typedef struct InfraredSignal InfraredSignal;
+//typedef struct InfraredRawSignal InfraredRawSignal;

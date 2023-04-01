@@ -1,8 +1,5 @@
-#include "../infrared/xremote_ir_signal.h"
 #include "xremote_remote_item.h"
-#include <infrared_worker.h>
-#include <infrared_transmit.h>
-#include "../../xremote_i.h"
+
 
 CrossRemoteItem* xremote_remote_item_alloc() {
     CrossRemoteItem* item = malloc(sizeof(CrossRemoteItem));
@@ -10,7 +7,7 @@ CrossRemoteItem* xremote_remote_item_alloc() {
     item->time = 0;
     item->type = 0;
     item->ir_signal = xremote_ir_signal_alloc();
-
+    
     return item;
 }
 
@@ -70,6 +67,8 @@ bool xremote_remote_item_read(CrossRemoteItem* item, FlipperFormat* ff) {
         if(!flipper_format_read_string(ff, "remote_type", type)) break;
         if(furi_string_equal(type, "IR")) {
             success = xremote_remote_item_read_ir(item, ff);
+        } else if(furi_string_equal(type, "PAUSE")) {
+            success = xremote_remote_item_read_pause(item, ff);
         } else {
             break;
         }
@@ -84,7 +83,7 @@ bool xremote_remote_item_read_ir(CrossRemoteItem* item, FlipperFormat* ff) {
     buf = furi_string_alloc();
     item->type = XRemoteRemoteItemTypeInfrared;
     item->time = 0;
-
+    
     do {
         if(!flipper_format_read_string(ff, "name", item->name)) break;
         if(!flipper_format_read_string(ff, "type", buf)) break;
@@ -95,6 +94,20 @@ bool xremote_remote_item_read_ir(CrossRemoteItem* item, FlipperFormat* ff) {
         } else {
             break;
         }
+        success = true;
+    } while(false);
+    furi_string_free(buf);
+
+    return success;
+}
+
+bool xremote_remote_item_read_pause(CrossRemoteItem* item, FlipperFormat* ff) {
+    bool success = false;
+    item->type = XRemoteRemoteItemTypePause;
+
+    do {
+        if(!flipper_format_read_string(ff, "name", item->name)) break;
+        if(!flipper_format_read_int32(ff, "time", &item->time, 1)) break;
         success = true;
     } while(false);
 
@@ -117,8 +130,7 @@ bool xremote_remote_item_read_ir_signal_raw(CrossRemoteItem* item, FlipperFormat
     success = flipper_format_read_uint32(ff, "data", timings, timings_size);
 
     if(success) {
-        xremote_ir_signal_set_raw_signal(
-            item->ir_signal, timings, timings_size, frequency, duty_cycle);
+        xremote_ir_signal_set_raw_signal(item->ir_signal, timings, timings_size, frequency, duty_cycle);
     }
 
     free(timings);
@@ -147,6 +159,7 @@ bool xremote_remote_item_read_message(CrossRemoteItem* item, FlipperFormat* ff) 
     return success;
 }
 
+
 void xremote_remote_item_free(CrossRemoteItem* item) {
     furi_string_free(item->name);
     free(item);
@@ -158,6 +171,10 @@ void xremote_remote_item_set_type(CrossRemoteItem* item, int type) {
 
 void xremote_remote_item_set_name(CrossRemoteItem* item, const char* name) {
     furi_string_set(item->name, name);
+}
+
+void xremote_remote_item_set_time(CrossRemoteItem* item, int32_t time) {
+    item->time = time;
 }
 
 void xremote_remote_item_set_ir_signal(CrossRemoteItem* item, InfraredSignal* signal) {
@@ -173,8 +190,8 @@ InfraredSignal* xremote_remote_item_get_ir_signal(CrossRemoteItem* item) {
 }
 
 bool xremote_ir_signal_save(InfraredSignal* signal, FlipperFormat* ff, const char* name) {
-    if(!flipper_format_write_comment_cstr(ff, "") ||
-       !flipper_format_write_string_cstr(ff, "remote_type", "IR") ||
+    if(!flipper_format_write_comment_cstr(ff, "") || 
+       !flipper_format_write_string_cstr(ff, "remote_type", "IR") || 
        !flipper_format_write_string_cstr(ff, "name", name)) {
         return false;
     } else if(signal->is_raw) {
@@ -182,4 +199,14 @@ bool xremote_ir_signal_save(InfraredSignal* signal, FlipperFormat* ff, const cha
     } else {
         return xremote_ir_signal_save_message(&signal->payload.message, ff);
     }
+}
+
+bool xremote_pause_save(FlipperFormat* ff, int32_t time, const char* name) {
+    if(!flipper_format_write_comment_cstr(ff, "") ||
+       !flipper_format_write_string_cstr(ff, "remote_type", "PAUSE") ||
+       !flipper_format_write_string_cstr(ff, "name", name) || 
+       !flipper_format_write_int32(ff, "time", &time, 1)) {
+       return false;
+    }
+    return true;
 }

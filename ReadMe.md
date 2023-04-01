@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0330-1916-0.80.1-1364b30](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-03-31 12:05 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-03-31 12:05 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-01 07:10 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-01 07:10 EST`
 - Added: [Race (By zyuhel)](https://github.com/zyuhel/flipperzero-racegame)
 - UL: [Updated IR Assets #404 (By amec0e)](https://github.com/DarkFlippers/unleashed-firmware/pull/404)
 - Added: 24 SUPER-CHIP ROMs (Tested by qqMajiKpp)
@@ -49,6 +49,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - - Exit from app using long press on back button instead of short press, may be useful in case you want to turn backlight on and accidentally click back
 - UL: SubGHz: ScherKhan Improvements
 - OFW: [RPC: increase max message size #2543 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2543)
+- Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
 
 <a name="release">
 
