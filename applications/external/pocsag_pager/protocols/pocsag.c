@@ -9,7 +9,6 @@
 static const SubGhzBlockConst pocsag_const = {
     .te_short = 833,
     .te_delta = 100,
-    .min_count_bit_for_found = 1,
 };
 
 // Minimal amount of sync bits (interleaving zeros and ones)
@@ -288,7 +287,7 @@ uint8_t subghz_protocol_decoder_pocsag_get_hash_data(void* context) {
     return hash;
 }
 
-SubGhzProtocolStatus subghz_protocol_decoder_pocsag_serialize(
+bool subghz_protocol_decoder_pocsag_serialize(
     void* context,
     FlipperFormat* flipper_format,
     SubGhzRadioPreset* preset) {
@@ -296,57 +295,49 @@ SubGhzProtocolStatus subghz_protocol_decoder_pocsag_serialize(
     SubGhzProtocolDecoderPocsag* instance = context;
     uint32_t msg_len;
 
-    if(SubGhzProtocolStatusOk !=
-       pcsg_block_generic_serialize(&instance->generic, flipper_format, preset))
-        return SubGhzProtocolStatusError;
+    if(!pcsg_block_generic_serialize(&instance->generic, flipper_format, preset)) return false;
 
     msg_len = furi_string_size(instance->done_msg);
-    if(!flipper_format_write_uint32(
-           flipper_format, "MsgLen", &msg_len, pocsag_const.min_count_bit_for_found)) {
+    if(!flipper_format_write_uint32(flipper_format, "MsgLen", &msg_len, 1)) {
         FURI_LOG_E(TAG, "Error adding MsgLen");
-        return SubGhzProtocolStatusError;
+        return false;
     }
 
     uint8_t* s = (uint8_t*)furi_string_get_cstr(instance->done_msg);
     if(!flipper_format_write_hex(flipper_format, "Msg", s, msg_len)) {
         FURI_LOG_E(TAG, "Error adding Msg");
-        return SubGhzProtocolStatusError;
+        return false;
     }
-    return SubGhzProtocolStatusOk;
+    return true;
 }
 
-SubGhzProtocolStatus
-    subghz_protocol_decoder_pocsag_deserialize(void* context, FlipperFormat* flipper_format) {
+bool subghz_protocol_decoder_pocsag_deserialize(void* context, FlipperFormat* flipper_format) {
     furi_assert(context);
     SubGhzProtocolDecoderPocsag* instance = context;
-    SubGhzProtocolStatus ret = SubGhzProtocolStatusError;
+    bool ret = false;
     uint32_t msg_len;
     uint8_t* buf;
 
     do {
-        if(SubGhzProtocolStatusOk !=
-           pcsg_block_generic_deserialize(&instance->generic, flipper_format)) {
+        if(!pcsg_block_generic_deserialize(&instance->generic, flipper_format)) {
             break;
         }
 
-        if(!flipper_format_read_uint32(
-               flipper_format, "MsgLen", &msg_len, pocsag_const.min_count_bit_for_found)) {
+        if(!flipper_format_read_uint32(flipper_format, "MsgLen", &msg_len, 1)) {
             FURI_LOG_E(TAG, "Missing MsgLen");
-            ret = SubGhzProtocolStatusErrorValueBitCount;
             break;
         }
 
         buf = malloc(msg_len);
         if(!flipper_format_read_hex(flipper_format, "Msg", buf, msg_len)) {
             FURI_LOG_E(TAG, "Missing Msg");
-            ret = SubGhzProtocolStatusErrorValueBitCount;
             free(buf);
             break;
         }
         furi_string_set_strn(instance->done_msg, (const char*)buf, msg_len);
         free(buf);
 
-        ret = SubGhzProtocolStatusOk;
+        ret = true;
     } while(false);
     return ret;
 }

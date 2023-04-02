@@ -21,12 +21,12 @@ void pcsg_block_generic_get_preset_name(const char* preset_name, FuriString* pre
     furi_string_set(preset_str, preset_name_temp);
 }
 
-SubGhzProtocolStatus pcsg_block_generic_serialize(
+bool pcsg_block_generic_serialize(
     PCSGBlockGeneric* instance,
     FlipperFormat* flipper_format,
     SubGhzRadioPreset* preset) {
     furi_assert(instance);
-    SubGhzProtocolStatus ret = SubGhzProtocolStatusError;
+    bool res = false;
     FuriString* temp_str;
     temp_str = furi_string_alloc();
     do {
@@ -34,13 +34,11 @@ SubGhzProtocolStatus pcsg_block_generic_serialize(
         if(!flipper_format_write_header_cstr(
                flipper_format, PCSG_KEY_FILE_TYPE, PCSG_KEY_FILE_VERSION)) {
             FURI_LOG_E(TAG, "Unable to add header");
-            ret = SubGhzProtocolStatusErrorParserHeader;
             break;
         }
 
         if(!flipper_format_write_uint32(flipper_format, "Frequency", &preset->frequency, 1)) {
             FURI_LOG_E(TAG, "Unable to add Frequency");
-            ret = SubGhzProtocolStatusErrorParserFrequency;
             break;
         }
 
@@ -48,64 +46,55 @@ SubGhzProtocolStatus pcsg_block_generic_serialize(
         if(!flipper_format_write_string_cstr(
                flipper_format, "Preset", furi_string_get_cstr(temp_str))) {
             FURI_LOG_E(TAG, "Unable to add Preset");
-            ret = SubGhzProtocolStatusErrorParserPreset;
             break;
         }
         if(!strcmp(furi_string_get_cstr(temp_str), "FuriHalSubGhzPresetCustom")) {
             if(!flipper_format_write_string_cstr(
                    flipper_format, "Custom_preset_module", "CC1101")) {
                 FURI_LOG_E(TAG, "Unable to add Custom_preset_module");
-                ret = SubGhzProtocolStatusErrorParserCustomPreset;
                 break;
             }
             if(!flipper_format_write_hex(
                    flipper_format, "Custom_preset_data", preset->data, preset->data_size)) {
                 FURI_LOG_E(TAG, "Unable to add Custom_preset_data");
-                ret = SubGhzProtocolStatusErrorParserOthers;
                 break;
             }
         }
         if(!flipper_format_write_string_cstr(flipper_format, "Protocol", instance->protocol_name)) {
             FURI_LOG_E(TAG, "Unable to add Protocol");
-            ret = SubGhzProtocolStatusErrorParserProtocolName;
             break;
         }
 
         if(!flipper_format_write_string(flipper_format, "Ric", instance->result_ric)) {
             FURI_LOG_E(TAG, "Unable to add Ric");
-            ret = SubGhzProtocolStatusErrorParserBitCount;
             break;
         }
 
         if(!flipper_format_write_string(flipper_format, "Message", instance->result_msg)) {
             FURI_LOG_E(TAG, "Unable to add Message");
-            ret = SubGhzProtocolStatusErrorParserOthers;
             break;
         }
 
-        ret = SubGhzProtocolStatusOk;
+        res = true;
     } while(false);
     furi_string_free(temp_str);
-    return ret;
+    return res;
 }
 
-SubGhzProtocolStatus
-    pcsg_block_generic_deserialize(PCSGBlockGeneric* instance, FlipperFormat* flipper_format) {
+bool pcsg_block_generic_deserialize(PCSGBlockGeneric* instance, FlipperFormat* flipper_format) {
     furi_assert(instance);
-    SubGhzProtocolStatus ret = SubGhzProtocolStatusError;
+    bool res = false;
     FuriString* temp_data = furi_string_alloc();
     FuriString* temp_data2 = furi_string_alloc();
 
     do {
         if(!flipper_format_rewind(flipper_format)) {
             FURI_LOG_E(TAG, "Rewind error");
-            ret = SubGhzProtocolStatusErrorParserOthers;
             break;
         }
 
         if(!flipper_format_read_string(flipper_format, "Ric", temp_data2)) {
             FURI_LOG_E(TAG, "Missing Ric");
-            ret = SubGhzProtocolStatusErrorParserOthers;
             break;
         }
         if(instance->result_ric != NULL) {
@@ -116,7 +105,6 @@ SubGhzProtocolStatus
 
         if(!flipper_format_read_string(flipper_format, "Message", temp_data)) {
             FURI_LOG_E(TAG, "Missing Message");
-            ret = SubGhzProtocolStatusErrorParserOthers;
             break;
         }
         if(instance->result_msg != NULL) {
@@ -125,11 +113,11 @@ SubGhzProtocolStatus
             instance->result_msg = furi_string_alloc_set(temp_data);
         }
 
-        ret = SubGhzProtocolStatusOk;
+        res = true;
     } while(0);
 
     furi_string_free(temp_data);
     furi_string_free(temp_data2);
 
-    return ret;
+    return res;
 }
