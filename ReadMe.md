@@ -29,7 +29,7 @@ This software is for experimental purposes only and is not meant for any illegal
 
 <a name="latest">
 
-## Latest Updates - [PATREON: Latest Release RM0330-1916-0.80.1-1364b30](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
+## Latest Updates - [PATREON: Latest Release RM0401-0712-0.80.1-455dedb](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
 - Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-01 07:10 EST`
 - Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-01 07:10 EST`
@@ -50,6 +50,11 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: ScherKhan Improvements
 - OFW: [RPC: increase max message size #2543 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2543)
 - Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
+- UL: SubGHz: Support for Allmatic(reads as Beninca), also fix Beninca protocol 
+- UL: SubGHz: Allmatic -> Add Manually
+- UL: SubGHz: Unification of custom buttons (by gid9798 | PR #405)
+- OFW: [FatFS: use rtc for timestamping #2555 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2555)
+- Updated: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 
 <a name="release">
 
