@@ -58,6 +58,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [NRF24 Batch v1.8 (By vad7)](https://github.com/vad7/nRF24-Batch)
 - Updated: [POCSAG Pager (By XMasterx & Shmuma)](https://github.com/xMasterX/flipper-pager)
 - Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
+- POCSAG covered by [POCSAG Pager (By XMasterx & Shmuma)](https://github.com/xMasterX/flipper-pager) so removed from internal firmware.
 
 <a name="release">
 
