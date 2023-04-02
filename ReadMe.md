@@ -54,6 +54,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: SubGHz: Allmatic -> Add Manually
 - UL: SubGHz: Unification of custom buttons (by gid9798 | PR #405)
 - OFW: [FatFS: use rtc for timestamping #2555 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2555)
+- Updated: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
 
 <a name="release">
 

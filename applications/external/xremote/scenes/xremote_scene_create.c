@@ -9,7 +9,7 @@ typedef enum {
 
 static void xremote_create_callback(void* context, int32_t index, InputType type) {
     XRemote* app = context;
-
+    
     uint16_t custom_type;
     if(type == InputTypePress) {
         custom_type = XRemoteCustomEventMenuVoid;
@@ -22,8 +22,7 @@ static void xremote_create_callback(void* context, int32_t index, InputType type
         furi_crash("Unexpected Input Type");
     }
 
-    view_dispatcher_send_custom_event(
-        app->view_dispatcher, xremote_custom_menu_event_pack(custom_type, index));
+    view_dispatcher_send_custom_event(app->view_dispatcher, xremote_custom_menu_event_pack(custom_type, index));
 }
 
 void xremote_scene_create_on_enter(void* context) {
@@ -32,7 +31,7 @@ void xremote_scene_create_on_enter(void* context) {
     ButtonMenu* button_menu = app->button_menu_create;
     //SceneManager* scene_manager = app->scene_manager;
 
-    size_t item_count = cross_remtoe_get_item_count(app->cross_remote);
+    size_t item_count = cross_remote_get_item_count(app->cross_remote);
     for(size_t i = 0; i < item_count; ++i) {
         CrossRemoteItem* item = cross_remote_get_item(app->cross_remote, i);
         button_menu_add_item(
@@ -72,7 +71,7 @@ void xremote_scene_create_on_enter(void* context) {
 bool xremote_scene_create_on_event(void* context, SceneManagerEvent event) {
     XRemote* app = context;
     bool consumed = false;
-
+    
     if(event.type == SceneManagerEventTypeBack) {
         scene_manager_next_scene(app->scene_manager, XRemoteSceneMenu);
         consumed = true;
@@ -86,7 +85,7 @@ bool xremote_scene_create_on_event(void* context, SceneManagerEvent event) {
     } else if(event.type == SceneManagerEventTypeCustom) {
         const uint16_t custom_type = xremote_custom_menu_event_get_type(event.event);
         const int16_t button_index = xremote_custom_menu_event_get_value(event.event);
-        if(custom_type == XRemoteCustomEventMenuSelected && button_index < 0) {
+        if (custom_type == XRemoteCustomEventMenuSelected && button_index < 0) {
             scene_manager_set_scene_state(
                 app->scene_manager, XRemoteSceneCreate, (unsigned)button_index);
             if(button_index == ButtonIndexPlus) {
@@ -116,7 +115,7 @@ bool xremote_scene_create_on_event(void* context, SceneManagerEvent event) {
                 break;
         }*/
     }
-
+    
     return consumed;
 }
 
