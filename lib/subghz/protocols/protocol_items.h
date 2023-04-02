@@ -37,7 +37,6 @@
 #include "intertechno_v3.h"
 #include "clemsa.h"
 #include "ansonic.h"
-#include "pocsag.h"
 #include "smc5326.h"
 #include "holtek_ht12x.h"
 #include "dooya.h"
