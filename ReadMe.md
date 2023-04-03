@@ -4,7 +4,7 @@
 &nbsp;<a href='https://shop.rogue-master.net/' target='_blank'><img src='https://rogue-master.net/img/Merch.png' alt='RM Merch'' title='RM Merch'></a>
 &nbsp;<a href='https://github.com/RogueMaster/awesome-flipperzero-withModules' target='_blank'><img src='https://rogue-master.net/img/Resources.png' alt='More Research / Assets' title='More Research / Assets'></a></h1>
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0329-0101-0.80.1-e959309.tgz&channel=RM0329-0101-0.80.1-e959309&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0329-0101-0.80.1-e959309-NoAnim.tgz&channel=RM0329-0101-0.80.1-e959309-NoAnim&version=0.79.2)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0402-2350-0.80.2-27c3e55.tgz&channel=RM0402-2350-0.80.2-27c3e55&version=0.80.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0402-2350-0.80.2-27c3e55-NoAnim.tgz&channel=RM0402-2350-0.80.2-27c3e55-NoAnim&version=0.80.2)
 
 ## Thank you so much to our RM Pro/Extreme Patreon supporters! Because of people like you, we are able to offer the best and most up-to-date Flipper Zero Firmware!
 
@@ -31,34 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0402-1702-0.80.2-778a908](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-01 07:10 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-01 07:10 EST`
-- Added: [Race (By zyuhel)](https://github.com/zyuhel/flipperzero-racegame)
-- UL: [Updated IR Assets #404 (By amec0e)](https://github.com/DarkFlippers/unleashed-firmware/pull/404)
-- Added: 24 SUPER-CHIP ROMs (Tested by qqMajiKpp)
-- No Animations Build will now have blank internal animations (Thanks to qqMajiKpp)
-- Updated: [ESP32CAM Marauder (By 0xchocolate & eried)](https://github.com/eried/flipperzero-mayhem) (Changes Applied By RogueMaster)
-- UL: Plugins: Show External CC1101 module status in Weather Station and in POCSAG Pager plugins
-- UL: SubGHz: Fix false detections of StarLine 72bit, flipper can decode only 64bit
-- UL: SubGHz: ScherKhan, more informative messages instead of 'Unknown', may be not correct, because we guessing type by bits
-- UL: SubGHz: Clear code in 'Add Manually' scene (by gid9798 | PR #403)
-- UL: Plugins: GPS NMEA (UART) modifications:
-- - Ability to change baudrate using Up button, hold button to switch between baudrates (9600, 57600, 115200) (i set 57600 as default)
-- - Ok button will set backlight to always on mode, to disable press ok button again (it will restore default settings after app exit too)
-- - Long press Right button to change speed from knots to kilometers per hour
-- - Exit from app using long press on back button instead of short press, may be useful in case you want to turn backlight on and accidentally click back
-- UL: SubGHz: ScherKhan Improvements
-- OFW: [RPC: increase max message size #2543 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2543)
-- Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
-- UL: SubGHz: Support for Allmatic(reads as Beninca), also fix Beninca protocol 
-- UL: SubGHz: Allmatic -> Add Manually
-- UL: SubGHz: Unification of custom buttons (by gid9798 | PR #405)
-- OFW: [FatFS: use rtc for timestamping #2555 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2555)
-- Updated: [Cross Remote WIP (By leedave)](https://github.com/leedave/Leeds-Flipper-Zero-Applications/tree/feature/xremote)
-- Updated: [NRF24 Batch v1.8 (By vad7)](https://github.com/vad7/nRF24-Batch)
-- Updated: [POCSAG Pager (By XMasterx & Shmuma)](https://github.com/xMasterX/flipper-pager)
-- Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
-- POCSAG covered by [POCSAG Pager (By XMasterx & Shmuma)](https://github.com/xMasterX/flipper-pager) so removed from internal firmware.
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-02 11:50 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-02 11:50 EST`
 
 <a name="release">
 
@@ -402,4 +376,4 @@ $ ./fbt dolphin_ext
 - [Wii EC Analyzer (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - [Zero Tracker (By DrZlo13)](https://github.com/DrZlo13/flipper-zero-music-tracker)
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0329-0101-0.80.1-e959309.tgz&channel=RM0329-0101-0.80.1-e959309&version=0.79.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0329-0101-0.80.1-e959309-NoAnim.tgz&channel=RM0329-0101-0.80.1-e959309-NoAnim&version=0.79.2)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0402-2350-0.80.2-27c3e55.tgz&channel=RM0402-2350-0.80.2-27c3e55&version=0.80.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0402-2350-0.80.2-27c3e55-NoAnim.tgz&channel=RM0402-2350-0.80.2-27c3e55-NoAnim&version=0.80.2)
