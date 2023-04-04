@@ -35,9 +35,9 @@ typedef enum {
 } EventType;
 
 typedef struct {
-    event type;
+    EventType type;
     InputEvent input;
-} ZetrafferEvent;
+} ZeitrafferEvent;
 
 static void draw_callback(Canvas* canvas, void* ctx) {
     UNUSED(ctx);
@@ -236,7 +236,7 @@ int32_t zeitraffer_app(void* p) {
                     if(furi_timer_is_running(timer)) {
                         notification_message(notifications, &sequence_error);
                     } else {
-                        time--;
+                        Time--;
                         notification_message(notifications, &sequence_click);
                     }
                 }
@@ -244,14 +244,14 @@ int32_t zeitraffer_app(void* p) {
                     if(furi_timer_is_running(timer)) {
                         notification_message(notifications, &sequence_click);
                         furi_timer_stop(timer);
-                        work = false;
+                        Work = false;
                     } else {
                         furi_timer_start(timer, 1000);
-                        work = true;
+                        Work = true;
 
                         if(WorkCount == 0) WorkCount = Count;
 
-                        if(WorkTime == 0) worktime = delay;
+                        if(WorkTime == 0) WorkTime = Delay;
 
                         if(Count == 0) {
                             InfiniteShot = true;
@@ -262,11 +262,11 @@ int32_t zeitraffer_app(void* p) {
                         if(Count == -1) {
                             gpio_item_set_pin(4, true);
                             gpio_item_set_pin(5, true);
-                            bulb = true;
+                            Bulb = true;
                             WorkCount = 1;
                             worktime = time;
                         } else
-                            bulb = false;
+                            Bulb = false;
 
                         notification_message(notifications, &sequence_success);
                     }
@@ -289,7 +289,7 @@ int32_t zeitraffer_app(void* p) {
                 }
                 if(event.input.key == InputKeyOk) {
                     // We don't need your highlighting! Or is it needed?
-                    backlight++;
+                    Backlight++;
                     if(Backlight > 2) Backlight = 0;
                 }
             }
