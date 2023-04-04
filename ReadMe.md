@@ -41,6 +41,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: Updated: [Sub-GHz Remote (By ESurge)](https://github.com/ESurge/flipperzero-firmware-unirfremix) (Update by xMasterX)
 - Updated: [Intravelometer (By theageoflove)](https://github.com/theageoflove/flipperzero-zeitraffer)
 - Updated: Sub-GHz CLI in hopes of fixing chat.
+- UL: [StarLine ignore option #410 (By gid9798)](https://github.com/DarkFlippers/unleashed-firmware/pull/410)
 
 <a name="release">
 
