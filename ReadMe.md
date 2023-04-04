@@ -37,6 +37,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
 - OFW: [WS: fix protocol TX141TH-BV2 #2559 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2559)
 - Updated: [NRF24 Batch v1.8 (By vad7)](https://github.com/vad7/nRF24-Batch)
+- Updated: [Sub-GHz Bruteforcer v3.5 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master)
 
 <a name="release">
 
