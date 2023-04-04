@@ -5,21 +5,21 @@
 #include <notification/notification_messages.h>
 #include <flipper_format/flipper_format.h>
 #include "gpio_item.h"
-#include "zeitraffer_icons.h"
+#include "GPIO_Intervalometer_icons.h"
 
 #define CONFIG_FILE_DIRECTORY_PATH "/ext/apps_data/intravelometer"
 #define CONFIG_FILE_PATH CONFIG_FILE_DIRECTORY_PATH "/intravelometer.conf"
 
-// Part of code stolen from https://github.com/zmactep/flipperzero-hello-world
+// Часть кода покрадена из https://github.com/zmactep/flipperzero-hello-world
 
-int32_t Time = 10; // Timer
-int32_t Count = 10; // Number of frames
-int32_t WorkTime = 0; // Timer counter
-int32_t WorkCount = 0; // Frame counter
-bool InfiniteShot = false; // Infinite shooting
-bool Bulb = false; // BULB Mode
-int32_t Backlight = 0; // Backlight: on/off/auto
-int32_t Delay = 3; // delay to bounce
+int32_t Time = 10; // Таймер
+int32_t Count = 10; // Количество кадров
+int32_t WorkTime = 0; // Счётчик таймера
+int32_t WorkCount = 0; // Счётчик кадров
+bool InfiniteShot = false; // Бесконечная съёмка
+bool Bulb = false; // Режим BULB
+int32_t Backlight = 0; // Подсветка: вкл/выкл/авто
+int32_t Delay = 3; // Задержка на отскочить
 bool Work = false;
 
 const NotificationSequence sequence_click = {
@@ -69,18 +69,16 @@ static void draw_callback(Canvas* canvas, void* ctx) {
         canvas_draw_str(canvas, 13, 55, "AUTO");
     }
 
-    if(Work) {
-        canvas_draw_icon(canvas, 85, 41, &I_ButtonUpHollow_7x4);
-        canvas_draw_icon(canvas, 85, 57, &I_ButtonDownHollow_7x4);
-        canvas_draw_icon(canvas, 59, 48, &I_ButtonLeftHollow_4x7);
-        canvas_draw_icon(canvas, 72, 48, &I_ButtonRightHollow_4x7);
-    } else {
-        canvas_draw_icon(canvas, 85, 41, &I_ButtonUp_7x4);
-        canvas_draw_icon(canvas, 85, 57, &I_ButtonDown_7x4);
-        canvas_draw_icon(canvas, 59, 48, &I_ButtonLeft_4x7);
-        canvas_draw_icon(canvas, 72, 48, &I_ButtonRight_4x7);
-    }
+    //canvas_draw_icon(canvas, 90, 17, &I_ButtonUp_7x4);
+    //canvas_draw_icon(canvas, 100, 17, &I_ButtonDown_7x4);
+    //canvas_draw_icon(canvas, 27, 17, &I_ButtonLeftSmall_3x5);
+    //canvas_draw_icon(canvas, 37, 17, &I_ButtonRightSmall_3x5);
+    //canvas_draw_icon(canvas, 3, 48, &I_Pin_star_7x7);
 
+    canvas_draw_icon(canvas, 85, 41, &I_ButtonUp_7x4);
+    canvas_draw_icon(canvas, 85, 57, &I_ButtonDown_7x4);
+    canvas_draw_icon(canvas, 59, 48, &I_ButtonLeft_4x7);
+    canvas_draw_icon(canvas, 72, 48, &I_ButtonRight_4x7);
     canvas_draw_icon(canvas, 3, 48, &I_Pin_star_7x7);
 
     canvas_set_font(canvas, FontPrimary);
@@ -89,8 +87,8 @@ static void draw_callback(Canvas* canvas, void* ctx) {
     canvas_set_font(canvas, FontPrimary);
     canvas_draw_str(canvas, 85, 55, "S");
 
-    //canvas_draw_icon(canvas, 59, 48, &I_ButtonLeft_4x7);
-    //canvas_draw_icon(canvas, 72, 48, &I_ButtonRight_4x7);
+    canvas_draw_icon(canvas, 59, 48, &I_ButtonLeft_4x7);
+    canvas_draw_icon(canvas, 72, 48, &I_ButtonRight_4x7);
 
     if(Work) {
         canvas_draw_icon(canvas, 106, 46, &I_loading_10px);
@@ -98,7 +96,7 @@ static void draw_callback(Canvas* canvas, void* ctx) {
 }
 
 static void input_callback(InputEvent* input_event, void* ctx) {
-    // Check if the context is not null
+    // Проверяем, что контекст не нулевой
     furi_assert(ctx);
     FuriMessageQueue* event_queue = ctx;
 
@@ -107,7 +105,7 @@ static void input_callback(InputEvent* input_event, void* ctx) {
 }
 
 static void timer_callback(FuriMessageQueue* event_queue) {
-    // Check if the context is not null
+    // Проверяем, что контекст не нулевой
     furi_assert(event_queue);
 
     ZeitrafferEvent event = {.type = EventTypeTick};
@@ -117,46 +115,42 @@ static void timer_callback(FuriMessageQueue* event_queue) {
 int32_t zeitraffer_app(void* p) {
     UNUSED(p);
 
-    // Current event of custom type ZeitrafferEvent
-    ZetrafferEvent event;
-    // Queue of events for 8 elements of size ZeitrafferEvent
+    // Текущее событие типа кастомного типа ZeitrafferEvent
+    ZeitrafferEvent event;
+    // Очередь событий на 8 элементов размера ZeitrafferEvent
     FuriMessageQueue* event_queue = furi_message_queue_alloc(8, sizeof(ZeitrafferEvent));
 
-    // Create a new viewport
+    // Создаем новый view port
     ViewPort* view_port = view_port_alloc();
-    // Create a draw callback, no context
+    // Создаем callback отрисовки, без контекста
     view_port_draw_callback_set(view_port, draw_callback, NULL);
-    // Create a callback for keystrokes, pass as context
-    // our message queue to push these events into it
+    // Создаем callback нажатий на клавиши, в качестве контекста передаем
+    // нашу очередь сообщений, чтоб запихивать в неё эти события
     view_port_input_callback_set(view_port, input_callback, event_queue);
 
-    // Create a GUI application
+    // Создаем GUI приложения
     Gui* gui = furi_record_open(RECORD_GUI);
-    // Connect view port to GUI in full screen mode
+    // Подключаем view port к GUI в полноэкранном режиме
     gui_add_view_port(gui, view_port, GuiLayerFullscreen);
 
-    // Configure pins
+    // Конфигурим пины
     gpio_item_configure_all_pins(GpioModeOutputPushPull);
 
-    // Create a periodic timer with a callback, where as
-    // context will be passed to our event queue
+    // Создаем периодический таймер с коллбэком, куда в качестве
+    // контекста будет передаваться наша очередь событий
     FuriTimer* timer = furi_timer_alloc(timer_callback, FuriTimerTypePeriodic, event_queue);
-    // Start timer
+    // Запускаем таймер
     //furi_timer_start(timer, 1500);
 
-    // Enable notifications
+    // Включаем нотификации
     NotificationApp* notifications = furi_record_open(RECORD_NOTIFICATION);
 
     Storage* storage = furi_record_open(RECORD_STORAGE);
 
-    // Load settings
+    // Загружаем настройки
     FlipperFormat* load = flipper_format_file_alloc(storage);
 
     do {
-        if(!storage_simply_mkdir(storage, CONFIG_FILE_DIRECTORY_PATH)) {
-            notification_message(notifications, &sequence_error);
-            break;
-        }
         if(!flipper_format_file_open_existing(load, CONFIG_FILE_PATH)) {
             notification_message(notifications, &sequence_error);
             break;
@@ -183,18 +177,18 @@ int32_t zeitraffer_app(void* p) {
 
     flipper_format_free(load);
 
-    // Infinite event queue processing loop
+    // Бесконечный цикл обработки очереди событий
     while(1) {
-        // Select an event from the queue into the event variable (wait indefinitely if the queue is empty)
-        // and check that we managed to do it
+        // Выбираем событие из очереди в переменную event (ждем бесконечно долго, если очередь пуста)
+        // и проверяем, что у нас получилось это сделать
         furi_check(furi_message_queue_get(event_queue, &event, FuriWaitForever) == FuriStatusOk);
 
-        // Our event is a button click
+        // Наше событие — это нажатие кнопки
         if(event.type == EventTypeInput) {
-            if(event.input.type == InputTypeShort) { // Short presses
+            if(event.input.type == InputTypeShort) { // Короткие нажатия
 
                 if(event.input.key == InputKeyBack) {
-                    if(Work) { // If the timer is running - don't touch the buttons!
+                    if(Work) { // Если таймер запущен - нефиг мацать кнопки!
                         notification_message(notifications, &sequence_error);
                     } else {
                         WorkCount = Count;
@@ -264,7 +258,7 @@ int32_t zeitraffer_app(void* p) {
                             gpio_item_set_pin(5, true);
                             Bulb = true;
                             WorkCount = 1;
-                            worktime = time;
+                            WorkTime = Time;
                         } else
                             Bulb = false;
 
@@ -272,11 +266,10 @@ int32_t zeitraffer_app(void* p) {
                     }
                 }
             }
-            if(event.input.type == InputTypeLong) { // Long presses
-                // If the "back" button is pressed, then we exit the loop, and therefore the application
+            if(event.input.type == InputTypeLong) { // Длинные нажатия
+                // Если нажата кнопка "назад", то выходим из цикла, а следовательно и из приложения
                 if(event.input.key == InputKeyBack) {
-                    if(furi_timer_is_running(
-                           timer)) { // And if the timer is running, don't exit :D
+                    if(furi_timer_is_running(timer)) { // А если работает таймер - не выходим :D
                         notification_message(notifications, &sequence_error);
                     } else {
                         notification_message(notifications, &sequence_click);
@@ -288,13 +281,13 @@ int32_t zeitraffer_app(void* p) {
                     }
                 }
                 if(event.input.key == InputKeyOk) {
-                    // We don't need your highlighting! Or is it needed?
+                    // Нам ваша подсветка и нахой не нужна! Или нужна?
                     Backlight++;
                     if(Backlight > 2) Backlight = 0;
                 }
             }
 
-            if(event.input.type == InputTypeRepeat) { // Pressed buttons
+            if(event.input.type == InputTypeRepeat) { // Зажатые кнопки
                 if(event.input.key == InputKeyRight) {
                     if(furi_timer_is_running(timer)) {
                         notification_message(notifications, &sequence_error);
@@ -320,46 +313,46 @@ int32_t zeitraffer_app(void* p) {
                     if(furi_timer_is_running(timer)) {
                         notification_message(notifications, &sequence_error);
                     } else {
-                        time = time - 10;
+                        Time = Time - 10;
                     }
                 }
             }
         }
 
-        // Our event is a fired timer
+        // Наше событие — это сработавший таймер
         else if(event.type == EventTypeTick) {
             WorkTime--;
 
-            if(WorkTime < 1) { // take a photo
+            if(WorkTime < 1) { // фоткаем
                 notification_message(notifications, &sequence_blink_white_100);
-                if(bulb) {
+                if(Bulb) {
                     gpio_item_set_all_pins(false);
                     WorkCount = 0;
                 } else {
                     WorkCount--;
                     view_port_update(view_port);
                     notification_message(notifications, &sequence_click);
-                    // kicking legs
+                    // Дрыгаем ногами
                     //gpio_item_set_all_pins(true);
                     gpio_item_set_pin(4, true);
                     gpio_item_set_pin(5, true);
-                    furi_delay_ms(400); // The camera does not respond well to short presses
+                    furi_delay_ms(400); // На короткие нажатия фотик плохо реагирует
                     gpio_item_set_pin(4, false);
                     gpio_item_set_pin(5, false);
                     //gpio_item_set_all_pins(false);
 
                     if(InfiniteShot) WorkCount++;
 
-                    worktime = time;
+                    WorkTime = Time;
                     view_port_update(view_port);
                 }
             } else {
-                // Send notification of blinking blue LED
+                // Отправляем нотификацию мигания синим светодиодом
                 notification_message(notifications, &sequence_blink_blue_100);
             }
 
-            if(WorkCount < 1) { // finished
-                work = false;
+            if(WorkCount < 1) { // закончили
+                Work = false;
                 gpio_item_set_all_pins(false);
                 furi_timer_stop(timer);
                 notification_message(notifications, &sequence_audiovisual_alert);
@@ -367,7 +360,7 @@ int32_t zeitraffer_app(void* p) {
                 WorkCount = 0;
             }
 
-            switch(Backlight) { // what about the backlight?
+            switch(Backlight) { // чо по подсветке?
             case 1:
                 notification_message(notifications, &sequence_display_backlight_on);
                 break;
@@ -378,13 +371,12 @@ int32_t zeitraffer_app(void* p) {
                 notification_message(notifications, &sequence_display_backlight_enforce_auto);
             }
         }
-        if(Time < 1) Time = 1; // We do not allow to unscrew the timer less than one
+        if(Time < 1) Time = 1; // Не даём открутить таймер меньше единицы
         if(Count < -1)
-            Count =
-                0; // And here we give, more than 0 frames is an endless shooting, and -1 frames - BULB
+            Count = 0; // А тут даём, бо 0 кадров это бесконечная съёмка, а -1 кадров - BULB
     }
 
-    // We store the settings
+    // Схороняем настройки
     FlipperFormat* save = flipper_format_file_alloc(storage);
 
     do {
@@ -398,7 +390,7 @@ int32_t zeitraffer_app(void* p) {
         }
         if(!flipper_format_write_comment_cstr(
                save,
-               "Zeitraffer app settings: # of frames, interval time, backlight type, Delay")) {
+               "Zeitraffer app settings: n of frames, interval time, backlight type, Delay")) {
             notification_message(notifications, &sequence_error);
             break;
         }
@@ -425,18 +417,18 @@ int32_t zeitraffer_app(void* p) {
 
     furi_record_close(RECORD_STORAGE);
 
-    // Clear the timer
+    // Очищаем таймер
     furi_timer_free(timer);
 
-    // Special cleanup of memory occupied by the queue
+    // Специальная очистка памяти, занимаемой очередью
     furi_message_queue_free(event_queue);
 
-    // Clean up the created objects associated with the interface
+    // Чистим созданные объекты, связанные с интерфейсом
     gui_remove_view_port(gui, view_port);
     view_port_free(view_port);
     furi_record_close(RECORD_GUI);
 
-    // Clear notifications
+    // Очищаем нотификации
     furi_record_close(RECORD_NOTIFICATION);
 
     return 0;
