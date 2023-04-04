@@ -5,16 +5,17 @@ App(
     entry_point="zeitraffer_app",
     requires=[
         "gui",
-		"input", 
+        "input", 
         "notification",
-		"gpio"
+        "gpio"
     ],
     stack_size=2 * 1024,
     order=90,
-	fap_icon_assets="icons",
-	fap_icon="zeitraffer.png",
+    fap_icon_assets="icons",
+    fap_icon="zeitraffer.png",
     fap_category="GPIO",
-	fap_description="Simple intervalometer app",
+    fap_icon_assets_symbol="zeitraffer",
+    fap_description="Simple intervalometer app",
     fap_author="Aurelius Rosenbaum",
-	fap_weburl="https://github.com/theageoflove/flipperzero-zeitraffer",
+    fap_weburl="https://github.com/theageoflove/flipperzero-zeitraffer",
 )
