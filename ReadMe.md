@@ -42,6 +42,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Intravelometer (By theageoflove)](https://github.com/theageoflove/flipperzero-zeitraffer)
 - Updated: Sub-GHz CLI in hopes of fixing chat.
 - UL: [StarLine ignore option #410 (By gid9798)](https://github.com/DarkFlippers/unleashed-firmware/pull/410)
+- OFW PR Updated: [AVR Flasher WIP (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2475)
 
 <a name="release">
 
