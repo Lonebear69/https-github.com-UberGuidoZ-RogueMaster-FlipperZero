@@ -31,7 +31,7 @@ typedef struct {
     InfraredRemote* ir_remote_buffer;
     InfraredWorker* ir_worker;
     CrossRemote* cross_remote;
-    uint32_t haptic; 
+    uint32_t haptic;
     uint32_t speaker;
     uint32_t led;
     uint32_t save_settings;
