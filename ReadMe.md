@@ -36,6 +36,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: [IR Scope (By kallanreed)](https://github.com/kallanreed/unleashed-firmware/tree/dev/applications/external/ir_scope)
 - Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
 - OFW: [WS: fix protocol TX141TH-BV2 #2559 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2559)
+- Updated: [NRF24 Batch v1.8 (By vad7)](https://github.com/vad7/nRF24-Batch)
 
 <a name="release">
 
