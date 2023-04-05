@@ -44,6 +44,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: [StarLine ignore option #410 (By gid9798)](https://github.com/DarkFlippers/unleashed-firmware/pull/410)
 - OFW PR Updated: [AVR Flasher WIP (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2475)
 - Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
+- REVERT: Updated: Sub-GHz CLI in hopes of fixing chat.
 
 <a name="release">
 
