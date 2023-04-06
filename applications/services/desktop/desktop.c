@@ -361,7 +361,7 @@ Desktop* desktop_alloc() {
 
     // Lock icon - Slim
     desktop->lock_icon_slim_viewport = view_port_alloc();
-    view_port_set_width(desktop->lock_icon_slim_viewport, icon_get_width(&I_Lock_8x8));
+    view_port_set_width(desktop->lock_icon_slim_viewport, icon_get_width(&I_Lock_7x8));
     view_port_draw_callback_set(
         desktop->lock_icon_slim_viewport, desktop_lock_icon_draw_callback, desktop);
     view_port_enabled_set(desktop->lock_icon_slim_viewport, false);
