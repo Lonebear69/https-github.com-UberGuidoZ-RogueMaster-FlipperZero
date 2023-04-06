@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
-from flipper.app import App
-from os.path import join, exists, relpath
-from os import makedirs, walk, environ
-from update import Main as UpdateMain
+import json
 import shutil
 import zipfile
-import tarfile
+from os import makedirs, walk, environ
+from os.path import exists, join, relpath, basename, split
+
 from ansi.color import fg
 
 
@@ -137,43 +136,8 @@ class Main(App):
         )
 
         if self.args.version:
-            bundle_dir_name = f"{self.target}-update-{self.args.suffix}"[
-                : self.DIST_FOLDER_MAX_NAME_LENGTH
-            ]
-            bundle_dir = join(self.output_dir_path, bundle_dir_name)
-            bundle_args = [
-                "generate",
-                "-d",
-                bundle_dir,
-                "-v",
-                self.args.version,
-                "-t",
-                self.target,
-                "--dfu",
-                self.get_dist_file_path(
-                    self.get_project_file_name(self.projects["firmware"], "dfu")
-                ),
-                "--stage",
-                self.get_dist_file_path(
-                    self.get_project_file_name(self.projects["updater"], "bin")
-                ),
-            ]
-            if self.args.resources:
-                bundle_args.extend(
-                    (
-                        "-r",
-                        self.args.resources,
-                    )
-                )
-            bundle_args.extend(self.other_args)
-            log_custom_fz_name = (
-                environ.get("CUSTOM_FLIPPER_NAME", None)
-                or ""
-            )
-            if (log_custom_fz_name != "") and (len(log_custom_fz_name) <= 8) and (log_custom_fz_name.isalnum()) and (log_custom_fz_name.isascii()):
-                self.logger.info(
-                    f"Flipper Custom Name is set:\n\tName: {log_custom_fz_name} : length - {len(log_custom_fz_name)} chars"
-                )
+            if bundle_result := self.bundle_update_package():
+                return bundle_result
 
             if (bundle_result := UpdateMain(no_exit=True)(bundle_args)) == 0:
                 self.logger.info(
@@ -197,6 +161,126 @@ class Main(App):
             return bundle_result
 
         return 0
+
+    def bundle_sdk(self):
+        self.logger.info("Bundling SDK")
+        components_paths = dict()
+
+        sdk_components_keys = (
+            "full.bin",
+            "firmware.elf",
+            "update.dir",
+            "sdk_headers.dir",
+            "lib.dir",
+            "debug.dir",
+            "scripts.dir",
+        )
+
+        with zipfile.ZipFile(
+            self.get_dist_path(self.get_dist_file_name("sdk", "zip")),
+            "w",
+            zipfile.ZIP_DEFLATED,
+        ) as zf:
+            for component_key in sdk_components_keys:
+                component_path = self._dist_components.get(component_key)
+                components_paths[component_key] = basename(component_path)
+
+                if component_key.endswith(".dir"):
+                    for root, dirnames, files in walk(component_path):
+                        if "__pycache__" in dirnames:
+                            dirnames.remove("__pycache__")
+                        for file in files:
+                            zf.write(
+                                join(root, file),
+                                join(
+                                    components_paths[component_key],
+                                    relpath(
+                                        join(root, file),
+                                        component_path,
+                                    ),
+                                ),
+                            )
+                else:
+                    zf.write(component_path, basename(component_path))
+
+            zf.writestr(
+                "components.json",
+                json.dumps(
+                    {
+                        "meta": {
+                            "hw_target": self.target,
+                            "flavor": self.flavor,
+                            "version": self.args.version,
+                        },
+                        "components": components_paths,
+                    }
+                ),
+            )
+
+    def bundle_update_package(self):
+        self.logger.debug(
+            f"Generating update bundle with version {self.args.version} for {self.target}"
+        )
+        bundle_dir_name = f"{self.target}-update-{self.args.suffix}"[
+            : self.DIST_FOLDER_MAX_NAME_LENGTH
+        ]
+        bundle_dir = self.get_dist_path(bundle_dir_name)
+        bundle_args = [
+            "generate",
+            "-d",
+            bundle_dir,
+            "-v",
+            self.args.version,
+            "-t",
+            self.target,
+            "--dfu",
+            self.get_dist_path(
+                self.get_project_file_name(self.projects["firmware"], "dfu")
+            ),
+            "--stage",
+            self.get_dist_path(
+                self.get_project_file_name(self.projects["updater"], "bin")
+            ),
+        ]
+        if self.args.resources:
+            bundle_args.extend(
+                (
+                    "-r",
+                    self.args.resources,
+                )
+            )
+        bundle_args.extend(self.other_args)
+        
+        log_custom_fz_name = (
+            environ.get("CUSTOM_FLIPPER_NAME", None)
+            or ""
+        )
+        if (log_custom_fz_name != "") and (len(log_custom_fz_name) <= 8) and (log_custom_fz_name.isalnum()) and (log_custom_fz_name.isascii()):
+            self.logger.info(f"Flipper Custom Name is set:\n\tName: {log_custom_fz_name} : length - {len(log_custom_fz_name)} chars")
+
+        if (bundle_result := UpdateMain(no_exit=True)(bundle_args)) == 0:
+            self.note_dist_component("update", "dir", bundle_dir)
+            self.logger.info(
+                fg.boldgreen(
+                    f"Use this directory to self-update your Flipper:\n\t{bundle_dir}"
+                )
+            )
+
+            # Create tgz archive
+            with tarfile.open(
+                join(
+                    self.output_dir_path,
+                    bundle_tgz := f"{self.DIST_FILE_PREFIX}{bundle_dir_name}.tgz",
+                ),
+                "w:gz",
+                compresslevel=9,
+                format=tarfile.USTAR_FORMAT,
+            ) as tar:
+                self.note_dist_component(
+                    "update", "tgz", self.get_dist_path(bundle_tgz)
+                )
+                tar.add(bundle_dir, arcname=bundle_dir_name)
+        return bundle_result
 
 
 if __name__ == "__main__":
