@@ -46,6 +46,11 @@ This software is for experimental purposes only and is not meant for any illegal
 - REVERT: Updated: Sub-GHz CLI in hopes of fixing chat.
 - UL: AnMotors AT4 - Add manually fixes (By XMasterx)
 - Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
+- OFW: [SD Driver: do not cache sd status. #2560 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2560)
+- OFW: [Moved ufbt to fbt codebase #2520 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2520)
+- OFW: [Graphics cleanup and icon rotation #2561 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2561)
+- OFW: [Furi: more gpio checks in HAL #2549 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2549)
+- OFW: [Fixing parsing troika card number #2536 (By achistyakov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2536)
 
 <a name="release">
 
