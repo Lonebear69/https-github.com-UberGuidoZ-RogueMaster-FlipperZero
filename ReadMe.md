@@ -29,10 +29,10 @@ This software is for experimental purposes only and is not meant for any illegal
 
 <a name="latest">
 
-## Latest Updates - [PATREON: Latest Release RM0406-0232-0.80.2-e9263e8](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
+## Latest Updates - [PATREON: Latest Release RM0406-1236-0.80.2-6848ac5](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-06 12:22 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-06 12:22 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-06 12:36 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-06 12:36 EST`
 - Added: [IR Scope (By kallanreed)](https://github.com/kallanreed/unleashed-firmware/tree/dev/applications/external/ir_scope)
 - Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
 - OFW: [WS: fix protocol TX141TH-BV2 #2559 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2559)
@@ -55,6 +55,9 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [EXTRA Demo (By Milk-Cool)](https://github.com/Milk-Cool/EXTRA-demo) (This app has VERY useful functions!)
 - Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
 - OFW: [FuriHal: fix gpio naming and add explicit pulls for vibro, speaker and ir_tx #2565 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2565)
+- Updated: SubGHz External (For New GPIO mapping)
+- Updated: [RC2014 ColecoVision (By ezod)](https://github.com/ezod/flipperzero-rc2014-coleco) (For New GPIO mapping)
+- Updated: [Temp Sensors Reader (By quen0n)](https://github.com/quen0n/Unitemp-Flipper-Zero-Plugin) `Req: BMP180/BMP280/BME280/BME680/DHT11/DHT22(AM2302)/AM2301/AM2320/HTU2XD/HTU21x/HDC1080/MAX31855/MAX6675` (For New GPIO mapping)
 
 <a name="release">
 
