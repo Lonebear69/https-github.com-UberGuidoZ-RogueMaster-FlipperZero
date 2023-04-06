@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0405-0249-0.80.2-e2919b4](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release) 
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-05 23:47 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-05 23:47 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-06 00:58 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-06 00:58 EST`
 - Added: [IR Scope (By kallanreed)](https://github.com/kallanreed/unleashed-firmware/tree/dev/applications/external/ir_scope)
 - Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
 - OFW: [WS: fix protocol TX141TH-BV2 #2559 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2559)
@@ -51,6 +51,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Graphics cleanup and icon rotation #2561 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2561)
 - OFW: [Furi: more gpio checks in HAL #2549 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2549)
 - OFW: [Fixing parsing troika card number #2536 (By achistyakov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2536)
+- UL: Merge Fixes (By xMasterX)
 
 <a name="release">
 
