@@ -52,6 +52,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Furi: more gpio checks in HAL #2549 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2549)
 - OFW: [Fixing parsing troika card number #2536 (By achistyakov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2536)
 - UL: Merge Fixes (By xMasterX)
+- Updated: [EXTRA Demo (By Milk-Cool)](https://github.com/Milk-Cool/EXTRA-demo) (This app has VERY useful functions!)
+- Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
 
 <a name="release">
 
