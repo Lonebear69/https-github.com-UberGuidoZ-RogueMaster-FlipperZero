@@ -19,7 +19,7 @@
 #ifdef TOTP_BADBT_TYPE_ENABLED
 #include "../../../workers/bt_type_code/bt_type_code.h"
 #endif
-#include "../../fonts/mode-nine/mode_nine.h"
+#include "../../fonts/mode_nine/mode_nine.h"
 
 static const char* STEAM_ALGO_ALPHABET = "23456789BCDFGHJKMNPQRTVWXY";
 static const uint8_t PROGRESS_BAR_MARGIN = 3;
