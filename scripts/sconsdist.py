@@ -2,11 +2,14 @@
 
 import json
 import shutil
+import tarfile
 import zipfile
 from os import makedirs, walk, environ
 from os.path import exists, join, relpath, basename, split
 
 from ansi.color import fg
+from flipper.app import App
+from update import Main as UpdateMain
 
 
 class ProjectDir:
@@ -53,12 +56,19 @@ class Main(App):
         if project_name == "firmware" and filetype != "elf":
             project_name = "full"
 
-        return self.get_dist_file_name(project_name, filetype)
+        dist_target_path = self.get_dist_file_name(project_name, filetype)
+        self.note_dist_component(
+            project_name, filetype, self.get_dist_path(dist_target_path)
+        )
+        return dist_target_path
+
+    def note_dist_component(self, component: str, extension: str, srcpath: str) -> None:
+        self._dist_components[f"{component}.{extension}"] = srcpath
 
     def get_dist_file_name(self, dist_artifact_type: str, filetype: str) -> str:
         return f"{self.DIST_FILE_PREFIX}{self.target}-{dist_artifact_type}-{self.args.suffix}.{filetype}"
 
-    def get_dist_file_path(self, filename: str) -> str:
+    def get_dist_path(self, filename: str) -> str:
         return join(self.output_dir_path, filename)
 
     def copy_single_project(self, project: ProjectDir) -> None:
@@ -68,17 +78,15 @@ class Main(App):
             if exists(src_file := join(obj_directory, f"{project.project}.{filetype}")):
                 shutil.copyfile(
                     src_file,
-                    self.get_dist_file_path(
-                        self.get_project_file_name(project, filetype)
-                    ),
+                    self.get_dist_path(self.get_project_file_name(project, filetype)),
                 )
-        for foldertype in ("sdk", "lib"):
+        for foldertype in ("sdk_headers", "lib"):
             if exists(sdk_folder := join(obj_directory, foldertype)):
-                self.package_zip(foldertype, sdk_folder)
+                self.note_dist_component(foldertype, "dir", sdk_folder)
 
     def package_zip(self, foldertype, sdk_folder):
         with zipfile.ZipFile(
-            self.get_dist_file_path(self.get_dist_file_name(foldertype, "zip")),
+            self.get_dist_path(self.get_dist_file_name(foldertype, "zip")),
             "w",
             zipfile.ZIP_DEFLATED,
         ) as zf:
@@ -93,7 +101,8 @@ class Main(App):
                     )
 
     def copy(self) -> int:
-        self.projects = dict(
+        self._dist_components: dict[str, str] = dict()
+        self.projects: dict[str, ProjectDir] = dict(
             map(
                 lambda pd: (pd.project, pd),
                 map(ProjectDir, self.args.project),
@@ -121,12 +130,18 @@ class Main(App):
             try:
                 shutil.rmtree(self.output_dir_path)
             except Exception as ex:
-                pass
+                self.logger.warn(f"Failed to clean output directory: {ex}")
 
         if not exists(self.output_dir_path):
+            self.logger.debug(f"Creating output directory {self.output_dir_path}")
             makedirs(self.output_dir_path)
 
+        for folder in ("debug", "scripts"):
+            if exists(folder):
+                self.note_dist_component(folder, "dir", folder)
+
         for project in self.projects.values():
+            self.logger.debug(f"Copying {project.project} for {project.target}")
             self.copy_single_project(project)
 
         self.logger.info(
@@ -139,26 +154,14 @@ class Main(App):
             if bundle_result := self.bundle_update_package():
                 return bundle_result
 
-            if (bundle_result := UpdateMain(no_exit=True)(bundle_args)) == 0:
-                self.logger.info(
-                    fg.boldgreen(
-                        f"Use this directory to self-update your Flipper:\n\t{bundle_dir}"
-                    )
-                )
-
-                # Create tgz archive
-                with tarfile.open(
-                    join(
-                        self.output_dir_path,
-                        f"{self.DIST_FILE_PREFIX}{bundle_dir_name}.tgz",
-                    ),
-                    "w:gz",
-                    compresslevel=9,
-                    format=tarfile.USTAR_FORMAT,
-                ) as tar:
-                    tar.add(bundle_dir, arcname=bundle_dir_name)
-
-            return bundle_result
+        required_components = ("firmware.elf", "full.bin", "update.dir")
+        if all(
+            map(
+                lambda c: c in self._dist_components,
+                required_components,
+            )
+        ):
+            self.bundle_sdk()
 
         return 0
 
