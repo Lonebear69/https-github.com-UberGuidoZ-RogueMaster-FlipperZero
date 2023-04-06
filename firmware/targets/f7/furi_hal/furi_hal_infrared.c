@@ -13,6 +13,13 @@
 #include <furi.h>
 #include <math.h>
 
+#define INFRARED_TX_DEBUG 0
+
+#if INFRARED_TX_DEBUG == 1
+#define gpio_infrared_tx gpio_infrared_tx_debug
+const GpioPin gpio_infrared_tx_debug = {.port = GPIOA, .pin = GpioModeAnalog};
+#endif
+
 #define INFRARED_TIM_TX_DMA_BUFFER_SIZE 200
 #define INFRARED_POLARITY_SHIFT 1
 
@@ -570,9 +577,9 @@ static void furi_hal_infrared_async_tx_free_resources(void) {
         (furi_hal_infrared_state == InfraredStateAsyncTxStopped));
 
     if(infrared_external_output) {
-        furi_hal_gpio_init(&gpio_ext_pa7, GpioModeOutputOpenDrain, GpioPullDown, GpioSpeedLow);
+        furi_hal_gpio_init(&gpio_ext_pa7, GpioModeAnalog, GpioPullDown, GpioSpeedLow);
     } else {
-        furi_hal_gpio_init(&gpio_infrared_tx, GpioModeOutputOpenDrain, GpioPullDown, GpioSpeedLow);
+        furi_hal_gpio_init(&gpio_infrared_tx, GpioModeAnalog, GpioPullDown, GpioSpeedLow);
     }
     furi_hal_interrupt_set_isr(IR_DMA_CH1_IRQ, NULL, NULL);
     furi_hal_interrupt_set_isr(IR_DMA_CH2_IRQ, NULL, NULL);
