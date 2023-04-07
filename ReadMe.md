@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0406-2014-0.80.2-3a44c56](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-07 01:33 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-07 01:33 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-07 08:21 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-07 08:21 EST`
 - Added: [IR Scope (By kallanreed)](https://github.com/kallanreed/unleashed-firmware/tree/dev/applications/external/ir_scope)
 - Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
 - OFW: [WS: fix protocol TX141TH-BV2 #2559 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2559)
@@ -45,7 +45,6 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW PR Updated: [AVR Flasher WIP (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2475)
 - REVERT: Updated: Sub-GHz CLI in hopes of fixing chat.
 - UL: AnMotors AT4 - Add manually fixes (By XMasterx)
-- Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
 - OFW: [SD Driver: do not cache sd status. #2560 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2560)
 - OFW: [Moved ufbt to fbt codebase #2520 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2520)
 - OFW: [Graphics cleanup and icon rotation #2561 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2561)
@@ -63,6 +62,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: Removed extra checks and platform modifications
 - OFW: [Fix gpio state isp programmer #2567 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2567)
 - UL: SubGHz: Keyboard lock fixed
+- Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
 
 <a name="release">
 
