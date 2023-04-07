@@ -62,6 +62,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: Updated: [Weather Station (By Skorpionm)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1833)
 - UL: Removed extra checks and platform modifications
 - OFW: [Fix gpio state isp programmer #2567 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2567)
+- UL: SubGHz: Keyboard lock fixed
 
 <a name="release">
 
