@@ -63,6 +63,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Fix gpio state isp programmer #2567 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2567)
 - UL: SubGHz: Keyboard lock fixed
 - Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
+- All [Patreon Members](https://www.patreon.com/RogueMaster/membership) on Apr 10th @ 12PM EST will be granted 10 submissions into our Wifi Dev Board giveaway! See [Discord](https://discord.gg/gF2bBUzAFe) #announcements for more details on how you can get more chances to win!
 
 <a name="release">
 
