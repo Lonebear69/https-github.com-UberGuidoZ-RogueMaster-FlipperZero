@@ -4,7 +4,7 @@
 &nbsp;<a href='https://shop.rogue-master.net/' target='_blank'><img src='https://rogue-master.net/img/Merch.png' alt='RM Merch'' title='RM Merch'></a>
 &nbsp;<a href='https://github.com/RogueMaster/awesome-flipperzero-withModules' target='_blank'><img src='https://rogue-master.net/img/Resources.png' alt='More Research / Assets' title='More Research / Assets'></a></h1>
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0402-2350-0.80.2-27c3e55.tgz&channel=RM0402-2350-0.80.2-27c3e55&version=0.80.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0402-2350-0.80.2-27c3e55-NoAnim.tgz&channel=RM0402-2350-0.80.2-27c3e55-NoAnim&version=0.80.2)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0408-0302-0.81.1-1af0221.tgz&channel=RM0408-0302-0.81.1-1af0221&version=0.81.1) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0408-0302-0.81.1-1af0221-NoAnim.tgz&channel=RM0408-0302-0.81.1-1af0221-NoAnim&version=0.81.1)
 
 ## Thank you so much to our RM Pro/Extreme Patreon supporters! Because of people like you, we are able to offer the best and most up-to-date Flipper Zero Firmware!
 
@@ -31,38 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0407-1539-0.80.2-fbaec5f](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-07 15:39 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-07 15:39 EST`
-- Added: [IR Scope (By kallanreed)](https://github.com/kallanreed/unleashed-firmware/tree/dev/applications/external/ir_scope)
-- Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
-- OFW: [WS: fix protocol TX141TH-BV2 #2559 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2559)
-- Updated: [NRF24 Batch v1.8 (By vad7)](https://github.com/vad7/nRF24-Batch)
-- UL: Updated: [Sub-GHz Bruteforcer v3.5 (By Ganapati/xMasterX/derskythe)](https://github.com/derskythe/flipperzero-subbrute/tree/master)
-- UL: Updated: [Sub-GHz Remote (By ESurge)](https://github.com/ESurge/flipperzero-firmware-unirfremix) (Update by xMasterX)
-- Updated: [Intravelometer (By theageoflove)](https://github.com/theageoflove/flipperzero-zeitraffer)
-- Updated: Sub-GHz CLI in hopes of fixing chat.
-- UL: [StarLine ignore option #410 (By gid9798)](https://github.com/DarkFlippers/unleashed-firmware/pull/410)
-- OFW PR Updated: [AVR Flasher WIP (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2475)
-- REVERT: Updated: Sub-GHz CLI in hopes of fixing chat.
-- UL: AnMotors AT4 - Add manually fixes (By XMasterx)
-- OFW: [SD Driver: do not cache sd status. #2560 (By DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2560)
-- OFW: [Moved ufbt to fbt codebase #2520 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2520)
-- OFW: [Graphics cleanup and icon rotation #2561 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/2561)
-- OFW: [Furi: more gpio checks in HAL #2549 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2549)
-- OFW: [Fixing parsing troika card number #2536 (By achistyakov)](https://github.com/flipperdevices/flipperzero-firmware/pull/2536)
-- UL: Merge Fixes (By xMasterX)
-- Updated: [EXTRA Demo (By Milk-Cool)](https://github.com/Milk-Cool/EXTRA-demo) (This app has VERY useful functions!)
-- Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
-- OFW: [FuriHal: fix gpio naming and add explicit pulls for vibro, speaker and ir_tx #2565 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2565)
-- Updated: SubGHz External (For New GPIO mapping)
-- Updated: [RC2014 ColecoVision (By ezod)](https://github.com/ezod/flipperzero-rc2014-coleco) (For New GPIO mapping)
-- Updated: [Temp Sensors Reader (By quen0n)](https://github.com/quen0n/Unitemp-Flipper-Zero-Plugin) `Req: BMP180/BMP280/BME280/BME680/DHT11/DHT22(AM2302)/AM2301/AM2320/HTU2XD/HTU21x/HDC1080/MAX31855/MAX6675` (For New GPIO mapping)
-- OFW: [scripts: sconsdist: added stub file artifact for older ufbt #2568 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2568)
-- UL: Updated: [Weather Station (By Skorpionm)-OFW](https://github.com/flipperdevices/flipperzero-firmware/pull/1833)
-- UL: Removed extra checks and platform modifications
-- OFW: [Fix gpio state isp programmer #2567 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2567)
-- UL: SubGHz: Keyboard lock fixed
-- Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-08 03:02 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-08 03:02 EST`
 - All [Patreon Members](https://www.patreon.com/RogueMaster/membership) on Apr 10th @ 12PM EST will be granted 10 submissions into our Wifi Dev Board giveaway! See [Discord](https://discord.gg/gF2bBUzAFe) #announcements for more details on how you can get more chances to win!
 
 <a name="release">
@@ -409,4 +379,4 @@ $ ./fbt dolphin_ext
 - [Wii EC Analyzer (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - [Zero Tracker (By DrZlo13)](https://github.com/DrZlo13/flipper-zero-music-tracker)
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0402-2350-0.80.2-27c3e55.tgz&channel=RM0402-2350-0.80.2-27c3e55&version=0.80.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0402-2350-0.80.2-27c3e55-NoAnim.tgz&channel=RM0402-2350-0.80.2-27c3e55-NoAnim&version=0.80.2)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0408-0302-0.81.1-1af0221.tgz&channel=RM0408-0302-0.81.1-1af0221&version=0.81.1) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0408-0302-0.81.1-1af0221-NoAnim.tgz&channel=RM0408-0302-0.81.1-1af0221-NoAnim&version=0.81.1)
