@@ -4,6 +4,7 @@ REM Stop this script when evasion is succeed
 REM and run your true payload
 REM optimised for Flipper Zero
 REM Auth: @nocomp
+REM Props: @FalsePhilosopher for showing @nocomp the trustedsec blog post this was built from
 REM Source: https://github.com/nocomp/Kiosk-evasion-BADUsb-Bruteforce
 DELAY 2000
 ALT F4
