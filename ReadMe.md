@@ -50,6 +50,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: Add alutech table to enviroment alloc and free (By xMasterX)
 - Updated: [Nightstand Clock (By nymda)](https://github.com/nymda/FlipperNightStand)
 - Added: Some [NFC FeliCa support (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2093)
+- SKIPPED THIS CRAP: [NFC disable EMV support #2571 (By gornekich)](https://github.com/flipperdevices/flipperzero-firmware/pull/2571)
+- OFW: [ufbt: project & debugging updates #2572 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2572)
 
 <a name="release">
 
