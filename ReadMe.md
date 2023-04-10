@@ -29,10 +29,10 @@ This software is for experimental purposes only and is not meant for any illegal
 
 <a name="latest">
 
-## Latest Updates - [PATREON: Latest Release RM0409-1910-0.81.1-59200fd](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
+## Latest Updates - [PATREON: Latest Release RM0409-2347-0.81.1-40dc1ec](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-09 21:22 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-09 21:22 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-09 23:47 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-09 23:47 EST`
 - All [Patreon Members](https://www.patreon.com/RogueMaster/membership) on Apr 10th @ 12PM EST will be granted 10 submissions into our Wifi Dev Board giveaway! See [Discord](https://discord.gg/gF2bBUzAFe) #announcements for more details on how you can get more chances to win!
 - Updated: [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dabtimer) (Removed PerMin Alert when Sound Off OR after alert chime)
 - Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
@@ -43,7 +43,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Temp Sensors Reader (By quen0n)](https://github.com/quen0n/Unitemp-Flipper-Zero-Plugin) `Req: BMP180/BMP280/BME280/BME680/DHT11/DHT22(AM2302)/AM2301/AM2320/HTU2XD/HTU21x/HDC1080/MAX31855/MAX6675`
 - Updated: [CLI Bridge (By ranchordo)](https://github.com/ranchordo/flipperzero-cli-bridge) - Unlock loader in cli bridge (fix subghz chat) (By Willy-JL)
 - Updated: [POCSAG Pager (By XMasterx & Shmuma)](https://github.com/xMasterX/flipper-pager) (Updates By Willy-JL)
-- Add XP to many hacking apps (Mostly By Willy-JL)
+- Add XP to many hacking apps (Mostly By Willy-JL) - DTMF Dolphin, RFID Fuzzer, iButton Fuzzer, IR Remote, Mfkey32, NFC Magic, NFC Magic Gen 4, NRF Sniffer, Picopass, SubGHz Playlist, POCSAG Pager, Protoview, Sentry Sage, Spectrum Analyzser, SubGhz Bruteforcer, Wifi Deauther V1, Wifi Deauther V2 & Wifi Marauder Companion.
 - Add lockable capability to Submenu module (By Willy-JL)
 - Add text input cursor position changes (By Willy-JL)
 - Updated Sub-GHz Remote to be External
