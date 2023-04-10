@@ -65,7 +65,6 @@ typedef enum {
     NfcReadModeMfClassic,
     NfcReadModeMfUltralight,
     NfcReadModeMfDesfire,
-    NfcReadModeEMV,
     NfcReadModeNFCA,
     NfcReadModeFelica,
 } NfcReadMode;

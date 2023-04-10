@@ -833,12 +833,6 @@ void nfc_worker_read_type(NfcWorker* nfc_worker) {
                         event = NfcWorkerEventReadMfDesfire;
                         break;
                     }
-                } else if(read_mode == NfcReadModeEMV) {
-                    nfc_worker->dev_data->protocol = NfcDeviceProtocolEMV;
-                    if(nfc_worker_read_bank_card(nfc_worker, &tx_rx)) {
-                        event = NfcWorkerEventReadBankCard;
-                        break;
-                    }
                 } else if(read_mode == NfcReadModeNFCA) {
                     nfc_worker->dev_data->protocol = NfcDeviceProtocolUnknown;
                     event = NfcWorkerEventReadUidNfcA;
