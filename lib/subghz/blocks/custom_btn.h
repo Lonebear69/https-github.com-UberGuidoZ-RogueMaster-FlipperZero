@@ -4,6 +4,10 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void subghz_custom_btn_set(uint8_t b);
 
 uint8_t subghz_custom_btn_get();
@@ -15,3 +19,7 @@ uint8_t subghz_custom_btn_get_original();
 void subghz_custom_btn_set_max(uint8_t b);
 
 void subghz_custom_btns_reset();
+
+#ifdef __cplusplus
+}
+#endif
