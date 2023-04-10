@@ -5,6 +5,7 @@ enum SubmenuIndex {
     SubmenuIndexReadMifareClassic,
     SubmenuIndexReadMifareDesfire,
     SubmenuIndexReadMfUltralight,
+    SubmenuIndexReadEMV,
     SubmenuIndexReadNFCA,
     SubmenuIndexReadFelica,
 };
@@ -35,6 +36,12 @@ void nfc_scene_read_card_type_on_enter(void* context) {
         submenu,
         "Read NTAG/Ultralight",
         SubmenuIndexReadMfUltralight,
+        nfc_scene_read_card_type_submenu_callback,
+        nfc);
+    submenu_add_item(
+        submenu,
+        "Read EMV card",
+        SubmenuIndexReadEMV,
         nfc_scene_read_card_type_submenu_callback,
         nfc);
     submenu_add_item(
@@ -72,6 +79,11 @@ bool nfc_scene_read_card_type_on_event(void* context, SceneManagerEvent event) {
         }
         if(event.event == SubmenuIndexReadMfUltralight) {
             nfc->dev->dev_data.read_mode = NfcReadModeMfUltralight;
+            scene_manager_next_scene(nfc->scene_manager, NfcSceneRead);
+            consumed = true;
+        }
+        if(event.event == SubmenuIndexReadEMV) {
+            nfc->dev->dev_data.read_mode = NfcReadModeEMV;
             scene_manager_next_scene(nfc->scene_manager, NfcSceneRead);
             consumed = true;
         }
