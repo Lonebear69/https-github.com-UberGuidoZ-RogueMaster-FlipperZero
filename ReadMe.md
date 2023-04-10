@@ -48,6 +48,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Add text input cursor position changes (By Willy-JL)
 - Updated Sub-GHz Remote to be External
 - UL: Add alutech table to enviroment alloc and free (By xMasterX)
+- Updated: [Nightstand Clock (By nymda)](https://github.com/nymda/FlipperNightStand)
 
 <a name="release">
 

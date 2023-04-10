@@ -12,7 +12,6 @@
 /*
     This is a modified version of the default clock app intended for use overnight
     Up / Down controls the displays brightness. Down at brightness 0 turns the notification LED on and off.
-    Default clock button actions replaced with long presses.
 */
 
 int brightness = 5;
@@ -278,6 +277,13 @@ int32_t clock_app(void* p) {
 
     clock_state_init(plugin_state);
 
+    notif = furi_record_open(RECORD_NOTIFICATION);
+    float tmpBrightness = notif->settings.display_brightness;
+    brightness = tmpBrightness * 100; // Keep current brightness by default
+
+    notification_message(notif, &sequence_display_backlight_enforce_on);
+    notification_message(notif, &led_off);
+
     // Set system callbacks
     ViewPort* view_port = view_port_alloc();
     view_port_draw_callback_set(view_port, clock_render_callback, plugin_state);
@@ -302,12 +308,6 @@ int32_t clock_app(void* p) {
     furi_timer_start(timer, furi_kernel_get_tick_frequency());
     //FURI_LOG_D(TAG, "Timer started");
 
-    notif = furi_record_open(RECORD_NOTIFICATION);
-    float tmpBrightness = notif->settings.display_brightness;
-
-    notification_message(notif, &sequence_display_backlight_enforce_on);
-    notification_message(notif, &led_off);
-
     // Main loop
     PluginEvent event;
     for(bool processing = true; processing;) {
@@ -318,7 +318,7 @@ int32_t clock_app(void* p) {
         if(furi_mutex_acquire(plugin_state->mutex, FuriWaitForever) != FuriStatusOk) continue;
         // press events
         if(event.type == EventTypeKey) {
-            if(event.input.type == InputTypeLong) {
+            if(event.input.type == InputTypeShort) {
                 switch(event.input.key) {
                 case InputKeyLeft:
                     // Reset seconds
@@ -332,11 +332,6 @@ int32_t clock_app(void* p) {
                     // Exit the plugin
                     processing = false;
                     break;
-                default:
-                    break;
-                }
-            } else if(event.input.type == InputTypeShort) {
-                switch(event.input.key) {
                 case InputKeyUp:
                     handle_up();
                     break;
@@ -359,6 +354,7 @@ int32_t clock_app(void* p) {
     view_port_enabled_set(view_port, false);
     gui_remove_view_port(gui, view_port);
     furi_record_close(RECORD_GUI);
+    furi_record_close(RECORD_NOTIFICATION);
     view_port_free(view_port);
     furi_message_queue_free(plugin_state->event_queue);
     furi_mutex_free(plugin_state->mutex);
