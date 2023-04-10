@@ -33,7 +33,6 @@ This software is for experimental purposes only and is not meant for any illegal
 
 - Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-10 15:57 EST`
 - Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-10 15:57 EST`
-- All [Patreon Members](https://www.patreon.com/RogueMaster/membership) on Apr 10th @ 12PM EST will be granted 10 submissions into our Wifi Dev Board giveaway! See [Discord](https://discord.gg/gF2bBUzAFe) #announcements for more details on how you can get more chances to win!
 - Updated: [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dabtimer) (Removed PerMin Alert when Sound Off OR after alert chime)
 - Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
 - Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
@@ -52,6 +51,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - Added: Some [NFC FeliCa support (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2093)
 - SKIPPED THIS CRAP: [NFC disable EMV support #2571 (By gornekich)](https://github.com/flipperdevices/flipperzero-firmware/pull/2571)
 - OFW: [ufbt: project & debugging updates #2572 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2572)
+- FLIPPER ZERO Giveaway on our [Discord](https://discord.gg/gF2bBUzAFe) #announcements!
 
 <a name="release">
 
