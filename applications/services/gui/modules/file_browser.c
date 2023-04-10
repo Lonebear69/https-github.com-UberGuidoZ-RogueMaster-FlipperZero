@@ -21,8 +21,6 @@
 
 #define ITEM_LIST_LEN_MAX 50
 
-#define CUSTOM_ICON_MAX_SIZE 32
-
 #define SCROLL_INTERVAL (333)
 #define SCROLL_DELAY (2)
 
@@ -602,7 +600,8 @@ static void browser_draw_list(Canvas* canvas, FileBrowserModel* model) {
             (show_scrollbar ? MAX_LEN_PX - 6 : MAX_LEN_PX),
             filename,
             scroll_counter,
-            (model->item_idx != idx));
+            (model->item_idx != idx),
+            false);
     }
 
     if(show_scrollbar) {

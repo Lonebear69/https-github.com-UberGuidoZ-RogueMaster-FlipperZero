@@ -5,6 +5,7 @@
 #include <input/input.h>
 #include <dialogs/dialogs.h>
 #include <IR_Remote_icons.h>
+#include <dolphin/dolphin.h>
 
 #include <notification/notification.h>
 #include <notification/notification_messages.h>
@@ -162,6 +163,7 @@ int32_t infrared_remote_app(void* p) {
     FuriMessageQueue* event_queue = furi_message_queue_alloc(8, sizeof(InputEvent));
 
     // App button string
+    DOLPHIN_DEED(DolphinDeedPluginStart);
     IRApp* app = malloc(sizeof(IRApp));
     app->up_button = furi_string_alloc();
     app->down_button = furi_string_alloc();

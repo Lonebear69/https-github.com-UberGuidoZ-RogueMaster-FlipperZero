@@ -85,7 +85,11 @@ int32_t gps_app(void* p) {
     FuriMessageQueue* event_queue = furi_message_queue_alloc(8, sizeof(PluginEvent));
 
     GpsUart* gps_uart = gps_uart_enable();
-    if(gps_uart == NULL) {
+
+    gps_uart->mutex = furi_mutex_alloc(FuriMutexTypeNormal);
+    if(!gps_uart->mutex) {
+        FURI_LOG_E("GPS", "cannot create mutex\r\n");
+        free(gps_uart);
         return 255;
     }
 
@@ -169,8 +173,6 @@ int32_t gps_app(void* p) {
                     }
                 }
             }
-        } else {
-            FURI_LOG_D("GPS", "FuriMessageQueue: event timeout");
         }
         if(!gps_uart->changing_baudrate) {
             view_port_update(view_port);

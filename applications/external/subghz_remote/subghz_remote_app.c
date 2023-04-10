@@ -19,6 +19,7 @@
 #include <lib/subghz/types.h>
 #include <lib/subghz/protocols/keeloq.h>
 #include <lib/subghz/protocols/star_line.h>
+#include <dolphin/dolphin.h>
 
 #include <lib/subghz/blocks/custom_btn.h>
 
@@ -820,6 +821,7 @@ void subghz_remote_free(SubGHzRemote* app, bool with_subghz) {
 
 int32_t subghz_remote_app(void* p) {
     UNUSED(p);
+    DOLPHIN_DEED(DolphinDeedPluginStart);
     SubGHzRemote* app = subghz_remote_alloc();
 
     app->file_path = furi_string_alloc();
@@ -835,11 +837,7 @@ int32_t subghz_remote_app(void* p) {
     app->file_result = 3;
 
     Storage* storage = furi_record_open(RECORD_STORAGE);
-    storage_common_migrate(storage, EXT_PATH("subghz/unirf"), SUBREMOTEMAP_FOLDER);
-    if(!storage_simply_mkdir(storage, SUBREMOTEMAP_FOLDER)) {
-        FURI_LOG_E(TAG, "Could not create folder %s", SUBREMOTEMAP_FOLDER);
-    }
-    storage_common_migrate(storage, EXT_PATH("unirf"), SUBREMOTEMAP_FOLDER);
+
     if(!storage_simply_mkdir(storage, SUBREMOTEMAP_FOLDER)) {
         FURI_LOG_E(TAG, "Could not create folder %s", SUBREMOTEMAP_FOLDER);
     }

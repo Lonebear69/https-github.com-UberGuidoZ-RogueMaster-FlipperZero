@@ -41,6 +41,12 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [DnD Dice (By Ka3u6y6a)](https://github.com/Ka3u6y6a/flipper-zero-dice)
 - UL: Updated: [Sub-GHz Remote (By ESurge)](https://github.com/ESurge/flipperzero-firmware-unirfremix)
 - Updated: [Temp Sensors Reader (By quen0n)](https://github.com/quen0n/Unitemp-Flipper-Zero-Plugin) `Req: BMP180/BMP280/BME280/BME680/DHT11/DHT22(AM2302)/AM2301/AM2320/HTU2XD/HTU21x/HDC1080/MAX31855/MAX6675`
+- Updated: [CLI Bridge (By ranchordo)](https://github.com/ranchordo/flipperzero-cli-bridge) - Unlock loader in cli bridge (fix subghz chat) (By Willy-JL)
+- Updated: [POCSAG Pager (By XMasterx & Shmuma)](https://github.com/xMasterX/flipper-pager) (Updates By Willy-JL)
+- Add XP to many hacking apps (Mostly By Willy-JL)
+- Add lockable capability to Submenu module (By Willy-JL)
+- Add text input cursor position changes (By Willy-JL)
+- Updated Sub-GHz Remote to be External
 
 <a name="release">
 
