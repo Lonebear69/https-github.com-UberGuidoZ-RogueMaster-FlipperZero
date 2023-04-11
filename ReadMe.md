@@ -53,6 +53,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [ufbt: project & debugging updates #2572 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2572)
 - FLIPPER ZERO Giveaway on our [Discord](https://discord.gg/gF2bBUzAFe) #announcements!
 - Updated: [Geiger Counter (By nmrr)](https://github.com/nmrr/flipperzero-geigercounter)
+- Updated: [WiFi (Marauder) v3.1.3 (Updated By tcpassos)](https://github.com/tcpassos/flipperzero-firmware-with-wifi-marauder-companion)
 
 <a name="release">
 
