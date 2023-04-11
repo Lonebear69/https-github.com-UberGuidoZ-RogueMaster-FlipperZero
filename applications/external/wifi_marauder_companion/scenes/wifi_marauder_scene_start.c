@@ -147,8 +147,9 @@ static void wifi_marauder_scene_start_var_list_enter_callback(void* context, uin
     // Try to open the automation script
     // TODO: Improve file selection, use a file explorer
     if(index == NUM_MENU_ITEMS - 2) {
-        app->script = wifi_marauder_script_parse_file(MARAUDER_APP_SCRIPT_PATH("script.json"), app->storage);
-        if (!app->script) {
+        app->script =
+            wifi_marauder_script_parse_file(MARAUDER_APP_SCRIPT_PATH("script.json"), app->storage);
+        if(!app->script) {
             return;
         }
     }

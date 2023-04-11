@@ -71,11 +71,15 @@ void wifi_marauder_scene_console_output_on_enter(void* context) {
     wifi_marauder_uart_set_handle_rx_data_cb(
         app->lp_uart,
         wifi_marauder_console_output_handle_rx_packets_cb); // setup callback for packets rx thread
-    
+
     // Run the script if the file with the script has been opened
     if(app->script != NULL) {
         app->script_worker = wifi_marauder_script_worker_alloc();
-        wifi_marauder_script_worker_start(app->script_worker, app->script, wifi_marauder_script_execute_stage, app->script_worker);
+        wifi_marauder_script_worker_start(
+            app->script_worker,
+            app->script,
+            wifi_marauder_script_execute_stage,
+            app->script_worker);
     }
 
     // Get ready to send command
@@ -88,7 +92,8 @@ void wifi_marauder_scene_console_output_on_enter(void* context) {
         }
 
         // If it is a sniff function, open the pcap file for recording
-        if(app->ok_to_save_pcaps && strncmp("sniff", app->selected_tx_string, strlen("sniff")) == 0) {
+        if(app->ok_to_save_pcaps &&
+           strncmp("sniff", app->selected_tx_string, strlen("sniff")) == 0) {
             app->is_writing_pcap = true;
             wifi_marauder_create_pcap_file(app);
         }
@@ -122,11 +127,11 @@ void wifi_marauder_scene_console_output_on_exit(void* context) {
     wifi_marauder_uart_set_handle_rx_data_cb(app->uart, NULL);
     wifi_marauder_uart_set_handle_rx_data_cb(app->lp_uart, NULL);
 
-    if (app->script_worker) {
+    if(app->script_worker) {
         wifi_marauder_script_worker_free(app->script_worker);
     }
 
-    if (app->script) {
+    if(app->script) {
         wifi_marauder_script_free(app->script);
     }
 
@@ -144,5 +149,4 @@ void wifi_marauder_scene_console_output_on_exit(void* context) {
     if(app->log_file && storage_file_is_open(app->log_file)) {
         storage_file_close(app->log_file);
     }
-
 }

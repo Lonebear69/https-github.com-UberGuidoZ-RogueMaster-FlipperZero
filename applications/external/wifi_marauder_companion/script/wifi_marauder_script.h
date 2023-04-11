@@ -42,7 +42,7 @@ typedef enum {
 typedef struct WifiMarauderScriptStage {
     WifiMarauderScriptStageType type;
     void* stage;
-    struct WifiMarauderScriptStage *next_stage;
+    struct WifiMarauderScriptStage* next_stage;
 } WifiMarauderScriptStage;
 
 typedef struct WifiMarauderScriptStageScan {
@@ -63,7 +63,7 @@ typedef struct WifiMarauderScriptStageSniffPmkid {
 } WifiMarauderScriptStageSniffPmkid;
 
 typedef struct WifiMarauderScriptStageBeaconList {
-    char **ssids;
+    char** ssids;
     int ssid_count;
     int timeout;
 } WifiMarauderScriptStageBeaconList;
@@ -71,12 +71,12 @@ typedef struct WifiMarauderScriptStageBeaconList {
 // Script
 typedef struct WifiMarauderScript {
     char* name;
-    WifiMarauderScriptStage *first_stage;
+    WifiMarauderScriptStage* first_stage;
     int repeat;
 } WifiMarauderScript;
 
-WifiMarauderScript *wifi_marauder_script_alloc();
-WifiMarauderScript *wifi_marauder_script_parse_raw(const char* script_raw);
-WifiMarauderScript *wifi_marauder_script_parse_file(const char* file_path, Storage* storage);
+WifiMarauderScript* wifi_marauder_script_alloc();
+WifiMarauderScript* wifi_marauder_script_parse_raw(const char* script_raw);
+WifiMarauderScript* wifi_marauder_script_parse_file(const char* file_path, Storage* storage);
 //void* wifi_marauder_script_get_stage(WifiMarauderScript *script, WifiMarauderScriptStageType stage);
-void wifi_marauder_script_free(WifiMarauderScript *script);
+void wifi_marauder_script_free(WifiMarauderScript* script);
