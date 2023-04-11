@@ -52,6 +52,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - SKIPPED THIS CRAP: [NFC disable EMV support #2571 (By gornekich)](https://github.com/flipperdevices/flipperzero-firmware/pull/2571)
 - OFW: [ufbt: project & debugging updates #2572 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2572)
 - FLIPPER ZERO Giveaway on our [Discord](https://discord.gg/gF2bBUzAFe) #announcements!
+- Updated: [Geiger Counter (By nmrr)](https://github.com/nmrr/flipperzero-geigercounter)
 
 <a name="release">
 

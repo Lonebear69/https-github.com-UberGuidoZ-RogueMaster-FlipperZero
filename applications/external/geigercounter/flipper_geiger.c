@@ -56,13 +56,34 @@ static void draw_callback(Canvas* canvas, void* ctx) {
             "%ld cps - %.2f uSv/h",
             displayStruct.cps,
             ((double)displayStruct.cpm * (double)CONVERSION_FACTOR));
-    else
+    else if(displayStruct.data == 2)
         snprintf(
             buffer,
             sizeof(buffer),
             "%ld cps - %.2f mSv/y",
             displayStruct.cps,
             (((double)displayStruct.cpm * (double)CONVERSION_FACTOR)) * (double)8.76);
+    else if(displayStruct.data == 3)
+        snprintf(
+            buffer,
+            sizeof(buffer),
+            "%ld cps - %.4f Rad/h",
+            displayStruct.cps,
+            ((double)displayStruct.cpm * (double)CONVERSION_FACTOR) / (double)10000);
+    else if(displayStruct.data == 4)
+        snprintf(
+            buffer,
+            sizeof(buffer),
+            "%ld cps - %.2f mR/h",
+            displayStruct.cps,
+            ((double)displayStruct.cpm * (double)CONVERSION_FACTOR) / (double)10);
+    else
+        snprintf(
+            buffer,
+            sizeof(buffer),
+            "%ld cps - %.2f uR/h",
+            displayStruct.cps,
+            ((double)displayStruct.cpm * (double)CONVERSION_FACTOR) * (double)100);
 
     for(int i = 0; i < SCREEN_SIZE_X; i += 2) {
         float Y = SCREEN_SIZE_Y - (displayStruct.line[i / 2] * displayStruct.coef);
@@ -167,7 +188,7 @@ int32_t flipper_geiger_app(void* p) {
                     if(mutexVal.data != 0)
                         mutexVal.data--;
                     else
-                        mutexVal.data = 2;
+                        mutexVal.data = 5;
 
                     screenRefresh = 1;
                     furi_mutex_release(mutexVal.mutex);
@@ -175,7 +196,7 @@ int32_t flipper_geiger_app(void* p) {
                            event.input.type == InputTypeShort)) {
                     furi_mutex_acquire(mutexVal.mutex, FuriWaitForever);
 
-                    if(mutexVal.data != 2)
+                    if(mutexVal.data != 5)
                         mutexVal.data++;
                     else
                         mutexVal.data = 0;
