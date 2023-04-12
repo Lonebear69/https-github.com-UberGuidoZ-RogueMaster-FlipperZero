@@ -50,7 +50,7 @@ This software is for experimental purposes only and is not meant for any illegal
 
 - Close qFlipper
 - Use Web Installer for easy install
-OR
+### OR
 - Extract/unzip the downloaded file from above to a folder on your computer (Use 7Zip or WinRAR)
 - Copy the entire folder to the update folder onto the SD card you're using in your FlipperZero
 - Once the SD card is back in the Flipper (or you've copied the files successfully via qFlipper), press down at the Desktop (the screen with the animations)
