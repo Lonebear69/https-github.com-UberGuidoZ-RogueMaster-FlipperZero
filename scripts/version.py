@@ -61,7 +61,7 @@ class GitVersion:
                 "GIT_BRANCH": "dev",
                 "GIT_BRANCH_NUM": branch_num,
                 "FURI_CUSTOM_FLIPPER_NAME": custom_fz_name,
-                "VERSION": "0.81.1",
+                "VERSION": "0.81.2",
                 "BUILD_DIRTY": 0,
             }
         else:
@@ -69,7 +69,7 @@ class GitVersion:
                 "GIT_COMMIT": commit,
                 "GIT_BRANCH": "dev",
                 "GIT_BRANCH_NUM": branch_num,
-                "VERSION": "0.81.1",
+                "VERSION": "0.81.2",
                 "BUILD_DIRTY": 0,
             }
 
