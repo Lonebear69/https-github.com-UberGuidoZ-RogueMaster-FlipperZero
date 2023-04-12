@@ -55,6 +55,8 @@ This software is for experimental purposes only and is not meant for any illegal
 - Updated: [Pong (By nmrr)](https://github.com/nmrr/flipperzero-pong)
 - Updated: [Geiger Counter (By nmrr)](https://github.com/nmrr/flipperzero-geigercounter)
 - Updated: [WiFi (Marauder) v3.1.3 (Updated By tcpassos)](https://github.com/tcpassos/flipperzero-firmware-with-wifi-marauder-companion)
+- OFW: [Bugfix: ISP Programmer and SubGhz #2574 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2574)
+- OFW: [FuriHal: pwr pulls for some pins, 2nd iteration #2579 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2579)
 
 <a name="release">
 
