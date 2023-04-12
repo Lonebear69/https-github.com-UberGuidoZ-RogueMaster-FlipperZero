@@ -31,8 +31,8 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0411-1433-0.81.1-8dfc752](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-11 21:27 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-11 21:27 EST`
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-12 01:28 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-12 01:28 EST`
 - Updated: [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dabtimer) (Removed PerMin Alert when Sound Off OR after alert chime)
 - Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
 - Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
@@ -52,9 +52,9 @@ This software is for experimental purposes only and is not meant for any illegal
 - SKIPPED THIS CRAP: [NFC disable EMV support #2571 (By gornekich)](https://github.com/flipperdevices/flipperzero-firmware/pull/2571)
 - OFW: [ufbt: project & debugging updates #2572 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2572)
 - FLIPPER ZERO Giveaway on our [Discord](https://discord.gg/gF2bBUzAFe) #announcements!
-- Updated: [WiFi (Marauder) v3.1.3 (Updated By tcpassos)](https://github.com/tcpassos/flipperzero-firmware-with-wifi-marauder-companion)
 - Updated: [Pong (By nmrr)](https://github.com/nmrr/flipperzero-pong)
 - Updated: [Geiger Counter (By nmrr)](https://github.com/nmrr/flipperzero-geigercounter)
+- Updated: [WiFi (Marauder) v3.1.3 (Updated By tcpassos)](https://github.com/tcpassos/flipperzero-firmware-with-wifi-marauder-companion)
 
 <a name="release">
 
