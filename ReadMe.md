@@ -4,7 +4,7 @@
 &nbsp;<a href='https://shop.rogue-master.net/' target='_blank'><img src='https://rogue-master.net/img/Merch.png' alt='RM Merch'' title='RM Merch'></a>
 &nbsp;<a href='https://github.com/RogueMaster/awesome-flipperzero-withModules' target='_blank'><img src='https://rogue-master.net/img/Resources.png' alt='More Research / Assets' title='More Research / Assets'></a></h1>
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4.tgz&channel=RM0412-1357-0.81.2-bee09a4&version=0.81.1) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4-NoAnim.tgz&channel=RM0412-1357-0.81.2-bee09a4-NoAnim&version=0.81.1)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4.tgz&channel=RM0412-1357-0.81.2-bee09a4&version=0.81.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4-NoAnim.tgz&channel=RM0412-1357-0.81.2-bee09a4-NoAnim&version=0.81.2)
 
 ## Thank you so much to our RM Pro/Extreme Patreon supporters! Because of people like you, we are able to offer the best and most up-to-date Flipper Zero Firmware!
 
@@ -380,4 +380,4 @@ $ ./fbt dolphin_ext
 - [Wii EC Analyzer (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - [Zero Tracker (By DrZlo13)](https://github.com/DrZlo13/flipper-zero-music-tracker)
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4.tgz&channel=RM0412-1357-0.81.2-bee09a4&version=0.81.1) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4-NoAnim.tgz&channel=RM0412-1357-0.81.2-bee09a4-NoAnim&version=0.81.1)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4.tgz&channel=RM0412-1357-0.81.2-bee09a4&version=0.81.2) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4-NoAnim.tgz&channel=RM0412-1357-0.81.2-bee09a4-NoAnim&version=0.81.2)
