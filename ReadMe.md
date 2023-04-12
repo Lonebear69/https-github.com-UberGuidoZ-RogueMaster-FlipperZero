@@ -4,7 +4,7 @@
 &nbsp;<a href='https://shop.rogue-master.net/' target='_blank'><img src='https://rogue-master.net/img/Merch.png' alt='RM Merch'' title='RM Merch'></a>
 &nbsp;<a href='https://github.com/RogueMaster/awesome-flipperzero-withModules' target='_blank'><img src='https://rogue-master.net/img/Resources.png' alt='More Research / Assets' title='More Research / Assets'></a></h1>
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0408-0302-0.81.1-1af0221.tgz&channel=RM0408-0302-0.81.1-1af0221&version=0.81.1) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0408-0302-0.81.1-1af0221-NoAnim.tgz&channel=RM0408-0302-0.81.1-1af0221-NoAnim&version=0.81.1)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4.tgz&channel=RM0412-1357-0.81.2-bee09a4&version=0.81.1) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4-NoAnim.tgz&channel=RM0412-1357-0.81.2-bee09a4-NoAnim&version=0.81.1)
 
 ## Thank you so much to our RM Pro/Extreme Patreon supporters! Because of people like you, we are able to offer the best and most up-to-date Flipper Zero Firmware!
 
@@ -31,32 +31,9 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Latest Updates - [PATREON: Latest Release RM0412-1340-0.81.2-5c2cfaf](https://www.patreon.com/RogueMaster?filters[tag]=Latest%20Release)
 
-- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-12 13:40 EST`
-- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-12 13:40 EST`
-- Updated: [Dab Timer (By RogueMaster)](https://github.com/RogueMaster/flipperzero-dabtimer) (Removed PerMin Alert when Sound Off OR after alert chime)
-- Updated: [Flizzer Tracker (By LTVA1)](https://github.com/LTVA1/flizzer_tracker)
-- Updated: [UART Terminal (By cool4uma)](https://github.com/cool4uma/UART_Terminal)
-- Updated: [DnD Dice (By Ka3u6y6a)](https://github.com/Ka3u6y6a/flipper-zero-dice)
-- UL: Updated: [Sub-GHz Remote (By ESurge)](https://github.com/ESurge/flipperzero-firmware-unirfremix)
-- Updated: [Temp Sensors Reader (By quen0n)](https://github.com/quen0n/Unitemp-Flipper-Zero-Plugin) `Req: BMP180/BMP280/BME280/BME680/DHT11/DHT22(AM2302)/AM2301/AM2320/HTU2XD/HTU21x/HDC1080/MAX31855/MAX6675`
-- Updated: [CLI Bridge (By ranchordo)](https://github.com/ranchordo/flipperzero-cli-bridge) - Unlock loader in cli bridge (fix subghz chat) (By Willy-JL)
-- Updated: [POCSAG Pager (By XMasterx & Shmuma)](https://github.com/xMasterX/flipper-pager) (Updates By Willy-JL)
-- Add XP to many hacking apps (Mostly By Willy-JL) - DTMF Dolphin, RFID Fuzzer, iButton Fuzzer, IR Remote, Mfkey32, NFC Magic, NFC Magic Gen 4, NRF Sniffer, Picopass, SubGHz Playlist, POCSAG Pager, Protoview, Sentry Sage, Spectrum Analyzser, SubGhz Bruteforcer, Wifi Deauther V1, Wifi Deauther V2 & Wifi Marauder Companion.
-- Add lockable capability to Submenu module (By Willy-JL)
-- Add text input cursor position changes (By Willy-JL)
-- Updated Sub-GHz Remote to be External
-- UL: Add alutech table to enviroment alloc and free (By xMasterX)
-- Updated: [Nightstand Clock (By nymda)](https://github.com/nymda/FlipperNightStand)
-- Added: Some [NFC FeliCa support (By nullableVoidPtr)](https://github.com/flipperdevices/flipperzero-firmware/pull/2093)
-- SKIPPED THIS CRAP: [NFC disable EMV support #2571 (By gornekich)](https://github.com/flipperdevices/flipperzero-firmware/pull/2571)
-- OFW: [ufbt: project & debugging updates #2572 (By hedger)](https://github.com/flipperdevices/flipperzero-firmware/pull/2572)
-- FLIPPER ZERO Giveaway on our [Discord](https://discord.gg/gF2bBUzAFe) #announcements!
-- Updated: [Pong (By nmrr)](https://github.com/nmrr/flipperzero-pong)
-- Updated: [Geiger Counter (By nmrr)](https://github.com/nmrr/flipperzero-geigercounter)
-- OFW: [Bugfix: ISP Programmer and SubGhz #2574 (By Skorpionm)](https://github.com/flipperdevices/flipperzero-firmware/pull/2574)
-- OFW: [FuriHal: pwr pulls for some pins, 2nd iteration #2579 (By skotopes)](https://github.com/flipperdevices/flipperzero-firmware/pull/2579)
-- Updated: [Authenticator/TOTP (By akopachov)](https://github.com/akopachov/flipper-zero_authenticator)
-- Updated: [WiFi (Marauder) v3.1.3 (Updated By tcpassos)](https://github.com/tcpassos/flipperzero-firmware-with-wifi-marauder-companion)
+- Last Synced/Checked Unleashed, changes in [changelog](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/CHANGELOG.md) and in [commits](https://github.com/DarkFlippers/unleashed-firmware/commits/dev): `2023-04-12 13:57 EST`
+- Last Synced/Checked OFW, changes in [commits](https://github.com/flipperdevices/flipperzero-firmware/commits/dev): `2023-04-12 13:57 EST`
+- All [Patreon Members](https://www.patreon.com/RogueMaster/membership) on Apr 14th @ 12PM EST will be granted 10 submissions into our Flipper Zero giveaway! See [Discord](https://discord.gg/gF2bBUzAFe) #announcements for more details on how you can get more chances to win!
 
 <a name="release">
 
@@ -403,4 +380,4 @@ $ ./fbt dolphin_ext
 - [Wii EC Analyzer (By csBlueChip)](https://github.com/csBlueChip/FlipperZero_WiiEC)
 - [Zero Tracker (By DrZlo13)](https://github.com/DrZlo13/flipper-zero-music-tracker)
 
-# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0408-0302-0.81.1-1af0221.tgz&channel=RM0408-0302-0.81.1-1af0221&version=0.81.1) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0408-0302-0.81.1-1af0221-NoAnim.tgz&channel=RM0408-0302-0.81.1-1af0221-NoAnim&version=0.81.1)
+# Install GitHub Version With [WEB INSTALLER](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4.tgz&channel=RM0412-1357-0.81.2-bee09a4&version=0.81.1) OR  [WITHOUT ANIMATIONS](https://lab.flipper.net/?url=https%3A%2F%2Frogue-master.net%2F%3Ffile%3DRM0412-1357-0.81.2-bee09a4-NoAnim.tgz&channel=RM0412-1357-0.81.2-bee09a4-NoAnim&version=0.81.1)
