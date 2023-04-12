@@ -2,7 +2,7 @@
 #include <furi_hal_usb_hid.h>
 #include "../../services/convert/convert.h"
 #include "../../types/token_info.h"
-#include "../type-code-common.h"
+#include "../type_code_common.h"
 
 static void totp_type_code_worker_restore_usb_mode(TotpUsbTypeCodeWorkerContext* context) {
     if(context->usb_mode_prev != NULL) {

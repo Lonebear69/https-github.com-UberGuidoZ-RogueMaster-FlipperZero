@@ -5,7 +5,7 @@
 #include <storage/storage.h>
 #include "../../types/common.h"
 #include "../../types/token_info.h"
-#include "../type-code-common.h"
+#include "../type_code_common.h"
 
 #define HID_BT_KEYS_STORAGE_PATH EXT_PATH("authenticator/.bt_hid.keys")
 
