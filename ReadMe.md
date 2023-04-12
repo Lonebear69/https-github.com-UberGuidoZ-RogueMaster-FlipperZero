@@ -48,6 +48,9 @@ This software is for experimental purposes only and is not meant for any illegal
 
 ## Install Instructions
 
+- Close qFlipper
+- Use Web Installer for easy install
+OR
 - Extract/unzip the downloaded file from above to a folder on your computer (Use 7Zip or WinRAR)
 - Copy the entire folder to the update folder onto the SD card you're using in your FlipperZero
 - Once the SD card is back in the Flipper (or you've copied the files successfully via qFlipper), press down at the Desktop (the screen with the animations)
@@ -72,8 +75,6 @@ $ ./fbt dolphin_ext
 
 ## How To
 
-- [HERE IS A GUIDE FOR INSTALL (BY PINGYWON)](https://flipper.pingywon.com/)
-- [HERE IS A NOOB GUIDE TO FLASH AND UNLOCK (BY interestingsoup)](https://interestingsoup.com/n00b-guide-flashing-flipper-zero-to-rougemaster/)
 - [How to install firmware](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/documentation/HowToInstall.md)
 - [How to build firmware](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/documentation/HowToBuild.md)
 - [How to change Flipper name](https://github.com/RogueMaster/flipperzero-firmware/blob/420/documentation/CustomFlipperName.md)
@@ -82,7 +83,6 @@ $ ./fbt dolphin_ext
 - [Barcode Generator readme](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/documentation/BarcodeGenerator.md)
 - [How to extend SubGHz frequency range](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/documentation/DangerousSettings.md)
 - [How to add extra SubGHz frequencies](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/documentation/SubGHzSettings.md)
-- [💎 Extra plugins precompiled for Unleashed](https://github.com/UberGuidoZ/Flipper/tree/main/Applications/Unleashed)
 - [Configure Sub-GHz Remote App](https://github.com/RogueMaster/flipperzero-firmware/blob/420/documentation/SubGHzRemotePlugin.md)
 - [GAMES ONLY MODE PASSWORD: UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT IN CLOCK](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/GAMES_ONLY.md)
 - [FLIPPER PROJECT WISH LIST](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/RoadMap.md)
