@@ -103,8 +103,9 @@ static bool subghz_tx(SubGhz* subghz, uint32_t frequency) {
     furi_assert(subghz->txrx->txrx_state != SubGhzTxRxStateSleep);
     furi_hal_subghz_idle();
     furi_hal_subghz_set_frequency_and_path(frequency);
-    furi_hal_gpio_write(&gpio_cc1101_g0, false);
-    furi_hal_gpio_init(&gpio_cc1101_g0, GpioModeOutputPushPull, GpioPullNo, GpioSpeedLow);
+    furi_hal_gpio_write(furi_hal_subghz.cc1101_g0_pin, false);
+    furi_hal_gpio_init(
+        furi_hal_subghz.cc1101_g0_pin, GpioModeOutputPushPull, GpioPullNo, GpioSpeedLow);
     bool ret = furi_hal_subghz_tx();
     if(ret) {
         subghz_speaker_on(subghz);

@@ -13,13 +13,6 @@
 #include <furi.h>
 #include <math.h>
 
-#define INFRARED_TX_DEBUG 0
-
-#if INFRARED_TX_DEBUG == 1
-#define gpio_infrared_tx gpio_infrared_tx_debug
-const GpioPin gpio_infrared_tx_debug = {.port = GPIOA, .pin = GpioModeAnalog};
-#endif
-
 #define INFRARED_TIM_TX_DMA_BUFFER_SIZE 200
 #define INFRARED_POLARITY_SHIFT 1
 
