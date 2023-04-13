@@ -20,7 +20,7 @@ Press Back to Exit
 
 
 
-## Setting up the `subghz_remote/example.txt` file:
+## Setting up the `/ext/subghz/subghz_remote/example.txt` file:
 
 ```
 UP: /ext/subghz/Up.sub
