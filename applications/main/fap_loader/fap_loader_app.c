@@ -1,6 +1,7 @@
 #include "fap_loader_app.h"
 
 #include <furi.h>
+#include <furi_hal_debug.h>
 
 #include <assets_icons.h>
 #include <gui/gui.h>
@@ -23,8 +24,6 @@ struct FapLoader {
     ViewDispatcher* view_dispatcher;
     Loading* loading;
 };
-
-volatile bool fap_loader_debug_active = false;
 
 bool fap_loader_load_name_and_icon(
     FuriString* path,
