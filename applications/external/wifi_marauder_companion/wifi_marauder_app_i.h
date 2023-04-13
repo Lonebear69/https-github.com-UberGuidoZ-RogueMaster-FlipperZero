@@ -6,7 +6,7 @@
 #include "scenes/wifi_marauder_scene.h"
 #include "wifi_marauder_custom_event.h"
 #include "wifi_marauder_uart.h"
-#include "wifi_marauder_pcap.h"
+#include "file/sequential_file.h"
 #include "script/wifi_marauder_script.h"
 #include "script/wifi_marauder_script_worker.h"
 #include "script/wifi_marauder_script_executor.h"

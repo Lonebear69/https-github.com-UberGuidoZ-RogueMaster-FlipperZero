@@ -4,6 +4,7 @@
 #define WIFI_MARAUDER_DEFAULT_TIMEOUT_SCAN 15
 #define WIFI_MARAUDER_DEFAULT_TIMEOUT_DEAUTH 30
 #define WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF_PMKID 60
+#define WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF_BEACON 60
 #define WIFI_MARAUDER_DEFAULT_TIMEOUT_BEACON 60
 
 WifiMarauderScript* wifi_marauder_script_alloc() {
@@ -11,6 +12,7 @@ WifiMarauderScript* wifi_marauder_script_alloc() {
     if(script == NULL) {
         return NULL;
     }
+    script->name = NULL;
     script->description = NULL;
     script->first_stage = NULL;
     script->repeat = 1;
@@ -119,6 +121,23 @@ WifiMarauderScriptStageDeauth* _wifi_marauder_script_get_stage_deauth(cJSON* sta
     deauth_stage->timeout = deauth_timeout;
 
     return deauth_stage;
+}
+
+WifiMarauderScriptStageSniffBeacon* _wifi_marauder_script_get_stage_sniff_beacon(cJSON* stages) {
+    cJSON* sniffbeacon_stage_json = cJSON_GetObjectItem(stages, "sniffbeacon");
+    if(sniffbeacon_stage_json == NULL) {
+        return NULL;
+    }
+
+    cJSON* timeout_json = cJSON_GetObjectItem(sniffbeacon_stage_json, "timeout");
+    int timeout = timeout_json != NULL ? (int)cJSON_GetNumberValue(timeout_json) :
+                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF_BEACON;
+
+    WifiMarauderScriptStageSniffBeacon* sniff_beacon_stage =
+        (WifiMarauderScriptStageSniffBeacon*)malloc(sizeof(WifiMarauderScriptStageSniffBeacon));
+    sniff_beacon_stage->timeout = timeout;
+
+    return sniff_beacon_stage;
 }
 
 WifiMarauderScriptStageSniffPmkid* _wifi_marauder_script_get_stage_sniff_pmkid(cJSON* stages) {
@@ -242,6 +261,17 @@ void _wifi_marauder_script_load_stages(WifiMarauderScript* script, cJSON* stages
             &prev_stage);
     }
 
+    // Sniff beacon stage
+    WifiMarauderScriptStageSniffBeacon* sniff_beacon =
+        _wifi_marauder_script_get_stage_sniff_beacon(stages);
+    if(sniff_beacon != NULL) {
+        _wifi_marauder_script_add_stage(
+            script,
+            _wifi_marauder_script_create_stage(
+                WifiMarauderScriptStageTypeSniffBeacon, sniff_beacon),
+            &prev_stage);
+    }
+
     // Sniff PMKID stage
     WifiMarauderScriptStageSniffPmkid* sniff_pmkid =
         _wifi_marauder_script_get_stage_sniff_pmkid(stages);
@@ -292,11 +322,34 @@ WifiMarauderScript* wifi_marauder_script_parse_file(const char* file_path, Stora
         json_buffer[bytes_read] = '\0';
 
         script = wifi_marauder_script_parse_raw(json_buffer);
+        if(script != NULL) {
+            // Set script name
+            FuriString* script_name = furi_string_alloc();
+            path_extract_filename_no_ext(file_path, script_name);
+            script->name = strdup(furi_string_get_cstr(script_name));
+            furi_string_free(script_name);
+        }
         storage_file_close(script_file);
     }
 
     storage_file_free(script_file);
     return script;
+}
+
+WifiMarauderScriptStage* wifi_marauder_script_get_stage(
+    WifiMarauderScript* script,
+    WifiMarauderScriptStageType stage_type) {
+    if(script == NULL) {
+        return NULL;
+    }
+    WifiMarauderScriptStage* current_stage = script->first_stage;
+    while(current_stage != NULL) {
+        if(current_stage->type == stage_type) {
+            return current_stage;
+        }
+        current_stage = current_stage->next_stage;
+    }
+    return NULL;
 }
 
 void wifi_marauder_script_free(WifiMarauderScript* script) {
@@ -320,6 +373,9 @@ void wifi_marauder_script_free(WifiMarauderScript* script) {
         case WifiMarauderScriptStageTypeSniffPmkid:
             free(current_stage->stage);
             break;
+        case WifiMarauderScriptStageTypeSniffBeacon:
+            free(current_stage->stage);
+            break;
         case WifiMarauderScriptStageTypeBeaconList:
             for(int i = 0;
                 i < ((WifiMarauderScriptStageBeaconList*)current_stage->stage)->ssid_count;
@@ -333,6 +389,7 @@ void wifi_marauder_script_free(WifiMarauderScript* script) {
         free(current_stage);
         current_stage = next_stage;
     }
+    free(script->name);
     free(script->description);
     free(script);
 }

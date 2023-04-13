@@ -20,6 +20,7 @@
  * - Scan
  * - Select
  * - Deauth
+ * - Sniff beacon
  * - Sniff PMKID
  * - Beacon List
  * ----------------------------------------------------------------------------------------------------
@@ -27,7 +28,7 @@
  * {
  *     "meta": {
  *         "description": "My script",
- *         "repeat": times the script will repeat
+ *         "repeat": times the script will repeat (default 1),
  *     },
  *     "stages": {
  *         "scan": {
@@ -37,13 +38,16 @@
  *         },
  *         "select": {
  *             "type": "ap" | "station" | "ssid",
- *             "filter": "all" | "contains \"{SSID fragment}\" or equals \"{SSID}\" or ..."
+ *             "filter": "all" | "contains \"{SSID fragment}\" or equals \"{SSID}\" or ..." (Not implemented yet on Marauder firmware)
  *         },
  *         "deauth": {
  *             "timeout": seconds
  *         },
+ *         "sniffBeacon": {
+ *             "timeout": seconds
+ *         },
  *         "sniffPmkid": {
- *             "forceDeauth": true | false,
+ *             "forceDeauth": true (default) | false,
  *             "channel": 1-11,
  *             "timeout": seconds
  *         },
@@ -69,6 +73,7 @@ typedef enum {
     WifiMarauderScriptStageTypeScan,
     WifiMarauderScriptStageTypeSelect,
     WifiMarauderScriptStageTypeDeauth,
+    WifiMarauderScriptStageTypeSniffBeacon,
     WifiMarauderScriptStageTypeSniffPmkid,
     WifiMarauderScriptStageTypeBeaconList,
 } WifiMarauderScriptStageType;
@@ -108,6 +113,10 @@ typedef struct WifiMarauderScriptStageDeauth {
     int timeout;
 } WifiMarauderScriptStageDeauth;
 
+typedef struct WifiMarauderScriptStageSniffBeacon {
+    int timeout;
+} WifiMarauderScriptStageSniffBeacon;
+
 typedef struct WifiMarauderScriptStageSniffPmkid {
     bool force_deauth;
     int channel;
@@ -122,6 +131,7 @@ typedef struct WifiMarauderScriptStageBeaconList {
 
 // Script
 typedef struct WifiMarauderScript {
+    char* name;
     char* description;
     WifiMarauderScriptStage* first_stage;
     int repeat;
@@ -130,4 +140,7 @@ typedef struct WifiMarauderScript {
 WifiMarauderScript* wifi_marauder_script_alloc();
 WifiMarauderScript* wifi_marauder_script_parse_raw(const char* script_raw);
 WifiMarauderScript* wifi_marauder_script_parse_file(const char* file_path, Storage* storage);
+WifiMarauderScriptStage* wifi_marauder_script_get_stage(
+    WifiMarauderScript* script,
+    WifiMarauderScriptStageType stage_type);
 void wifi_marauder_script_free(WifiMarauderScript* script);
