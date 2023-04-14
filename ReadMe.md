@@ -41,6 +41,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - UL: Plugins: Bluetooth Remote - implemented YouTube Shorts Remote (may be unstable) (By xMasterX)
 - UL: Revert Deep Sleep due to BLE issues and other random freezes - OFW breaking things again
 - Updated: [WiFi (Marauder) v3.1.3 (Updated By tcpassos)](https://github.com/tcpassos/flipperzero-firmware-with-wifi-marauder-companion)
+- Added: [Mifare Nested (By AloneLiberty)](https://github.com/AloneLiberty/FlipperNested) -> Learn [How to Use](https://github.com/AloneLiberty/FlipperNested#how-to-use-it)
 
 <a name="release">
 
