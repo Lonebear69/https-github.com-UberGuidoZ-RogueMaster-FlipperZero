@@ -40,6 +40,7 @@ This software is for experimental purposes only and is not meant for any illegal
 - OFW: [Deep Sleep Idle #2569 (DrZlo13)](https://github.com/flipperdevices/flipperzero-firmware/pull/2569)
 - UL: [refactoring HID_BLE #420 (By krolchonok)](https://github.com/DarkFlippers/unleashed-firmware/pull/420)
 - UL: Plugins: Bluetooth Remote - implemented YouTube Shorts Remote (may be unstable) (By xMasterX)
+- UL: Revert Deep Sleep due to BLE issues and other random freezes - OFW breaking things again
 
 <a name="release">
 
