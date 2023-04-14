@@ -3,9 +3,11 @@
 
 #define WIFI_MARAUDER_DEFAULT_TIMEOUT_SCAN 15
 #define WIFI_MARAUDER_DEFAULT_TIMEOUT_DEAUTH 30
-#define WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF_PMKID 60
-#define WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF_BEACON 60
+#define WIFI_MARAUDER_DEFAULT_TIMEOUT_PROBE 60
+#define WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF 60
 #define WIFI_MARAUDER_DEFAULT_TIMEOUT_BEACON 60
+#define WIFI_MARAUDER_DEFAULT_ENABLE_LED true
+#define WIFI_MARAUDER_DEFAULT_SAVE_PCAP true
 
 WifiMarauderScript* wifi_marauder_script_alloc() {
     WifiMarauderScript* script = (WifiMarauderScript*)malloc(sizeof(WifiMarauderScript));
@@ -15,6 +17,8 @@ WifiMarauderScript* wifi_marauder_script_alloc() {
     script->name = NULL;
     script->description = NULL;
     script->first_stage = NULL;
+    script->enable_led = WIFI_MARAUDER_DEFAULT_ENABLE_LED;
+    script->save_pcap = WIFI_MARAUDER_DEFAULT_SAVE_PCAP;
     script->repeat = 1;
     return script;
 }
@@ -26,6 +30,16 @@ void _wifi_marauder_script_load_meta(WifiMarauderScript* script, cJSON* meta_sec
         if(description != NULL) {
             script->description = strdup(description->valuestring);
         }
+        // Enable LED
+        cJSON* enable_led_json = cJSON_GetObjectItemCaseSensitive(meta_section, "enableLed");
+        if(cJSON_IsBool(enable_led_json)) {
+            script->enable_led = enable_led_json->valueint;
+        }
+        // Save PCAP
+        cJSON* save_pcap_json = cJSON_GetObjectItemCaseSensitive(meta_section, "savePcap");
+        if(cJSON_IsBool(save_pcap_json)) {
+            script->save_pcap = save_pcap_json->valueint;
+        }
         // Times the script will be repeated
         cJSON* repeat = cJSON_GetObjectItem(meta_section, "repeat");
         if(repeat != NULL) {
@@ -33,7 +47,7 @@ void _wifi_marauder_script_load_meta(WifiMarauderScript* script, cJSON* meta_sec
         }
     }
     if(script->description == NULL) {
-        script->description = "My script";
+        script->description = strdup("My script");
     }
 }
 
@@ -123,6 +137,40 @@ WifiMarauderScriptStageDeauth* _wifi_marauder_script_get_stage_deauth(cJSON* sta
     return deauth_stage;
 }
 
+WifiMarauderScriptStageProbe* _wifi_marauder_script_get_stage_probe(cJSON* stages) {
+    cJSON* probe_stage_json = cJSON_GetObjectItemCaseSensitive(stages, "probe");
+    if(probe_stage_json == NULL) {
+        return NULL;
+    }
+
+    cJSON* timeout = cJSON_GetObjectItem(probe_stage_json, "timeout");
+    int probe_timeout = timeout != NULL ? (int)cJSON_GetNumberValue(timeout) :
+                                          WIFI_MARAUDER_DEFAULT_TIMEOUT_PROBE;
+
+    WifiMarauderScriptStageProbe* probe_stage =
+        (WifiMarauderScriptStageProbe*)malloc(sizeof(WifiMarauderScriptStageProbe));
+    probe_stage->timeout = probe_timeout;
+
+    return probe_stage;
+}
+
+WifiMarauderScriptStageSniffRaw* _wifi_marauder_script_get_stage_sniff_raw(cJSON* stages) {
+    cJSON* sniffraw_stage_json = cJSON_GetObjectItem(stages, "sniffraw");
+    if(sniffraw_stage_json == NULL) {
+        return NULL;
+    }
+
+    cJSON* timeout_json = cJSON_GetObjectItem(sniffraw_stage_json, "timeout");
+    int timeout = timeout_json != NULL ? (int)cJSON_GetNumberValue(timeout_json) :
+                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF;
+
+    WifiMarauderScriptStageSniffRaw* sniff_raw_stage =
+        (WifiMarauderScriptStageSniffRaw*)malloc(sizeof(WifiMarauderScriptStageSniffRaw));
+    sniff_raw_stage->timeout = timeout;
+
+    return sniff_raw_stage;
+}
+
 WifiMarauderScriptStageSniffBeacon* _wifi_marauder_script_get_stage_sniff_beacon(cJSON* stages) {
     cJSON* sniffbeacon_stage_json = cJSON_GetObjectItem(stages, "sniffbeacon");
     if(sniffbeacon_stage_json == NULL) {
@@ -131,13 +179,47 @@ WifiMarauderScriptStageSniffBeacon* _wifi_marauder_script_get_stage_sniff_beacon
 
     cJSON* timeout_json = cJSON_GetObjectItem(sniffbeacon_stage_json, "timeout");
     int timeout = timeout_json != NULL ? (int)cJSON_GetNumberValue(timeout_json) :
-                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF_BEACON;
+                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF;
 
     WifiMarauderScriptStageSniffBeacon* sniff_beacon_stage =
         (WifiMarauderScriptStageSniffBeacon*)malloc(sizeof(WifiMarauderScriptStageSniffBeacon));
     sniff_beacon_stage->timeout = timeout;
 
     return sniff_beacon_stage;
+}
+
+WifiMarauderScriptStageSniffDeauth* _wifi_marauder_script_get_stage_sniff_deauth(cJSON* stages) {
+    cJSON* sniffdeauth_stage_json = cJSON_GetObjectItem(stages, "sniffdeauth");
+    if(sniffdeauth_stage_json == NULL) {
+        return NULL;
+    }
+
+    cJSON* timeout_json = cJSON_GetObjectItem(sniffdeauth_stage_json, "timeout");
+    int timeout = timeout_json != NULL ? (int)cJSON_GetNumberValue(timeout_json) :
+                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF;
+
+    WifiMarauderScriptStageSniffDeauth* sniff_deauth_stage =
+        (WifiMarauderScriptStageSniffDeauth*)malloc(sizeof(WifiMarauderScriptStageSniffDeauth));
+    sniff_deauth_stage->timeout = timeout;
+
+    return sniff_deauth_stage;
+}
+
+WifiMarauderScriptStageSniffEsp* _wifi_marauder_script_get_stage_sniff_esp(cJSON* stages) {
+    cJSON* sniffesp_stage_json = cJSON_GetObjectItem(stages, "sniffesp");
+    if(sniffesp_stage_json == NULL) {
+        return NULL;
+    }
+
+    cJSON* timeout_json = cJSON_GetObjectItem(sniffesp_stage_json, "timeout");
+    int timeout = timeout_json != NULL ? (int)cJSON_GetNumberValue(timeout_json) :
+                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF;
+
+    WifiMarauderScriptStageSniffEsp* sniff_esp_stage =
+        (WifiMarauderScriptStageSniffEsp*)malloc(sizeof(WifiMarauderScriptStageSniffEsp));
+    sniff_esp_stage->timeout = timeout;
+
+    return sniff_esp_stage;
 }
 
 WifiMarauderScriptStageSniffPmkid* _wifi_marauder_script_get_stage_sniff_pmkid(cJSON* stages) {
@@ -150,7 +232,7 @@ WifiMarauderScriptStageSniffPmkid* _wifi_marauder_script_get_stage_sniff_pmkid(c
     int channel = channel_json != NULL ? (int)cJSON_GetNumberValue(channel_json) : 0;
     cJSON* timeout_json = cJSON_GetObjectItem(sniffpmkid_stage_json, "timeout");
     int timeout = timeout_json != NULL ? (int)cJSON_GetNumberValue(timeout_json) :
-                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF_PMKID;
+                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF;
     cJSON* force_deauth_json =
         cJSON_GetObjectItemCaseSensitive(sniffpmkid_stage_json, "forceDeauth");
     bool force_deauth = cJSON_IsBool(force_deauth_json) ? force_deauth_json->valueint : true;
@@ -164,8 +246,25 @@ WifiMarauderScriptStageSniffPmkid* _wifi_marauder_script_get_stage_sniff_pmkid(c
     return sniff_pmkid_stage;
 }
 
+WifiMarauderScriptStageSniffPwn* _wifi_marauder_script_get_stage_sniff_pwn(cJSON* stages) {
+    cJSON* sniffpwn_stage_json = cJSON_GetObjectItem(stages, "sniffpwn");
+    if(sniffpwn_stage_json == NULL) {
+        return NULL;
+    }
+
+    cJSON* timeout_json = cJSON_GetObjectItem(sniffpwn_stage_json, "timeout");
+    int timeout = timeout_json != NULL ? (int)cJSON_GetNumberValue(timeout_json) :
+                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_SNIFF;
+
+    WifiMarauderScriptStageSniffPwn* sniff_pwn_stage =
+        (WifiMarauderScriptStageSniffPwn*)malloc(sizeof(WifiMarauderScriptStageSniffPwn));
+    sniff_pwn_stage->timeout = timeout;
+
+    return sniff_pwn_stage;
+}
+
 WifiMarauderScriptStageBeaconList* _wifi_marauder_script_get_stage_beacon_list(cJSON* stages) {
-    cJSON* stage_beaconlist = cJSON_GetObjectItem(stages, "beaconlist");
+    cJSON* stage_beaconlist = cJSON_GetObjectItem(stages, "beaconList");
     if(stage_beaconlist == NULL) {
         return NULL;
     }
@@ -205,8 +304,29 @@ WifiMarauderScriptStageBeaconList* _wifi_marauder_script_get_stage_beacon_list(c
     cJSON* timeout = cJSON_GetObjectItem(stage_beaconlist, "timeout");
     beaconlist_stage->timeout = timeout != NULL ? (int)cJSON_GetNumberValue(timeout) :
                                                   WIFI_MARAUDER_DEFAULT_TIMEOUT_BEACON;
+    // Random SSIDs
+    cJSON* random_ssids = cJSON_GetObjectItem(stage_beaconlist, "generate");
+    beaconlist_stage->random_ssids =
+        random_ssids != NULL ? (int)cJSON_GetNumberValue(random_ssids) : 0;
 
     return beaconlist_stage;
+}
+
+WifiMarauderScriptStageBeaconAp* _wifi_marauder_script_get_stage_beacon_ap(cJSON* stages) {
+    cJSON* beaconap_stage_json = cJSON_GetObjectItem(stages, "beaconAp");
+    if(beaconap_stage_json == NULL) {
+        return NULL;
+    }
+
+    cJSON* timeout_json = cJSON_GetObjectItem(beaconap_stage_json, "timeout");
+    int timeout = timeout_json != NULL ? (int)cJSON_GetNumberValue(timeout_json) :
+                                         WIFI_MARAUDER_DEFAULT_TIMEOUT_BEACON;
+
+    WifiMarauderScriptStageBeaconAp* beacon_ap_stage =
+        (WifiMarauderScriptStageBeaconAp*)malloc(sizeof(WifiMarauderScriptStageBeaconAp));
+    beacon_ap_stage->timeout = timeout;
+
+    return beacon_ap_stage;
 }
 
 WifiMarauderScriptStage*
@@ -261,6 +381,24 @@ void _wifi_marauder_script_load_stages(WifiMarauderScript* script, cJSON* stages
             &prev_stage);
     }
 
+    // Probe stage
+    WifiMarauderScriptStageProbe* stage_probe = _wifi_marauder_script_get_stage_probe(stages);
+    if(stage_probe != NULL) {
+        _wifi_marauder_script_add_stage(
+            script,
+            _wifi_marauder_script_create_stage(WifiMarauderScriptStageTypeProbe, stage_probe),
+            &prev_stage);
+    }
+
+    // Sniff raw stage
+    WifiMarauderScriptStageSniffRaw* sniff_raw = _wifi_marauder_script_get_stage_sniff_raw(stages);
+    if(sniff_raw != NULL) {
+        _wifi_marauder_script_add_stage(
+            script,
+            _wifi_marauder_script_create_stage(WifiMarauderScriptStageTypeSniffRaw, sniff_raw),
+            &prev_stage);
+    }
+
     // Sniff beacon stage
     WifiMarauderScriptStageSniffBeacon* sniff_beacon =
         _wifi_marauder_script_get_stage_sniff_beacon(stages);
@@ -269,6 +407,26 @@ void _wifi_marauder_script_load_stages(WifiMarauderScript* script, cJSON* stages
             script,
             _wifi_marauder_script_create_stage(
                 WifiMarauderScriptStageTypeSniffBeacon, sniff_beacon),
+            &prev_stage);
+    }
+
+    // Sniff deauth stage
+    WifiMarauderScriptStageSniffDeauth* sniff_deauth =
+        _wifi_marauder_script_get_stage_sniff_deauth(stages);
+    if(sniff_deauth != NULL) {
+        _wifi_marauder_script_add_stage(
+            script,
+            _wifi_marauder_script_create_stage(
+                WifiMarauderScriptStageTypeSniffDeauth, sniff_deauth),
+            &prev_stage);
+    }
+
+    // Sniff esp stage
+    WifiMarauderScriptStageSniffEsp* sniff_esp = _wifi_marauder_script_get_stage_sniff_esp(stages);
+    if(sniff_esp != NULL) {
+        _wifi_marauder_script_add_stage(
+            script,
+            _wifi_marauder_script_create_stage(WifiMarauderScriptStageTypeSniffEsp, sniff_esp),
             &prev_stage);
     }
 
@@ -282,6 +440,15 @@ void _wifi_marauder_script_load_stages(WifiMarauderScript* script, cJSON* stages
             &prev_stage);
     }
 
+    // Sniff pwn stage
+    WifiMarauderScriptStageSniffPwn* sniff_pwn = _wifi_marauder_script_get_stage_sniff_pwn(stages);
+    if(sniff_pwn != NULL) {
+        _wifi_marauder_script_add_stage(
+            script,
+            _wifi_marauder_script_create_stage(WifiMarauderScriptStageTypeSniffPwn, sniff_pwn),
+            &prev_stage);
+    }
+
     // Beacon List stage
     WifiMarauderScriptStageBeaconList* stage_beacon_list =
         _wifi_marauder_script_get_stage_beacon_list(stages);
@@ -290,6 +457,17 @@ void _wifi_marauder_script_load_stages(WifiMarauderScript* script, cJSON* stages
             script,
             _wifi_marauder_script_create_stage(
                 WifiMarauderScriptStageTypeBeaconList, stage_beacon_list),
+            &prev_stage);
+    }
+
+    // Beacon Ap stage
+    WifiMarauderScriptStageBeaconAp* stage_beacon_ap =
+        _wifi_marauder_script_get_stage_beacon_ap(stages);
+    if(stage_beacon_ap != NULL) {
+        _wifi_marauder_script_add_stage(
+            script,
+            _wifi_marauder_script_create_stage(
+                WifiMarauderScriptStageTypeBeaconAp, stage_beacon_ap),
             &prev_stage);
     }
 }
@@ -370,10 +548,25 @@ void wifi_marauder_script_free(WifiMarauderScript* script) {
         case WifiMarauderScriptStageTypeDeauth:
             free(current_stage->stage);
             break;
-        case WifiMarauderScriptStageTypeSniffPmkid:
+        case WifiMarauderScriptStageTypeProbe:
+            free(current_stage->stage);
+            break;
+        case WifiMarauderScriptStageTypeSniffRaw:
             free(current_stage->stage);
             break;
         case WifiMarauderScriptStageTypeSniffBeacon:
+            free(current_stage->stage);
+            break;
+        case WifiMarauderScriptStageTypeSniffDeauth:
+            free(current_stage->stage);
+            break;
+        case WifiMarauderScriptStageTypeSniffEsp:
+            free(current_stage->stage);
+            break;
+        case WifiMarauderScriptStageTypeSniffPmkid:
+            free(current_stage->stage);
+            break;
+        case WifiMarauderScriptStageTypeSniffPwn:
             free(current_stage->stage);
             break;
         case WifiMarauderScriptStageTypeBeaconList:
@@ -383,6 +576,9 @@ void wifi_marauder_script_free(WifiMarauderScript* script) {
                 free(((WifiMarauderScriptStageBeaconList*)current_stage->stage)->ssids[i]);
             }
             free(((WifiMarauderScriptStageBeaconList*)current_stage->stage)->ssids);
+            free(current_stage->stage);
+            break;
+        case WifiMarauderScriptStageTypeBeaconAp:
             free(current_stage->stage);
             break;
         }

@@ -20,15 +20,24 @@
  * - Scan
  * - Select
  * - Deauth
+ * - Probe
+ * - Sniff raw
  * - Sniff beacon
+ * - Sniff deauth
+ * - Sniff Espressif
  * - Sniff PMKID
+ * - Sniff Pwnagotchi
  * - Beacon List
+ * - Beacon Random
+ * - Beacon Ap
  * ----------------------------------------------------------------------------------------------------
  * SCRIPT SYNTAX:
  * {
  *     "meta": {
  *         "description": "My script",
  *         "repeat": times the script will repeat (default 1),
+ *         "enableLed": true (default) | false,
+ *         "savePcap": true (default) | false
  *     },
  *     "stages": {
  *         "scan": {
@@ -43,7 +52,19 @@
  *         "deauth": {
  *             "timeout": seconds
  *         },
+ *         "probe": {
+ *             "timeout": seconds
+ *         },
+ *         "sniffRaw": {
+ *             "timeout": seconds
+ *         },
  *         "sniffBeacon": {
+ *             "timeout": seconds
+ *         },
+ *         "sniffDeauth": {
+ *             "timeout": seconds
+ *         },
+ *         "sniffEsp": {
  *             "timeout": seconds
  *         },
  *         "sniffPmkid": {
@@ -51,12 +72,19 @@
  *             "channel": 1-11,
  *             "timeout": seconds
  *         },
- *         "beaconlist": {
+ *         "sniffPwn": {
+ *             "timeout": seconds
+ *         },
+ *         "beaconList": {
  *             "ssids": [
  *                 "SSID 1",
  *                 "SSID 2",
  *                 "SSID 3"
  *             ],
+ *             "generate": number of random SSIDs that will be generated,
+ *             "timeout": seconds
+ *         }
+ *         "beaconAp": {
  *             "timeout": seconds
  *         }
  *     }
@@ -73,9 +101,15 @@ typedef enum {
     WifiMarauderScriptStageTypeScan,
     WifiMarauderScriptStageTypeSelect,
     WifiMarauderScriptStageTypeDeauth,
+    WifiMarauderScriptStageTypeProbe,
+    WifiMarauderScriptStageTypeSniffRaw,
     WifiMarauderScriptStageTypeSniffBeacon,
+    WifiMarauderScriptStageTypeSniffDeauth,
+    WifiMarauderScriptStageTypeSniffEsp,
     WifiMarauderScriptStageTypeSniffPmkid,
+    WifiMarauderScriptStageTypeSniffPwn,
     WifiMarauderScriptStageTypeBeaconList,
+    WifiMarauderScriptStageTypeBeaconAp,
 } WifiMarauderScriptStageType;
 
 typedef enum {
@@ -113,9 +147,25 @@ typedef struct WifiMarauderScriptStageDeauth {
     int timeout;
 } WifiMarauderScriptStageDeauth;
 
+typedef struct WifiMarauderScriptStageProbe {
+    int timeout;
+} WifiMarauderScriptStageProbe;
+
+typedef struct WifiMarauderScriptStageSniffRaw {
+    int timeout;
+} WifiMarauderScriptStageSniffRaw;
+
 typedef struct WifiMarauderScriptStageSniffBeacon {
     int timeout;
 } WifiMarauderScriptStageSniffBeacon;
+
+typedef struct WifiMarauderScriptStageSniffDeauth {
+    int timeout;
+} WifiMarauderScriptStageSniffDeauth;
+
+typedef struct WifiMarauderScriptStageSniffEsp {
+    int timeout;
+} WifiMarauderScriptStageSniffEsp;
 
 typedef struct WifiMarauderScriptStageSniffPmkid {
     bool force_deauth;
@@ -123,17 +173,29 @@ typedef struct WifiMarauderScriptStageSniffPmkid {
     int timeout;
 } WifiMarauderScriptStageSniffPmkid;
 
+typedef struct WifiMarauderScriptStageSniffPwn {
+    int timeout;
+} WifiMarauderScriptStageSniffPwn;
+
 typedef struct WifiMarauderScriptStageBeaconList {
     char** ssids;
     int ssid_count;
+    int random_ssids;
     int timeout;
 } WifiMarauderScriptStageBeaconList;
+
+typedef struct WifiMarauderScriptStageBeaconAp {
+    int timeout;
+} WifiMarauderScriptStageBeaconAp;
 
 // Script
 typedef struct WifiMarauderScript {
     char* name;
     char* description;
     WifiMarauderScriptStage* first_stage;
+    // TODO: Think of a way to not change the settings if they are not informed in the JSON
+    bool enable_led;
+    bool save_pcap;
     int repeat;
 } WifiMarauderScript;
 
